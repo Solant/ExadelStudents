@@ -1,15 +1,15 @@
 <html>
 <head>
   <title>Create</title>
-  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
 </head>
 <body>
     
 	<div class="hat">
-	<img src="images/exadel-logo.png" class="exadel_logo">
+	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
-	<img src="images/account.png" class="account_logo">
-	<img src="images/exit.png" class="exit_logo">
+	<img src="/resources/images/account.png" class="account_logo">
+	<img src="/resources/images/exit.png" class="exit_logo">
 	<span class="currUserName"> Username </span>
 			
 </div>

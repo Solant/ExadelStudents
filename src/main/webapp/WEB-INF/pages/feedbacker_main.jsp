@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="styles/style.css">
+		<link rel="stylesheet" href="/resources/styles/style.css">
 	</head>
 	<body>
 		<div class="hat">
-			<img src="images/exadel-logo.png" class="exadel_logo">
+			<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
-			<img src="images/account.png" class="account_logo">
-			<img src="images/exit.png" class="exit_logo">
+			<img src="/resources/images/account.png" class="account_logo">
+			<img src="/resources/images/exit.png" class="exit_logo">
 			<span class="currUserName"> Username </span>
-			<img src="images/loupe.png" class="loupe_logo">
+			<img src="/resources/images/loupe.png" class="loupe_logo">
 			
 			<span class="bookmarks"> <a href> My Students </a> </span>
 			<span class="bookmarks"> <a href> All Students </a> </span>

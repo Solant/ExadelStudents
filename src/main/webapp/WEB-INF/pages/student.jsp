@@ -3,23 +3,23 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Student's page</title>
-    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="/resources/styles/style.css" />
 </head>
 <body>
 
 <div class="hat">
-	<img src="images/exadel-logo.png" class="exadel_logo">
+	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
-	<img src="images/account.png" class="account_logo">
-	<img src="images/exit.png" class="exit_logo">
+	<img src="/resources/images/account.png" class="account_logo">
+	<img src="/resources/images/exit.png" class="exit_logo">
 	<span class="currUserName"> Username </span>
-	<img src="images/loupe.png" class="loupe_logo">
+	<img src="/resources/images/loupe.png" class="loupe_logo">
 			
 </div>
 <div align="center" width = "600px">
     <div style="height: 50px"></div>
     <div class="profile" align="center">
-        <img src="images/account.png" style="zoom: 2;float:left; margin-top: 5px;">
+        <img src="/resources/images/account.png" style="zoom: 2;float:left; margin-top: 5px;">
         <div style="margin-top:20px;" >
             <label for="firstName" class="spoilers label">First name</label><input id="firstName"><br>
             <label for="lastName" class="spoilers label">Last name</label><input id="lastName"><br>

@@ -3,34 +3,34 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Choosing table fields</title>
-    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="/resources/styles/style.css" />
 </head>
 <body>
 
 	<div class="hat">
-		<img src="images/exadel-logo.png" class="exadel_logo">
+		<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
-		<img src="images/account.png" class="account_logo">
-		<img src="images/exit.png" class="exit_logo">
+		<img src="/resources/images/account.png" class="account_logo">
+		<img src="/resources/images/exit.png" class="exit_logo">
 		<span class="currUserName"> Username </span>
-		<img src="images/loupe.png" class="loupe_logo">
+		<img src="/resources/images/loupe.png" class="loupe_logo">
 	</div>
 	
 	<div class="functionsBox">
 		<a href><p>
-			<img src="images/add.png" class="add_logo" width="25px">
+			<img src="/resources/images/add.png" class="add_logo" width="25px">
 			<span>Add User</span>
 		</p></a>
 		<a href><p>
-			<img src="images/yellow-link.png"  height="23px">
+			<img src="/resources/images/yellow-link.png"  height="23px">
 			<span>Link Student</span>
 		</p></a>
 		<a href><p>
-			<img src="images/interview.png"  width="25px">
+			<img src="/resources/images/interview.png"  width="25px">
 			<span>Interview</span>
 		</p></a>
 		<a href><p>
-			<img src="images/fired.png"  width="25px">
+			<img src="/resources/images/fired.png"  width="25px">
 			<span>Fired Students</span>
 		</p></a>
 	</div>

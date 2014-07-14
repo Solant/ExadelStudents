@@ -6,14 +6,14 @@
   src="html5shiv.js">
   </script>
   <![endif]-->
-  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
 </head>
 <body>
     
 	<div class="hat">
-		<img src="images/exadel-logo.png" class="exadel_logo">
+		<img src="/resources/images/exadel-logo.png" class="/resources/exadel_logo">
 	</div>
-	<form method=post action="login" class="loginAndCreateForm" >
+	<form method="post" action="Login" class="loginAndCreateForm" >
 		<h1>Login Form </h1>
 		<p>
 			<span>Login:</span>
