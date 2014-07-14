@@ -1,0 +1,253 @@
+﻿body {
+    margin: 0;      /* Убираем отступы */
+	
+	min-width: 900px;
+}
+
+.skyBox{
+	position: fixed;
+	height:250px;
+	width: 100%;
+	background-color: RGB(70,186,235);
+	z-index: -1;
+}
+
+.hat{      
+	position: fixed;
+	height: 50px;
+	width: 100%;
+	background-color: RGB(0,156,203);
+	z-index:1;
+	top: 0px;
+	min-width: 900px;
+}
+
+.account_logo {
+    float: right;
+    margin-right: 5px;
+    margin-top: 4px;
+}
+.exadel_logo{
+	vertical-align: middle;
+	padding-top: 10px;
+	padding-left: 20px;
+}
+
+.loupe_logo{
+	float:right;
+	margin-top: 5px;
+	margin-right: 10px;	
+}
+
+.exit_logo{
+	float: right;
+	margin-top: 5px;
+	margin-right: 10px;
+}
+
+.currUserName{
+	float:right;
+	color: white;
+	margin-right:10px;
+	font-size: 25px;
+	text-shadow: 1px 1px 1px RGB(70,186,235);
+	font-family: Arial;
+	margin-top: 9px;
+}
+
+.bookmarks a{
+
+	float:right;
+	color: white;
+	font-size: 25px;
+	text-shadow: 1px 1px 1px RGB(70,186,235);
+	font-family: Arial;
+	
+	margin-right:6px;
+	margin-top: 6px;
+	padding-bottom:12px;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-top:3px;
+	text-decoration: none;
+}
+.bookmarks a:hover{
+	background-color: RGB(70,186,235);
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+table{
+	top: 100px;
+	right: 100px;
+	position: absolute;
+	left: 10%;
+	background-color: white;
+	text-align:center; 
+    border:#777777 1px solid;
+    border-collapse:collapse;
+    box-shadow: 0 1px 2px #d1d1d1; 
+    font-family: Arial;
+	min-width: 700px;
+}
+
+table thead{
+    background-color: grey;
+    color:white;
+    font-weight:bold;
+    border-bottom:1px solid #e0e0e0;    
+    text-shadow: 1px 1px 0px black;
+    font-family:serif;
+}
+table td{
+	padding: 2px 8px 2px 8px;
+	border-color: grey;
+}
+.spoilers label{
+    float:left;
+    margin-left: 2%;
+    height: 40px;
+}
+.spoilers input, select{
+    float:right;
+    margin-right: 2%;
+    height: 24px;
+}
+.spoilers{
+    width: 600px;
+    border: solid;
+    border-color: #c0c0c0;
+    border-radius: 20px;
+    font: 20px Helvetica;
+}
+.group{
+    white-space: nowrap;
+    height: 10px;
+}
+.details[open] summary { /* цвет строки-заголовка в открытом виде */
+    background: #c0c0c0;
+
+}
+.details{
+    width: 600px;
+}
+.profile{
+    background-color:  #c0c0c0;
+    width: 600px;
+    height:100px;
+    border-radius: 20px;
+    border: solid;
+    border-color: white;
+}
+#hatSelect{
+    font:20px/40px Helvetica;
+    color: #ffffff;
+    background-color: RGB(0,156,203);
+    border:white solid;
+    border-radius: 20px;
+    height: 40px;
+    width: 600px;
+}
+
+.details summary { /* строки-заголовок для клика */
+    height: 40px;
+    position: relative;
+    background:RGB(70,186,235);
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: solid;
+    border-color: white;
+    color: #fff;
+    cursor: pointer;
+    font: 20px/40px Helvetica;
+}
+ .loginAndCreateForm{
+    color: RGB(0,107,253);
+    width: 320px;
+    margin: auto;
+    margin-top: 100px;
+    border: 0px solid;
+    padding: 7px;
+    text-align:left;
+    font-size: 14px;
+    background-color: white; /*RGB(0,156,203);*/
+    border-width: 3px;
+    border-color: #00a1d2;
+    border-radius: 2px;
+}
+.loginAndCreateForm p {
+    margin-left: 30px;
+    /*text-shadow: 1px 1px 0px black;*/
+}
+
+.loginAndCreateForm h1{
+	text-align:center;
+}
+
+#loginAndCreateButton{
+    margin-left: 37%;
+    background-color: RGB(0,156,203);
+    border-style:none;     
+    border-radius: 3px;
+    color: white;
+    height: 22px;
+    padding-left: 10px;
+    padding-right: 10px;     
+    font-weight:800;     
+    text-shadow: 1px 1px 0px black;
+
+}
+#loginAndCreateButton:hover{   
+    background-color:RGB(0,107,253);
+}
+
+.field{
+    color: RGB(0,107,253);
+    height: 20px;
+    background-color: white;
+    position: relative;
+    float: right;
+    margin-right: 20px;   
+    border-color: #00a1d2;
+    border-radius: 3px;
+    border: 1 solid;
+	width:50%;
+}
+
+/*Начало раздела отвечающего за страницу Create.html*/
+
+#createFormSet{
+	border-color: #00a1d2;
+    border-radius: 8px;
+	border: 1 solid;
+	padding:0;
+}
+
+/*Rjytw раздела отвечающего за страницу Create.html*/
+
+.functionsBox{
+	left: 20px;
+	top: 100px;
+	width: 170px;
+	height: 400px;
+	position: absolute;
+	font-size: 19px;
+	padding-left: 4px;
+	padding-right: 10px;
+	background-color:  #c0c0c0;
+}
+
+.functionsBox p {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background-color:white;
+	border: 1px;
+    border-style:none;     
+    border-radius: 3px;
+}
+
+.functionsBox p span{
+	float:right;
+	padding-top:2px;
+	padding-right: 5px;
+}
