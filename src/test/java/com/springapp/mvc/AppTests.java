@@ -1,5 +1,5 @@
 package com.springapp.mvc;
-
+/*
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,3 +37,4 @@ public class AppTests {
                 .andExpect(view().name("hello"));
     }
 }
+*/

@@ -11,22 +11,18 @@
 <body>
     
 	<div class="hat">
-		<img src="/resources/images/exadel-logo.png" class="/resources/exadel_logo">
+		<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 	</div>
-	<form method="post" action="Login" class="loginAndCreateForm" >
-		<h1>Login Form </h1>
-		<p>
-			<span>Login:</span>
-			<input type="text"  name= "login" class="field" >
-		</p>
-		<p>
-			<span>Password:</span>
-			<input type="password"  name= "password" class="field">
-		</p>
-		<p>
-			<input type="submit" id="loginAndCreateButton" value="Login">
-		</p>
-	</form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form action="student">
+        <button name="Login" type="submit">LOGIN LIKE A STUDENT</button>
+    </form>
+    <form action="curator">
+        <button name="Login" type="submit">LOGIN LIKE A CURATOR</button>
+    </form>
 </body>
-
 </html>
