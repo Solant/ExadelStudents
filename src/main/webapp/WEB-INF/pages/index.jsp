@@ -18,12 +18,13 @@
     <br>
     <br>
     <br>
+    <!--
     <form action="student">
         <button name="Login" type="submit">LOGIN LIKE A STUDENT</button>
     </form>
     <form action="curator">
         <button name="Login" type="submit">LOGIN LIKE A CURATOR</button>
-    </form>
+    </form> -->
 </body>
 
 </html>
