@@ -17,4 +17,45 @@
 
     <mvc:annotation-driven />
 
+
+    <bean id="testDataSource"    class="org.apache.commons.dbcp2.BasicDataSource"
+             destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/postgres" />
+        <property name="username" value="exadel" />
+        <property name="password" value="exadel" />
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="testOnBorrow" value="true" />
+        <property name="defaultAutoCommit" value="false" />
+
+
+    </bean>
+
+
+    <bean id="mySessionFactory"
+          class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+
+        <property name="dataSource" ref="testDataSource"/>
+
+        <property name="mappingResources">
+            <list>
+                <value>product.hbm.xml</value>
+            </list>
+        </property>
+
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.HSQLDialect
+            </value>
+        </property>
+    </bean>
+
+    <bean id="myStudentDao" class="persistance.dao.impl.StudentDAOImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+
+
+
+
+
 </beans>
