@@ -14,11 +14,4 @@ public class HelloController {
         model.setViewName("index");
         return model;
 	}
-
-    @RequestMapping(value = "/student", method = RequestMethod.GET)
-    public ModelAndView adminPage() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("student");
-        return model;
-    }
 }

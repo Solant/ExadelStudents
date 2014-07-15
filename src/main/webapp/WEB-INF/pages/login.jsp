@@ -12,7 +12,7 @@
 <body>
     
 	<div class="hat">
-		<img src="/resources/images/exadel-logo.png" class="/resources/exadel_logo">
+		<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 	</div>
 	<form method="post" action="/j_spring_security_check" class="loginAndCreateForm" >
 		<h1>Login Form </h1>
@@ -23,10 +23,10 @@
 		<p>
 			<span>Password:</span>
 			<input type="password"  name= "j_password" class="field">
-		</p>1
+		</p>
         <p>
             <span>Remember Me</span>
-            <checkbox name="_spring_security_remember_me"></checkbox>
+            <input type="checkbox" name="_spring_security_remember_me">
         </p>
 		<p>
 			<input type="submit" id="loginAndCreateButton" value="Login">
