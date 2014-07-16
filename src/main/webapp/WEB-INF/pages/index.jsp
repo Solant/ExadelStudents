@@ -24,5 +24,9 @@
     <form action="curator">
         <button name="Login" type="submit">LOGIN LIKE A CURATOR</button>
     </form>
+    <form action="worker">
+    <button name="Login" type="submit">LOGIN LIKE A WORKER</button>
+    </form>
+
 </body>
 </html>
