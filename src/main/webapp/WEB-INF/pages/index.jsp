@@ -7,6 +7,8 @@
   </script>
   <![endif]-->
   <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
+    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/resources/styles/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
     
@@ -24,7 +26,9 @@
 			<input type="password"  name= "password" class="field">
 		</p>
 		<p>
-			<input type="submit" id="loginAndCreateButton" value="Login">
+            <div class="conteiner">
+			    <button type="submit" class=" btn-success btn-sm " >Login</button>
+            </div>
 		</p>
 	</form>
 </body>

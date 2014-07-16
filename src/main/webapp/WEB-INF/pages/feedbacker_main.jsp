@@ -1,8 +1,18 @@
-<!DOCTYPE html>
+
 <html>
 	<head>
 		<link rel="stylesheet" href="/resources/styles/style.css">
-	</head>
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.1/css/jquery.dataTables.css">
+
+        <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" class="init">
+            $(document).ready(function() {
+                $('#example').dataTable();
+            } );
+        </script>
+
+    </head>
 	<body>
 		<div class="hat">
 			<img src="/resources/images/exadel-logo.png" class="exadel_logo">
@@ -16,8 +26,9 @@
 			<span class="bookmarks"> <a href> All Students </a> </span>
 			<span class="bookmarks"> <a href> Interviews  </a> </span>
 		</div>
-		<div class="skyBox"> </div>
-		<table border = 1>
+		<div class="skyBox"></div>
+        <div id="table">
+            <table border = 1 id="example">
 			<thead>
 				<td> Name </td>
 				<td> Status </td>
@@ -363,7 +374,7 @@
 			</tr>
 			</tbody>
 		</table>
-				
+		</div>
 		
 	</body>
 </html>
