@@ -75,11 +75,12 @@
     border-top-right-radius: 8px;
 }
 
+#table{
+    padding-top: 100px;
+    padding-left: 50px;
+}
+
 table{
-    top: 100px;
-    right: 100px;
-    position: absolute;
-    left: 10%;
     background-color: white;
     text-align:center;
     border:#777777 1px solid;
