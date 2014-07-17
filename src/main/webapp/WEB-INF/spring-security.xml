@@ -17,7 +17,7 @@
     <authentication-manager>
         <authentication-provider>
             <user-service>
-                <user name="wasya" password="123" authorities="ROLE_STUDENT" />
+                <user name="student" password="123" authorities="ROLE_STUDENT" />
                 <user name="curator" password="123" authorities="ROLE_CURATOR" />
                 <user name="worker" password="123" authorities="ROLE_WORKER" />
             </user-service>

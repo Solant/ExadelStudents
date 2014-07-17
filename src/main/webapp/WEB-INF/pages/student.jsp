@@ -31,11 +31,13 @@
         <c:out value="Ivan"></c:out>
     </div>
 
-    <ul class="nav nav-tabs" role="tablist" id="myTab">
-        <li class="active"><a href="#education" role="tab" data-toggle="tab">Education institution</a></li>
-        <li><a href="#beforeWorking" role="tab" data-toggle="tab">Before working</a></li>
-        <li><a href="#currProject" role="tab" data-toggle="tab">Current project</a></li>
-    </ul>
+   <%-- <div class="tabbable tabs-left" style="float: left">--%>
+        <ul class="nav nav-tabs" role="tablist" id="myTab">
+            <li class="active"><a href="#education" role="tab" data-toggle="tab">Education institution</a></li>
+            <li><a href="#beforeWorking" role="tab" data-toggle="tab">Before working</a></li>
+            <li><a href="#currProject" role="tab" data-toggle="tab">Current project</a></li>
+        </ul>
+   <%-- </div>--%>
 
     <div class="tab-content">
         <div class="tab-pane active" id="education">

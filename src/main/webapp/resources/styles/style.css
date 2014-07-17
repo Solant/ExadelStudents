@@ -103,12 +103,12 @@ table td{
 	padding: 2px 8px 2px 8px;
 	border-color: grey;
 }
-.spoilers label{
+.group label{
     float:left;
     margin-left: 2%;
     height: 40px;
 }
-.spoilers input, select{
+.group input, select{
     float:right;
     margin-right: 2%;
     height: 24px;
@@ -122,22 +122,21 @@ table td{
 }
 .group{
     white-space: nowrap;
-    height: 10px;
-}
-.details[open] summary { /* цвет строки-заголовка в открытом виде */
-    background: #c0c0c0;
-
-}
-.details{
-    width: 600px;
+    height: 45px;
+    overflow: auto;
 }
 .profile{
     background-color:  #c0c0c0;
-    width: 600px;
-    height:100px;
+    width: 200px;
+    height:40px;
     border-radius: 20px;
-    border: solid;
-    border-color: white;
+    border: solid #ffffff;
+    float: right;
+    font:20px/40px Helvetica;
+}
+.profile img{
+    float:left;
+    margin-left: 5px;
 }
 #hatSelect{
     font:20px/40px Helvetica;
@@ -149,18 +148,6 @@ table td{
     width: 600px;
 }
 
-.details summary { /* строки-заголовок для клика */
-    height: 40px;
-    position: relative;
-    background:RGB(70,186,235);
-    padding: 2px 10px;
-    border-radius: 20px;
-    border: solid;
-    border-color: white;
-    color: #fff;
-    cursor: pointer;
-    font: 20px/40px Helvetica;
-}
  .loginAndCreateForm{
     color: RGB(0,107,253);
     width: 320px;
