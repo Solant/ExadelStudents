@@ -1,5 +1,4 @@
-﻿/*common properties*/
-body {
+﻿body {
     margin: 0;      /* Убираем отступы */
 }
 
@@ -32,10 +31,16 @@ body {
 	padding-left: 20px;
 }
 
-.loupeAndExit_logo{
+.loupe_logo{
 	float:right;
 	margin-top: 5px;
 	margin-right: 10px;	
+}
+
+.exit_logo{
+	float: right;
+	margin-top: 5px;
+	margin-right: 10px;
 }
 
 .currUserName{
@@ -47,9 +52,6 @@ body {
 	font-family: Arial;
 	margin-top: 9px;
 }
-/* end of common properties*/
-
-/* feedbackers main properties*/
 
 .bookmarks a{
 
@@ -73,12 +75,11 @@ body {
 	border-top-right-radius: 8px;
 }
 
-#table{
-    padding-top: 100px;
-    padding-left: 50px;
-}
-
 table{
+	top: 100px;
+	right: 100px;
+	position: absolute;
+	left: 10%;
 	background-color: white;
 	text-align:center; 
     border:#777777 1px solid;
@@ -100,16 +101,12 @@ table td{
 	padding: 2px 8px 2px 8px;
 	border-color: grey;
 }
-
-/*end of feedbacker main properties*/
-
-/* student properties*/
-.spoilers label{
+.group label{
     float:left;
     margin-left: 2%;
     height: 40px;
 }
-.spoilers input, select{
+.group input, select{
     float:right;
     margin-right: 2%;
     height: 24px;
@@ -123,27 +120,22 @@ table td{
 }
 .group{
     white-space: nowrap;
-    height: 10px;
-}
-.details[open] summary { /* цвет строки-заголовка в открытом виде */
-    background: #c0c0c0;
-
-}
-.details{
-    width: 600px;
+    height: 45px;
+    overflow: auto;
 }
 .profile{
     background-color:  #c0c0c0;
-    width: 600px;
-    height:100px;
+    width: 200px;
+    height:40px;
     border-radius: 20px;
-    border: solid;
-    border-color: white;
+    border: solid #ffffff;
+    float: right;
+    font:20px/40px Helvetica;
 }
-
-/*end of student properties*/
-
-/*selectfields properties*/
+.profile img{
+    float:left;
+    margin-left: 5px;
+}
 #hatSelect{
     font:20px/40px Helvetica;
     color: #ffffff;
@@ -154,50 +146,6 @@ table td{
     width: 600px;
 }
 
-.details summary { /* строки-заголовок для клика */
-    height: 40px;
-    position: relative;
-    background:RGB(70,186,235);
-    padding: 2px 10px;
-    border-radius: 20px;
-    border: solid;
-    border-color: white;
-    color: #fff;
-    cursor: pointer;
-    font: 20px/40px Helvetica;
-}
-
-.functionsBox{
-    left: 20px;
-    top: 100px;
-    width: 170px;
-    height: 400px;
-    position: absolute;
-    font-size: 19px;
-    padding-left: 4px;
-    padding-right: 10px;
-    background-color:  #c0c0c0;
-}
-
-.functionsBox p {
-    padding-top: 1px;
-    padding-bottom: 1px;
-    background-color:white;
-    border: 1px;
-    border-style:none;
-    border-radius: 3px;
-}
-
-.functionsBox p span{
-    float:right;
-    padding-top:2px;
-    padding-right: 5px;
-}
-
-/* end of selectfields properties*/
-
-/* props of login and create form*/
-
  .loginAndCreateForm{
     color: RGB(0,107,253);
     width: 320px;
@@ -207,13 +155,14 @@ table td{
     padding: 7px;
     text-align:left;
     font-size: 14px;
-    background-color: white;
+    background-color: white; /*RGB(0,156,203);*/
     border-width: 3px;
     border-color: #00a1d2;
     border-radius: 2px;
 }
 .loginAndCreateForm p {
     margin-left: 30px;
+    /*text-shadow: 1px 1px 0px black;*/
 }
 
 .loginAndCreateForm h1{
@@ -237,29 +186,53 @@ table td{
     background-color:RGB(0,107,253);
 }
 
-/*end props of login and create form*/
-
-/*props of create.jsp*/
-
-#createFormSet{
-	border-color: #00a1d2;
-    border-radius: 8px;
-	border: 1px solid;
-	padding:0;
-}
-
 .field{
     color: RGB(0,107,253);
     height: 20px;
     background-color: white;
     position: relative;
     float: right;
-    margin-right: 20px;
+    margin-right: 20px;   
     border-color: #00a1d2;
     border-radius: 3px;
-    border: 1px solid;
-    width:50%;
+    border: 1 solid;
+	width:50%;
 }
 
-/*end props of create.jsp*/
+/*Начало раздела отвечающего за страницу create.jsp*/
 
+#createFormSet{
+	border-color: #00a1d2;
+    border-radius: 8px;
+	border: 1 solid;
+	padding:0;
+}
+
+/*Rjytw раздела отвечающего за страницу create.jsp*/
+
+.functionsBox{
+	left: 20px;
+	top: 100px;
+	width: 170px;
+	height: 400px;
+	position: absolute;
+	font-size: 19px;
+	padding-left: 4px;
+	padding-right: 10px;
+	background-color:  #c0c0c0;
+}
+
+.functionsBox p {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background-color:white;
+	border: 1px;
+    border-style:none;     
+    border-radius: 3px;
+}
+
+.functionsBox p span{
+	float:right;
+	padding-top:2px;
+	padding-right: 5px;
+}

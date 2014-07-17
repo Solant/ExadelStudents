@@ -26,13 +26,22 @@
 <div style="height: 50px"></div>
 <a href="#modal" role="button" class="btn" data-toggle="modal" style="float: left;">&#9658;</a>
 
+
+
+
+
+
+
+
+
+
 <div id="modal" class="modal hide fade">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h2>Menu</h2>
     </div>
     <div class="modal-body">
-        <a href><p>
+        <a href="/WEB-INF/pages/create.jsp"><p>
             <img src="/resources/images/add.png" class="add_logo" width="25px">
             <span>Add User</span>
         </p></a>
@@ -56,7 +65,7 @@
 
 
 
-<div class="tabbable " style="overflow: auto">
+<div class="tabbable" style="overflow: auto">
     <ul class="nav nav-tabs pull-right" role="tablist" id="myTab">
         <li class="active"><a href="#education" role="tab" data-toggle="tab">Education institution</a></li>
         <li><a href="#beforeWorking" role="tab" data-toggle="tab">Before working</a></li>
@@ -71,21 +80,36 @@
     </div>
 
 
-
-    <div class="tab-content">
+<form>
+    <div class="tab-content" style="height: 100%">
         <div class="tab-pane active" id="education">
-            <form>
                 <div class="spoilers">
                     <div class="group"><label for="university">University</label><input type="checkbox"><input id = "university"></div>
                     <div class="group"><label for="faculty">Faculty</label><input type="checkbox"><input id="faculty"></div>
                     <div class="group"><label for="specialty">Specialty</label><input type="checkbox"><input id="specialty"></div>
                     <div class="group"><label for="group">Group</label><input type="checkbox"><input id="group"></div>
                 </div>
-            </form>
+            <div class="spoilers">
+                <div class="group"><label for="university">University</label><input type="checkbox"><input id = "university"></div>
+                <div class="group"><label for="faculty">Faculty</label><input type="checkbox"><input id="faculty"></div>
+                <div class="group"><label for="specialty">Specialty</label><input type="checkbox"><input id="specialty"></div>
+                <div class="group"><label for="group">Group</label><input type="checkbox"><input id="group"></div>
+            </div>
+            <div class="spoilers">
+                <div class="group"><label for="university">University</label><input type="checkbox"><input id = "university"></div>
+                <div class="group"><label for="faculty">Faculty</label><input type="checkbox"><input id="faculty"></div>
+                <div class="group"><label for="specialty">Specialty</label><input type="checkbox"><input id="specialty"></div>
+                <div class="group"><label for="group">Group</label><input type="checkbox"><input id="group"></div>
+            </div>
+            <div class="spoilers">
+                <div class="group"><label for="university">University</label><input type="checkbox"><input id = "university"></div>
+                <div class="group"><label for="faculty">Faculty</label><input type="checkbox"><input id="faculty"></div>
+                <div class="group"><label for="specialty">Specialty</label><input type="checkbox"><input id="specialty"></div>
+                <div class="group"><label for="group">Group</label><input type="checkbox"><input id="group"></div>
+            </div>
         </div>
 
         <div class="tab-pane" id="beforeWorking">
-            <form>
                 <div class="spoilers">
                     <div class="group"><label for="dateOfEmployng">Date of employing</label><input type="checkbox"><input id = "dateOfEmployng" type="date"></div>
                     <div class="group"><label for="trainingExadel">Have you been training in Exadel before working?</label>
@@ -108,10 +132,8 @@
                         </select>
                     </div>
                 </div>
-            </form>
         </div>
         <div class="tab-pane" id="currProject">
-            <form>
                 <div class="spoilers">
                     <div class="group"><label for="teamLead">Team Leader</label><input type="checkbox"><input id="teamLead"></div>
                     <div class="group"><label for="PM">Project Manager</label><input type="checkbox"><input id="PM"></div>
@@ -134,8 +156,12 @@
                         </select></div>
 
                 </div>
-            </form>
         </div>
     </div>
+    <div style="height: 65px"></div>
+    <footer class="navbar navbar-fixed-bottom" style="bottom: 5px;width: 100%;position: fixed ">
+    <button type="submit" class="btn-large pull-right" style="margin-right: 20px" >Form table</button>
+    </footer>
+</form>
 </body>
 </html>
