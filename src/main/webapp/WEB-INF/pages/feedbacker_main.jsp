@@ -1,4 +1,5 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 	<head>
 		<link rel="stylesheet" href="/resources/styles/style.css">
@@ -18,7 +19,7 @@
 			<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
 			<img src="/resources/images/account.png" class="account_logo">
-			<img src="/resources/images/exit.png" class="exit_logo">
+            <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
 			<span class="currUserName"> Username </span>
 			<img src="/resources/images/loupe.png" class="loupe_logo">
 			
