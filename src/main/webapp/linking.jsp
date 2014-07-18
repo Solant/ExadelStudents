@@ -15,9 +15,6 @@
     <span class="currUserName"> Username </span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
 
-    <span class="bookmarks"> <a href> My Students </a> </span>
-    <span class="bookmarks"> <a href> All Students </a> </span>
-    <span class="bookmarks"> <a href> Interviews  </a> </span>
 </div>
 <form class="linkingForm" >
 <div class="radio">
