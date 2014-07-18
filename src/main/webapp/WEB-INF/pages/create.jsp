@@ -1,14 +1,19 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
+
 <html>
 
 <head>
   <title>Create</title>
+    <%-- <link href="/resources/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="/resources/styles/style.css" />
+     <script src="/resources/styles/bootstrap/js/jquery.js"></script>
+     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>--%>
   <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
 </head>
 <body>
-    
+
 	<div class="hat">
 	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
@@ -17,7 +22,8 @@
         <span class="currUserName"><c:out value="${account}"></c:out></span>
 
     </div>
-	<form class="loginAndCreateForm" >
+    <div class="loginAndCreateForm">
+	<form action="/worker/createUser/">
 	
 		<h1>Adding user Form </h1>
 	
@@ -61,11 +67,15 @@
 			
 
 		
-		<p>
-			<input type="submit" id="loginAndCreateButton" value="Create">
-		</p>
-		
+		<div>
+        <form action="worker" method="get">
+            <button formaction="/worker" type="submit" class="btn" >Cancel</button>
+        </form>
+        <button type="submit" class="btn">Create</button>
+		</div>
+
 	</form>
+    </div>
 </body>
 
 </html>

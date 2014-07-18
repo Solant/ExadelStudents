@@ -2,7 +2,6 @@ package com.springapp.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,9 +15,8 @@ public class WorkerController {
     public String workerPage(ModelMap model) {
         return "select_fields";
     }
-    @RequestMapping(value = "/createUser/{workerName}", method = RequestMethod.GET)
-    public String createUser(@PathVariable("workerName")String name,  ModelMap model){
-        //model.addAttribute("account", name);
+    @RequestMapping(value = "/createUser", method = RequestMethod.GET)
+    public String createUser(){
         return "create";
     }
 
@@ -54,7 +52,7 @@ public class WorkerController {
 
     @RequestMapping(value = "/formTable", method = RequestMethod.POST)
     public String formTable(){
-        return "";
+        return "feedbacker_main";
     }
 
 }
