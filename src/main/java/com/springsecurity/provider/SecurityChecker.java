@@ -5,9 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Collection;
 
-/**
- * Created by solant on 16.07.14.
- */
 public class SecurityChecker {
     public static boolean hasRole(String role) {
         Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>)
