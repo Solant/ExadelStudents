@@ -17,6 +17,24 @@
 <div class="hat">
     <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
+
+    <a href="/worker/createUser/${account}"><button class="btn">
+        <img src="/resources/images/add.png" class="add_logo" width="25px">
+        <span>Add User</span>
+    </button></a>
+    <a href><button class="btn">
+        <img src="/resources/images/yellow-link.png"  height="23px">
+        <span>Link Student</span>
+    </button></a>
+    <a href><button class="btn">
+        <img src="/resources/images/fired.png"  width="25px">
+        <span>Fired Students</span>
+    </button></a>
+
+
+
+
+
     <img src="/resources/images/account.png" class="account_logo">
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
     <span class="currUserName"><c:out value="${account}"></c:out></span>
@@ -24,24 +42,25 @@
 </div>
 
 <div style="height: 50px"></div>
+
+
+
+
+
+
+
+
+
+
+<%--
 <a href="#modal" role="button" class="btn" data-toggle="modal" style="float: left;">&#9658;</a>
-
-
-
-
-
-
-
-
-
-
 <div id="modal" class="modal hide fade">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h2>Menu</h2>
     </div>
     <div class="modal-body">
-        <a href="/WEB-INF/pages/create.jsp"><p>
+        <a href="/worker/createUser/${account}"><p>
             <img src="/resources/images/add.png" class="add_logo" width="25px">
             <span>Add User</span>
         </p></a>
@@ -61,12 +80,12 @@
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     </div>
-</div>
+</div>--%>
 
 
 
-<div class="tabbable" style="overflow: auto">
-    <ul class="nav nav-tabs pull-right" role="tablist" id="myTab">
+<div class="tabbable tabs-left" style="float: left">
+    <ul class="nav nav-tabs pull-left" role="tablist" id="myTab">
         <li class="active"><a href="#education" role="tab" data-toggle="tab">Education institution</a></li>
         <li><a href="#beforeWorking" role="tab" data-toggle="tab">Before working</a></li>
         <li><a href="#currProject" role="tab" data-toggle="tab">Current project</a></li>

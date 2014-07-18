@@ -20,12 +20,18 @@ body {
     min-width: 900px;
 }
 
+.hat button{
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
 .account_logo {
     float: right;
     margin-right: 5px;
     margin-top: 4px;
 }
 .exadel_logo{
+    float: left;
     vertical-align: middle;
     padding-top: 10px;
     padding-left: 20px;

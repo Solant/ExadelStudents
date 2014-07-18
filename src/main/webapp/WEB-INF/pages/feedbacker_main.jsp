@@ -21,8 +21,8 @@
 			
 			<img src="/resources/images/account.png" class="account_logo">
             <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
-			<span class="currUserName"> Username </span>
-			<img src="/resources/images/loupe.png" class="loupe_logo">
+            <span class="currUserName"><c:out value="${account}"></c:out></span>
+            <img src="/resources/images/loupe.png" class="loupe_logo">
 			
 			<span class="bookmarks"> <a href> My Students </a> </span>
 			<span class="bookmarks"> <a href> All Students </a> </span>

@@ -1,4 +1,8 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
+
 <head>
   <title>Create</title>
   <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
@@ -9,10 +13,10 @@
 	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
 	<img src="/resources/images/account.png" class="account_logo">
-	<img src="/resources/images/exit.png" class="exit_logo">
-	<span class="currUserName"> Username </span>
-			
-</div>
+        <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
+        <span class="currUserName"><c:out value="${account}"></c:out></span>
+
+    </div>
 	<form class="loginAndCreateForm" >
 	
 		<h1>Adding user Form </h1>
