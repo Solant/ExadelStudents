@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Create</title>
@@ -8,8 +9,10 @@
     
 	<div class="hat">
 	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
-			
-	<img src="/resources/images/account.png" class="account_logo">
+
+        <a href="account.jsp">
+            <img src="/resources/images/account.png" class="account_logo">
+        </a>
 	<img src="/resources/images/exit.png" class="exit_logo">
 	<span class="currUserName"> Username </span>
 			

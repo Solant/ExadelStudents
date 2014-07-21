@@ -294,4 +294,33 @@ select.linkingR{
     text-align: center;
     margin-top: 20px;
 }
-/*account form*/
+/*review form*/
+.reviewForm{
+    font-family: arial;
+    color: RGB(0,107,253);
+    margin:auto;
+    margin-top: 100px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: white;
+    border:3px solid;
+    border-color: #00a1d2;
+    border-radius: 2px;
+    width: 450px;
+    text-align: left;
+}
+
+.alignCenter{
+    text-align: center;
+}
+.floatright{
+    float: right;
+    margin-right: 20px;
+}
+.textOther{
+    width: 400px;
+    max-width: 400px;
+    color: RGB(0,107,253);
+    height: 100px;
+}
+/*end of review form*/

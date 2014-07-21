@@ -10,7 +10,9 @@
 <div class="hat">
     <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
-    <img src="/resources/images/account.png" class="account_logo">
+    <a href="account.jsp">
+        <img src="/resources/images/account.png" class="account_logo">
+    </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
     <span class="currUserName"> Username </span>
     <img src="/resources/images/loupe.png" class="loupe_logo">

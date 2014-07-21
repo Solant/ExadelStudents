@@ -17,7 +17,9 @@
 <div class="hat">
     <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
-    <img src="/resources/images/account.png" class="account_logo">
+    <a href="account.jsp">
+        <img src="/resources/images/account.png" class="account_logo">
+    </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
     <span class="currUserName"><c:out value="${account}"></c:out></span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
@@ -41,7 +43,7 @@
         <h2>Menu</h2>
     </div>
     <div class="modal-body">
-        <a href="../../create.jsp"><p>
+        <a href="create.jsp"><p>
             <img src="/resources/images/add.png" class="add_logo" width="25px">
             <span>Add User</span>
         </p></a>
