@@ -170,8 +170,7 @@ table td{
     text-align:center;
 }
 
-#loginAndCreateButton{
-    margin-left: 37%;
+.loginAndCreateButton{
     background-color: RGB(0,156,203);
     border-style:none;
     border-radius: 3px;
@@ -183,7 +182,7 @@ table td{
     text-shadow: 1px 1px 0px black;
 
 }
-#loginAndCreateButton:hover{
+.loginAndCreateButton:hover{
     background-color:RGB(0,107,253);
 }
 
@@ -196,7 +195,7 @@ table td{
     margin-right: 20px;
     border-color: #00a1d2;
     border-radius: 3px;
-    border: 1 solid;
+    border: 1px solid;
     width:50%;
 }
 
@@ -290,3 +289,9 @@ select.linkingR{
 .button button:hover{
     background-color:RGB(0,107,253);
 }
+/*end of linking form*/
+.allignCenter{
+    text-align: center;
+    margin-top: 20px;
+}
+/*account form*/

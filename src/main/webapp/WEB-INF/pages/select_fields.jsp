@@ -41,11 +41,11 @@
         <h2>Menu</h2>
     </div>
     <div class="modal-body">
-        <a href="/WEB-INF/pages/create.jsp"><p>
+        <a href="../../create.jsp"><p>
             <img src="/resources/images/add.png" class="add_logo" width="25px">
             <span>Add User</span>
         </p></a>
-        <a href><p>
+        <a href="linking.jsp"><p>
             <img src="/resources/images/yellow-link.png"  height="23px">
             <span>Link Student</span>
         </p></a>

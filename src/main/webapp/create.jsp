@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
   <title>Create</title>
@@ -36,30 +37,23 @@
 				</select>
 			</p>
 		</fieldset>
-	
-		
+
+        <p>
+            <label for="lastname">Lastname:</label>
+            <input type="text" id="lastname" class="field">
+        </p>
 		
 		<p>
 			<label for="firstname">Firstname:</label>
 			<input type="text" id="firstname" class="field">
 		</p>
-		
-		<p>
-			<label for="secondname">Secondname:</label>
-			<input type="text" id="secondname" class="field">
-		</p>
-		
-		
-		<p>
-			<label for="lastname">Lastname:</label>
-			<input type="text" id="lastname" class="field">
-		</p>
-			
 
-		
-		<p>
-			<input type="submit" id="loginAndCreateButton" value="Create">
-		</p>
+        <div class="allignCenter">
+            <div>
+			    <input type="submit" class="loginAndCreateButton" value="Create">
+                <input type="submit" class="loginAndCreateButton" value="Cancel">
+		    </div>
+        </div>
 		
 	</form>
 </body>
