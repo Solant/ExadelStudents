@@ -6,6 +6,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Collection;
 
 public class SecurityChecker {
+
+    /**
+     * Returns if user has authority to log in
+     *
+     * @role        Role to be checked in String
+     * @return      boolean
+     */
+
     public static boolean hasRole(String role) {
         Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>)
         SecurityContextHolder.getContext().getAuthentication().getAuthorities();
