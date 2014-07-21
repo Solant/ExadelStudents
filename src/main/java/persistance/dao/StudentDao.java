@@ -6,5 +6,5 @@ import persistance.model.Student;
 /**
  * Created by user on 15.07.2014.
  */
-public interface StudentDao1 extends GenericDao<Student> {
+public interface StudentDao extends GenericDao<Student> {
 }
