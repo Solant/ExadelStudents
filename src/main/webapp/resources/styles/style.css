@@ -20,12 +20,18 @@
     min-width: 900px;
 }
 
+.hat button{
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
 .account_logo {
     float: right;
     margin-right: 5px;
     margin-top: 4px;
 }
 .exadel_logo{
+    float: left;
     vertical-align: middle;
     padding-top: 10px;
     padding-left: 20px;
@@ -39,6 +45,8 @@
 
 .exit_logo{
     float: right;
+    border-left: #ffffff solid;
+
     margin-top: 5px;
     margin-right: 10px;
 }
@@ -145,6 +153,7 @@ table td{
     border-radius: 20px;
     height: 40px;
     width: 600px;
+    overflow: auto;
 }
 
 .loginAndCreateForm{
@@ -165,7 +174,14 @@ table td{
     margin-left: 30px;
     /*text-shadow: 1px 1px 0px black;*/
 }
-
+.loginAndCreateForm div{
+    overflow: auto;
+}
+.loginAndCreateForm button{
+    float:right;
+    margin-right: 10px;
+    cursor: pointer;
+}
 
 .loginAndCreateForm h1{
     text-align:center;
@@ -290,7 +306,7 @@ select.linkingR{
 }
 .button button:hover{
     background-color:RGB(0,107,253);
-}}
+}
 
 
 
@@ -376,3 +392,5 @@ select.linkingR{
     -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
+
+
