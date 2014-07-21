@@ -1,4 +1,4 @@
-body {
+﻿body {
     margin: 0;      /* Убираем отступы */
 }
 
@@ -20,18 +20,12 @@ body {
     min-width: 900px;
 }
 
-.hat button{
-    margin-left: 20px;
-    margin-top: 5px;
-}
-
 .account_logo {
     float: right;
     margin-right: 5px;
     margin-top: 4px;
 }
 .exadel_logo{
-    float: left;
     vertical-align: middle;
     padding-top: 10px;
     padding-left: 20px;
@@ -45,8 +39,6 @@ body {
 
 .exit_logo{
     float: right;
-    border-left: #ffffff solid;
-
     margin-top: 5px;
     margin-right: 10px;
 }
@@ -153,7 +145,6 @@ table td{
     border-radius: 20px;
     height: 40px;
     width: 600px;
-    overflow: auto;
 }
 
 .loginAndCreateForm{
@@ -174,14 +165,7 @@ table td{
     margin-left: 30px;
     /*text-shadow: 1px 1px 0px black;*/
 }
-.loginAndCreateForm div{
-    overflow: auto;
-}
-.loginAndCreateForm button{
-    float:right;
-    margin-right: 10px;
-    cursor: pointer;
-}
+
 
 .loginAndCreateForm h1{
     text-align:center;
@@ -254,6 +238,59 @@ table td{
     padding-top:2px;
     padding-right: 5px;
 }
+/*linking form*/
+
+select.linkingL{
+    float: left;
+    height: 300px;
+    width: 30%;
+    font-family: arial;
+    color: RGB(0,107,253);
+    border: 1px solid #00a1d2;
+}
+select.linkingR{
+    float: right;
+    width: 30%;
+    height: 300px;
+    font-family: arial;
+    color: RGB(0,107,253);
+    border: 1px solid #00a1d2;
+}
+.linkingForm{
+    font-family: arial;
+    color: RGB(0,107,253);
+    margin:auto;
+    margin-top: 100px;
+    padding: 7px;
+    font-size: 25px;
+    background-color: white;
+    border:3px solid;
+    border-color: #00a1d2;
+    border-radius: 2px;
+    width: 450px;
+}
+.radio{
+    text-align: center;
+}
+
+.button{
+    margin-top: 150px;
+    text-align: center;
+}
+.button button{
+    background-color: RGB(0,156,203);
+    border-style:none;
+    border-radius: 3px;
+    color: white;
+    height: 22px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight:800;
+    text-shadow: 1px 1px 0px black;
+}
+.button button:hover{
+    background-color:RGB(0,107,253);
+}}
 
 
 
