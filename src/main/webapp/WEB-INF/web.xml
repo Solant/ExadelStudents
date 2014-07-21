@@ -30,6 +30,14 @@
         </param-value>
     </context-param>
 
+    <!-- Loads Hibernate config file -->
+    <context-param>
+        <param-name>contextHibernateConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/dao.xml
+        </param-value>
+    </context-param>
+
     <!-- Spring Security -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
