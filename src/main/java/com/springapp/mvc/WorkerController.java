@@ -1,7 +1,5 @@
 package com.springapp.mvc;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class WorkerController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String workerPage(ModelMap model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName(); //get logged in username
-        model.addAttribute("account", name);
         return "select_fields";
     }
-    @RequestMapping(value = "/createUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/createUser", method = RequestMethod.GET)
     public String createUser(){
-        return "feedbaker_main";
+        return "create";
     }
 
     @RequestMapping(value = "/changeStudent", method = RequestMethod.POST)
@@ -57,7 +52,7 @@ public class WorkerController {
 
     @RequestMapping(value = "/formTable", method = RequestMethod.POST)
     public String formTable(){
-        return "";
+        return "feedbacker_main";
     }
 
 }
