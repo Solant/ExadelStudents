@@ -1,7 +1,10 @@
 package persistance.dao.impl;
 
 
+import org.springframework.stereotype.Repository;
 import persistance.dao.AttributeDao;
+import persistance.model.Attribute;
 
-public class AttributeDaoImpl extends GenericDaoImpl implements AttributeDao {
+@Repository
+public class AttributeDaoImpl extends GenericDaoImpl<Attribute> implements AttributeDao {
 }

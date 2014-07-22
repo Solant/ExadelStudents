@@ -1,5 +1,7 @@
 package persistance.dao;
 
-public interface AttributeDao extends GenericDao {
+import persistance.model.Attribute;
+
+public interface AttributeDao extends GenericDao<Attribute> {
 
 }
