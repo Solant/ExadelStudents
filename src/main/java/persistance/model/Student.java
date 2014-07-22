@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table (name = "Students")
+@Table (name = "Users")
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column (name = "firstname")
     private String firstName;
 
-    @Column
+    @Column (name = "lastname")
     private String secondName;
 
     @OneToMany(mappedBy = "myStudents", fetch = FetchType.LAZY)

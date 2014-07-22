@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table (name = "Feedbackers")
+@Table (name = "Users")
 public class Feedbacker {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column
+    @Column(name = "secondname")
     private String secondName;
 
     @OneToMany(fetch = FetchType.LAZY)

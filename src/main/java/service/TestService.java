@@ -3,7 +3,7 @@ package service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import persistance.dao.StudentDao1;
+import persistance.dao.StudentDao;
 import persistance.model.Student;
 
 /**
@@ -13,7 +13,7 @@ import persistance.model.Student;
 @Service
 public class TestService {
     @Autowired
-    private StudentDao1 sd;
+    private StudentDao sd;
 
     @Transactional
     public void testMethod(){
