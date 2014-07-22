@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.StudentDao;
 import persistance.model.Student;
+import persistance.model.User;
 
 /**
  * Created by user on 18.07.2014.
@@ -20,10 +21,12 @@ public class TestService {
 
         System.out.println("TEST STARTED!");
 
-        /*Student stud = new Student();
-        stud.setFirstName("test");
-        stud.setSecondName("Test");
-        sd.save(stud);*/
+        Student stud = new Student();
+        stud.setLogin("test");
+        stud.setPassword("test");
+        stud.setFirstName("testFN");
+        stud.setSecondName("testSN");
+        sd.save(stud);
         for(Student s : sd.findAll()){
             System.out.println(s.getFirstName());
         }

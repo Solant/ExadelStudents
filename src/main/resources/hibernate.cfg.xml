@@ -13,5 +13,7 @@
         <mapping class="persistance.model.Feedbacker"/>
         <mapping class="persistance.model.Group"/>
         <mapping class="persistance.model.Project" />
+        <mapping class="persistance.model.User" />
+        <mapping class="persistance.model.UserRole" />
     </session-factory>
 </hibernate-configuration>

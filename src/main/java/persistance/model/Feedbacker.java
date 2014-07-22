@@ -1,11 +1,12 @@
 package persistance.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table (name = "Users")
-public class Feedbacker {
+public class Feedbacker{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +29,15 @@ public class Feedbacker {
     @OneToMany(mappedBy = "feedbacker", fetch = FetchType.LAZY)
     private Set <Review> reviews;
 
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "enabled")
+    private boolean enabled;
+
     public Feedbacker() {
     }
 
@@ -47,13 +57,6 @@ public class Feedbacker {
         this.firstName = firstName;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Set<Student> getMyStudents() {
         return myStudents;
@@ -77,5 +80,37 @@ public class Feedbacker {
 
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
