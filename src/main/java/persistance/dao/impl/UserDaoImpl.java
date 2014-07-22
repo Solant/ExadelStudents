@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 
         List<User> users = new ArrayList<User>();
 
-        users = getSessionFactory().getCurrentSession()
+        users = sessionFactory.getCurrentSession()
                 .createQuery("from User where login=?")
                 .setParameter(0, login).list();
 
