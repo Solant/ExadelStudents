@@ -26,8 +26,7 @@
 	<img src="/resources/images/loupe.png" class="loupe_logo">
 </div>
 
-<div align="center" width = "600px">
-    <div style="height: 50px"></div>
+<div align="center">
     <div class="profile">
         <img src="/resources/images/account.png">
         <c:out value="Ivanov"></c:out>
@@ -327,7 +326,7 @@
             </form>
         </div>
 
-    </div>
-
+</div>
+</div>
 </body>
 </html>

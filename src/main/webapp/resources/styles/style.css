@@ -348,3 +348,9 @@ select.linkingR{
     height: 100px;
 }
 /*end of review form*/
+
+/*student page*/
+.nav-tabs {
+    margin-top: 50px;
+}
+/*end of student page*/
