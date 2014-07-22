@@ -35,348 +35,170 @@
             <table border = 1 id="example">
 			<thead>
 				<td> Name </td>
-				<td> Status </td>
+				<td> Hire date </td>
 				
-				<td> Name </td>
-				<td> Status </td>
+				<td> Faculty </td>
+				<td> Course/Group </td>
 				
-				<td> Name </td>
-				<td> Status </td>
+				<td> Year of graduation </td>
+				<td> Number of hours </td>
 				
-				<td> Name </td>
-				<td> Status </td>
+				<td> Billable </td>
+				<td> Role on Project </td>
 				
-				<td> Name </td>
-				<td> Status </td>
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				<td> Name </td>
-				<td> Status </td>
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				
-				<td> Name </td>
-				<td> Status </td>
-				<td> Name </td>
-				<td> Status </td>
+				<td> Technology </td>
+				<td> English </td>
 			</thead>
-			<tbody>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xzxc</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xqwe</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xz </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xs</td>
-			</tr>
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xzxc</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xqwe</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xz </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xs</td>
-			</tr>
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xzxc</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xqwe</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xz </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xs</td>
-			</tr>
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xzxc</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xqwe</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xz </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xs</td>
-			</tr>
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xzxc</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xqwe</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xz </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xs</td>
-			</tr>
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xzxc</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xasd </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xqwe</td>
-			</tr>
-			
-			<tr>
-				<td> Alex </td>
-				<td> Xz </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> Xs</td>
-			</tr>
-			<tr>
-				<td> Alex </td>
-				<td> X </td>
-			</tr>
-			<tr>
-				<td> Mish </td>
-				<td> X</td>
-			</tr>
-			</tbody>
+                <tbody>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                <tr>
+                    <td>Ivanov Ivan</td>
+                    <td>22.07.2014</td>
+                    <td>FAMCS</td>
+                    <td>3/3</td>
+                    <td>2017</td>
+                    <td>30</td>
+                    <td>Billable</td>
+                    <td>Developer(20.07.2014)</td>
+                    <td>Java, Hibernate</td>
+                    <td>Intermediate</td>
+                </tr>
+                </tbody>
+            <tfoot>
+                <td> Name </td>
+                <td> Hire date </td>
+
+                <td> Faculty </td>
+                <td> Course/Group </td>
+
+                <td> Year of graduation </td>
+                <td> Number of hours </td>
+
+                <td> Billable </td>
+                <td> Role on Project </td>
+
+                <td> Technology </td>
+                <td> English </td>
+            </tfoot>
 		</table>
 		</div>
 		
