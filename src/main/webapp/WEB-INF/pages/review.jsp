@@ -24,11 +24,13 @@
     <h1 class="alignCenter">Review Form </h1>
 
     <p>
-        <span>Lastname:</span> <span class="field">Ivanov</span>
+        <label for="lastname">Lastname:</label>
+        <input class="field" type="text" id="lastname" value="Ivanov" readonly>
     </p>
 
     <p>
-        <span>Firstname:</span> <span class="field"> Ivan</span>
+        <label for="firstname">Firstname:</label>
+        <input class="field" type="text" id="firstname" value="Ivan" readonly>
     </p>
 
     Professional suitability:
