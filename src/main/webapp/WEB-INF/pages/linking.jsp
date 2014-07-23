@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/resources/styles/style.css"><%--
     <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">--%>
 </head>

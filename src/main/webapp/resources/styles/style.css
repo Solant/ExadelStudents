@@ -163,8 +163,8 @@ table td{
 }
 
 .loginAndCreateForm{
-    color: RGB(0,107,253);
-    width: 320px;
+    color: #808080;
+    width: 350px;
     margin: auto;
     margin-top: 100px;
     border: 0px solid;
@@ -173,8 +173,7 @@ table td{
     font-size: 14px;
     background-color: white; /*RGB(0,156,203);*/
     border-width: 3px;
-    border-color: #00a1d2;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 .loginAndCreateForm p {
     margin-left: 30px;
@@ -194,7 +193,7 @@ table td{
 }
 
 .loginAndCreateButton{
-    background-color: RGB(0,156,203);
+    background-color: #808080;
     border-style:none;
     border-radius: 3px;
     color: white;
@@ -206,12 +205,12 @@ table td{
 
 }
 .loginAndCreateButton:hover{
-    background-color:RGB(0,107,253);
+    background-color:RGB(0,156,203);
 }
 
 .field{
-    color: RGB(0,107,253);
-    height: 20px;
+    color: #808080;
+    height: 25px;
     background-color: white;
     position: relative;
     float: right;
@@ -266,28 +265,23 @@ select.linkingL{
     height: 300px;
     width: 30%;
     font-family: arial;
-    color: RGB(0,107,253);
-    border: 1px solid #00a1d2;
 }
 select.linkingR{
     float: right;
     width: 30%;
     height: 300px;
     font-family: arial;
-    color: RGB(0,107,253);
-    border: 1px solid #00a1d2;
 }
 .linkingForm{
     font-family: arial;
-    color: RGB(0,107,253);
+    color: #808080;
     margin:auto;
     margin-top: 100px;
     padding: 7px;
     font-size: 25px;
     background-color: white;
     border:3px solid;
-    border-color: #00a1d2;
-    border-radius: 2px;
+    border-radius: 10px;
     width: 450px;
 }
 .radio{
@@ -299,7 +293,7 @@ select.linkingR{
     text-align: center;
 }
 .button button{
-    background-color: RGB(0,156,203);
+    background-color: #808080;
     border-style:none;
     border-radius: 3px;
     color: white;
@@ -310,7 +304,7 @@ select.linkingR{
     text-shadow: 1px 1px 0px black;
 }
 .button button:hover{
-    background-color:RGB(0,107,253);
+    background-color: RGB(0,156,203);
 }
 
 /*end of linking form*/
@@ -321,15 +315,14 @@ select.linkingR{
 /*review form*/
 .reviewForm{
     font-family: arial;
-    color: RGB(0,107,253);
+    color: #808080;
     margin:auto;
     margin-top: 100px;
     padding: 10px;
     font-size: 14px;
     background-color: white;
     border:3px solid;
-    border-color: #00a1d2;
-    border-radius: 2px;
+    border-radius: 10px;
     width: 450px;
     text-align: left;
 }

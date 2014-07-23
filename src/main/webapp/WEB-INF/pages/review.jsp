@@ -1,8 +1,10 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Review</title>
+    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
 </head>
 <body>
@@ -32,12 +34,13 @@
         <label for="firstname">Firstname:</label>
         <input class="field" type="text" id="firstname" value="Ivan" readonly>
     </p>
-
-    Professional suitability:
-    <span class="floatright">
-        <input type="radio" name="feedbacking" value="suitable" id="suitable" ><label for="suitable">Suitable</label>
-        <input type="radio" name="feedbacking" value="unsuitable" id="unsuitable" ><label for="unsuitable">Unsuitable</label>
-    </span>
+    <p>
+        <span>Professional suitability:</span>
+        <span class="floatright">
+            <input type="radio" name="feedbacking" value="suitable" id="suitable" ><label for="suitable">Suitable</label>
+            <input type="radio" name="feedbacking" value="unsuitable" id="unsuitable" ><label for="unsuitable">Unsuitable</label>
+        </span>
+    </p>
     <p>
         <label for="attitude">Attitude to work:</label>
         <input type="text" id="attitude" class="field">

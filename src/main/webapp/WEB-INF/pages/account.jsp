@@ -1,8 +1,10 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Account</title>
+    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
 </head>
 <body>
@@ -20,15 +22,16 @@
     <h1>Account Form</h1>
 
     <p>
-        <span>Lastname:</span> <span class="field">Ivanov</span>
+        <label for="lastname">Lastname:</label>
+        <input class="field" type="text" id="lastname" value="Ivanov" readonly>
     </p>
 
     <p>
-        <span>Firstname:</span> <span class="field"> Ivan</span>
+        <label for="firstname">Firstname:</label>
+        <input class="field" type="text" id="firstname" value="Ivan" readonly>
     </p>
 
 
-    <fieldset id="createFormSet">
         <p>
             <label for="oldPassword">Password:</label>
             <input type="password" id="oldPassword" class="field">
@@ -43,7 +46,6 @@
             <label for="confirmPassword">Confirm Password:</label>
             <input type="password" id="confirmPassword" class="field">
         </p>
-    </fieldset>
 
 
     <div class="allignCenter">

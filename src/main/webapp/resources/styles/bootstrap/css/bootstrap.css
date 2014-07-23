@@ -763,9 +763,9 @@ h3 {
   line-height: 40px;
 }
 
-h1 {
+/*h1 {
   font-size: 38.5px;
-}
+}*/
 
 h2 {
   font-size: 31.5px;
@@ -1091,9 +1091,9 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   display: inline-block;
-  height: 20px;
+  height: 10px;
   padding: 4px 6px;
-  margin-bottom: 10px;
+  /*margin-bottom: 10px;*/
   font-size: 14px;
   line-height: 20px;
   color: #555555;
@@ -1259,8 +1259,8 @@ textarea::-webkit-input-placeholder {
 
 .radio input[type="radio"],
 .checkbox input[type="checkbox"] {
-  float: left;
-  margin-left: -20px;
+ /* float: left;
+  margin-left: -20px;*/
 }
 
 .controls > .radio:first-child,

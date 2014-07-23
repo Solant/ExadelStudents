@@ -10,7 +10,9 @@
      <link rel="stylesheet" href="/resources/styles/style.css" />
      <script src="/resources/styles/bootstrap/js/jquery.js"></script>
      <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>--%>
-  <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
+
+    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
 </head>
 <body>
 
@@ -22,12 +24,10 @@
         <span class="currUserName"><c:out value="${account}"></c:out></span>
 
     </div>
-    <div class="loginAndCreateForm">
-	<form action="/worker/createUser/">
+	<form class="loginAndCreateForm" action="/worker/createUser/">
 	
 		<h1>Adding user Form </h1>
-	
-		<fieldset id="createFormSet">	
+
 			<p>
 				<label for="login">Login:</label>
 				<input type="text" id="login" class="field">
@@ -45,7 +45,6 @@
 					<option>Personnel officer</option>
 				</select>
 			</p>
-		</fieldset>
 
         <p>
             <label for="lastname">Lastname:</label>
@@ -65,7 +64,6 @@
         </div>
 		
 	</form>
-    </div>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Login</title>
@@ -7,6 +8,8 @@
   src="html5shiv.js">
   </script>
   <![endif]-->
+
+  <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
 </head>
 <body>
