@@ -1,4 +1,5 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -9,17 +10,20 @@
 </head>
 <body>
 
-<div class="hat">
-    <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
+
+<div class="hat">
+    <%--<a href="<c:url--%><%--">--%>
     <img src="/resources/images/account.png" class="account_logo">
-    <img src="/resources/images/exit.png" class="exit_logo">
-    <span class="currUserName"> Username </span>
+    </a>
+
+    <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
+    <span class="currUserName"><c:out value="${account}"></c:out></span>
 
 </div>
 <form class="loginAndCreateForm" >
 
-    <h1>Account Form</h1>
+    <h1>Account Form <%--<c:out value="${pageContext.request.requestURL}" />--%></h1>
 
     <p>
         <label for="lastname">Lastname:</label>
@@ -50,8 +54,8 @@
 
     <div class="allignCenter">
         <div>
-            <input type="submit" value="Change" class="loginAndCreateButton">
-            <input type="submit" value="Cancel" class="loginAndCreateButton">
+            <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
+            <button type="submit"  class="loginAndCreateButton">Change</button>
         </div>
     </div>
 </form>

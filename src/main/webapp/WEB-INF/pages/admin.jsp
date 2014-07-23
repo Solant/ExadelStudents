@@ -17,8 +17,9 @@
 <div class="hat">
     <form method="get">
         <img src="/resources/images/exadel-logo.png" class="exadel_logo">
-
-    <img src="/resources/images/account.png" class="account_logo">
+        <a href="<c:url value="/admin/account" />">
+        <img src="/resources/images/account.png" class="account_logo">
+            </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
     <span class="currUserName"><c:out value="${account}"></c:out></span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
@@ -37,59 +38,7 @@
         </form>
 </div>
 
-
-
-
-
-
-
-
-        <img src="/resources/images/account.png" class="account_logo">
-        <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
-        <span class="currUserName"><c:out value="${account}"></c:out></span>
-        <span class="divider-vertical"></span>
-        <a href=""><img src="/resources/images/loupe.png" class="loupe_logo"></a>
-    </form>
-</div>
-
-
 <div style="height: 50px"></div>
-
-
-
-
-
-
-
-<%--
-<a href="#modal" role="button" class="btn" data-toggle="modal" style="float: left;">&#9658;</a>
-<%--<div id="modal" class="modal hide fade">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h2>Menu</h2>
-    </div>
-    <div class="modal-body">
-        <a href="/WEB-INF/pages/create.jsp"><p>
-            <img src="/resources/images/add.png" class="add_logo" width="25px">
-            <span>Add User</span>
-        </p></a>
-        <a href><p>
-            <img src="/resources/images/yellow-link.png"  height="23px">
-            <span>Link Student</span>
-        </p></a>
-        <a href><p>
-            <img src="/resources/images/interview.png"  width="25px">
-            <span>Interview</span>
-        </p></a>
-        <a href><p>
-            <img src="/resources/images/fired.png"  width="25px">
-            <span>Fired Students</span>
-        </p></a>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    </div>
-</div>--%>
 
 
 

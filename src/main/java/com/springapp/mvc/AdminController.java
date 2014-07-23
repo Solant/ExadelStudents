@@ -18,14 +18,19 @@ public class AdminController {
         return "admin";
     }
     @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
-    public String returnCreate(){
+    public String showCreate(){
         return "create";
     }
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
     public String createUser(HttpSession session){
         //session.setAttribute("account", newName);
-        return "redirect:/worker";
+        return "redirect:/admin";
+    }
+
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    public String showAccount(){
+        return "account";
     }
 
 
