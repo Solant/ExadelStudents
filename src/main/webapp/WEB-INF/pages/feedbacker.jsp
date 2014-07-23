@@ -26,7 +26,7 @@
             <span class="currUserName"><c:out value="${account}"></c:out></span>
             <img src="/resources/images/loupe.png" class="loupe_logo">
 			
-			<span class="bookmarks"> <a href="fblist.jsp"> My Students </a> </span>
+			<span class="bookmarksSelect"> <a href="fblist.jsp"> My Students </a> </span>
 			<span class="bookmarks"> <a href="fblist.jsp"> All Students </a> </span>
 			<span class="bookmarks">  <a href="fblist.jsp"> Interviews  </a> </span>
 		</div>
