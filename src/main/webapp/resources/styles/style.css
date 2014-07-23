@@ -306,6 +306,7 @@ select.linkingR{
 }
 .button button:hover{
     background-color:RGB(0,107,253);
+    cursor: pointer;
 }
 
 

@@ -23,7 +23,7 @@
 
     </div>
     <div class="loginAndCreateForm">
-	<form action="/worker/createUser/">
+	<form id="Create" class="createForm" action="/worker/createUser/" method="post">
 	
 		<h1>Adding user Form </h1>
 	
@@ -51,7 +51,7 @@
 		
 		<p>
 			<label for="firstname">Firstname:</label>
-			<input type="text" id="firstname" class="field">
+			<input type="text" id="firstname" name="firstname" class="field">
 		</p>
 		
 		<p>
@@ -67,12 +67,14 @@
 			
 
 		
-		<div>
-        <form action="worker" method="get">
-            <button formaction="/worker" type="submit" class="btn" >Cancel</button>
-        </form>
-        <button type="submit" class="btn">Create</button>
-		</div>
+		<div class="button" style="margin-top: 0px">
+
+            <form>
+                <button formmethod="get" formaction="/worker" type="submit" class="button">Cancel</button>
+            </form>
+                    <button form="Create" type="submit" class="button">Create</button>
+
+            </div>
 
 	</form>
     </div>

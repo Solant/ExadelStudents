@@ -18,11 +18,11 @@
 		<h1>Login Form </h1>
 		<p>
 			<span>Login:</span>
-			<input type="text" name="j_username" class="field" >
+			<input type="text" name="j_username" class="field" value="worker" >
 		</p>
 		<p>
 			<span>Password:</span>
-			<input type="password"  name= "j_password" class="field">
+			<input type="password"  name= "j_password" class="field" value="123">
 		</p>
         <p>
             <span>Remember Me</span>

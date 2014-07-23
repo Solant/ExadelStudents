@@ -5,6 +5,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by Надя on 16.07.2014.
  */
@@ -15,9 +17,15 @@ public class WorkerController {
     public String workerPage(ModelMap model) {
         return "select_fields";
     }
-    @RequestMapping(value = "/createUser", method = RequestMethod.GET)
-    public String createUser(){
+    @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
+    public String returnCreate(){
         return "create";
+    }
+
+    @RequestMapping(value = "/createUser", method = RequestMethod.POST)
+    public String createUser(HttpSession session){
+        //session.setAttribute("account", newName);
+        return "redirect:/worker";
     }
 
     @RequestMapping(value = "/changeStudent", method = RequestMethod.POST)
@@ -35,15 +43,11 @@ public class WorkerController {
         return "";
     }
 
-    @RequestMapping(value = "/linkStudentCurator", method = RequestMethod.POST)
+    @RequestMapping(value = "/linkStudent", method = RequestMethod.GET)
     public String linkStudentCurator(){
-        return "";
+        return "linking";
     }
 
-    @RequestMapping(value = "/linkStudentInterwiewer", method = RequestMethod.POST)
-    public String linkStudentInterwiewer(){
-        return "";
-    }
 
     @RequestMapping(value = "/firedStudents", method = RequestMethod.POST)
     public String firedStudents(){

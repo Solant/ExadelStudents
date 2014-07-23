@@ -15,16 +15,16 @@
 <body>
 
 <div class="hat">
-    <form>
+    <form method="get">
         <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
 
 
-        <button formaction="/worker/createUser" class="btn">
+        <button formaction="/worker/returnCreate" class="btn">
             <img src="/resources/images/add.png" class="add_logo" width="25px">
             <span>Add User</span>
         </button>
-        <button formaction="#" class="btn">
+        <button formaction="/worker/linkStudent" class="btn">
             <img src="/resources/images/yellow-link.png"  height="23px">
             <span>Link Student</span>
         </button>
