@@ -164,7 +164,7 @@ table td{
 
 .loginAndCreateForm{
     color: #808080;
-    width: 350px;
+    width: 370px;
     margin: auto;
     margin-top: 100px;
     border: 0px solid;
@@ -357,3 +357,12 @@ select.linkingR{
     color: gray;
 }
 /*end of student page*/
+
+/*fblist props*/
+
+.fblist{
+padding-top: 100px;
+margin-left: 50px;
+    margin-right: 50px;
+}
+/*end of fblist props*/
