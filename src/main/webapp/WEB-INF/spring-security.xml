@@ -15,16 +15,11 @@
         <logout logout-success-url="/" />
     </http>
 
-    <beans:bean id="authenticationFailureHandler" class="com.springsecurity.provider.CustomAuthenticationFailureHandler"/>
+    <beans:bean id="authenticationFailureHandler" class="com.springsecurity.CustomAuthenticationFailureHandler"/>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="wasya" password="123456" authorities="ROLE_STUDENT" />
-                <user name="curator" password="123456" authorities="ROLE_CURATOR" />
-                <user name="worker" password="123456" authorities="ROLE_WORKER" />
-                <user name="admin" password="123456" authorities="ROLE_ADMIN" />
-            </user-service>
+        <authentication-provider user-service-ref="myUserDetailsService" >
+           <!-- <password-encoder hash="md5" /> -->
         </authentication-provider>
     </authentication-manager>
 

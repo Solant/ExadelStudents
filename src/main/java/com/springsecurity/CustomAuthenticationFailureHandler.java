@@ -1,4 +1,4 @@
-package com.springsecurity.provider;
+package com.springsecurity;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;

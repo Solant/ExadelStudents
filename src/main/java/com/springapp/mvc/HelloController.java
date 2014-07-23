@@ -20,7 +20,6 @@ public class HelloController {
     @Autowired
     private TestService ts;
 
-
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public void welcomePage() {
         //ModelAndView model = new ModelAndView();
