@@ -2,7 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<title>Admin | Table</title>
 	<head>
+
+        <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
 		<link rel="stylesheet" href="/resources/styles/style.css">
         <link rel="stylesheet" href="http://cdn.datatables.net/1.10.1/css/jquery.dataTables.css">
 
@@ -16,22 +19,41 @@
 
     </head>
 	<body>
-		<div class="hat">
-			<img src="/resources/images/exadel-logo.png" class="exadel_logo">
-
+    <div class="hat">
+        <form method="get">
+            <img src="/resources/images/exadel-logo.png" class="exadel_logo">
             <a href="<c:url value="/account"/> ">
                 <img src="/resources/images/account.png" class="account_logo">
             </a>
             <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
             <span class="currUserName"><c:out value="${account}"></c:out></span>
             <img src="/resources/images/loupe.png" class="loupe_logo">
-			
-			<span class="bookmarks"> <a href="fblist.jsp"> My Students </a> </span>
-			<span class="bookmarks"> <a href="fblist.jsp"> All Students </a> </span>
-			<span class="bookmarks">  <a href="fblist.jsp"> Interviews  </a> </span>
-		</div>
+            <button formaction="/admin/returnCreate" class="btn">
+                <img src="/resources/images/add.png" class="add_logo" width="25px">
+                <span>Add User</span>
+            </button>
+            <button formaction="/admin/linkStudent" class="btn">
+                <img src="/resources/images/yellow-link.png"  height="23px">
+                <span>Link Student</span>
+            </button>
+            <button formaction="#" class="btn">
+                <img src="/resources/images/fired.png"  width="25px">
+                <span>Fired Students</span>
+            </button>
+        </form>
+    </div>
+
+    <img src="/resources/images/account.png" class="account_logo">
+    <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
+    <span class="currUserName"><c:out value="${account}"></c:out></span>
+    <span class="divider-vertical"></span>
+    <a href=""><img src="/resources/images/loupe.png" class="loupe_logo"></a>
+    </form>
+    </div>
+
+
 		<div class="skyBox"></div>
-        <%--<div id="table">
+        <div id="table">
             <table border = 1 id="example">
 			<thead>
 				<td> Name </td>
@@ -200,7 +222,7 @@
                 <td> English </td>
             </tfoot>
 		</table>
-		</div>--%>
+		</div>
 		
 	</body>
 </html>

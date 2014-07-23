@@ -1,4 +1,6 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -51,8 +53,8 @@
         </p>
 
 
-    <div class="allignCenter">
-        <div>
+    <div class="displayFlex">
+        <div class="alignCenter">
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
             <button type="submit"  class="loginAndCreateButton">Change</button>
         </div>

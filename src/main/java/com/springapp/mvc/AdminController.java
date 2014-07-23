@@ -42,7 +42,7 @@ public class AdminController {
 
     @RequestMapping(value = "/formTable", method = RequestMethod.POST)
     public String formTable(){
-        return "feedbacker";
+        return "adminTable";
     }
 
 }

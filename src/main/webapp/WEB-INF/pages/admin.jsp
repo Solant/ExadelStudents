@@ -98,7 +98,7 @@
     </div>
 
 
-<form action="/admin    /formTable" method="post">
+<form action="/admin/formTable" method="post">
     <div class="tab-content" >
         <div class="tab-pane active" id="education">
             <div class="spoilers">
