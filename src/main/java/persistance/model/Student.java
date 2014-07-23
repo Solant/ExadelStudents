@@ -1,20 +1,32 @@
 package persistance.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table (name = "Students")
+@Table (name = "Users")
 public class Student {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "enabled")
+    private boolean enabled;
+
+
+    @Column (name = "firstname")
     private String firstName;
 
-    @Column
+    @Column (name = "secondname")
     private String secondName;
 
     @OneToMany(mappedBy = "myStudents", fetch = FetchType.LAZY)
@@ -49,14 +61,6 @@ public class Student {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Set<Value> getValues() {
@@ -99,5 +103,36 @@ public class Student {
         this.reviews = reviews;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
 }
