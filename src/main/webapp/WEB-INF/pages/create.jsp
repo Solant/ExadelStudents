@@ -57,8 +57,8 @@
 			<input type="text" id="firstname" class="field">
 		</p>
 
-        <div class="allignCenter">
-            <div>
+        <div class="displayFlex">
+            <div class="alignCenter">
                 <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
 			    <button type="submit" class="loginAndCreateButton">Create</button>
 		     </div>

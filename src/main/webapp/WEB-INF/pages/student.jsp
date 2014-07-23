@@ -32,7 +32,7 @@
 <div class="hat">
 	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
-	<a href="../../account.jsp">
+	<a href="account.jsp">
         <img src="/resources/images/account.png" class="account_logo">
     </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
@@ -102,8 +102,8 @@
                     <input type="text" id="skype" >
                 </div>
 
-                <div class="alignCenter">
-                    <div>
+                <div class="displayFlex">
+                    <div class="alignCenter">
                         <button  type="submit">Save</button>
                     </div>
                 </div>
@@ -151,8 +151,8 @@
                     <div class="group"><label for="faculty">Faculty</label><input id="faculty"></div>
                     <div class="group"><label for="specialty">Specialty</label><input id="specialty"></div>
                     <div class="group"><label for="group">Group</label><input id="group"></div>--%>
+                <div class="displayFlex">
                     <div class="alignCenter">
-                        <div>
                     <button  type="submit">Save</button>
                         </div>
                     </div>
@@ -205,8 +205,8 @@
                         </div>
                     </div>
 
-                    <div class="alignCenter">
-                        <div>
+                    <div class="displayFlex">
+                        <div class="alignCenter">
                             <input type="radio" name="billable" value="yes" id="bilYes">
                             <label for="bilYes">Billable</label>
                             <input type="radio" name="billable" value="no" id="bilNo">
@@ -228,8 +228,8 @@
                         </div>
                     </div>
 
+                <div class="displayFlex">
                     <div class="alignCenter">
-                        <div>
                             <button  type="submit">Save</button>
                         </div>
                     </div>
@@ -294,8 +294,8 @@
                         </div>
                     </div>
 
-                <div class="allignCenter">
-                    <div>
+                <div class="displayFlex">
+                    <div class="alignCenter">
                         <button  type="submit">Save</button>
                     </div>
                 </div>
@@ -336,8 +336,8 @@
                     </div>
                 </div>
 
-                <div class="alignCenter">
-                    <div>
+                <div class="displayFlex">
+                    <div class="alignCenter">
                         <button  type="submit">Save</button>
                     </div>
                 </div>
