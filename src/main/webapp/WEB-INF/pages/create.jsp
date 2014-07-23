@@ -17,14 +17,15 @@
 <body>
 
 	<div class="hat">
-	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
-			
-	<img src="/resources/images/account.png" class="account_logo">
+        <a href="<c:url value="/account" />">
+            <img src="/resources/images/account.png" class="account_logo">
+        </a>
+
         <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
         <span class="currUserName"><c:out value="${account}"></c:out></span>
 
     </div>
-	<form class="loginAndCreateForm" action="/worker/createUser/">
+	<form class="loginAndCreateForm" >
 	
 		<h1>Adding user Form </h1>
 
@@ -58,8 +59,8 @@
 
         <div class="allignCenter">
             <div>
-			    <input type="submit" class="loginAndCreateButton" value="Create">
-                <input type="submit" class="loginAndCreateButton" value="Cancel">   
+                <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
+			    <button type="submit" class="loginAndCreateButton">Create</button>
 		     </div>
         </div>
 		
