@@ -92,8 +92,8 @@
 
     <div class="allignCenter">
         <div>
-            <input type="submit" class="loginAndCreateButton" value="Create">
-            <input type="submit" class="loginAndCreateButton" value="Cancel">
+            <button type="submit" class="loginAndCreateButton">Create</button>
+            <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
         </div>
     </div>
 
