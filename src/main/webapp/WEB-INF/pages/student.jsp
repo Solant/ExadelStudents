@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="/resources/styles/style.css" />
     <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.1/css/jquery.dataTables.css">
+
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+            $('#reviewsTable').dataTable();
+        } );
+    </script>
+
 </head>
 <body>
 
@@ -51,6 +63,11 @@
             <li>
                 <a href="#other" role="tab" data-toggle="tab">Other</a>
             </li>
+
+            <li>
+                <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
+            </li>
+
         </ul>
    <%-- </div>--%>
 
@@ -324,6 +341,69 @@
                 </div>
 
             </form>
+        </div>
+
+        <div class="tab-pane" id="reviews">
+            <div class="spoilers">
+
+                    <table border="1px" id="reviewsTable">
+                        <thead>
+                            <td>Curator</td>
+                            <td>Date</td>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href>Curator Ivan</a></td>
+                                <td>23.07.2013</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Alex</a></td>
+                                <td>23.07.2014</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Ivan</a></td>
+                                <td>23.07.2013</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Alex</a></td>
+                                <td>23.07.2014</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Ivan</a></td>
+                                <td>23.07.2014</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Alex</a></td>
+                                <td>23.07.2013</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Ivan</a></td>
+                                <td>23.07.2014</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Ivan</a></td>
+                                <td>23.07.2014</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Alex</a></td>
+                                <td>23.07.2013</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Ivan</a></td>
+                                <td>23.07.2014</td>
+                            </tr>
+                            <tr>
+                                <td><a href>Curator Alex</a></td>
+                                <td>23.07.2014</td>
+                            </tr><tr>
+                                <td><a href>Curator Ivan</a></td>
+                                <td>23.07.2013</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+            </div>
         </div>
 
 </div>

@@ -353,4 +353,14 @@ select.linkingR{
 .nav-tabs {
     margin-top: 50px;
 }
+
+#reviewsTable{
+    min-width: 600px;
+    font-size: 14px;
+}
+
+#reviewsTable_length, #reviewsTable_filter, #reviewsTable_info, #reviewsTable_paginate{
+    font-size: 14px;
+    color: gray;
+}
 /*end of student page*/
