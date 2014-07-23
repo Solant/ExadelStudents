@@ -27,5 +27,4 @@ public class CuratorController {
     public String addInterwiewerFeedback(){
         return "feedbacker";
     }
-
 }

@@ -10,9 +10,9 @@
 </head>
 <body>
 
-
-
 <div class="hat">
+    <img src="/resources/images/exadel-logo.png" class="exadel_logo">
+
     <a href="<c:url value="/account"/> ">
     <img src="/resources/images/account.png" class="account_logo">
     </a>
@@ -27,7 +27,7 @@
 
     <p>
         <label for="lastname">Lastname:</label>
-        <input class="field" type="text" id="lastname" value="Ivanov ${account}" readonly>
+        <input class="field" type="text" id="lastname" value="Ivanov" readonly>
     </p>
 
     <p>

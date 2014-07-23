@@ -11,13 +11,16 @@
 <div class="hat">
     <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
-    <a href="<c:url value="/account" />">
+    <a href="../../account.jsp">
         <img src="/resources/images/account.png" class="account_logo">
     </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
     <span class="currUserName"><c:out value="${account}"></c:out></span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
 
+    <span class="bookmarks"> <a href="../../linking.jsp"> My Students </a> </span>
+    <span class="bookmarks"> <a href> All Students </a> </span>
+    <span class="bookmarks"> <a href> Interviews  </a> </span>
 </div>
 <form class="linkingForm" >
 <div class="radio">
@@ -55,8 +58,8 @@
         </select>
     <div class="button">
         <div>
-            <button type="submit" class="button">Link</button>
-            <button class="button" onclick="history.back(); return false;">Cancel</button>
+            <button  class="button">Linking</button>
+            <button  class="button">Cancel</button>
         </div>
     </div>
 </form>

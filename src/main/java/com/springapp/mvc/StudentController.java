@@ -16,5 +16,4 @@ public class StudentController {
     public String saveChanges(){
         return "student";
     }
-
 }

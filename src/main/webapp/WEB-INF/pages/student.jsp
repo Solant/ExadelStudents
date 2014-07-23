@@ -8,9 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/resources/styles/style.css" />
-    <script src="/resources/styles/bootstrap/js/jquery.js"></script>
+    <script src="/resources/styles/bootstrap/js/bootstrap.js"></script>
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
 
 
@@ -30,7 +32,7 @@
 <div class="hat">
 	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
-	<a href="<c:url value="/account" />">
+	<a href="account.jsp">
         <img src="/resources/images/account.png" class="account_logo">
     </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
@@ -46,7 +48,7 @@
     </div>
 
    <%-- <div class="tabbable tabs-left" style="float: left">--%>
-        <ul class="nav nav-tabs" role="tablist" id="myTab">
+        <ul class="nav nav-tabs" role="tablist">
             <li class="active">
                 <a href="#common" role="tab" data-toggle="tab">Common</a>
             </li>
@@ -198,7 +200,7 @@
 
                     <div class="allignCenter">
                         <div>
-                            <label for="pastProject">Past project's:</label><br/>
+                            <label for="pastProject">Past projects:</label><br/>
                             <textarea name="pastProject" id="pastProject" cols="30" rows="10" class="textOther"></textarea>
                         </div>
                     </div>
