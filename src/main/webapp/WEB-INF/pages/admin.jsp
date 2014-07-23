@@ -22,7 +22,7 @@
             </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
     <span class="currUserName"><c:out value="${account}"></c:out></span>
-    <img src="/resources/images/loupe.png" class="loupe_logo">
+        <a href="<c:url value="/admin" />"><img src="/resources/images/loupe.png" class="loupe_logo"></a>
         <button formaction="/admin/returnCreate" class="btn">
             <img src="/resources/images/add.png" class="add_logo" width="25px">
             <span>Add User</span>
@@ -37,12 +37,6 @@
         </button>
         </form>
 </div>
-
-        <img src="/resources/images/account.png" class="account_logo">
-        <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
-        <span class="currUserName"><c:out value="${account}"></c:out></span>
-        <span class="divider-vertical"></span>
-        <a href=""><img src="/resources/images/loupe.png" class="loupe_logo"></a>
     </form>
 </div>
 
@@ -84,7 +78,7 @@
 
 
 <div class="tabbable tabs-left" style="float: left; position: fixed">
-    <ul class="nav nav-tabs pull-left" role="tablist" id="myTab">
+    <ul class="nav nav-tabs nav-stacked pull-left" role="tablist" id="myTab">
         <li class="active"><a href="#education" role="tab" data-toggle="tab">Education institution</a></li>
         <li><a href="#beforeWorking" role="tab" data-toggle="tab">Before working</a></li>
         <li><a href="#currProject" role="tab" data-toggle="tab">Current project</a></li>
