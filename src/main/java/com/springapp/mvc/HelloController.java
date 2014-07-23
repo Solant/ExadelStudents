@@ -24,4 +24,8 @@ public class HelloController {
 
         return "login";
     }
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    public String account(){
+        return "account";
+    }
 }

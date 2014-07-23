@@ -11,7 +11,7 @@
 <div class="hat">
     <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
-    <a href="../../account.jsp">
+    <a href="<c:url value="/account"/> ">
         <img src="/resources/images/account.png" class="account_logo">
     </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
@@ -58,8 +58,8 @@
         </select>
     <div class="button">
         <div>
-            <button  class="button">Linking</button>
-            <button  class="button">Cancel</button>
+            <button  class="button">Link</button>
+            <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
         </div>
     </div>
 </form>

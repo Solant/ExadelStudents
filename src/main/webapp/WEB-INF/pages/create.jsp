@@ -20,8 +20,7 @@
         <a href="<c:url value="/account" />">
             <img src="/resources/images/account.png" class="account_logo">
         </a>
-			
-	<img src="/resources/images/account.png" class="account_logo">
+
         <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
         <span class="currUserName"><c:out value="${account}"></c:out></span>
 
