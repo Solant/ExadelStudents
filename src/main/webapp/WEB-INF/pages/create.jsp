@@ -22,6 +22,11 @@
             <img src="/resources/images/account.png" class="account_logo">
         </a>
 
+=======
+	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
+			
+	<img src="/resources/images/account.png" class="account_logo">
+>>>>>>> Temporary merge branch 2:src/main/webapp/create.jsp
         <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
         <span class="currUserName"><c:out value="${account}"></c:out></span>
 
@@ -58,8 +63,8 @@
 			<input type="text" id="firstname" class="field">
 		</p>
 
-        <div class="allignCenter">
-            <div>
+        <div class="displayFlex">
+            <div class="alignCenter">
                 <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
 			    <button type="submit" class="loginAndCreateButton">Create</button>
 		     </div>

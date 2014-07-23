@@ -2402,7 +2402,7 @@ input[type="time"],
 input[type="datetime-local"],
 input[type="month"] {
   line-height: 34px;
-  line-height: 1.42857143 \0;
+ /* line-height: 1.42857143 ;*/
 }
 input[type="date"].input-sm,
 input[type="time"].input-sm,
@@ -2430,6 +2430,7 @@ input[type="month"].input-lg {
 .radio label,
 .checkbox label {
   padding-left: 20px;
+  padding-right: 20px;
   margin-bottom: 0;
   font-weight: normal;
   cursor: pointer;
@@ -2440,7 +2441,7 @@ input[type="month"].input-lg {
 .checkbox-inline input[type="checkbox"] {
   position: absolute;
   margin-top: 4px \9;
-  margin-left: -20px;
+/*  margin-left: -20px;*/
 }
 .radio + .radio,
 .checkbox + .checkbox {
