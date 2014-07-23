@@ -19,8 +19,8 @@ public class HelloController {
             return "redirect:student";
         if (SecurityChecker.hasRole("ROLE_CURATOR"))
             return "redirect:curator";
-        if (SecurityChecker.hasRole("ROLE_WORKER"))
-            return "redirect:worker";
+        if (SecurityChecker.hasRole("ROLE_ADMIN"))
+            return "redirect:admin";
 
         return "login";
     }

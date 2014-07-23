@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CuratorController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String curatorPage(ModelMap model) {
-        return "feedbacker_main";
+        return "feedbacker";
     }
 
     @RequestMapping(value = "/addCuratorFeedback", method = RequestMethod.POST)
     public String addCuratorFeedback(){
-        return "feedbacker_main";
+        return "feedbacker";
     }
 
     @RequestMapping(value = "/addInterwiewerFeedback", method = RequestMethod.POST)
     public String addInterwiewerFeedback(){
-        return "feedbacker_main";
+        return "feedbacker";
     }
 }

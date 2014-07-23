@@ -11,11 +11,11 @@ import javax.servlet.http.HttpSession;
  * Created by Надя on 16.07.2014.
  */
 @Controller
-@RequestMapping("/worker")
-public class WorkerController {
+@RequestMapping("/admin")
+public class AdminController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String workerPage(ModelMap model) {
-        return "select_fields";
+        return "admin";
     }
     @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
     public String returnCreate(){
@@ -28,20 +28,6 @@ public class WorkerController {
         return "redirect:/worker";
     }
 
-    @RequestMapping(value = "/changeStudent", method = RequestMethod.POST)
-    public String changeStudent(){
-        return "";
-    }
-
-    @RequestMapping(value = "/changeCurator", method = RequestMethod.POST)
-    public String changeCurator(){
-        return "";
-    }
-
-    @RequestMapping(value = "/changeWorker", method = RequestMethod.POST)
-    public String changeWorker(){
-        return "";
-    }
 
     @RequestMapping(value = "/linkStudent", method = RequestMethod.GET)
     public String linkStudentCurator(){
@@ -56,7 +42,7 @@ public class WorkerController {
 
     @RequestMapping(value = "/formTable", method = RequestMethod.POST)
     public String formTable(){
-        return "feedbacker_main";
+        return "feedbacker";
     }
 
 }

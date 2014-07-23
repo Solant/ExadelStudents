@@ -22,14 +22,11 @@
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
     <span class="currUserName"><c:out value="${account}"></c:out></span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
-</div>
-
-
-        <button formaction="/worker/returnCreate" class="btn">
+        <button formaction="/admin/returnCreate" class="btn">
             <img src="/resources/images/add.png" class="add_logo" width="25px">
             <span>Add User</span>
         </button>
-        <button formaction="/worker/linkStudent" class="btn">
+        <button formaction="/admin/linkStudent" class="btn">
             <img src="/resources/images/yellow-link.png"  height="23px">
             <span>Link Student</span>
         </button>
@@ -37,6 +34,11 @@
             <img src="/resources/images/fired.png"  width="25px">
             <span>Fired Students</span>
         </button>
+        </form>
+</div>
+
+
+
 
 
 
