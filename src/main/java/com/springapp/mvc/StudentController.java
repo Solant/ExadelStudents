@@ -17,8 +17,4 @@ public class StudentController {
         return "student";
     }
 
-    @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String showAccount(){
-        return "account";
-    }
 }

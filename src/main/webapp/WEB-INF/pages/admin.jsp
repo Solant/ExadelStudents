@@ -17,7 +17,7 @@
 <div class="hat">
     <form method="get">
         <img src="/resources/images/exadel-logo.png" class="exadel_logo">
-        <a href="<c:url value="/admin/account" />">
+        <a href="<c:url value="/account" />">
         <img src="/resources/images/account.png" class="account_logo">
             </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
@@ -57,7 +57,7 @@
     </div>
 
 
-<form action="/worker/formTable" method="post">
+<form action="/admin/formTable" method="post">
     <div class="tab-content" >
         <div class="tab-pane active" id="education">
             <div class="spoilers">

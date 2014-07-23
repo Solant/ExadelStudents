@@ -28,8 +28,4 @@ public class CuratorController {
         return "feedbacker";
     }
 
-    @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String showAccount(){
-        return "account";
-    }
 }

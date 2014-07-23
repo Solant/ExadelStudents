@@ -27,7 +27,7 @@
 
     <p>
         <label for="lastname">Lastname:</label>
-        <input class="field" type="text" id="lastname" value="Ivanov" readonly>
+        <input class="field" type="text" id="lastname" value="Ivanov ${account}" readonly>
     </p>
 
     <p>

@@ -28,12 +28,6 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String showAccount(){
-        return "account";
-    }
-
-
     @RequestMapping(value = "/linkStudent", method = RequestMethod.GET)
     public String linkStudentCurator(){
         return "linking";

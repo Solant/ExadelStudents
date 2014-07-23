@@ -13,7 +13,7 @@
 <div class="hat">
     <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
-    <a href="account.jsp">
+    <a href="/account">
         <img src="/resources/images/account.png" class="account_logo">
     </a>
     <img src="/resources/images/exit.png" class="exit_logo">

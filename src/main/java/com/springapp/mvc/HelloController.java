@@ -26,7 +26,7 @@ public class HelloController {
         return "login";
     }
     @RequestMapping(value = {"/account"}, method = RequestMethod.GET)
-    public String account(HttpRequest httpRequest) {
+    public String account() {
         return "account";
     }
     @RequestMapping(value = {"/back"}, method = RequestMethod.GET)

@@ -30,7 +30,7 @@
 <div class="hat">
 	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 			
-	<a href="<c:url value="/student/account" />">
+	<a href="<c:url value="/account" />">
         <img src="/resources/images/account.png" class="account_logo">
     </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>

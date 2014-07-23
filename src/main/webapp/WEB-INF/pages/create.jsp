@@ -17,7 +17,7 @@
 <body>
 
 	<div class="hat">
-        <a href="<c:url value="/admin/account" />">
+        <a href="<c:url value="/account" />">
             <img src="/resources/images/account.png" class="account_logo">
         </a>
 			
