@@ -17,6 +17,7 @@
 <body>
 
 	<div class="hat">
+        <img src="/resources/images/exadel-logo.png" class="exadel_logo">
         <a href="<c:url value="/account" />">
             <img src="/resources/images/account.png" class="account_logo">
         </a>
