@@ -13,7 +13,7 @@
 
 
 <div class="hat">
-    <%--<a href="<c:url--%><%--">--%>
+    <a href="<c:url value="/account"/> ">
     <img src="/resources/images/account.png" class="account_logo">
     </a>
 
@@ -23,7 +23,7 @@
 </div>
 <form class="loginAndCreateForm" >
 
-    <h1>Account Form <%--<c:out value="${pageContext.request.requestURL}" />--%></h1>
+    <h1>Account Form</h1>
 
     <p>
         <label for="lastname">Lastname:</label>
