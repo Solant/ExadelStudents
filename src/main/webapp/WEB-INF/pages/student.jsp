@@ -200,7 +200,7 @@
 
                     <div class="allignCenter">
                         <div>
-                            <label for="pastProject">Past project's:</label><br/>
+                            <label for="pastProject">Past projects:</label><br/>
                             <textarea name="pastProject" id="pastProject" cols="30" rows="10" class="textOther"></textarea>
                         </div>
                     </div>
