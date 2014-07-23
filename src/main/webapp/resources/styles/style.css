@@ -76,7 +76,26 @@
     padding-top:3px;
     text-decoration: none;
 }
-.bookmarks a:hover{
+.bookmarks a:hover, .bookmarksSelect a:hover{
+    background-color: RGB(70,186,235);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.bookmarksSelect a{
+    float:right;
+    color: white;
+    font-size: 25px;
+    text-shadow: 1px 1px 1px RGB(70,186,235);
+    font-family: Arial;
+
+    margin-right:6px;
+    margin-top: 6px;
+    padding-bottom:12px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top:3px;
+    text-decoration: none;
     background-color: RGB(70,186,235);
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
