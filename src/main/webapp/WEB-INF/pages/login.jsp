@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Login</title>
@@ -7,6 +8,8 @@
   src="html5shiv.js">
   </script>
   <![endif]-->
+
+  <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
 </head>
 <body>
@@ -17,20 +20,20 @@
 	<form method="post" action="/j_spring_security_check" class="loginAndCreateForm" >
 		<h1>Login Form </h1>
 		<p>
-			<span>Login:</span>
-			<input type="text" name="j_username" class="field" value="worker" >
+            <label for="login">Login:</label>
+			<input type="text" name="j_username" class="field" id="login">
 		</p>
 		<p>
-			<span>Password:</span>
-			<input type="password"  name= "j_password" class="field" value="123">
+            <label for="password">Password:</label>
+			<input type="password"  name= "j_password" class="field" id="password">
 		</p>
         <p>
-            <span>Remember Me</span>
-            <input type="checkbox" name="_spring_security_remember_me">
+            <label for="remember">Remember Me</label>
+            <input type="checkbox" name="_spring_security_remember_me" id="remember">
         </p>
-		<p>
-			<input type="submit" id="loginAndCreateButton" value="Login">
-		</p>
+		<div class="allignCenter">
+			<input type="submit" class="loginAndCreateButton" value="Login">
+        </div>
 	</form>
 </body>
 

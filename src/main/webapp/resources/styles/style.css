@@ -1,4 +1,4 @@
-﻿body {
+﻿﻿body {
     margin: 0;      /* Убираем отступы */
 }
 
@@ -88,6 +88,11 @@
     padding-left: 50px;
 }
 
+#example_length, #example_filter, #example_info, #example_paginate{
+    font-size: 20px;
+    color: gray;
+}
+
 table{
     background-color: white;
     text-align:center;
@@ -98,7 +103,7 @@ table{
     min-width: 700px;
 }
 
-table thead{
+table thead,table tfoot{
     background-color: grey;
     color:white;
     font-weight:bold;
@@ -115,17 +120,18 @@ table td{
     margin-left: 2%;
     height: 40px;
 }
-.group input, select{
+.group input, .group select{
     float:right;
     margin-right: 2%;
-    height: 24px;
 }
 .spoilers{
+    padding: 10px ;
     width: 600px;
     border: solid;
     border-color: #c0c0c0;
     border-radius: 20px;
     font: 20px Helvetica;
+    text-align: left;
 }
 .group{
     white-space: nowrap;
@@ -157,8 +163,8 @@ table td{
 }
 
 .loginAndCreateForm{
-    color: RGB(0,107,253);
-    width: 320px;
+    color: #808080;
+    width: 350px;
     margin: auto;
     margin-top: 100px;
     border: 0px solid;
@@ -167,8 +173,7 @@ table td{
     font-size: 14px;
     background-color: white; /*RGB(0,156,203);*/
     border-width: 3px;
-    border-color: #00a1d2;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 .loginAndCreateForm p {
     margin-left: 30px;
@@ -187,9 +192,8 @@ table td{
     text-align:center;
 }
 
-#loginAndCreateButton{
-    margin-left: 37%;
-    background-color: RGB(0,156,203);
+.loginAndCreateButton{
+    background-color: #808080;
     border-style:none;
     border-radius: 3px;
     color: white;
@@ -200,20 +204,20 @@ table td{
     text-shadow: 1px 1px 0px black;
 
 }
-#loginAndCreateButton:hover{
-    background-color:RGB(0,107,253);
+.loginAndCreateButton:hover{
+    background-color:RGB(0,156,203);
 }
 
 .field{
-    color: RGB(0,107,253);
-    height: 20px;
+    color: #808080;
+    height: 25px;
     background-color: white;
     position: relative;
     float: right;
     margin-right: 20px;
     border-color: #00a1d2;
     border-radius: 3px;
-    border: 1 solid;
+    border: 1px solid;
     width:50%;
 }
 
@@ -261,28 +265,23 @@ select.linkingL{
     height: 300px;
     width: 30%;
     font-family: arial;
-    color: RGB(0,107,253);
-    border: 1px solid #00a1d2;
 }
 select.linkingR{
     float: right;
     width: 30%;
     height: 300px;
     font-family: arial;
-    color: RGB(0,107,253);
-    border: 1px solid #00a1d2;
 }
 .linkingForm{
     font-family: arial;
-    color: RGB(0,107,253);
+    color: #808080;
     margin:auto;
     margin-top: 100px;
     padding: 7px;
     font-size: 25px;
     background-color: white;
     border:3px solid;
-    border-color: #00a1d2;
-    border-radius: 2px;
+    border-radius: 10px;
     width: 450px;
 }
 .radio{
@@ -294,7 +293,7 @@ select.linkingR{
     text-align: center;
 }
 .button button{
-    background-color: RGB(0,156,203);
+    background-color: #808080;
     border-style:none;
     border-radius: 3px;
     color: white;
@@ -305,93 +304,56 @@ select.linkingR{
     text-shadow: 1px 1px 0px black;
 }
 .button button:hover{
-    background-color:RGB(0,107,253);
-    cursor: pointer;
+    background-color: RGB(0,156,203);
 }
 
-
-
-.btn {
-    display: inline-block;
-    *display: inline;
-    padding: 4px 12px;
-    margin-bottom: 0;
-    *margin-left: .3em;
-    font-size: 14px;
-    line-height: 20px;
-    color: #333333;
+/*end of linking form*/
+.allignCenter{
     text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    vertical-align: middle;
-    cursor: pointer;
-    background-color: #f5f5f5;
-    *background-color: #e6e6e6;
-    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-    background-repeat: repeat-x;
-    border: 1px solid #cccccc;
-    *border: 0;
-    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    border-bottom-color: #b3b3b3;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-    *zoom: 1;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+}
+/*review form*/
+.reviewForm{
+    font-family: arial;
+    color: #808080;
+    margin:auto;
+    margin-top: 100px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: white;
+    border:3px solid;
+    border-radius: 10px;
+    width: 450px;
+    text-align: left;
 }
 
-.btn:hover,
-.btn:focus,
-.btn:active,
-.btn.active,
-.btn.disabled,
-.btn[disabled] {
-    color: #333333;
-    background-color: #e6e6e6;
-    *background-color: #d9d9d9;
+.alignCenter{
+    text-align: center;
+}
+.floatright{
+    float: right;
+    margin-right: 20px;
+}
+.textOther{
+    width: 400px;
+    max-width: 400px;
+    color: RGB(0,107,253);
+    height: 100px;
+}
+/*end of review form*/
+
+/*student page*/
+.nav-tabs {
+    margin-top: 50px;
 }
 
-.btn:active,
-.btn.active {
-    background-color: #cccccc \9;
+#reviewsTable{
+    min-width: 600px;
+    font-size: 14px;
 }
 
-.btn:first-child {
-    *margin-left: 0;
+#reviewsTable_length, #reviewsTable_filter, #reviewsTable_info, #reviewsTable_paginate{
+    font-size: 14px;
+    color: gray;
 }
-
-.btn:hover,
-.btn:focus {
-    color: #333333;
-    text-decoration: none;
-    background-position: 0 -15px;
-    -webkit-transition: background-position 0.1s linear;
-    -moz-transition: background-position 0.1s linear;
-    -o-transition: background-position 0.1s linear;
-    transition: background-position 0.1s linear;
-}
-
-.btn:focus {
-    outline: thin dotted #333;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
-}
-
-.btn.active,
-.btn:active {
-    background-image: none;
-    outline: 0;
-    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-
+/*end of student page*/

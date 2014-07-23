@@ -18,6 +18,11 @@
     <form method="get">
         <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
+    <img src="/resources/images/account.png" class="account_logo">
+    <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
+    <span class="currUserName"><c:out value="${account}"></c:out></span>
+    <img src="/resources/images/loupe.png" class="loupe_logo">
+</div>
 
 
         <button formaction="/worker/returnCreate" class="btn">
@@ -56,13 +61,13 @@
 
 <%--
 <a href="#modal" role="button" class="btn" data-toggle="modal" style="float: left;">&#9658;</a>
-<div id="modal" class="modal hide fade">
+<%--<div id="modal" class="modal hide fade">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h2>Menu</h2>
     </div>
     <div class="modal-body">
-        <a href="/worker/createUser/${account}"><p>
+        <a href="/WEB-INF/pages/create.jsp"><p>
             <img src="/resources/images/add.png" class="add_logo" width="25px">
             <span>Add User</span>
         </p></a>

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/resources/styles/style.css"><%--
     <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">--%>
 </head>
@@ -10,9 +11,11 @@
 <div class="hat">
     <img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
-    <img src="/resources/images/account.png" class="account_logo">
+    <a href="account.jsp">
+        <img src="/resources/images/account.png" class="account_logo">
+    </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
-    <span class="currUserName"><c:out value="${account}"></c:out></span>
+    <span class="currUserName"> Username </span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
 
 </div>
@@ -51,10 +54,9 @@
             <option value="A">N</option>
         </select>
     <div class="button">
-        <form  method="get">
-            <button formaction="#" type="submit" class="button">Link</button>
-            <button formaction="/worker" type="submit" class="button">Cancel</button>
-        </form>
+        <div>
+            <button type="button" class="button">Linking</button>
+        </div>
     </div>
 </form>
 </body>
