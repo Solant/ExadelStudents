@@ -6,11 +6,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import service.TestService;
 
 @Controller
 public class HelloController {
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
-	public ModelAndView welcomePage() {
+	public ModelAndView welcomePage222() {
 		ModelAndView model = new ModelAndView();
         model.setViewName("index");
         return model;

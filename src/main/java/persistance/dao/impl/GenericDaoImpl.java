@@ -3,14 +3,13 @@ package persistance.dao.impl;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import persistance.dao.GenericDao;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 public class GenericDaoImpl<T> implements GenericDao<T>{
 
     @Autowired
-    private SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;              //Database session
 
     private Class<T> type;
 
