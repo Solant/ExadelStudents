@@ -141,15 +141,20 @@ table td{
 .group input, .group select{
     float:right;
     margin-right: 2%;
+    width: 40%;
+    padding: 3px;
+    border-radius: 3px;
+    border: 1px solid;
 }
 .spoilers{
+    margin-top: 10px;
     padding: 10px ;
     width: 650px;
-    border: solid;
-    border-color: #c0c0c0;
+    border:3px solid;
     border-radius: 20px;
-    font: 20px Helvetica;
+    font-size: 14px;
     text-align: left;
+    color: #808080;
 }
 .group{
     white-space: nowrap;
@@ -169,28 +174,18 @@ table td{
     float:left;
     margin-left: 5px;
 }
-#hatSelect{
-    font:20px/40px Helvetica;
-    color: #ffffff;
-    background-color: RGB(0,156,203);
-    border:white solid;
-    border-radius: 20px;
-    height: 55px;
-    width: 600px;
-    overflow: auto;
-}
+
 
 .loginAndCreateForm{
     color: #808080;
     width: 370px;
     margin: auto;
     margin-top: 100px;
-    border: 0px solid;
+    border: 3px solid;
     padding: 7px;
     text-align:left;
     font-size: 14px;
-    background-color: white; /*RGB(0,156,203);*/
-    border-width: 3px;
+    background-color: white;
     border-radius: 10px;
 }
 .loginAndCreateForm p {
@@ -237,6 +232,7 @@ table td{
     border-radius: 3px;
     border: 1px solid;
     width:50%;
+    padding: 3px;
 }
 
 /*Начало раздела отвечающего за страницу create.jsp*/
@@ -389,3 +385,63 @@ margin-left: 50px;
     margin-right: 50px;
 }
 /*end of fblist props*/
+
+/*admin props*/
+
+.adminProfile{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#hatSelect{
+    font:20px/40px Helvetica;
+    color: #ffffff;
+    background-color: RGB(0,156,203);
+    border:white solid;
+    border-radius: 20px;
+    height: 55px;
+    width: 650px;
+    overflow: auto;
+}
+
+#hatSelect div{
+    margin-top: 7px;
+}
+
+.hsFloatRight{
+    float: right;
+    margin-right: 7%;
+}
+
+.hsFloatLeft{
+    float: left;
+    margin-left: 3%;
+}
+
+.adminGroup{
+    overflow: auto;
+}
+
+.adminGroup label{
+    float:left;
+    margin-left: 2%;
+    height: 40px;
+}
+.adminGroup input, .adminGroup select{
+    float:right;
+    margin-right: 2%;
+    padding: 2px;
+    border-radius: 3px;
+    border: 1px solid;
+}
+.adminGroup input:not([type="checkbox"]), .adminGroup select{
+    width: 30%;
+}
+
+.inTable{
+    font: -webkit-mini-control;
+    float: right;
+    margin-right: 2%;
+    vertical-align: middle;
+}
+/*end of admin props*/
