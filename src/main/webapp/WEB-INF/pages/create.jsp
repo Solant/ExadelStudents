@@ -1,4 +1,4 @@
-<%@ page import="com.classes.User" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -42,12 +42,7 @@
 				<input type="password" id="password" class="field" value="${user.login}">
 			</p>
 
-        <%
-            User user = new User();
-            user.setLogin((String)pageContext.getAttribute("login"));
-            user.setPassword((String)pageContext.getAttribute("password"));
-            request.setAttribute("current", user);
-        %>
+
 			<p>
 				<label for="person">User's post:</label>
 				<select id="person" class="field">

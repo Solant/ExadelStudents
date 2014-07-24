@@ -87,10 +87,6 @@
 
 <div align="center" width = "600px">
     <div id="hatSelect">
-        <%
-            String queryData = "ahsjhfdjsgfjhs";
-            out.println ( queryData);
-        %>
         <label style="margin-left:2%;float: left;">Field name</label>
         <label style="margin-right:5%;float: right;">Filter parameters</label><label></label>
     </div>
