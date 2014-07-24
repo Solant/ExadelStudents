@@ -30,7 +30,7 @@ public class MyUserDetailsService implements UserDetailsService{
         User user = userDao.findByLogin(username);
         System.out.println("[DEBUG]MyUserDetailsService.loadUserByName() username = " + user.getLogin());
 
-        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
+        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRoles());
 
         System.out.println("[DEBUG]MyUserDetailsService.loadUserByName() username = " + user.getLogin());
 
