@@ -7,7 +7,7 @@ CREATE TABLE users
   enabled boolean NOT NULL DEFAULT FALSE,
   firstname varchar(20),
   secondname varchar(20),
-  status smallint NOT NULL DEFAULT 3,
+  status varchar(20) NOT NULL,
   PRIMARY KEY (id)
 );
 
