@@ -22,9 +22,6 @@ public class HelloController {
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public void welcomePage() {
-        //ModelAndView model = new ModelAndView();
-        // model.setViewName("index");
-        //return model;
         ts.testMethod();
 
     }
