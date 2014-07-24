@@ -27,7 +27,7 @@ public class MyUserDetailsService implements UserDetailsService{
         System.out.println("[CALL]MyUserDetailsService.loadUserByName()");
         System.out.println("[DEBUG]MyUserDetailsService.loadUserByName() username = " + username);
 
-        User user = userDao.findByUserName(username);
+        User user = userDao.findByLogin(username);
         System.out.println("[DEBUG]MyUserDetailsService.loadUserByName() username = " + user.getLogin());
 
         List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());

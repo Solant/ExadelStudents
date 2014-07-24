@@ -31,10 +31,9 @@ public class TestService {
 
     @Transactional
     public void testMethod(){
-
         System.out.println("TEST STARTED!");
 
-       /* Student stud = new Student();
+        Student stud = new Student();
 
         stud.setLogin("test1Stud");
         stud.setPassword("test1Stud");
@@ -49,27 +48,21 @@ public class TestService {
         cur1.setPassword("testCur3");
         cur1.setFirstName("testCur3FN");
         cur1.setSecondName("testCur3SN");
-       // cur1.getMyStudents().add(stud);
 
         cur2.setLogin("testCur4");
         cur2.setPassword("testCur4");
         cur2.setFirstName("testCur4FN");
         cur2.setSecondName("testCur4SN");
 
-        cur1.getMyStudents().add(stud);
-        cur2.getMyStudents().add(stud);
 
         fd.save(cur1);
-        fd.save(cur2);*/
+        fd.save(cur2);
 
-       /* Set<Feedbacker> curators = new HashSet();
-
-        curators.add(cur1);
-        curators.add(cur2);
-        stud.getCurators().addAll(curators);*/
+        stud.getCurators().add(cur1);
+        stud.getCurators().add(cur2);
 
 
-        /*
+
         Group group = new Group();
         group.setName("Institution");
         gd.save(group);
@@ -106,50 +99,35 @@ public class TestService {
         values.add(value2);
 
         stud.setValues(values);
-        sd.update(stud);*/
+        sd.update(stud);
 
-       /* User user = new User();
-        user.setLogin("testUser3");
-        user.setPassword("testUser3");
-        ud.save(user);*/
-/*
+
         UserRole ur = new UserRole();
         ur.setRole("ROLE_STUDENT");
-        ur.setUser(user);
+        ur.setUser(stud);
 
         UserRole ur2 = new UserRole();
         ur2.setRole("ROLE_ADMIN");
-        ur2.setUser(user);
+        ur2.setUser(stud);
 
-        Set<UserRole> roles = new HashSet<UserRole>();
-        roles.add(ur);
-        roles.add(ur2);
+        stud.getUserRole().add(ur);
+        stud.getUserRole().add(ur2);
 
-        user.setUserRole(roles);
-
-        System.out.println(ur.getUser().getLogin()+" "+ur.getUser().getId());
-        ud.update(user);*/
+        ud.update(stud);
 
         // -----------------------------------------------
-         for(User u : ud.findAll()) {
-             System.out.println("U- " + u.getLogin());
-         }
-
-          Student stud = new Student();
-        stud = sd.findAll().get(0);
-        System.out.println(stud.getCurators().size());
-
-        Feedbacker cur = fd.findAll().get(0);
-
-        System.out.println(cur.getMyStudents().size());
-
-        for(Student student : sd.findAll()){
-            System.out.println("S- "+student.getLogin());
+        for (User u : ud.findAll()) {
+            System.out.println("U- " + u.getLogin());
         }
 
-        for(Feedbacker feedb : fd.findAll()){
-            System.out.println("F- "+feedb.getLogin());
+        for (Student student : sd.findAll()) {
+            System.out.println("S- " + student.getLogin());
         }
+
+        for (Feedbacker feedb : fd.findAll()) {
+            System.out.println("F- " + feedb.getLogin());
+        }
+
         System.out.println("TEST ENDED!");
     }
 }
