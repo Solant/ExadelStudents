@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Надя on 16.07.2014.
@@ -22,7 +23,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public String createUser(){
+    public String createUser(@RequestParam("login") String login){
         return "create";
     }
 

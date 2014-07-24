@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -17,6 +17,10 @@
 </head>
 <body>
 
+
+
+
+
 	<div class="hat">
         <img src="/resources/images/exadel-logo.png" class="exadel_logo">
         <a href="<c:url value="/account" />">
@@ -31,6 +35,12 @@
 	<form class="loginAndCreateForm" method="post" action="/admin/createUser" >
 	
 		<h1>Adding user Form </h1>
+
+      <%--  <form:form commandName="newUser" action="/admin/createUser" method="post">
+            <form:input path="login"/>
+            <form:password path="password"/>
+            <form:button type="submit">Create</form:button>
+        </form:form>--%>
 
 			<p>
 				<label for="login">Login:</label>
