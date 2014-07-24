@@ -5,8 +5,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpSession;
-
 /**
  * Created by Надя on 16.07.2014.
  */
@@ -17,15 +15,15 @@ public class AdminController {
     public String workerPage(ModelMap model) {
         return "admin";
     }
+
     @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
-    public String returnCreate(){
+    public String returnCreate(ModelMap model){
         return "create";
     }
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public String createUser(HttpSession session){
-        //session.setAttribute("account", newName);
-        return "redirect:/worker";
+    public String createUser(){
+        return "create";
     }
 
 

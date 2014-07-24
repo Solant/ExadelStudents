@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -24,21 +25,24 @@
 
         <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
         <span class="currUserName"><c:out value="${account}"></c:out></span>
+        <a href="<c:url value="/admin" />"><img src="/resources/images/loupe.png" class="loupe_logo"></a>
 
     </div>
-	<form class="loginAndCreateForm" >
+	<form class="loginAndCreateForm" method="post" action="/admin/createUser" >
 	
 		<h1>Adding user Form </h1>
 
 			<p>
 				<label for="login">Login:</label>
-				<input type="text" id="login" class="field">
+				<input type="text" name="login" id="login" class="field" value="${user.login}">
 			</p>
 			
 			<p>
 				<label for="password">Password:</label>
-				<input type="password" id="password" class="field">
+				<input type="password" id="password" class="field" value="${user.login}">
 			</p>
+
+
 			<p>
 				<label for="person">User's post:</label>
 				<select id="person" class="field">

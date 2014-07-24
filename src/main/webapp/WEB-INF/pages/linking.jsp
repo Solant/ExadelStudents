@@ -16,7 +16,7 @@
     </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
     <span class="currUserName"><c:out value="${account}"></c:out></span>
-    <img src="/resources/images/loupe.png" class="loupe_logo">
+    <a href="<c:url value="/admin" />"><img src="/resources/images/loupe.png" class="loupe_logo"></a>
 
 </div>
 <form class="linkingForm" >
