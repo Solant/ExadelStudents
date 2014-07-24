@@ -4,6 +4,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import persistance.dao.GenericDao;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class GenericDaoImpl<T> implements GenericDao<T>{
@@ -17,7 +19,6 @@ public class GenericDaoImpl<T> implements GenericDao<T>{
     public GenericDaoImpl() {
         this.type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
-
 
     public void save(T entity){
         sessionFactory.getCurrentSession().save(entity);
@@ -44,7 +45,7 @@ public class GenericDaoImpl<T> implements GenericDao<T>{
 
     @SuppressWarnings("unchecked")
     public List<T> findAll(){
-        return (List<T>) sessionFactory.getCurrentSession().createQuery("from "+type.getName()).list();
+        return (List<T>) sessionFactory.getCurrentSession().createCriteria(type).list();
     }
 
 

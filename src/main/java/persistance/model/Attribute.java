@@ -24,10 +24,9 @@ public class Attribute {
     @OneToMany(mappedBy = "attribute", fetch = FetchType.LAZY)
     private Set<Value> values;
 
-    /*
     @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name = "attrId")
-    private Group group;*/
+    @JoinColumn(name = "groupId")
+    private Group group;
 
     public Attribute() {
     }
@@ -71,14 +70,14 @@ public class Attribute {
     public void setType(String type) {
         this.type = type;
     }
-/*
+
     public Group getGroup() {
         return group;
     }
 
     public void setGroup(Group group) {
         this.group = group;
-    }*/
+    }
 
 
 }

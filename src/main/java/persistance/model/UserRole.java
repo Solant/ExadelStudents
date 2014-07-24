@@ -13,8 +13,8 @@ public class UserRole {
     @Column(name = "user_role_id")
     private int userRoleId;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     User user;
 
     @Column(name = "role")

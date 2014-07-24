@@ -10,9 +10,6 @@ public class Value {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "value")
-    private String value;
-
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "studId")
     private Student student;
@@ -21,16 +18,12 @@ public class Value {
     @JoinColumn(name = "attrId")
     private Attribute attribute;
 
+    @Column(name = "value")
+    private String value;
+
     public Value() {
     }
 
-    public Attribute getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(Attribute attribute) {
-        this.attribute = attribute;
-    }
 
     public int getId() {
         return id;
@@ -54,6 +47,14 @@ public class Value {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public Attribute getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(Attribute attribute) {
+        this.attribute = attribute;
     }
 
 }

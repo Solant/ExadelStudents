@@ -1,11 +1,12 @@
 package persistance.dao;
 
 
-import persistance.dao.impl.GenericDaoImpl;
 import persistance.model.User;
 
-public interface UserDao extends GenericDao<User> {
+import java.util.List;
 
-    User findByUserName(String username);
+public interface UserDao extends GenericDao<User>{
+
+    public User findByLogin(String login);
 
 }

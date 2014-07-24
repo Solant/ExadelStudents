@@ -14,8 +14,8 @@ public class Group {
     @Column(name = "groupName")
     private String name;
 
-   /* @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
-    private Set<Attribute> attributes;*/
+   @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
+    private Set<Attribute> attributes;
     public Group() {
     }
 

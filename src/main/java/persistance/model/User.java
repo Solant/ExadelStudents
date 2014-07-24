@@ -1,16 +1,19 @@
 package persistance.model;
 
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "Users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn( name="status", discriminatorType=DiscriminatorType.STRING)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "login")
     private String login;
@@ -21,7 +24,7 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
     public User() {
@@ -35,11 +38,11 @@ public class User {
         this.login = login;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

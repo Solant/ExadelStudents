@@ -12,10 +12,11 @@ import persistance.model.User;
 @Repository
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
+    @Autowired
     private SessionFactory sessionFactory;
 
     @SuppressWarnings("unchecked")
-    public User findByUserName(String login) {
+    public User findByLogin(String login) {
 
         List<User> users = new ArrayList<User>();
 
@@ -30,12 +31,8 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     }
 
-    public SessionFactory setSessionFactory()
-    {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+   /* @SuppressWarnings("unchecked")
+    public List<User> findAll(){
+        return (List<User>) sessionFactory.getCurrentSession().createQuery("from User where status = user").list();
+    }*/
 }
