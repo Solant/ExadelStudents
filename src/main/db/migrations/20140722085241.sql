@@ -1,9 +1,9 @@
 
 CREATE TABLE users
 (
-  id bigserial NOT NULL,
-  login varchar(40) NOT NULL,
-  password varchar(60) NOT NULL,
+  id bigserial NOT NULL UNIQUE ,
+  login varchar(40) NOT NULL UNIQUE ,
+  password varchar(70) NOT NULL,
   enabled boolean NOT NULL DEFAULT FALSE,
   firstname varchar(20),
   secondname varchar(20),
@@ -12,7 +12,7 @@ CREATE TABLE users
 );
 
 CREATE TABLE user_roles (
-  user_role_id bigserial NOT NULL ,
+  user_role_id bigserial NOT NULL UNIQUE,
   user_id bigint NOT NULL,
   ROLE varchar(30) NOT NULL,
   PRIMARY KEY (user_role_id),
@@ -22,7 +22,7 @@ CREATE TABLE user_roles (
 
 CREATE TABLE groups
 (
-  id bigserial NOT NULL,
+  id bigserial NOT NULL UNIQUE ,
   attrId bigint NOT NULL,
   groupname varchar(40),
   PRIMARY KEY (id)
@@ -30,7 +30,7 @@ CREATE TABLE groups
 
 CREATE TABLE attributes
 (
-  id bigserial NOT NULL,
+  id bigserial NOT NULL UNIQUE,
   groupid bigint not null,
   attrname varchar(40),
   status smallint,
@@ -41,7 +41,7 @@ CREATE TABLE attributes
 
 CREATE TABLE values
 (
-  id bigserial NOT NULL,
+  id bigserial NOT NULL UNIQUE,
   studid bigint NOT NULL,
   attrid bigint NOT NULL,
   value varchar(40),
@@ -52,7 +52,7 @@ CREATE TABLE values
 
 CREATE TABLE reviews
 (
-  id bigserial NOT NULL,
+  id bigserial NOT NULL UNIQUE,
   studid bigint NOT NULL,
   feedbid bigint NOT NULL,
   fromInterview boolean NOT NULL default FALSE,
@@ -88,7 +88,7 @@ CREATE TABLE studentsandinterviewers
 
 CREATE TABLE projects
 (
-  id bigserial NOT NULL,
+  id bigserial NOT NULL UNIQUE,
   studid bigint NOT NULL,
   projname varchar(30),
   curid bigint NOT NULL,

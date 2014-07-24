@@ -1,19 +1,44 @@
 package persistance.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Calendar;
 
 @Entity
 @Table (name = "Reviews")
 public class Review
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-    @Column(name = "status")
-    private int status;
+    @Column(name = "suitability")
+    private boolean suitability;
+
+    @Column(name = "work_attitude")
+    private String workAttitude;
+
+    @Column(name = "team_attitude")
+    private String teamAttitude;
+
+    @Column(name = "prof_progress")
+    private String profProgress;
+
+    @Column(name = "need_more_hours")
+    private boolean needMoreHours;
+
+    @Column(name = "working_on_real_project")
+    private int workingOnRealProject; // No (has/doesn't have perspective) / Yes
+
+    @Column(name = "billable")
+    private boolean billable;
+
+    @Column(name = "fromInterview")
+    private boolean fromInterview; //or from Curator
 
     @Column(name = "comment")
     private String comment;
@@ -21,17 +46,78 @@ public class Review
     @Column(name = "date")
     private Calendar date;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn/*(name = "studId")*/
+    @ManyToOne
+    @JoinColumn(name = "studId")
     private Student student;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn/*(name = "feedbId")*/
+    @ManyToOne
+    @JoinColumn(name = "feedbId")
     private Feedbacker feedbacker;
 
 
     public Review() {
     }
+
+    public boolean isFromInterview() {
+        return fromInterview;
+    }
+
+    public boolean isBillable() {
+        return billable;
+    }
+
+    public void setBillable(boolean billable) {
+        this.billable = billable;
+    }
+
+    public boolean isSuitability() {
+        return suitability;
+    }
+
+    public void setSuitability(boolean suitability) {
+        this.suitability = suitability;
+    }
+
+    public String getWorkAttitude() {
+        return workAttitude;
+    }
+
+    public void setWorkAttitude(String workAttitude) {
+        this.workAttitude = workAttitude;
+    }
+
+    public String getTeamAttitude() {
+        return teamAttitude;
+    }
+
+    public void setTeamAttitude(String teamAttitude) {
+        this.teamAttitude = teamAttitude;
+    }
+
+    public String getProfProgress() {
+        return profProgress;
+    }
+
+    public void setProfProgress(String profProgress) {
+        this.profProgress = profProgress;
+    }
+
+    public boolean isNeedMoreHours() {
+        return needMoreHours;
+    }
+
+    public void setNeedMoreHours(boolean needMoreHours) {
+        this.needMoreHours = needMoreHours;
+    }
+
+    public int getWorkingOnRealProject() {
+        return workingOnRealProject;
+    }
+
+    public void setWorkingOnRealProject(int workingOnRealProject) {
+        this.workingOnRealProject = workingOnRealProject;
+    }
+
 
     public Calendar getDate() {
         return date;
@@ -49,19 +135,19 @@ public class Review
         this.comment = comment;
     }
 
-    public int getStatus() {
-        return status;
+    public boolean getFromInterview() {
+        return fromInterview;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setFromInterview(boolean fromInterview) {
+        this.fromInterview = fromInterview;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

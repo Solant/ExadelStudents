@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class GenericDaoImpl<T> implements GenericDao<T>{
+public class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -21,12 +21,12 @@ public class GenericDaoImpl<T> implements GenericDao<T>{
         this.type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    public void save(T entity){
+    public void save(T entity) {
         sessionFactory.getCurrentSession().save(entity);
     }
 
     @SuppressWarnings("unchecked")
-    public void removeById (int id){
+    public void removeById(long id) {
 
         T contact = (T) sessionFactory.getCurrentSession().load(
                 type, id);
@@ -35,20 +35,19 @@ public class GenericDaoImpl<T> implements GenericDao<T>{
         }
     }
 
-    public void update (T entity){
+    public void update(T entity) {
         sessionFactory.getCurrentSession().update(entity);
     }
 
     @SuppressWarnings("unchecked")
-    public T findById(long id){
+    public T findById(long id) {
         return (T) sessionFactory.getCurrentSession().get(type, id);
     }
 
     @SuppressWarnings("unchecked")
-    public List<T> findAll(){
+    public List<T> findAll() {
         return (List<T>) sessionFactory.getCurrentSession().createCriteria(type).list();
     }
-
 
 
 }

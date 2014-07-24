@@ -9,10 +9,18 @@ import org.springframework.stereotype.Repository;
 import persistance.dao.UserDao;
 import persistance.model.User;
 
-@Repository
+//@Repository
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
-    @Autowired
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    //@Autowired
     private SessionFactory sessionFactory;
 
     @SuppressWarnings("unchecked")
