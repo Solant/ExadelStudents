@@ -141,15 +141,17 @@ table td{
 .group input, .group select{
     float:right;
     margin-right: 2%;
+    width: 40%;
 }
 .spoilers{
+    margin-top: 10px;
     padding: 10px ;
     width: 650px;
-    border: solid;
-    border-color: #c0c0c0;
+    border:3px solid;
     border-radius: 20px;
-    font: 20px Helvetica;
+    font-size: 14px;
     text-align: left;
+    color: #808080;
 }
 .group{
     white-space: nowrap;
@@ -185,12 +187,11 @@ table td{
     width: 370px;
     margin: auto;
     margin-top: 100px;
-    border: 0px solid;
+    border: 3px solid;
     padding: 7px;
     text-align:left;
     font-size: 14px;
-    background-color: white; /*RGB(0,156,203);*/
-    border-width: 3px;
+    background-color: white;
     border-radius: 10px;
 }
 .loginAndCreateForm p {

@@ -104,7 +104,7 @@
 
                 <div class="displayFlex">
                     <div class="alignCenter">
-                        <button  type="submit">Save</button>
+                        <button  type="submit" class="loginAndCreateButton">Save</button>
                     </div>
                 </div>
 
@@ -153,7 +153,7 @@
                     <div class="group"><label for="group">Group</label><input id="group"></div>--%>
                 <div class="displayFlex">
                     <div class="alignCenter">
-                    <button  type="submit">Save</button>
+                    <button  type="submit" class="loginAndCreateButton">Save</button>
                         </div>
                     </div>
             </form>
@@ -230,7 +230,7 @@
 
                 <div class="displayFlex">
                     <div class="alignCenter">
-                            <button  type="submit">Save</button>
+                            <button  type="submit" class="loginAndCreateButton">Save</button>
                         </div>
                     </div>
             </form>
@@ -296,7 +296,7 @@
 
                 <div class="displayFlex">
                     <div class="alignCenter">
-                        <button  type="submit">Save</button>
+                        <button  type="submit" class="loginAndCreateButton">Save</button>
                     </div>
                 </div>
             </form>
@@ -338,7 +338,7 @@
 
                 <div class="displayFlex">
                     <div class="alignCenter">
-                        <button  type="submit">Save</button>
+                        <button  type="submit" class="loginAndCreateButton">Save</button>
                     </div>
                 </div>
 
