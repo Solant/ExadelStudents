@@ -50,57 +50,57 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Ivan</a></td>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
                     <td>23.07.2013</td>
                     <td>Curator</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Alex</a></td>
+                    <td><a href="review.jsp">Ivanov Alex</a></td>
                     <td>23.07.2014</td>
                     <td>Curator</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Ivan</a></td>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
                     <td>23.07.2014</td>
                     <td>Curator</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Alex</a></td>
+                    <td><a href="review.jsp">Ivanov Alex</a></td>
                     <td>23.07.2013</td>
                     <td>Feedbacker</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Ivan</a></td>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
                     <td>23.07.2014</td>
                     <td>Curator</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Ivan</a></td>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
                     <td>23.07.2013</td>
                     <td>Feedbacker</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Ivan</a></td>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
                     <td>23.07.2014</td>
                     <td>Curator</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Alex</a></td>
+                    <td><a href="review.jsp">Ivanov Alex</a></td>
                     <td>23.07.2013</td>
                     <td>Feedbacker</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Ivan</a></td>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
                     <td>23.07.2014</td>
                     <td>Curator</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Ivan</a></td>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
                     <td>23.07.2014</td>
                     <td>Feedbacker</td>
                 </tr>
                 <tr>
-                    <td><a href="../../review.jsp">Ivanov Alex</a></td>
+                    <td><a href="review.jsp">Ivanov Alex</a></td>
                     <td>23.07.2013</td>
                     <td>Curator</td>
                 </tr>

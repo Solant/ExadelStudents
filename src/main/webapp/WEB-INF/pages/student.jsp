@@ -47,7 +47,6 @@
         <c:out value="Ivan"></c:out>
     </div>
 
-   <%-- <div class="tabbable tabs-left" style="float: left">--%>
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
                 <a href="#common" role="tab" data-toggle="tab">Common</a>
@@ -71,7 +70,6 @@
             </li>
 
         </ul>
-   <%-- </div>--%>
 
     <div class="tab-content">
 
