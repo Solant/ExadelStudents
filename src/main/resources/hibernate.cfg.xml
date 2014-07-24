@@ -15,7 +15,5 @@
         <mapping class="persistance.model.Project" />
         <mapping class="persistance.model.User" />
         <mapping class="persistance.model.UserRole" />
-       <!-- <mapping class="persistance.model.StudentsAndCurators"/>
-        <mapping class="persistance.model.StudentsAndInterviewers"/> -->
     </session-factory>
 </hibernate-configuration>

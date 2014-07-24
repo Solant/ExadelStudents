@@ -1,6 +1,11 @@
 package persistance.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,9 +18,9 @@ public class UserRole {
     @Column(name = "user_role_id")
     private int userRoleId;
 
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id")
-    User user;
+    private User user;
 
     @Column(name = "role")
     private String role;

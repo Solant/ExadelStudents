@@ -3,6 +3,8 @@ package persistance.model;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @DiscriminatorValue("feedbacker")
@@ -14,15 +16,19 @@ public class Feedbacker extends User{
     @Column(name = "secondname")
     private String secondName;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany
+    @Cascade(CascadeType.SAVE_UPDATE)
     @JoinTable(name = "StudentsAndCurators", joinColumns = {@JoinColumn(name = "CurId")}, inverseJoinColumns = {@JoinColumn(name = "StudId")})
     private Set<Student> myStudents = new HashSet();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany
+    @Cascade(CascadeType.SAVE_UPDATE)
     @JoinTable(name = "StudentsAndInterviewers", joinColumns = {@JoinColumn(name = "IntervId")}, inverseJoinColumns = {@JoinColumn(name = "StudId")})
     private Set<Student> interviewedStudents = new HashSet();
 
-    @OneToMany(mappedBy = "feedbacker", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "feedbacker")
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
+   // @JoinColumn(name = "feedbId")
     private Set <Review> reviews = new HashSet();
 
     public Feedbacker() {

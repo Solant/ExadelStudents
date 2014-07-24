@@ -1,6 +1,11 @@
 package persistance.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Calendar;
 
 @Entity
@@ -10,20 +15,20 @@ public class Project
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "projName")
     private String projName;
 
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "studId")
     private Student student;
 
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "curId")
-    Feedbacker curator;
+    private Feedbacker curator;
 
     public Project() {
     }
@@ -36,11 +41,11 @@ public class Project
         this.projName = projName;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

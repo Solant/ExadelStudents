@@ -30,15 +30,16 @@ public class TestService {
     private GroupDao gd;
 
     @Transactional
-    public void testMethod(){
+    public void testMethod() {
+
         System.out.println("TEST STARTED!");
 
         Student stud = new Student();
 
-        stud.setLogin("test1Stud");
-        stud.setPassword("test1Stud");
-        stud.setFirstName("test1StudFN");
-        stud.setSecondName("test1StudSN");
+        stud.setLogin("test5Stud");
+        stud.setPassword("test5Stud");
+        stud.setFirstName("test5StudFN");
+        stud.setSecondName("test5StudSN");
         sd.save(stud);
 
         Feedbacker cur1 = new Feedbacker();
@@ -54,24 +55,18 @@ public class TestService {
         cur2.setFirstName("testCur4FN");
         cur2.setSecondName("testCur4SN");
 
-
-        fd.save(cur1);
-        fd.save(cur2);
-
         stud.getCurators().add(cur1);
         stud.getCurators().add(cur2);
-
-
 
         Group group = new Group();
         group.setName("Institution");
         gd.save(group);
 
-        Attribute attribute = new Attribute();
-        attribute.setGroup(group);
-        attribute.setAttributeName("Institution");
-        attribute.setStatus(2);
-        attribute.setType("text");
+        Attribute attribute1 = new Attribute();
+        attribute1.setGroup(group);
+        attribute1.setAttributeName("Institution");
+        attribute1.setStatus(2);
+        attribute1.setType("text");
 
         Attribute attribute2 = new Attribute();
         attribute2.setGroup(group);
@@ -79,13 +74,11 @@ public class TestService {
         attribute2.setStatus(2);
         attribute2.setType("text");
 
-        ad.save(attribute);
+        ad.save(attribute1);
         ad.save(attribute2);
 
-        stud = sd.findAll().get(0);
-
         Value value = new Value();
-        value.setAttribute(attribute);
+        value.setAttribute(attribute1);
         value.setValue("BSU");
         value.setStudent(stud);
 
@@ -110,10 +103,10 @@ public class TestService {
         ur2.setRole("ROLE_ADMIN");
         ur2.setUser(stud);
 
-        stud.getUserRole().add(ur);
-        stud.getUserRole().add(ur2);
+        stud.getUserRoles().add(ur);
+        stud.getUserRoles().add(ur2);
 
-        ud.update(stud);
+        sd.update(stud);
 
         // -----------------------------------------------
         for (User u : ud.findAll()) {
@@ -127,6 +120,7 @@ public class TestService {
         for (Feedbacker feedb : fd.findAll()) {
             System.out.println("F- " + feedb.getLogin());
         }
+     //   gd.removeById((long)8);
 
         System.out.println("TEST ENDED!");
     }

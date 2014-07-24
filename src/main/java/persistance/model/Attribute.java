@@ -1,6 +1,11 @@
 package persistance.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Set;
 
 
@@ -10,7 +15,7 @@ public class Attribute {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "attrName")
     private String attributeName;
@@ -21,10 +26,12 @@ public class Attribute {
     @Column(name = "type")
     private String type;
 
-    @OneToMany(mappedBy = "attribute", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "attribute")
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
+   // @JoinColumn(name = "attrId")
     private Set<Value> values;
 
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "groupId")
     private Group group;
 
@@ -39,11 +46,11 @@ public class Attribute {
         this.values = values;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

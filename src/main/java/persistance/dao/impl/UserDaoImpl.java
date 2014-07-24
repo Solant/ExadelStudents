@@ -9,8 +9,18 @@ import org.springframework.stereotype.Repository;
 import persistance.dao.UserDao;
 import persistance.model.User;
 
+//@Repository
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    //@Autowired
     private SessionFactory sessionFactory;
 
     @SuppressWarnings("unchecked")
@@ -27,14 +37,6 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
             return null;
         }
 
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
     }
 
    /* @SuppressWarnings("unchecked")
