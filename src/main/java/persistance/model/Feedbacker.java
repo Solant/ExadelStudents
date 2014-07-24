@@ -5,12 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table (name = "Users")
-public class Feedbacker{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+@DiscriminatorValue("feedbacker")
+public class Feedbacker extends User{
 
     @Column(name = "firstname")
     private String firstName;
@@ -18,25 +14,16 @@ public class Feedbacker{
     @Column(name = "secondname")
     private String secondName;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "StudentsAndCurators", joinColumns = @JoinColumn(name = "CurId"), inverseJoinColumns = @JoinColumn(name = "StudId"))
-    private Set<Student> myStudents;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "StudentsAndCurators", joinColumns = {@JoinColumn(name = "CurId")}, inverseJoinColumns = {@JoinColumn(name = "StudId")})
+    private Set<Student> myStudents = new HashSet();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "StudentsAndInterviewers", joinColumns = @JoinColumn(name = "IntervId"), inverseJoinColumns = @JoinColumn(name = "StudId"))
-    private Set<Student> interviewedStudents;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "StudentsAndInterviewers", joinColumns = {@JoinColumn(name = "IntervId")}, inverseJoinColumns = {@JoinColumn(name = "StudId")})
+    private Set<Student> interviewedStudents = new HashSet();
 
     @OneToMany(mappedBy = "feedbacker", fetch = FetchType.LAZY)
-    private Set <Review> reviews;
-
-    @Column(name = "login")
-    private String login;
-
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "enabled")
-    private boolean enabled;
+    private Set <Review> reviews = new HashSet();
 
     public Feedbacker() {
     }
@@ -82,35 +69,4 @@ public class Feedbacker{
         this.reviews = reviews;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 }

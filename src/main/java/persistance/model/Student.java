@@ -1,27 +1,14 @@
 package persistance.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table (name = "Users")
-public class Student {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "login")
-    private String login;
-
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "enabled")
-    private boolean enabled;
-
+@DiscriminatorValue("student")
+public class Student extends User {
 
     @Column (name = "firstname")
     private String firstName;
@@ -29,20 +16,22 @@ public class Student {
     @Column (name = "secondname")
     private String secondName;
 
-    @OneToMany(mappedBy = "myStudents", fetch = FetchType.LAZY)
-    private Set<Feedbacker> curators;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "StudentsAndCurators", joinColumns = {@JoinColumn(name = "StudId")}, inverseJoinColumns = {@JoinColumn(name = "CurId")})
+    private Set<Feedbacker> curators = new HashSet();
 
-    @OneToMany(mappedBy = "interviewedStudents", fetch = FetchType.LAZY)
-    private Set<Feedbacker> interviewers;
-
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
-    private Set<Project> oldProjects;
-
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
-    private Set<Review> reviews;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "StudentsAndInterviewers", joinColumns = {@JoinColumn(name = "StudId")}, inverseJoinColumns = {@JoinColumn(name = "IntervId")})
+    private Set<Feedbacker> interviewers = new HashSet();
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
-    private Set<Value> values;
+    private Set<Project> oldProjects = new HashSet();
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private Set<Review> reviews = new HashSet();
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private Set<Value> values = new HashSet();
 
     public Student() {
     }
@@ -101,38 +90,6 @@ public class Student {
 
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
 }
