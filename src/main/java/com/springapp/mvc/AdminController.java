@@ -39,9 +39,9 @@ public class AdminController {
         return "";
     }
 
-    @RequestMapping(value = "/formTable", method = RequestMethod.POST)
+    @RequestMapping(value = "/formTable", method = RequestMethod.GET)
     public String formTable(){
-        return "adminTable";
+        return "/adminTable";
     }
 
 }

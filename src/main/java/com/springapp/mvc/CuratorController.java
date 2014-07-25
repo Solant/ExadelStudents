@@ -40,6 +40,6 @@ public class CuratorController {
 
     @RequestMapping(value = "/addInterwiewerFeedback", method = RequestMethod.POST)
     public String addInterwiewerFeedback(){
-        return "adminTable";
+        return "/adminTable.jsp";
     }
 }
