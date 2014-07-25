@@ -1,6 +1,7 @@
 package com.springapp.mvc;
 
 import com.services.SecurityService;
+import com.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -31,11 +32,10 @@ public class HelloController {
         return "account";
     }
     @Autowired
-    private TestService ts;
+    private StudentService ss;
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public void welcomePage() {
-        ts.testMethod();
-
+        ss.add("Wasya", "wasya", "wasya", "wasya");
     }
 }
