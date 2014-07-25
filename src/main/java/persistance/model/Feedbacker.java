@@ -16,6 +16,15 @@ public class Feedbacker extends User{
     @Column(name = "secondname")
     private String secondName;
 
+    @Column (name = "skype")
+    private String skype;
+
+    @Column(name = "telephone")
+    private String telephone;
+
+    @Column(name = "email")
+    private String email;
+
     @ManyToMany
     @Cascade(CascadeType.SAVE_UPDATE)
     @JoinTable(name = "StudentsAndCurators", joinColumns = {@JoinColumn(name = "CurId")}, inverseJoinColumns = {@JoinColumn(name = "StudId")})
@@ -50,7 +59,6 @@ public class Feedbacker extends User{
         this.firstName = firstName;
     }
 
-
     public Set<Student> getMyStudents() {
         return myStudents;
     }
@@ -74,5 +82,30 @@ public class Feedbacker extends User{
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
+
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
 }
