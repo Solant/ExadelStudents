@@ -21,7 +21,7 @@ public class Attribute {
     private String attributeName;
 
     @Column(name = "status")
-    private int status;
+    private String status;
 
     @Column(name = "type")
     private String type;
@@ -62,11 +62,11 @@ public class Attribute {
         this.attributeName = attributeName;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
