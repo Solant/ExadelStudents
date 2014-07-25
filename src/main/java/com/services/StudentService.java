@@ -1,13 +1,12 @@
 package com.services;
 
+import com.services.presentation.GAVPresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import persistance.dao.StudentDao;
-import persistance.model.Student;
-import persistance.model.UserRole;
-import persistance.model.Value;
+import persistance.model.*;
 
 import java.util.*;
 
@@ -50,20 +49,24 @@ public class StudentService {
     }
 
     /**
-     * Returns HashMap with all student attributes and values
+     * Returns ArrayList of GAVPresentation with all student attribute groups, attributes and values
      *
      * @param studentLogin - Student login
-     * @return HashMap<String attributeName, String value>
+     * @return ArrayList<GAVPresentation>
      */
     @Transactional
-    HashMap<String, String> getValues(String studentLogin){
-        HashMap<String, String> hashMap = new HashMap<String, String>();
+    public ArrayList<GAVPresentation> getValues(String studentLogin){
+        ArrayList<GAVPresentation> wow = new ArrayList<GAVPresentation>();
         Student student = studentDao.findByLogin(studentLogin);
         Set<Value> values = student.getValues();
         for (Value value : values){
-            hashMap.put(value.getAttribute().getAttributeName(), value.getValue());
+            GAVPresentation gav = new GAVPresentation();
+            gav.setAttribute(value.getAttribute().getAttributeName());
+            gav.setValue(value.getValue());
+            gav.setGroup(value.getAttribute().getGroup().getName());
+            wow.add(gav);
         }
-        return hashMap;
+        return wow;
     }
 
     @Transactional
