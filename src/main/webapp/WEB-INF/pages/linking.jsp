@@ -3,21 +3,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Linking</title>
     <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/styles/style.css"><%--
-    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">--%>
+    <link rel="stylesheet" href="/resources/styles/style.css">
 </head>
 <body>
 <div class="hat">
-    <img src="/resources/images/exadel-logo.png" class="exadel_logo">
-
-    <a href="<c:url value="/account"/> ">
-        <img src="/resources/images/account.png" class="account_logo">
-    </a>
-    <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
-    <span class="currUserName"><c:out value="${account}"></c:out></span>
-    <a href="<c:url value="/admin" />"><img src="/resources/images/loupe.png" class="loupe_logo"></a>
-
+    <form method="get">
+        <img src="/resources/images/exadel-logo.png" class="exadel_logo">
+        <a href="<c:url value="/account"/> ">
+            <img src="/resources/images/account.png" class="account_logo">
+        </a>
+        <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
+        <span class="currUserName"><c:out value="${account}"></c:out></span>
+        <a href="<c:url value="/admin" />"><img src="/resources/images/loupe.png" class="loupe_logo"></a>
+        <button formaction="/admin/returnCreate" class="btn">
+            <img src="/resources/images/add.png" class="add_logo" width="25px">
+            <span>Add User</span>
+        </button>
+        <button formaction="/admin/linkStudent" class="btn">
+            <img src="/resources/images/yellow-link.png"  height="23px">
+            <span>Link Student</span>
+        </button>
+    </form>
 </div>
 <form class="linkingForm" >
 <div class="radio">
