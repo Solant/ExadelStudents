@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "Reviews")
@@ -32,13 +34,13 @@ public class Review
     private boolean needMoreHours;
 
     @Column(name = "working_on_real_project")
-    private int workingOnRealProject; // No (has/doesn't have perspective) / Yes
+    private String workingOnRealProject; // No (has/doesn't have perspective) / Yes
 
     @Column(name = "billable")
     private boolean billable;
 
     @Column(name = "fromInterview")
-    private boolean fromInterview; //or from Curator
+    private boolean fromInterview; //or from curator
 
     @Column(name = "comment")
     private String comment;
@@ -53,6 +55,11 @@ public class Review
     @ManyToOne
     @JoinColumn(name = "feedbId")
     private Feedbacker feedbacker;
+
+
+    @OneToMany(mappedBy = "review")
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
+    private Set<Rating> ratings = new HashSet<Rating>();
 
 
     public Review() {
@@ -110,14 +117,13 @@ public class Review
         this.needMoreHours = needMoreHours;
     }
 
-    public int getWorkingOnRealProject() {
+    public String getWorkingOnRealProject() {
         return workingOnRealProject;
     }
 
-    public void setWorkingOnRealProject(int workingOnRealProject) {
+    public void setWorkingOnRealProject(String workingOnRealProject) {
         this.workingOnRealProject = workingOnRealProject;
     }
-
 
     public Calendar getDate() {
         return date;
@@ -165,5 +171,13 @@ public class Review
 
     public void setFeedbacker(Feedbacker feedbacker) {
         this.feedbacker = feedbacker;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
     }
 }

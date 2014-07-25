@@ -15,5 +15,7 @@
         <mapping class="persistance.model.HRWorker" />
         <mapping class="persistance.model.User" />
         <mapping class="persistance.model.UserRole" />
+        <mapping class="persistance.model.Rating" />
+        <mapping class="persistance.model.Technology" />
     </session-factory>
 </hibernate-configuration>
