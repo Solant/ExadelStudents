@@ -70,11 +70,11 @@ public class StudentService {
     }
 
     @Transactional
-    void addReview(String studentLogin, String curatorLogin, boolean fromInterview /*some shit here*/){
+    public void addReview(String studentLogin, String curatorLogin, boolean fromInterview /*some shit here*/){
 
     }
 
-    void addInterviewer(String interviewerLogin, String studentLogin){
+    public void addInterviewer(String interviewerLogin, String studentLogin){
         //Some code
     }
 

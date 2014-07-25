@@ -50,7 +50,19 @@
     </div>
 
         <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
+            <%----%>
+
+            <c:forEach items="${groups}" var="groupName">
+                <li>
+                    <a href="#${groupName}" role="tab" data-toggle="tab">${groupName}</a>
+                </li>
+            </c:forEach>
+
+
+
+            <%----%>
+
+            <%--<li class="active">
                 <a href="#common" role="tab" data-toggle="tab">Common</a>
             </li>
             <li >
@@ -70,12 +82,25 @@
             <li>
                 <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
             </li>
-
+--%>
         </ul>
 
     <div class="tab-content">
 
-        <div class="tab-pane active" id="common">
+    <c:forEach items="${groupedValues}" var="group">
+    <div class="tab-pane active" id="${group.get(0).getGroup()}">
+        <form class="spoilers">
+            <c:forEach items="${group}" var="value">
+                <div class="group">
+                    <label>${value.getAttribute()}</label>
+                    <input value="${value.getValue()}">
+                </div>
+            </c:forEach>
+        </form>
+    </div>
+    </c:forEach>
+
+       <%-- <div class="tab-pane active" id="common">
             <form class="spoilers">
                 <div class="group">
                     <label for="lastname">Lastname:</label>
@@ -146,11 +171,11 @@
                     <div class="group">
                         <label for="year">Year graduation:</label><input type="text" id="year" >
                     </div>
-                    <%--
+                    &lt;%&ndash;
                     <div class="group"><label for="university">University</label><input id = "university"></div>
                     <div class="group"><label for="faculty">Faculty</label><input id="faculty"></div>
                     <div class="group"><label for="specialty">Specialty</label><input id="specialty"></div>
-                    <div class="group"><label for="group">Group</label><input id="group"></div>--%>
+                    <div class="group"><label for="group">Group</label><input id="group"></div>&ndash;%&gt;
                 <div class="displayFlex">
                     <div class="alignCenter">
                     <button  type="submit" class="loginAndCreateButton">Save</button>
@@ -234,7 +259,7 @@
                         </div>
                     </div>
             </form>
-           <%-- <form>
+           &lt;%&ndash; <form>
                 <div class="spoilers">
                     <div class="group"><label for="dateOfEmployng">Date of employing</label><input id = "dateOfEmployng" type="date"></div>
                     <div class="group"><label for="trainingExadel">Have you been training in Exadel before working?</label>
@@ -255,7 +280,7 @@
                     </div>
                     <button style="display: block" type="submit">Save</button>
                 </div>
-            </form>--%>
+            </form>&ndash;%&gt;
         </div>
 
         <div class="tab-pane" id="project">
@@ -408,7 +433,7 @@
             </div>
         </div>
 
-</div>
-</div>
+</div>--%>
+<%--</div>--%>
 </body>
 </html>
