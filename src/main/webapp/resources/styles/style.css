@@ -242,7 +242,7 @@ table td{
 #createFormSet{
     border-color: #00a1d2;
     border-radius: 8px;
-    border: 1 solid;
+    border: 1px solid;
     padding:0;
 }
 
@@ -457,6 +457,11 @@ margin-left: 50px;
     float: right;
     margin-right: 2%;
     vertical-align: middle;
+}
+
+.adminMenuImages{
+    height: 25px;
+    width:25px
 }
 /*end of admin props*/
 
