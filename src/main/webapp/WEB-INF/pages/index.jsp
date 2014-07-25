@@ -21,5 +21,9 @@
     <form action="login">
         <button type="submit">LOGIN</button>
     </form>
+    <form action="worker">
+    <button name="Login" type="submit">LOGIN LIKE A WORKER</button>
+    </form>
+
 </body>
 </html>
