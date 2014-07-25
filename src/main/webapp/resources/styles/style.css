@@ -1,13 +1,8 @@
-﻿body {
-    margin: 0;      /* Убираем отступы */
-}
+﻿/*common props*/
 
-.skyBox{
-    position: fixed;
-    height:250px;
-    width: 100%;
-    background-color: RGB(70,186,235);
-    z-index: -1;
+
+body {
+    margin: 0;      /* Убираем отступы */
 }
 
 .hat{
@@ -32,6 +27,7 @@
     margin-right: 5px;
     margin-top: 4px;
 }
+
 .exadel_logo{
     float: left;
     vertical-align: middle;
@@ -62,58 +58,6 @@
     margin-top: 9px;
 }
 
-.bookmarks a{
-
-    float:right;
-    color: white;
-    font-size: 25px;
-    text-shadow: 1px 1px 1px RGB(70,186,235);
-    font-family: Arial;
-
-    margin-right:6px;
-    margin-top: 6px;
-    padding-bottom:12px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-top:3px;
-    text-decoration: none;
-}
-.bookmarks a:hover, .bookmarksSelect a:hover{
-    background-color: RGB(70,186,235);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.bookmarksSelect a{
-    float:right;
-    color: white;
-    font-size: 25px;
-    text-shadow: 1px 1px 1px RGB(70,186,235);
-    font-family: Arial;
-
-    margin-right:6px;
-    margin-top: 6px;
-    padding-bottom:12px;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-top:3px;
-    text-decoration: none;
-    background-color: RGB(70,186,235);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-#table{
-    padding-top: 100px;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-#example_length, #example_filter, #example_info, #example_paginate{
-    font-size: 20px;
-    color: gray;
-}
-
 table{
     background-color: white;
     text-align:center;
@@ -121,7 +65,6 @@ table{
     border-collapse:collapse;
     box-shadow: 0 1px 2px #d1d1d1;
     font-family: Arial;
-    /*min-width: 700px;*/
 }
 
 table thead,table tfoot{
@@ -132,38 +75,12 @@ table thead,table tfoot{
     text-shadow: 1px 1px 0px black;
     font-family:serif;
 }
+
 table td{
     padding: 2px 8px 2px 8px;
     border-color: grey;
 }
-.group label{
-    float:left;
-    margin-left: 2%;
-    height: 40px;
-}
-.group input, .group select{
-    float:right;
-    margin-right: 2%;
-    width: 40%;
-    padding: 3px;
-    border-radius: 3px;
-    border: 1px solid;
-}
-.spoilers{
-    margin-top: 10px;
-    padding: 10px ;
-    width: 650px;
-    border:3px solid;
-    border-radius: 20px;
-    font-size: 14px;
-    text-align: left;
-    color: #808080;
-}
-.group{
-    white-space: nowrap;
-    height: 45px;
-    overflow: auto;
-}
+
 .profile{
     background-color:  #c0c0c0;
     width: 200px;
@@ -173,6 +90,7 @@ table td{
     float: right;
     font:20px/40px Helvetica;
 }
+
 .profile img{
     float:left;
     margin-left: 5px;
@@ -190,13 +108,15 @@ table td{
     background-color: white;
     border-radius: 10px;
 }
+
 .loginAndCreateForm p {
     margin-left: 30px;
-    /*text-shadow: 1px 1px 0px black;*/
 }
+
 .loginAndCreateForm div{
     overflow: auto;
 }
+
 .loginAndCreateForm button{
     float:right;
     margin-right: 10px;
@@ -219,6 +139,7 @@ table td{
     text-shadow: 1px 1px 0px black;
 
 }
+
 .loginAndCreateButton:hover{
     background-color:RGB(0,156,203);
 }
@@ -237,55 +158,57 @@ table td{
     padding: 3px;
 }
 
-/*Начало раздела отвечающего за страницу create.jsp*/
-
-#createFormSet{
-    border-color: #00a1d2;
-    border-radius: 8px;
-    border: 1 solid;
-    padding:0;
+.alignCenter{
+    margin: auto;
+    text-align: center;
 }
 
-/*Rjytw раздела отвечающего за страницу create.jsp*/
+.displayFlex{
+    display: flex;
+}
+/*end of common props*/
 
-.functionsBox{
-    left: 20px;
-    top: 100px;
-    width: 170px;
-    height: 400px;
-    position: absolute;
-    font-size: 19px;
-    padding-left: 4px;
-    padding-right: 10px;
-    background-color:  #c0c0c0;
+/*login props*/
+
+/*all props are common*/
+
+/*end of login props*/
+
+#table{
+    padding-top: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
-.functionsBox p {
-    padding-top: 1px;
-    padding-bottom: 1px;
-    background-color:white;
-    border: 1px;
-    border-style:none;
-    border-radius: 3px;
+#example_length, #example_filter, #example_info, #example_paginate{
+    font-size: 20px;
+    color: gray;
 }
 
-.functionsBox p span{
-    float:right;
-    padding-top:2px;
-    padding-right: 5px;
-}
+
+
+
+
+/*props create.jsp*/
+
+/*all props are common*/
+
+/*end of props create.jsp*/
+
 /*linking form*/
 
 select.linkingL{
     float: left;
     height: 300px;
     width: 30%;
+    border-radius: 5px;
     font-family: arial;
 }
 select.linkingR{
     float: right;
     width: 30%;
     height: 300px;
+    border-radius: 5px;
     font-family: arial;
 }
 .linkingForm{
@@ -323,10 +246,7 @@ select.linkingR{
 }
 
 /*end of linking form*/
-.allignCenter{
-    text-align: center;
-    margin-top: 20px;
-}
+
 /*review form*/
 .reviewForm{
     font-family: arial;
@@ -340,15 +260,6 @@ select.linkingR{
     border-radius: 10px;
     width: 450px;
     text-align: left;
-}
-
-.alignCenter{
-    margin: auto;
-    text-align: center;
-}
-
-.displayFlex{
-    display: flex;
 }
 
 .floatright{
@@ -377,6 +288,37 @@ select.linkingR{
     font-size: 14px;
     color: gray;
 }
+
+
+.group label{
+    float:left;
+    margin-left: 2%;
+    height: 40px;
+}
+.group input, .group select{
+    float:right;
+    margin-right: 2%;
+    width: 40%;
+    padding: 3px;
+    border-radius: 3px;
+    border: 1px solid;
+}
+.spoilers{
+    margin-top: 10px;
+    padding: 10px ;
+    width: 650px;
+    border:3px solid;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: left;
+    color: #808080;
+}
+.group{
+    white-space: nowrap;
+    height: 45px;
+    overflow: auto;
+}
+
 /*end of student page*/
 
 /*fblist props*/
@@ -455,6 +397,11 @@ margin-left: 50px;
     float: right;
     margin-right: 2%;
     vertical-align: middle;
+}
+
+.adminMenuImages{
+    height: 25px;
+    width:25px
 }
 /*end of admin props*/
 
