@@ -3,6 +3,7 @@ package com.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import persistance.dao.StudentDao;
 import persistance.model.Student;
 import persistance.model.UserRole;
@@ -44,7 +45,7 @@ public class StudentService {
     }
 
     @Transactional
-    static public void setValues(String studentLogin, HashMap<String, String> hashMap){
+    public void setValues(String studentLogin, HashMap<String, String> hashMap){
         //Set values
     }
 
@@ -66,32 +67,42 @@ public class StudentService {
     }
 
     @Transactional
-    static void addReview(String studentLogin, String curatorLogin, boolean fromInterview /*some shit here*/){
+    void addReview(String studentLogin, String curatorLogin, boolean fromInterview /*some shit here*/){
 
     }
 
-    static boolean isSameStudent(String studentLogin){
-        //Some code, lol
-        return true;
-    }
-
-    static void addInterviewer(String interviewerLogin, String studentLogin){
+    void addInterviewer(String interviewerLogin, String studentLogin){
         //Some code
     }
 
-    static void addCurator(String interviewerLogin, String studentLogin){
+    void addCurator(String interviewerLogin, String studentLogin){
         //Some code
     }
 
-    static void disable(String studentLogin){
-        //some code lol
+    /**
+     * Disable user
+     *
+     * @param studentLogin - Student Login
+     */
+    void disable(String studentLogin){
+        Student student = studentDao.findByLogin(studentLogin);
+        student.setEnabled(false);
+
+        studentDao.update(student);
     }
 
-    static void enable(String studentLogin){
-        //some code, lol
+    /**
+     * Enable user
+     * @param studentLogin - Student login
+     */
+    void enable(String studentLogin){
+        Student student = studentDao.findByLogin(studentLogin);
+        student.setEnabled(true);
+
+        studentDao.update(student);
     }
 
-    static List<Student> find() {
+    List<Student> find() {
         List<Student> studentList = new ArrayList<Student>();
         return studentList;
     }
