@@ -30,15 +30,15 @@
             <a href="<c:url value="/admin"/> "><img src="/resources/images/loupe.png" class="loupe_logo"></a>
 
             <button formaction="/admin/returnCreate" class="btn">
-                <img src="/resources/images/add.png" class="add_logo" width="25px">
+                <img src="/resources/images/add.png" class="adminMenuImages">
                 <span>Add User</span>
             </button>
             <button formaction="/admin/linkStudent" class="btn">
-                <img src="/resources/images/yellow-link.png"  height="23px">
+                <img src="/resources/images/yellow-link.png" class="adminMenuImages">
                 <span>Link Student</span>
             </button>
             <button formaction="#" class="btn">
-                <img src="/resources/images/fired.png"  width="25px">
+                <img src="/resources/images/fired.png" class="adminMenuImages">
                 <span>Fired Students</span>
             </button>
         </form>
