@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface StudentDao extends GenericDao<Student> {
     public List<Student> findDisabledStudents();
+
+    public Student findByLogin(String login);
 }
