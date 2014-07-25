@@ -1,4 +1,5 @@
 <%@ page import="com.services.UserService" %>
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -29,11 +30,6 @@
 </head>
 <body>
 
-<%--<%
-    String str = UserService.getCurrentUserLogin();
-    pageContext.setAttribute("str", str);
-%>--%>
-
 
 <div class="hat">
 	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
@@ -42,7 +38,7 @@
         <img src="/resources/images/account.png" class="account_logo">
     </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
-	<span class="currUserName"><c:out value="${str}"></c:out></span>
+	<span class="currUserName"><c:out value="${account}"></c:out></span>
 	<img src="/resources/images/loupe.png" class="loupe_logo">
 </div>
 

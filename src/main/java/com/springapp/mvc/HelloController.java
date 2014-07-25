@@ -14,10 +14,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 
 public class HelloController {
+    @Autowired
     private UserService us;
+
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String welcomePage(ModelMap model,HttpSession session) {
-        //session.setAttribute("account", us.getCurrentUserLogin());
+        session.setAttribute("account", us.getCurrentUserLogin());
         if (SecurityService.hasRole("ROLE_STUDENT"))
             return "redirect:student";
         if (SecurityService.hasRole("ROLE_CURATOR"))
