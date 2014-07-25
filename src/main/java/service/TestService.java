@@ -120,7 +120,6 @@ public class TestService {
         for (Feedbacker feedb : fd.findAll()) {
             System.out.println("F- " + feedb.getLogin());
         }
-     //   gd.removeById((long)8);
 
         System.out.println("TEST ENDED!");
     }

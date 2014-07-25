@@ -39,8 +39,4 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     }
 
-   /* @SuppressWarnings("unchecked")
-    public List<User> findAll(){
-        return (List<User>) sessionFactory.getCurrentSession().createQuery("from User where status = user").list();
-    }*/
 }
