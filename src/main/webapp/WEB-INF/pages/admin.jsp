@@ -10,7 +10,6 @@
     <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
     <title>Choosing table fields</title>
-    <link rel="stylesheet" href="/resources/styles/style.css" />
 </head>
 <body>
 
@@ -206,7 +205,7 @@
             <input type="text" id="futureTechnologies"/>
         </div>
 
-        <div class="allignCenter">
+        <div class="alignCenter">
             <div>
                 <label for="pastProject">Past projects:</label>
                 <input type="checkbox"/><br/>
@@ -222,14 +221,6 @@
                 <label for="bilYes">Billable</label>
                 <input type="radio" name="billable" value="no" id="bilNo">
                 <label for="bilNo">No Billable</label>
-            </div>
-        </div>
-
-        <div class="adminGroup">
-            <div>
-                <label for="curatorCompany">Curator in Company:</label>
-                <input type="checkbox"/>
-                <input type="text" id="curatorCompany" >
             </div>
         </div>
 
@@ -264,6 +255,14 @@
         </div>
 
         <div class="adminGroup">
+            <div>
+                <label for="curator">Curator:</label>
+                <input type="checkbox"/>
+                <input type="text" id="curator" >
+            </div>
+        </div>
+
+        <div class="adminGroup">
             <label for="currRole">Current role</label>
             <input type="checkbox"/>
             <select id="currRole">
@@ -277,7 +276,7 @@
             <input type="checkbox"/>
             <input type="text" id="currTechnologies"/>
         </div>
-        <div class="allignCenter">
+        <div class="alignCenter">
             <div>
                 Change Project:
                 <input type="checkbox"/> <br/>
@@ -313,7 +312,7 @@
             <input type="text" id="engCourse">
         </div>
 
-        <div class="allignCenter">
+        <div class="alignCenter">
             <div>
                 <label for="trainings">Trainings:</label>
                 <input type="checkbox"/><br/>
@@ -321,7 +320,7 @@
             </div>
         </div>
 
-        <div class="allignCenter">
+        <div class="alignCenter">
             <div>
                 <label for="certificates">Certificates:</label>
                 <input type="checkbox"/><br/>

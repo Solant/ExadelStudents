@@ -144,14 +144,9 @@
                     <div class="group">
                         <label for="year">Year graduation:</label><input type="text" id="year" >
                     </div>
-                    <%--
-                    <div class="group"><label for="university">University</label><input id = "university"></div>
-                    <div class="group"><label for="faculty">Faculty</label><input id="faculty"></div>
-                    <div class="group"><label for="specialty">Specialty</label><input id="specialty"></div>
-                    <div class="group"><label for="group">Group</label><input id="group"></div>--%>
-                <div class="displayFlex">
-                    <div class="alignCenter">
-                    <button  type="submit" class="loginAndCreateButton">Save</button>
+                    <div class="displayFlex">
+                        <div class="alignCenter">
+                          <button  type="submit" class="loginAndCreateButton">Save</button>
                         </div>
                     </div>
             </form>
@@ -196,7 +191,7 @@
                         <input type="text" id="futureTechnologies"/>
                     </div>
 
-                    <div class="allignCenter">
+                    <div class="alignCenter">
                         <div>
                             <label for="pastProject">Past projects:</label><br/>
                             <textarea name="pastProject" id="pastProject" cols="30" rows="10" class="textOther"></textarea>
@@ -209,13 +204,6 @@
                             <label for="bilYes">Billable</label>
                             <input type="radio" name="billable" value="no" id="bilNo">
                             <label for="bilNo">No Billable</label>
-                        </div>
-                    </div>
-
-                    <div class="group">
-                        <div>
-                            <label for="curatorCompany">Curator in Company:</label>
-                            <input type="text" id="curatorCompany" >
                         </div>
                     </div>
 
@@ -259,20 +247,27 @@
         <div class="tab-pane" id="project">
             <form class="spoilers">
                     <div class="group">
-                        <label for="currProj">Current project</label>
+                        <label for="currProj">Current project:</label>
                         <input type="text" id="currProj">
                     </div>
                     <div class="group">
-                        <label for="teamLead">Team Leader</label>
+                        <label for="teamLead">Team Leader:</label>
                         <input type="text" id="teamLead">
                     </div>
                     <div class="group">
-                        <label for="PM">Project Manager</label>
+                        <label for="PM">Project Manager:</label>
                         <input type="text" id="PM">
                     </div>
 
                     <div class="group">
-                        <label for="currRole">Your current role</label>
+                        <div>
+                            <label for="curator">Curator:</label>
+                            <input type="text" id="curator" >
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label for="currRole">Your current role:</label>
                         <select id="currRole">
                             <option>Junior</option>
                             <option>Developer</option>
@@ -280,10 +275,10 @@
                         </select>
                     </div>
                     <div class="group">
-                        <label for="currTechnologies">Technologies using in the current project</label>
+                        <label for="currTechnologies">Technologies using in the current project:</label>
                         <input type="text" id="currTechnologies"/>
                     </div>
-                    <div class="allignCenter">
+                    <div class="alignCenter">
                         <div>
                             <input type="radio" name="changeProject" value="yes" id="chPrYes">
                             <label for="chPrYes">I want change Project</label>
@@ -320,14 +315,14 @@
                     <input type="text" id="engCourse">
                 </div>
 
-                <div class="allignCenter">
+                <div class="alignCenter">
                     <div>
                         <label for="trainings">Trainings:</label><br/>
                         <textarea name="certificates" id="trainings" cols="30" rows="10" class="textOther"></textarea>
                     </div>
                 </div>
 
-                <div class="allignCenter">
+                <div class="alignCenter">
                     <div>
                         <label for="certificates">Certificates:</label><br/>
                         <textarea name="certificates" id="certificates" cols="30" rows="10" class="textOther"></textarea>
@@ -346,7 +341,7 @@
         <div class="tab-pane" id="reviews">
             <div class="spoilers">
 
-                    <table border="1px" id="reviewsTable">
+                    <table border="1px" id="reviewsTable" class="display">
                         <thead>
                             <td>Curator</td>
                             <td>Date</td>
