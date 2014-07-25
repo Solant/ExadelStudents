@@ -22,6 +22,7 @@
     <span class="currUserName"><c:out value="${account}"></c:out></span>
 
 </div>
+
 <form class="loginAndCreateForm" >
 
     <h1>Account Form</h1>

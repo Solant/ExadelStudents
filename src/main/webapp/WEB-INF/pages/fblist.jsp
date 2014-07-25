@@ -28,15 +28,36 @@
     <span class="currUserName"><c:out value="${account}"></c:out></span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
 
-    <span class="bookmarks"> <a href="<c:url value="/curator/myStudents"/> "> My Students </a> </span>
-    <span class="bookmarks"> <a href="<c:url value="/curator/allStudents"/> "> All Students </a> </span>
-    <span class="bookmarks"> <a href="<c:url value="/curator/interview"/> "> Interviews  </a> </span>
+    <%--<span class="bookmarks">
+        <a href="<c:url value="/curator/myStudents"/> "> My Students </a>
+    </span>--%>
+    <a href="<c:url value="/curator/myStudents"/> ">
+        <button  class="btn">
+            <span>My Students</span>
+        </button>
+    </a>
+
+    <%--<a href="<c:url value="/curator/allStudents"/> ">
+        <button  class="btn">
+            <span>All Students</span>
+        </button>
+    </a>--%>
+
+    <a href="<c:url value="/curator/interview"/> ">
+        <button  class="btn">
+            <span>Interviews</span>
+        </button>
+    </a>
+    <%--<span class="bookmarks">
+        <a href="<c:url value="/curator/allStudents"/> "> All Students </a>
+    </span>
+    <span class="bookmarks">
+        <a href="<c:url value="/curator/interview"/> "> Interviews  </a>
+    </span>--%>
 
 
 </div>
-
-<div class="skyBox"></div>
-    <div class="fblist">
+<div id="table">
         <table id="fblist" border="1px">
             <thead>
                 <tr>
@@ -106,7 +127,6 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
+</div>
 </body>
 </html>

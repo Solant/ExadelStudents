@@ -47,9 +47,20 @@
     </form>
     </div>
 
+    <div class="saveTable">
+        Save as: <br/>
+        <a href="">
+            <img src="/resources/images/word.jpg" alt="word" title="word"/>
+        </a>
+        <a href="">
+            <img src="/resources/images/pdf.jpg" alt="pdf" title="pdf"/>
+        </a>
+        <a href="">
+            <img src="/resources/images/exel.jpg" alt="exel" title="exel"/>
+        </a>
+    </div>
 
-		<div class="skyBox"></div>
-        <div id="table">
+        <div id="searchTable">
             <table border = 1 id="example">
 			<thead>
 				<td> Name </td>
