@@ -21,11 +21,11 @@
 		<h1>Login Form </h1>
 		<p>
             <label for="login">Login:</label>
-			<input type="text" name="j_username" class="field" id="login">
+			<input type="text" name="j_username" class="field" id="login" value="test5Stud">
 		</p>
 		<p>
             <label for="password">Password:</label>
-			<input type="password"  name= "j_password" class="field" id="password">
+			<input type="password"  name= "j_password" class="field" id="password" value="test5Stud">
 		</p>
         <p>
             <label for="remember">Remember Me</label>

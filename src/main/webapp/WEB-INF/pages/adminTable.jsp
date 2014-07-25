@@ -30,7 +30,7 @@
             <a href="<c:url value="/admin"/> "><img src="/resources/images/loupe.png" class="loupe_logo"></a>
 
             <button formaction="/admin/returnCreate" class="btn">
-                <img src="/resources/images/add.png class="adminMenuImages">
+                <img src="/resources/images/add.png" class="adminMenuImages">
                 <span>Add User</span>
             </button>
             <button formaction="/admin/linkStudent" class="btn">

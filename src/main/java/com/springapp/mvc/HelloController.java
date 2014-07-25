@@ -1,8 +1,8 @@
 package com.springapp.mvc;
 
 import com.services.SecurityService;
+import com.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +14,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 
 public class HelloController {
+    private UserService us;
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String welcomePage(ModelMap model,HttpSession session) {
-        session.setAttribute("account", SecurityContextHolder.getContext().getAuthentication().getName());
+        //session.setAttribute("account", us.getCurrentUserLogin());
         if (SecurityService.hasRole("ROLE_STUDENT"))
             return "redirect:student";
         if (SecurityService.hasRole("ROLE_CURATOR"))

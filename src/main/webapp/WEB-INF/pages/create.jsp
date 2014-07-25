@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -31,44 +31,37 @@
         </button>
     </form>
 </div>
-	<form class="loginAndCreateForm" method="post" action="/admin/createUser" >
-	
+    <form:form commandName="newUser" cssClass="loginAndCreateForm" action="/admin/createUser" method="post">
 		<h1>Adding user Form </h1>
 
-      <%--  <form:form commandName="newUser" action="/admin/createUser" method="post">
-            <form:input path="login"/>
-            <form:password path="password"/>
-            <form:button type="submit">Create</form:button>
-        </form:form>--%>
-
-			<p>
+            <p>
 				<label for="login">Login:</label>
-				<input type="text" name="login" id="login" class="field" value="${user.login}">
+				<form:input path="login" type="text" name="login" id="login" class="field" />
 			</p>
 			
 			<p>
 				<label for="password">Password:</label>
-				<input type="password" id="password" class="field" value="${user.login}">
+				<form:input path="password" type="password" id="password" class="field" />
 			</p>
 
 
 			<p>
 				<label for="person">User's post:</label>
-				<select id="person" class="field">
-					<option>Student</option>
-					<option>Feedbacker</option>
-					<option>Personnel officer</option>
-				</select>
+				<form:select path="role" id="person" class="field">
+                    <form:option value="Student">Student</form:option>
+                    <form:option value="Feedbacker">Feedbacker</form:option>
+                    <form:option value="Admin">Admin</form:option>
+                </form:select>
 			</p>
 
         <p>
             <label for="lastname">Lastname:</label>
-            <input type="text" id="lastname" class="field">
+            <form:input path="lastname" type="text" id="lastname" class="field" />
         </p>
 		
 		<p>
 			<label for="firstname">Firstname:</label>
-			<input type="text" id="firstname" class="field">
+			<form:input path="firstname" type="text" id="firstname" class="field" />
 		</p>
 
         <div class="displayFlex">
@@ -78,7 +71,7 @@
 		     </div>
         </div>
 		
-	</form>
+	</form:form>
 </body>
 
 </html>
