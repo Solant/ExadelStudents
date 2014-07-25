@@ -11,7 +11,7 @@ public class UserService {
     }
 
     /**
-     * Returns login of current user from SpringSecurity
+     * Returns login of current user from SpringSecurity, non Transactional
      *
      * @return String
      */
