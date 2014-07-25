@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.StudentDao;
 import persistance.model.Student;
 import persistance.model.UserRole;
+import persistance.model.Value;
 
 import java.util.*;
 
@@ -13,7 +14,7 @@ import java.util.*;
 public class StudentService {
 
     @Autowired
-    private static StudentDao studentDao;
+    private StudentDao studentDao;
 
     /**
      * Creates new student
@@ -24,8 +25,9 @@ public class StudentService {
      * @param surname - Student second name
      *
      */
+
     @Transactional
-    static public void add(String login, String password, String name, String surname){
+    public void add(String login, String password, String name, String surname){
         Student student = new Student();
 
         student.setLogin(login);
@@ -46,10 +48,20 @@ public class StudentService {
         //Set values
     }
 
+    /**
+     * Returns HashMap with all student attributes and values
+     *
+     * @param studentLogin - Student login
+     * @return HashMap<String attributeName, String value>
+     */
     @Transactional
-    static HashMap<String, String> getValues(String studentLogin){
+    HashMap<String, String> getValues(String studentLogin){
         HashMap<String, String> hashMap = new HashMap<String, String>();
-        //Get value
+        Student student = studentDao.findByLogin(studentLogin);
+        Set<Value> values = student.getValues();
+        for (Value value : values){
+            hashMap.put(value.getAttribute().getAttributeName(), value.getValue());
+        }
         return hashMap;
     }
 
