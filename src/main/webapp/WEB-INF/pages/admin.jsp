@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/resources/styles/style.css" />
     <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
-    <title>Choosing table fields</title>
+    <title>Admin</title>
 </head>
 <body>
 
@@ -213,7 +213,6 @@
             </div>
         </div>
 
-        <div class="displayFlex">
             <div class="alignCenter">
                 Is Billable:
                 <input type="checkbox"/><br/>
@@ -222,7 +221,6 @@
                 <input type="radio" name="billable" value="no" id="bilNo">
                 <label for="bilNo">No Billable</label>
             </div>
-        </div>
 
         <div class="adminGroup">
             <div>

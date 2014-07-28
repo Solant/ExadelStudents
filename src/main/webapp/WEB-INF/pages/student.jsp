@@ -100,11 +100,9 @@
                     <input type="text" id="skype" >
                 </div>
 
-                <div class="displayFlex">
                     <div class="alignCenter">
                         <button  type="submit" class="loginAndCreateButton">Save</button>
                     </div>
-                </div>
 
             </form>
         </div>
@@ -144,11 +142,9 @@
                     <div class="group">
                         <label for="year">Year graduation:</label><input type="text" id="year" >
                     </div>
-                    <div class="displayFlex">
                         <div class="alignCenter">
                           <button  type="submit" class="loginAndCreateButton">Save</button>
                         </div>
-                    </div>
             </form>
         </div>
 
@@ -198,14 +194,12 @@
                         </div>
                     </div>
 
-                    <div class="displayFlex">
                         <div class="alignCenter">
                             <input type="radio" name="billable" value="yes" id="bilYes">
                             <label for="bilYes">Billable</label>
                             <input type="radio" name="billable" value="no" id="bilNo">
                             <label for="bilNo">No Billable</label>
                         </div>
-                    </div>
 
                     <div class="group">
                         <div>
@@ -214,10 +208,8 @@
                         </div>
                     </div>
 
-                <div class="displayFlex">
                     <div class="alignCenter">
                             <button  type="submit" class="loginAndCreateButton">Save</button>
-                        </div>
                     </div>
             </form>
            <%-- <form>
@@ -287,11 +279,9 @@
                         </div>
                     </div>
 
-                <div class="displayFlex">
                     <div class="alignCenter">
                         <button  type="submit" class="loginAndCreateButton">Save</button>
                     </div>
-                </div>
             </form>
         </div>
 
@@ -329,11 +319,9 @@
                     </div>
                 </div>
 
-                <div class="displayFlex">
                     <div class="alignCenter">
                         <button  type="submit" class="loginAndCreateButton">Save</button>
                     </div>
-                </div>
 
             </form>
         </div>
@@ -341,7 +329,7 @@
         <div class="tab-pane" id="reviews">
             <div class="spoilers">
 
-                    <table border="1px" id="reviewsTable" class="display">
+                    <table id="reviewsTable" class="display">
                         <thead>
                             <td>Curator</td>
                             <td>Date</td>

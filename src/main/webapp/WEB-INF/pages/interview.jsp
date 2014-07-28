@@ -29,18 +29,16 @@
     <span class="currUserName"><c:out value="${account}"></c:out></span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
 
-    <button> My Students </button>
-    <button> Interviews </button>
+    <button class="btn"> My Students </button>
+    <button class="btn"> Interviews </button>
 
 
 </div>
 <form class="reviewForm" >
 
-    <div class="displayFlex">
         <div class="alignCenter">
             <h1 >Interview Form </h1>
         </div>
-    </div>
 
 
     <p>
@@ -129,14 +127,12 @@
         </div>
     </div>
 
-    <div class="displayFlex">
         <div class="alignCenter">
             <label for="other">Other:</label><br/>
             <textarea name="other" id="other" cols="30" rows="10" class="textOther"></textarea>
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
             <button type="submit" class="loginAndCreateButton">Create</button>
         </div>
-    </div>
 
 </form>
 </body>

@@ -42,7 +42,7 @@
 
 </div>
 <div id="table">
-        <table id="fblist" border="1px" class="display">
+        <table id="fblist" class="display">
             <thead>
                 <tr>
                     <td rowspan="2">Name</td>
