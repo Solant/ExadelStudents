@@ -66,8 +66,9 @@
     <div class="interviewGroup">
         <select name="criteria1">
             <option value="html">html</option>
-            <option value="java">java</option>
             <option value="css">css</option>
+            <option value="java">java</option>
+            <option value="hibernate">hibernate</option>
         </select>
 
         <div class="starRating">
@@ -82,8 +83,9 @@
     <div class="interviewGroup">
         <select name="criteria2">
             <option value="html">html</option>
-            <option value="java">java</option>
             <option value="css">css</option>
+            <option value="java">java</option>
+            <option value="hibernate">hibernate</option>
         </select>
 
         <div class="starRating">
@@ -98,8 +100,9 @@
     <div class="interviewGroup">
         <select name="criteria3">
             <option value="html">html</option>
-            <option value="java">java</option>
             <option value="css">css</option>
+            <option value="java">java</option>
+            <option value="hibernate">hibernate</option>
         </select>
 
         <div class="starRating">
@@ -114,8 +117,9 @@
     <div class="interviewGroup">
         <select name="criteria4">
             <option value="html">html</option>
-            <option value="java">java</option>
             <option value="css">css</option>
+            <option value="java">java</option>
+            <option value="hibernate">hibernate</option>
         </select>
 
         <div class="starRating">
