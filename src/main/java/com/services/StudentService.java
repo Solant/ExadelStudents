@@ -102,10 +102,11 @@ public class StudentService {
     }
 
     @Transactional
-    void addReview(String studentLogin, String curatorLogin, Review review) {
+    public void addReview(String studentLogin, String curatorLogin, Review review) {
         review.setFeedbacker(feedbackerDao.findByLogin(curatorLogin));
         review.setStudent(studentDao.findByLogin(studentLogin));
         review.setDate(Calendar.getInstance());
+
         reviewDao.save(review);
     }
 
