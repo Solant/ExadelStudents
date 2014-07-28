@@ -1,7 +1,6 @@
 package persistance.dao.impl;
 
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import persistance.dao.HRWorkerDao;
 import persistance.model.HRWorker;
