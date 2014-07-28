@@ -50,45 +50,25 @@
     </div>
 
         <ul class="nav nav-tabs" role="tablist">
-            <%----%>
+
+            <%pageContext.setAttribute("isActive", "active");%>
 
             <c:forEach items="${groups}" var="groupName">
-                <li>
+                <li class="${isActive}">
                     <a href="#${groupName}" role="tab" data-toggle="tab">${groupName}</a>
                 </li>
             </c:forEach>
 
+            <%pageContext.setAttribute("isActive", "");%>
 
-
-            <%----%>
-
-            <%--<li class="active">
-                <a href="#common" role="tab" data-toggle="tab">Common</a>
-            </li>
-            <li >
-                <a href="#education" role="tab" data-toggle="tab">Education institution</a>
-            </li>
-            <li>
-                <a href="#work" role="tab" data-toggle="tab">Work</a>
-            </li>
-            <li>
-                <a href="#project" role="tab" data-toggle="tab">Project</a>
-            </li>
-
-            <li>
-                <a href="#other" role="tab" data-toggle="tab">Other</a>
-            </li>
-
-            <li>
-                <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
-            </li>
---%>
         </ul>
 
     <div class="tab-content">
 
+        <%pageContext.setAttribute("isActive", "active");%>
+
     <c:forEach items="${groupedValues}" var="group">
-    <div class="tab-pane active" id="${group.get(0).getGroup()}">
+    <div class="tab-pane ${isActive}" id="${group.get(0).getGroup()}">
         <form class="spoilers">
             <c:forEach items="${group}" var="value">
                 <div class="group">
@@ -98,7 +78,39 @@
             </c:forEach>
         </form>
     </div>
+                <%pageContext.setAttribute("isActive", "");%>
     </c:forEach>
+
+
+</body>
+</html>
+
+
+<%----%>
+
+<%--<li class="active">
+    <a href="#common" role="tab" data-toggle="tab">Common</a>
+</li>
+<li >
+    <a href="#education" role="tab" data-toggle="tab">Education institution</a>
+</li>
+<li>
+    <a href="#work" role="tab" data-toggle="tab">Work</a>
+</li>
+<li>
+    <a href="#project" role="tab" data-toggle="tab">Project</a>
+</li>
+
+<li>
+    <a href="#other" role="tab" data-toggle="tab">Other</a>
+</li>
+
+<li>
+    <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
+</li>
+--%>
+
+
 
        <%-- <div class="tab-pane active" id="common">
             <form class="spoilers">
@@ -435,5 +447,3 @@
 
 </div>--%>
 <%--</div>--%>
-</body>
-</html>
