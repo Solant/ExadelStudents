@@ -2,13 +2,14 @@ package persistance.dao.impl;
 
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import persistance.dao.HRWorkerDao;
 import persistance.model.HRWorker;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@Repository
 public class HRWorkerDaoImpl extends GenericDaoImpl<HRWorker> implements HRWorkerDao {
     @SuppressWarnings("unchecked")
     public HRWorker findByLogin(String login) {
