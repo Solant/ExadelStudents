@@ -109,6 +109,7 @@ public class StudentService {
      * @param interviewerLogin - Interviewer's login
      * @param studentLogin - - Student's login
      */
+    @Transactional
     void addInterviewer(String interviewerLogin, String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         Feedbacker feedbacker = feedbackerDao.findByLogin(interviewerLogin);
@@ -123,6 +124,7 @@ public class StudentService {
      * @param interviewerLogin - Curator's login
      * @param studentLogin - Student's login
      */
+    @Transactional
     void addCurator(String interviewerLogin, String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         Feedbacker feedbacker = feedbackerDao.findByLogin(interviewerLogin);
@@ -136,6 +138,7 @@ public class StudentService {
      *
      * @param studentLogin - Student Login
      */
+    @Transactional
     void disable(String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         student.setEnabled(false);
@@ -148,6 +151,7 @@ public class StudentService {
      *
      * @param studentLogin - Student login
      */
+    @Transactional
     void enable(String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         student.setEnabled(true);
@@ -155,6 +159,7 @@ public class StudentService {
         studentDao.update(student);
     }
 
+    @Transactional
     List<Student> find() {
         List<Student> studentList = new ArrayList<Student>();
         return studentList;

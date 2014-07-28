@@ -30,6 +30,7 @@ public class HRWorkerService {
         hrWorkerDao.save(worker);
     }
 
+    @Transactional
     public void delete(String hrDepartmentLogin){
         HRWorker worker = hrWorkerDao.findByLogin(hrDepartmentLogin);
         hrWorkerDao.removeById(worker.getId());

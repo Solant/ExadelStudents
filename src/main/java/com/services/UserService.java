@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.UserDao;
 import persistance.model.User;
 
@@ -18,6 +19,7 @@ public class UserService {
      * @param login - User Login
      * @return boolean
      */
+    @Transactional
     public boolean isLoginAvailable(String login){
         User user = userDao.findByLogin(login);
         if (user == null)
