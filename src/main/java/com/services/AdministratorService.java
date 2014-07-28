@@ -26,4 +26,8 @@ public class AdministratorService {
         admin.getUserRoles().add(ur);
         adminDao.save(admin);
     }
+
+    public void remove(String login){
+        //
+    }
 }

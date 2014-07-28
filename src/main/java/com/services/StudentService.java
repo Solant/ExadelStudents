@@ -73,7 +73,9 @@ public class StudentService {
             v.setAttribute(attributeDao.findByName(gav.getAttribute()));
             values.add(v);
         }
-        student.setValues(values);
+        student.getValues().clear();
+
+        student.getValues().addAll(values);
         studentDao.update(student);
     }
 
@@ -90,10 +92,12 @@ public class StudentService {
         Set<Value> values = student.getValues();
         for (Value value : values) {
             GAVPresentation gav = new GAVPresentation();
+
             gav.setAttribute(value.getAttribute().getAttributeName());
             gav.setValue(value.getValue());
             gav.setGroup(value.getAttribute().getGroup().getName());
             gav.setType(value.getAttribute().getType());
+
             wow.add(gav);
         }
         return wow;

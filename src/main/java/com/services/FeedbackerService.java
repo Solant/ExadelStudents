@@ -7,9 +7,6 @@ import persistance.dao.FeedbackerDao;
 import persistance.model.Feedbacker;
 import persistance.model.UserRole;
 
-/**
- * Created by solant on 24.07.14.
- */
 public class FeedbackerService {
 
     @Autowired
