@@ -424,3 +424,16 @@ margin-left: 50px;
     padding-right: 100px;
 }
 /*end of adminTable props*/
+
+/*interview props*/
+
+.starRating{
+    float: right;
+    margin-right: 20px;
+}
+
+.interviewGroup{
+    margin-bottom: 5px;
+}
+
+/*end of interview props*/
