@@ -5,6 +5,7 @@ public class GAVPresentation {
     private String group;
     private String attribute;
     private String value;
+    private String type;
 
     public String getType() {
         return type;
@@ -13,8 +14,6 @@ public class GAVPresentation {
     public void setType(String type) {
         this.type = type;
     }
-
-    private String type;
 
     public String getGroup() {
         return group;

@@ -31,7 +31,7 @@ public class UserService {
      *
      * @return String
      */
-    public String getCurrentUserLogin(){
+    public static String getCurrentUserLogin(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         return name;

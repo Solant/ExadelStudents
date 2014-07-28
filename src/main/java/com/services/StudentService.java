@@ -73,7 +73,8 @@ public class StudentService {
             v.setAttribute(attributeDao.findByName(gav.getAttribute()));
             values.add(v);
         }
-        student.setValues(values);
+        student.getValues().clear();
+        student.getValues().addAll(values);
         studentDao.update(student);
     }
 

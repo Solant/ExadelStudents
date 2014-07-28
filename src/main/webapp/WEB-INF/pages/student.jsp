@@ -1,6 +1,7 @@
 <%@ page import="com.services.UserService" %>
 <%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -57,9 +58,9 @@
                 <li class="${isActive}">
                     <a href="#${groupName}" role="tab" data-toggle="tab">${groupName}</a>
                 </li>
+                <%pageContext.setAttribute("isActive", "");%>
             </c:forEach>
 
-            <%pageContext.setAttribute("isActive", "");%>
 
         </ul>
 
@@ -67,19 +68,27 @@
 
         <%pageContext.setAttribute("isActive", "active");%>
 
-    <c:forEach items="${groupedValues}" var="group">
+    <c:forEach items="${groupedValues.valuesArray}" var="group" varStatus="index1">
+
     <div class="tab-pane ${isActive}" id="${group.get(0).getGroup()}">
-        <form class="spoilers">
-            <c:forEach items="${group}" var="value">
+        <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
+            <c:forEach items="${group}" var="valera" varStatus="index2">
                 <div class="group">
-                    <label>${value.getAttribute()}</label>
-                    <input value="${value.getValue()}">
+                    <label>${valera.getAttribute()} ${index1.count} ${index2.count}</label>
+                    <form:input path="${groupedValues.valuesArray.get(index1.count).get(index2.count)}" type="${valera.type}"/>
                 </div>
             </c:forEach>
-        </form>
+            <form:button type="submit" >Save</form:button>
+        </form:form>
     </div>
                 <%pageContext.setAttribute("isActive", "");%>
     </c:forEach>
+
+       <%-- <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
+            <form:input path="test" />
+            <form:button type="submit">Save</form:button>
+        </form:form>
+--%>
 
 
 </body>

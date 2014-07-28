@@ -26,7 +26,7 @@ public class HelloController {
     public String welcomePage(ModelMap model,HttpSession session) {
         session.setAttribute("account", us.getCurrentUserLogin());
         if (SecurityService.hasRole("ROLE_STUDENT"))
-            return "redirect:student";
+            return "redirect:student/"+us.getCurrentUserLogin();
         if (SecurityService.hasRole("ROLE_CURATOR"))
             return "redirect:curator";
         if (SecurityService.hasRole("ROLE_ADMIN"))
