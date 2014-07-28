@@ -28,4 +28,9 @@ public class FeedbackerService {
 
         feedbackerDao.save(feedbacker);
     }
+
+    public void delete(String login){
+        Feedbacker feedbacker = feedbackerDao.findByLogin(login);
+        feedbackerDao.removeById(feedbacker.getId());
+    }
 }

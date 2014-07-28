@@ -30,7 +30,8 @@ public class HRWorkerService {
         hrWorkerDao.save(worker);
     }
 
-    public static void delete(String hrDepartmentLogin){
-
+    public void delete(String hrDepartmentLogin){
+        HRWorker worker = hrWorkerDao.findByLogin(hrDepartmentLogin);
+        hrWorkerDao.removeById(worker.getId());
     }
 }
