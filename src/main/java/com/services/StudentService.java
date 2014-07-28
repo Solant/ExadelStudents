@@ -8,16 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import persistance.dao.AttributeDao;
 import persistance.dao.FeedbackerDao;
+import persistance.dao.ReviewDao;
 import persistance.dao.StudentDao;
-import persistance.model.Feedbacker;
-import persistance.model.Student;
-import persistance.model.UserRole;
-import persistance.model.Value;
+import persistance.model.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -31,6 +26,9 @@ public class StudentService {
     @Autowired
     private FeedbackerDao feedbackerDao;
 
+    @Autowired
+    private ReviewDao reviewDao;
+    
     /**
      * Creates new student
      *
@@ -104,8 +102,11 @@ public class StudentService {
     }
 
     @Transactional
-    void addReview(String studentLogin, String curatorLogin, boolean fromInterview /*some shit here*/) {
-
+    void addReview(String studentLogin, String curatorLogin, Review review) {
+        review.setFeedbacker(feedbackerDao.findByLogin(curatorLogin));
+        review.setStudent(studentDao.findByLogin(studentLogin));
+        review.setDate(Calendar.getInstance());
+        reviewDao.save(review);
     }
 
     /**
