@@ -4,10 +4,13 @@ CREATE TABLE users
   id bigserial NOT NULL UNIQUE ,
   login varchar(40) NOT NULL UNIQUE ,
   password varchar(70) NOT NULL,
-  enabled boolean NOT NULL DEFAULT FALSE,
-  firstname varchar(20),
-  secondname varchar(20),
-  status varchar(20) NOT NULL,
+  enabled boolean NOT NULL DEFAULT TRUE,
+  firstname varchar(30),
+  secondname varchar(30),
+  status varchar(20) NOT NULL DEFAULT 'student',
+  skype varchar(30),
+  telephone varchar(30),
+  email varchar(30),
   PRIMARY KEY (id)
 );
 
@@ -23,8 +26,8 @@ CREATE TABLE user_roles (
 CREATE TABLE groups
 (
   id bigserial NOT NULL UNIQUE ,
-  attrId bigint NOT NULL,
   groupname varchar(40),
+  status varchar(30) not null default 'for_everybody',
   PRIMARY KEY (id)
 );
 
@@ -33,8 +36,8 @@ CREATE TABLE attributes
   id bigserial NOT NULL UNIQUE,
   groupid bigint not null,
   attrname varchar(40),
-  status smallint,
-  type text,
+  status varchar(30) NOT NULL DEFAULT 'for_everybody',
+  type varchar(20),
   PRIMARY KEY (id),
   FOREIGN KEY (groupid)  REFERENCES groups (id)
 );
@@ -44,7 +47,7 @@ CREATE TABLE values
   id bigserial NOT NULL UNIQUE,
   studid bigint NOT NULL,
   attrid bigint NOT NULL,
-  value varchar(40),
+  value text,
   PRIMARY KEY (id),
   FOREIGN KEY (attrid) REFERENCES attributes (id),
   FOREIGN KEY (studid) REFERENCES users (id)
@@ -62,7 +65,7 @@ CREATE TABLE reviews
   team_attitude text,
   prof_progress text,
   need_more_hours boolean,
-  working_on_real_project smallint,
+  working_on_real_project varchar(30),
   billable boolean,
   date date,
   PRIMARY KEY (id),

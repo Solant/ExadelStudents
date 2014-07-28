@@ -1,6 +1,7 @@
 package com.springapp.mvc;
 
-import com.springsecurity.SecurityChecker;
+import com.services.SecurityService;
+import com.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,11 +18,11 @@ public class HelloController {
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String welcomePage(ModelMap model,HttpSession session) {
         session.setAttribute("account", SecurityContextHolder.getContext().getAuthentication().getName());
-        if (SecurityChecker.hasRole("ROLE_STUDENT"))
+        if (SecurityService.hasRole("ROLE_STUDENT"))
             return "redirect:student";
-        if (SecurityChecker.hasRole("ROLE_CURATOR"))
+        if (SecurityService.hasRole("ROLE_CURATOR"))
             return "redirect:curator";
-        if (SecurityChecker.hasRole("ROLE_ADMIN"))
+        if (SecurityService.hasRole("ROLE_ADMIN"))
             return "redirect:admin";
 
         return "login";
@@ -31,11 +32,10 @@ public class HelloController {
         return "account";
     }
     @Autowired
-    private TestService ts;
+    private StudentService ss;
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public void welcomePage() {
-        ts.testMethod();
-
+        ss.add("Wasya", "wasya", "wasya", "wasya");
     }
 }

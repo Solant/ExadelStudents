@@ -11,7 +11,7 @@ import java.util.List;
 public class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Autowired
-    private SessionFactory sessionFactory;              //Database session
+    protected SessionFactory sessionFactory;
 
     private Class<T> type;
 
