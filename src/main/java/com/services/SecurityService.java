@@ -1,17 +1,21 @@
-package com.springsecurity.provider;
+package com.services;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Collection;
 
-/**
- * Created by solant on 16.07.14.
- */
-public class SecurityChecker {
+public class SecurityService {
+
+    /**
+     * Checks if current user has authority to log in
+     *
+     * @role Role to be checked in String
+     * @return boolean
+     */
+
     public static boolean hasRole(String role) {
-        Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>)
-        SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         boolean hasRole = false;
         for (GrantedAuthority authority : authorities) {
             hasRole = authority.getAuthority().equals(role);

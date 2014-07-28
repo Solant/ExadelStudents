@@ -64,7 +64,7 @@
     </li>
 
     <li>
-        <a href="linking.jsp">Form table</a>
+        <a href="<c:url value="/admin/formTable"/> ">Form table</a>
     </li>
 
 </ul>
