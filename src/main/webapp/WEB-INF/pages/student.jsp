@@ -70,12 +70,12 @@
 
     <c:forEach items="${groupedValues.valuesArray}" var="group" varStatus="index1">
 
-    <div class="tab-pane ${isActive}" id="${group.get(0).getGroup()}">
+    <div class="tab-pane ${isActive}" id="${group[0].getGroup()}">
         <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
             <c:forEach items="${group}" var="valera" varStatus="index2">
                 <div class="group">
                     <label>${valera.getAttribute()} ${index1.count} ${index2.count}</label>
-                    <form:input path="${groupedValues.valuesArray.get(index1.count).get(index2.count)}" type="${valera.type}"/>
+                    <form:input path="valuesArray[${index1.count}][${index2.count}].value" type="${valera.type}"/>
                 </div>
             </c:forEach>
             <form:button type="submit" >Save</form:button>

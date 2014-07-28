@@ -28,7 +28,7 @@ public class StudentController {
     public String studentPage(ModelMap modelMap, @PathVariable("current") String current) {
         ArrayList<GAVPresentation> gav = studentService.getValues(current);
         GroupedValues groupedValues = new GroupedValues();
-        /*ArrayList<String> groups = new ArrayList<String>();
+        ArrayList<String> groups = new ArrayList<String>();
         for(int i = 0; gav.size() > 0; i++) {
             GAVPresentation temp = gav.remove(0);
             groupedValues.getValuesArray()[i][0] = temp;
@@ -42,9 +42,8 @@ public class StudentController {
         }
         modelMap.addAttribute("groups", groups);
         modelMap.addAttribute("groupedValues", groupedValues);
-*/
 
-        ArrayList<String> groups = new ArrayList<String>();
+       /* ArrayList<String> groups = new ArrayList<String>();
         while(gav.size() > 0){
             ArrayList<GAVPresentation> internal = new ArrayList<GAVPresentation>();
             GAVPresentation temp = gav.remove(0);
@@ -62,16 +61,17 @@ public class StudentController {
         modelMap.addAttribute("groupedValues", groupedValues);
         GAVPresentation g = new GAVPresentation();
         g.setValue("some");
-        modelMap.addAttribute("test", g);
+        modelMap.addAttribute("test", g);*/
         return "student";
     }
 
     @RequestMapping(value = "/saveChanges", method = RequestMethod.POST)
     public String saveChanges(@ModelAttribute("groupedValues") GroupedValues groupedValues, @PathVariable("current") String current){
-        System.out.print(groupedValues.getValuesArray().size());
+        //System.out.print(groupedValues.getValuesArray().size());
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
-        for(ArrayList<GAVPresentation> internal:groupedValues.getValuesArray())
-            values.addAll(internal);
+        for(GAVPresentation[] item:groupedValues.getValuesArray())
+            for(GAVPresentation item2 : item)
+                values.add(item2);
         System.out.print( "1" + values.get(0).getAttribute());
         studentService.setValues(current, values);
         return "redirect:/  student/"+current;
