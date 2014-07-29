@@ -42,6 +42,16 @@ public class StudentService {
         attributeDao.update(attributeDao.findByName("status"));
     }
 
+    @Transactional
+    public String getFirstName(String login){
+        return studentDao.findByLogin(login).getFirstName();
+    }
+
+    @Transactional
+    public String getSecondName(String login){
+        return studentDao.findByLogin(login).getSecondName();
+    }
+
     /**
      * Creates new student
      *
