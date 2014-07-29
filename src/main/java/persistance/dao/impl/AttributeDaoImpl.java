@@ -14,7 +14,7 @@ public class AttributeDaoImpl extends GenericDaoImpl<Attribute> implements Attri
 
         List<Attribute> attributes;
         attributes = sessionFactory.getCurrentSession().createCriteria(Attribute.class)
-                .add(Restrictions.eq("attrname", name)).list();
+                .add(Restrictions.eq("attributeName", name)).list();
 
         if (attributes.size() > 0) {
             return attributes.get(0);
