@@ -29,9 +29,19 @@ public class StudentService {
     @Autowired
     private GroupDao groupDao;
 
+    @Transactional
+    public void setStatus(String studentLogin, String status) {
+        Student student = studentDao.findByLogin(studentLogin);
+        Set<Value> values = attributeDao.findByName("status").getValues();
+        for (Value value : values){
+            if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
+                value.setValue(status);
+                break;
+            }
+        }
+        attributeDao.update(attributeDao.findByName("status"));
+    }
 
-    /*@Autowired
-    private */
     /**
      * Creates new student
      *
@@ -61,7 +71,7 @@ public class StudentService {
         val.setStudent(student);
         val.setValue(status);
         values.add(val);
-        
+
         studentDao.save(student);
         attributeDao.update(attribute);
     }
