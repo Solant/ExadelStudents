@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import persistance.dao.AttributeDao;
-import persistance.dao.FeedbackerDao;
-import persistance.dao.ReviewDao;
-import persistance.dao.StudentDao;
+import persistance.dao.*;
 import persistance.model.*;
 
 import java.util.*;
@@ -28,7 +25,10 @@ public class StudentService {
 
     @Autowired
     private ReviewDao reviewDao;
-    
+
+    @Autowired
+    private GroupDao groupDao;
+
     /**
      * Creates new student
      *
@@ -63,18 +63,9 @@ public class StudentService {
     @Transactional
     public void setValues(String studentLogin, ArrayList<GAVPresentation> gavList) {
         Student student = studentDao.findByLogin(studentLogin);
-        Set<Value> values = new HashSet<Value>();
-        for (GAVPresentation gav : gavList) {
-            Value v = new Value();
-            v.setValue(gav.getValue());
-            v.setStudent(student);
-            v.setAttribute(attributeDao.findByName(gav.getAttribute()));
-            values.add(v);
-        }
-        student.getValues().clear();
+        for(GAVPresentation gav : gavList){
 
-        student.getValues().addAll(values);
-        studentDao.update(student);
+        }
     }
 
     /**
@@ -85,20 +76,36 @@ public class StudentService {
      */
     @Transactional
     public ArrayList<GAVPresentation> getValues(String studentLogin) {
-        ArrayList<GAVPresentation> wow = new ArrayList<GAVPresentation>();
         Student student = studentDao.findByLogin(studentLogin);
-        Set<Value> values = student.getValues();
-        for (Value value : values) {
-            GAVPresentation gav = new GAVPresentation();
-
-            gav.setAttribute(value.getAttribute().getAttributeName());
-            gav.setValue(value.getValue());
-            gav.setGroup(value.getAttribute().getGroup().getName());
-            gav.setType(value.getAttribute().getType());
-
-            wow.add(gav);
+        String status = "";
+        Attribute a = attributeDao.findByName("status");
+        Set<Value> valuesS = a.getValues();
+        for(Value valera : valuesS){
+            if (valera.getStudent().getLogin().equalsIgnoreCase(studentLogin)){
+                status = valera.getValue();
+                break;
+            }
         }
-        return wow;
+
+        List<Group> groups = groupDao.getByStatus(status);
+        ArrayList<GAVPresentation> gavs = new ArrayList<GAVPresentation>();
+        for(Group group : groups){
+            Set<Attribute> attributes = group.getAttributes();
+            for(Attribute attribute : attributes){
+                Set<Value> values = attribute.getValues();
+                GAVPresentation gav = new GAVPresentation();
+                gav.setGroup(group.getName());
+                gav.setAttribute(attribute.getAttributeName());
+                gav.setType(attribute.getType());
+                gav.setValue("");
+                for(Value value : values)
+                    if(value.getStudent().getLogin().equalsIgnoreCase(studentLogin))
+                        gav.setValue(value.getValue());
+                gavs.add(gav);
+            }
+        }
+
+        return gavs;
     }
 
     @Transactional

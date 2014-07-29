@@ -52,9 +52,7 @@ public class MyUserDetailsService implements UserDetailsService{
             setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
         }
 
-        List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
-
-        return Result;
+        return new ArrayList<GrantedAuthority>(setAuths);
     }
 
     public UserDao getUserDao() {
