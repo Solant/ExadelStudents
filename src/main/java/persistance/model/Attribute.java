@@ -20,9 +20,6 @@ public class Attribute {
     @Column(name = "attrName")
     private String attributeName;
 
-    @Column(name = "status")
-    private String status;
-
     @Column(name = "type")
     private String type;
 
@@ -60,14 +57,6 @@ public class Attribute {
 
     public void setAttributeName(String attributeName) {
         this.attributeName = attributeName;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getType() {
