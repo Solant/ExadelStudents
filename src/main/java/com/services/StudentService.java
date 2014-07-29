@@ -29,6 +29,9 @@ public class StudentService {
     @Autowired
     private GroupDao groupDao;
 
+
+    /*@Autowired
+    private */
     /**
      * Creates new student
      *
@@ -38,7 +41,7 @@ public class StudentService {
      * @param surname  - Student second name
      */
     @Transactional
-    public void add(String login, String password, String name, String surname) {
+    public void add(String login, String password, String name, String surname, String status) {
         Student student = new Student();
 
         student.setLogin(login);
@@ -51,7 +54,16 @@ public class StudentService {
         ur.setUser(student);
         student.getUserRoles().add(ur);
 
+        Attribute attribute = attributeDao.findByName("status");
+        Set<Value> values = attribute.getValues();
+        Value val = new Value();
+        val.setAttribute(attribute);
+        val.setStudent(student);
+        val.setValue(status);
+        values.add(val);
+        
         studentDao.save(student);
+        attributeDao.update(attribute);
     }
 
     /**
