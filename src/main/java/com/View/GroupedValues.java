@@ -1,35 +1,23 @@
 package com.View;
 
-import com.services.presentation.GAVPresentation;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Надя on 28.07.2014.
  */
 public class GroupedValues {
-    private GAVPresentation[][] valuesArray;
-    private GAVPresentation[] test;
+    private List<Group> valuesArray;
 
     public GroupedValues(){
-        valuesArray = new GAVPresentation[4][4];
-        /*setTest(new GAVPresentation[2]);
-        getTest()[0].setValue("1");
-        getTest()[1].setValue("2");*/
+        valuesArray = new ArrayList<Group>();
     }
 
-
-    public GAVPresentation[] getTest() {
-        return test;
-    }
-
-    public void setTest(GAVPresentation[] test) {
-        this.test = test;
-    }
-
-    public GAVPresentation[][] getValuesArray() {
+    public List<Group> getValuesArray() {
         return valuesArray;
     }
 
-    public void setValuesArray(GAVPresentation[][] valuesArray) {
+    public void setValuesArray(List<Group> valuesArray) {
         this.valuesArray = valuesArray;
     }
 }

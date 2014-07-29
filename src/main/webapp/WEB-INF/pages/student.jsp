@@ -64,22 +64,27 @@
 
         </ul>
 
+
+
     <div class="tab-content">
 
         <%pageContext.setAttribute("isActive", "active");%>
 
-    <c:forEach items="${groupedValues.valuesArray}" var="group" varStatus="index1">
+    <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
+    <div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].group[0].getGroup()}">
 
-    <div class="tab-pane ${isActive}" id="${group[0].getGroup()}">
         <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
-            <c:forEach items="${group}" var="valera" varStatus="index2">
+            <c:forEach items="${groupedValues.valuesArray[index1.count-1].group}" varStatus="index2">
                 <div class="group">
-                    <label>${valera.getAttribute()} ${index1.count} ${index2.count}</label>
-                    <form:input path="valuesArray[${index1.count}][${index2.count}].value" type="${valera.type}"/>
+                    <%--<label >${groupedValues.valuesArray[index1.count-1].group[index2.count-1].attribute} </label>--%>
+
+                    <form:input type="${va}" path="valuesArray[${index1.count-1}].group[${index2.count-1}].value" />
+                    <form:input readonly="true" path="valuesArray[${index1.count-1}].group[${index2.count-1}].attribute" />
                 </div>
             </c:forEach>
             <form:button type="submit" >Save</form:button>
         </form:form>
+
     </div>
                 <%pageContext.setAttribute("isActive", "");%>
     </c:forEach>
