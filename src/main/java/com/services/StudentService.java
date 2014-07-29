@@ -102,7 +102,6 @@ public class StudentService {
                 if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)){
                     edited = true;
                     value.setValue(gav.getValue());
-                    attributeDao.update(attributeDao.findByName(gav.getAttribute()));
                     break;
                 }
             }
@@ -113,6 +112,7 @@ public class StudentService {
                 value.setAttribute(attributeDao.findByName(gav.getAttribute()));
                 attributeDao.findByName(gav.getAttribute()).getValues().add(value);
             }
+            attributeDao.update(attributeDao.findByName(gav.getAttribute()));
         }
     }
 
