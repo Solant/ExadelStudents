@@ -53,6 +53,13 @@
                     <form:option value="Admin">Admin</form:option>
                 </form:select>
 			</p>
+      <%--  <p>
+            <label for="person">User's status:</label>
+            <form:select path="role" id="person" class="field">
+                <form:option value="WORKING">Working</form:option>
+                <form:option value="STUDYING">Studying</form:option>
+            </form:select>
+        </p>--%>
 
         <p>
             <label for="lastname">Lastname:</label>

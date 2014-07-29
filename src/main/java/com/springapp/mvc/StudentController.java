@@ -28,7 +28,7 @@ public class StudentController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String studentPage(ModelMap modelMap, @PathVariable("current") String current) {
-        ArrayList<GAVPresentation> gav = studentService.getValues(current);
+        ArrayList<GAVPresentation> gav = (ArrayList<GAVPresentation>)studentService.getValues(current);
 
         GroupedValues groupedValues = new GroupedValues();
 

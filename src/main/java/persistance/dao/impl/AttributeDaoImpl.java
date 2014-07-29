@@ -1,11 +1,11 @@
 package persistance.dao.impl;
 
 
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import persistance.dao.AttributeDao;
 import persistance.model.Attribute;
+
 import java.util.List;
 
 @Repository

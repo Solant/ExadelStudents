@@ -78,7 +78,7 @@
                 <div class="group">
                     <%--<label >${groupedValues.valuesArray[index1.count-1].group[index2.count-1].attribute} </label>--%>
 
-                    <form:input type="${va}" path="valuesArray[${index1.count-1}].group[${index2.count-1}].value" />
+                    <form:input type="" path="valuesArray[${index1.count-1}].group[${index2.count-1}].value" />
                     <form:input readonly="true" path="valuesArray[${index1.count-1}].group[${index2.count-1}].attribute" />
                 </div>
             </c:forEach>
