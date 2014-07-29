@@ -1,4 +1,4 @@
-package com.services;
+package com.services.tables;
 
 import org.apache.poi.xwpf.usermodel.*;
 
@@ -51,7 +51,6 @@ public class WordTableService {
         XWPFTableCell cell = currentRow.getCell(currentCellNum);
         if (cell == null) cell = currentRow.createCell();
         cell.setText(value);
-        if(currentRowNum == 0) cell.setColor("blue");
         currentCellNum++;
     }
 
