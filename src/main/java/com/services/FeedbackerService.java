@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.FeedbackerDao;
 import persistance.model.Feedbacker;
+import persistance.model.Student;
 import persistance.model.UserRole;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 @Service
 public class FeedbackerService {
@@ -35,5 +39,15 @@ public class FeedbackerService {
     public void delete(String login){
         Feedbacker feedbacker = feedbackerDao.findByLogin(login);
         feedbackerDao.removeById(feedbacker.getId());
+    }
+
+    @Transactional
+    public ArrayList<String> getStudents(String feedbackerLogin){
+        ArrayList<String> students = new ArrayList<String>();
+        Feedbacker feedbacker = feedbackerDao.findByLogin(feedbackerLogin);
+        Set<Student> studentsSet = feedbacker.getMyStudents();
+        for (Student student : studentsSet)
+            students.add(student.getLogin());
+        return students;
     }
 }

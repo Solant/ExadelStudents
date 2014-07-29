@@ -29,9 +29,29 @@ public class StudentService {
     @Autowired
     private GroupDao groupDao;
 
+    @Transactional
+    public void setStatus(String studentLogin, String status) {
+        Student student = studentDao.findByLogin(studentLogin);
+        Set<Value> values = attributeDao.findByName("status").getValues();
+        for (Value value : values){
+            if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
+                value.setValue(status);
+                break;
+            }
+        }
+        attributeDao.update(attributeDao.findByName("status"));
+    }
 
-    /*@Autowired
-    private */
+    @Transactional
+    public String getFirstName(String login){
+        return studentDao.findByLogin(login).getFirstName();
+    }
+
+    @Transactional
+    public String getSecondName(String login){
+        return studentDao.findByLogin(login).getSecondName();
+    }
+
     /**
      * Creates new student
      *
@@ -61,7 +81,7 @@ public class StudentService {
         val.setStudent(student);
         val.setValue(status);
         values.add(val);
-        
+
         studentDao.save(student);
         attributeDao.update(attribute);
     }
@@ -76,7 +96,22 @@ public class StudentService {
     public void setValues(String studentLogin, ArrayList<GAVPresentation> gavList) {
         Student student = studentDao.findByLogin(studentLogin);
         for(GAVPresentation gav : gavList){
-
+            Set<Value> values = attributeDao.findByName(gav.getAttribute()).getValues();
+            boolean edited = false;
+            for(Value value : values){
+                if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)){
+                    edited = true;
+                    value.setValue(gav.getValue());
+                    break;
+                }
+            }
+            if (!edited){
+                Value value = new Value();
+                value.setStudent(student);
+                value.setValue(gav.getValue());
+                value.setAttribute(attributeDao.findByName(gav.getAttribute()));
+                attributeDao.findByName(gav.getAttribute()).getValues().add(value);
+            }
         }
     }
 
@@ -190,4 +225,13 @@ public class StudentService {
         return studentList;
     }
 
+    @Transactional
+    public ArrayList<Review> getReviews(String login){
+        List<Review> reviews = reviewDao.findAll();
+        ArrayList<Review> rev = new ArrayList<Review>();
+        for(Review review : reviews)
+            if (review.getStudent().getLogin().equalsIgnoreCase(login))
+                rev.add(review);
+        return rev;
+    }
 }
