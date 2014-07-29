@@ -16,7 +16,7 @@ CREATE TABLE users
 
 CREATE TABLE user_roles (
   user_role_id bigserial NOT NULL UNIQUE,
-  user_id bigint NOT NULL,
+  user_id bigint NOT NULL UNIQUE,
   ROLE varchar(30) NOT NULL,
   PRIMARY KEY (user_role_id),
   FOREIGN KEY (user_id) REFERENCES users(id)
@@ -26,7 +26,7 @@ CREATE TABLE user_roles (
 CREATE TABLE groups
 (
   id bigserial NOT NULL UNIQUE ,
-  groupname varchar(40),
+  groupname varchar(40) NOT NULL UNIQUE,
   status varchar(30) not null default 'for_everybody',
   PRIMARY KEY (id)
 );
@@ -35,8 +35,7 @@ CREATE TABLE attributes
 (
   id bigserial NOT NULL UNIQUE,
   groupid bigint not null,
-  attrname varchar(40),
-  status varchar(30) NOT NULL DEFAULT 'for_everybody',
+  attrname varchar(40) NOT NULL UNIQUE,
   type varchar(20),
   PRIMARY KEY (id),
   FOREIGN KEY (groupid)  REFERENCES groups (id)
@@ -50,7 +49,8 @@ CREATE TABLE values
   value text,
   PRIMARY KEY (id),
   FOREIGN KEY (attrid) REFERENCES attributes (id),
-  FOREIGN KEY (studid) REFERENCES users (id)
+  FOREIGN KEY (studid) REFERENCES users (id),
+  UNIQUE (studid, attrid)
 );
 
 CREATE TABLE reviews
@@ -78,7 +78,8 @@ CREATE TABLE studentsandcurators
   studid bigint NOT NULL,
   curid bigint NOT NULL,
   FOREIGN KEY (curid)    REFERENCES users (id),
-  FOREIGN KEY (studid)   REFERENCES users (id)
+  FOREIGN KEY (studid)   REFERENCES users (id),
+  UNIQUE(studid, curid)
 );
 
 CREATE TABLE studentsandinterviewers
@@ -86,16 +87,7 @@ CREATE TABLE studentsandinterviewers
   studid bigint NOT NULL,
   intervid bigint NOT NULL,
   FOREIGN KEY (intervid)  REFERENCES users (id),
-  FOREIGN KEY (studid)    REFERENCES users (id)
+  FOREIGN KEY (studid)    REFERENCES users (id),
+  UNIQUE(studid, intervid)
 );
 
-CREATE TABLE projects
-(
-  id bigserial NOT NULL UNIQUE,
-  studid bigint NOT NULL,
-  projname varchar(30),
-  curid bigint NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (studid)  REFERENCES users (id),
-  FOREIGN KEY (curid)   REFERENCES users (id)
-);
