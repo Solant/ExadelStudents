@@ -10,6 +10,7 @@ import persistance.model.Student;
 import persistance.model.UserRole;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -42,8 +43,8 @@ public class FeedbackerService {
     }
 
     @Transactional
-    public ArrayList<String> getStudents(String feedbackerLogin){
-        ArrayList<String> students = new ArrayList<String>();
+    public List<String> getStudents(String feedbackerLogin){
+        List<String> students = new ArrayList<String>();
         Feedbacker feedbacker = feedbackerDao.findByLogin(feedbackerLogin);
         Set<Student> studentsSet = feedbacker.getMyStudents();
         for (Student student : studentsSet)

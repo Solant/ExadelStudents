@@ -17,12 +17,26 @@ public class GroupDaoImpl extends GenericDaoImpl<Group> implements GroupDao {
      * @status status in String, can have 3 values: FOR_EVERYBODY, FOR_WORKING, FOR_STUDYING
      */
     public List<Group> getByStatus(String status){
-        List<Group> groups = new ArrayList<Group>();
+        List<Group> groups;
 
         groups = sessionFactory.getCurrentSession().createCriteria(Group.class)
                 .add(Restrictions.eq("status", status)).list();
 
         return groups;
+
+    }
+
+    public Group findByName(String name){
+
+        List<Group> groups;
+
+        groups = sessionFactory.getCurrentSession().createCriteria(Group.class)
+                .add(Restrictions.eq("name", name)).list();
+
+        if(groups.size() > 0)
+            return groups.get(0);
+        else
+            return null;
 
     }
 }
