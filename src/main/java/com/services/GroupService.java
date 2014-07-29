@@ -6,6 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.GroupDao;
 import persistance.model.Group;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GroupService {
 
     @Autowired
@@ -15,12 +18,29 @@ public class GroupService {
     public void addGroup(String groupName, String status){
         Group group = new Group();
         group.setName(groupName);
-        //group set status
+        group.setStatus(status);
         groupDao.save(group);
     }
 
     @Transactional
     public void deleteGroup(String groupName){
+        groupDao.removeById(groupDao.findByName(groupName).getId());
+    }
 
+    @Transactional
+    public void setStatus(String groupName, String status){
+        Group group = groupDao.findByName(groupName);
+        group.setStatus(status);
+        groupDao.update(group);
+    }
+
+    @Transactional
+    public List<String> getAllGroups(){
+        List<String> groupsReturn = new ArrayList<String>();
+        List<Group> groups = groupDao.findAll();
+        for (Group group : groups){
+            groupsReturn.add(group.getName());
+        }
+        return groupsReturn;
     }
 }

@@ -93,7 +93,7 @@ public class StudentService {
      * @param gavList - ArrayList of GAVPresentation
      */
     @Transactional
-    public void setValues(String studentLogin, ArrayList<GAVPresentation> gavList) {
+    public void setValues(String studentLogin, List<GAVPresentation> gavList) {
         Student student = studentDao.findByLogin(studentLogin);
         for(GAVPresentation gav : gavList){
             Set<Value> values = attributeDao.findByName(gav.getAttribute()).getValues();
@@ -122,7 +122,7 @@ public class StudentService {
      * @return ArrayList<GAVPresentation>
      */
     @Transactional
-    public ArrayList<GAVPresentation> getValues(String studentLogin) {
+    public List<GAVPresentation> getValues(String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         String status = "";
         Attribute a = attributeDao.findByName("status");
@@ -135,7 +135,7 @@ public class StudentService {
         }
 
         List<Group> groups = groupDao.getByStatus(status);
-        ArrayList<GAVPresentation> gavs = new ArrayList<GAVPresentation>();
+        List<GAVPresentation> gavs = new ArrayList<GAVPresentation>();
         for(Group group : groups){
             Set<Attribute> attributes = group.getAttributes();
             for(Attribute attribute : attributes){
@@ -226,9 +226,9 @@ public class StudentService {
     }
 
     @Transactional
-    public ArrayList<Review> getReviews(String login){
+    public List<Review> getReviews(String login){
         List<Review> reviews = reviewDao.findAll();
-        ArrayList<Review> rev = new ArrayList<Review>();
+        List<Review> rev = new ArrayList<Review>();
         for(Review review : reviews)
             if (review.getStudent().getLogin().equalsIgnoreCase(login))
                 rev.add(review);
