@@ -51,6 +51,7 @@ public class HelloController {
             for (int k = 0; k < 10; k++)
                 ets.addNewCell("Я Алёша " + i + " " + k);
         }
+        ets.addDateAsString();
 
         response.setHeader("Content-Disposition", "attachment;filename=table.xls");
         OutputStream os = null;
@@ -60,7 +61,22 @@ public class HelloController {
             e.printStackTrace();
         }
         ets.writeInStream(os);*/
-        WordTableService wts = new WordTableService();
-        wts.createTable();
+        WordTableService wts = new WordTableService("Test table");
+
+        for (int i = 0; i < 10; i++) {
+            wts.addNewRow();
+            for (int k = 0; k < 20; k++)
+                wts.addNewCell("Я Алёша " + i + " " + k);
+        }
+        wts.addDateAsString();
+
+        response.setHeader("Content-Disposition", "attachment;filename=table.doc");
+        OutputStream os = null;
+        try {
+            os = response.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        wts.writeInStream(os);
     }
 }
