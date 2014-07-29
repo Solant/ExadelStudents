@@ -225,4 +225,13 @@ public class StudentService {
         return studentList;
     }
 
+    @Transactional
+    public ArrayList<Review> getReviews(String login){
+        List<Review> reviews = reviewDao.findAll();
+        ArrayList<Review> rev = new ArrayList<Review>();
+        for(Review review : reviews)
+            if (review.getStudent().getLogin().equalsIgnoreCase(login))
+                rev.add(review);
+        return rev;
+    }
 }
