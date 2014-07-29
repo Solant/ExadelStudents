@@ -8,16 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import persistance.dao.AttributeDao;
 import persistance.dao.FeedbackerDao;
+import persistance.dao.ReviewDao;
 import persistance.dao.StudentDao;
-import persistance.model.Feedbacker;
-import persistance.model.Student;
-import persistance.model.UserRole;
-import persistance.model.Value;
+import persistance.model.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -31,6 +26,9 @@ public class StudentService {
     @Autowired
     private FeedbackerDao feedbackerDao;
 
+    @Autowired
+    private ReviewDao reviewDao;
+    
     /**
      * Creates new student
      *
@@ -74,6 +72,7 @@ public class StudentService {
             values.add(v);
         }
         student.getValues().clear();
+
         student.getValues().addAll(values);
         studentDao.update(student);
     }
@@ -91,18 +90,24 @@ public class StudentService {
         Set<Value> values = student.getValues();
         for (Value value : values) {
             GAVPresentation gav = new GAVPresentation();
+
             gav.setAttribute(value.getAttribute().getAttributeName());
             gav.setValue(value.getValue());
             gav.setGroup(value.getAttribute().getGroup().getName());
             gav.setType(value.getAttribute().getType());
+
             wow.add(gav);
         }
         return wow;
     }
 
     @Transactional
-    void addReview(String studentLogin, String curatorLogin, boolean fromInterview /*some shit here*/) {
+    public void addReview(String studentLogin, String curatorLogin, Review review) {
+        review.setFeedbacker(feedbackerDao.findByLogin(curatorLogin));
+        review.setStudent(studentDao.findByLogin(studentLogin));
+        review.setDate(Calendar.getInstance());
 
+        reviewDao.save(review);
     }
 
     /**
@@ -110,6 +115,7 @@ public class StudentService {
      * @param interviewerLogin - Interviewer's login
      * @param studentLogin - - Student's login
      */
+    @Transactional
     void addInterviewer(String interviewerLogin, String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         Feedbacker feedbacker = feedbackerDao.findByLogin(interviewerLogin);
@@ -124,6 +130,7 @@ public class StudentService {
      * @param interviewerLogin - Curator's login
      * @param studentLogin - Student's login
      */
+    @Transactional
     void addCurator(String interviewerLogin, String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         Feedbacker feedbacker = feedbackerDao.findByLogin(interviewerLogin);
@@ -137,6 +144,7 @@ public class StudentService {
      *
      * @param studentLogin - Student Login
      */
+    @Transactional
     void disable(String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         student.setEnabled(false);
@@ -149,6 +157,7 @@ public class StudentService {
      *
      * @param studentLogin - Student login
      */
+    @Transactional
     void enable(String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         student.setEnabled(true);
@@ -156,6 +165,7 @@ public class StudentService {
         studentDao.update(student);
     }
 
+    @Transactional
     List<Student> find() {
         List<Student> studentList = new ArrayList<Student>();
         return studentList;

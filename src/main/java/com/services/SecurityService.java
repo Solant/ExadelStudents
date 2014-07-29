@@ -10,11 +10,12 @@ public class SecurityService {
     /**
      * Checks if current user has authority to log in
      *
-     * @role Role to be checked in String
+     * @param role -  Role to be checked in String
      * @return boolean
      */
 
     public static boolean hasRole(String role) {
+        @SuppressWarnings("unchecked")
         Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         boolean hasRole = false;
         for (GrantedAuthority authority : authorities) {

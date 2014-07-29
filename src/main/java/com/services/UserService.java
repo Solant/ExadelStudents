@@ -5,8 +5,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.UserDao;
 import persistance.model.User;
+
 @Service
 public class UserService {
 
@@ -19,11 +21,10 @@ public class UserService {
      * @param login - User Login
      * @return boolean
      */
+    @Transactional
     public boolean isLoginAvailable(String login){
         User user = userDao.findByLogin(login);
-        if (user == null)
-            return false;
-        return true;
+        return user == null;
     }
 
     /**
@@ -33,7 +34,6 @@ public class UserService {
      */
     public static String getCurrentUserLogin(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        return name;
+        return auth.getName();
     }
 }

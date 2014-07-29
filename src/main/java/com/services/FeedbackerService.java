@@ -2,17 +2,19 @@ package com.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.FeedbackerDao;
 import persistance.model.Feedbacker;
 import persistance.model.UserRole;
 
-/**
- * Created by solant on 24.07.14.
- */
+@Service
 public class FeedbackerService {
+
     @Autowired
     private FeedbackerDao feedbackerDao;
 
+    @Transactional
     public void add(String login, String password, String name, String surname){
         Feedbacker feedbacker = new Feedbacker();
 
@@ -27,5 +29,11 @@ public class FeedbackerService {
         feedbacker.getUserRoles().add(ur);
 
         feedbackerDao.save(feedbacker);
+    }
+
+    @Transactional
+    public void delete(String login){
+        Feedbacker feedbacker = feedbackerDao.findByLogin(login);
+        feedbackerDao.removeById(feedbacker.getId());
     }
 }
