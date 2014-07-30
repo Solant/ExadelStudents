@@ -13,6 +13,14 @@ public class AdministratorService {
     @Autowired
     private AdminDao adminDao;
 
+    /**
+     * Add administrator
+     *
+     * @param login Login
+     * @param password Password
+     * @param name First Name
+     * @param surname Second Name
+     */
     @Transactional
     public void add(String login, String password, String name, String surname){
         Admin admin = new Admin();
@@ -25,9 +33,14 @@ public class AdministratorService {
         ur.setUser(admin);
         admin.getUserRoles().add(ur);
         adminDao.save(admin);
+
     }
 
+    /**
+     * Removes administrator
+     * @param login Administrator login
+     */
     public void remove(String login){
-        //
+        adminDao.removeById(adminDao.findByLogin(login).getId());
     }
 }
