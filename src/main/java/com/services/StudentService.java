@@ -29,6 +29,9 @@ public class StudentService {
     @Autowired
     private GroupDao groupDao;
 
+    @Autowired
+    private NotificationDao notificationDao;
+
     @Transactional
     public Student getStudentByLogin(String login){
         return studentDao.findByLogin(login);
@@ -255,5 +258,22 @@ public class StudentService {
             }
         }
         return r;
+    }
+
+    /**
+     * Get all notifications for student
+     *
+     * @param login Student login
+     * @return List<Notification>
+     */
+    @Transactional
+    public List<Notification> getAllNotifications(String login){
+        Student student = studentDao.findByLogin(login);
+        List<Notification> notifications = notificationDao.findAll();
+        List<Notification> notificationsReturn = new ArrayList<Notification>();
+        for(Notification notification : notifications)
+            if (notification.getUser().getLogin().equalsIgnoreCase(login))
+                notificationsReturn.add(notification);
+        return notificationsReturn;
     }
 }
