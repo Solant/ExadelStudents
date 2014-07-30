@@ -140,8 +140,6 @@ public class StudentService {
             }
         }
 
-        System.out.println(status);
-
         List<Group> groups = groupDao.getByStatus(status);
         List<GAVPresentation> gavs = new ArrayList<GAVPresentation>();
         for(Group group : groups){
@@ -244,7 +242,18 @@ public class StudentService {
     }
 
     @Transactional
-    public Student getStudentByLogin(String login){
-        return studentDao.findByLogin(login);
+    public Review getLastReview(String login){
+        Set<Review> reviews = studentDao.findByLogin(login).getReviews();
+        Review r = null;
+        for(Review review : reviews){
+            if (r == null)
+                r = review;
+            else{
+                if (r.getDate().before(review.getDate())){
+                    r = review;
+                }
+            }
+        }
+        return r;
     }
 }

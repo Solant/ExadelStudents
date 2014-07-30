@@ -12,28 +12,7 @@ import org.hibernate.annotations.CascadeType;
 @DiscriminatorValue("hrworker")
 public class HRWorker extends User {
 
-    @Column (name = "firstname")
-    private String firstName;
-
-    @Column (name = "secondname")
-    private String secondName;
 
     public HRWorker() {
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 }

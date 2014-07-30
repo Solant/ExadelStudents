@@ -29,6 +29,12 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Column (name = "firstname")
+    private String firstName;
+
+    @Column (name = "secondname")
+    private String secondName;
+
     @OneToMany(mappedBy = "user")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
    // @JoinColumn(name = "user_id")
@@ -39,6 +45,22 @@ public class User {
     private Set<Notification> notifications = new HashSet<Notification>();
 
     public User() {
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLogin() {
