@@ -47,21 +47,26 @@ public class FeedbackerService {
         feedbackerDao.removeById(feedbacker.getId());
     }
 
+    /**
+     * Get supervised students of feedbacker
+     *
+     * @param feedbackerLogin Feedbacker Login
+     * @return Set<Student>
+     */
     @Transactional
-    public List<String> getSupervisedStudents(String feedbackerLogin){
-        List<String> students = new ArrayList<String>();
-        Set<Student> studentsSet = feedbackerDao.findByLogin(feedbackerLogin).getMyStudents();
-        for (Student student : studentsSet)
-            students.add(student.getLogin());
-        return students;
+    public Set<Student> getSupervisedStudents(String feedbackerLogin){
+        return feedbackerDao.findByLogin(feedbackerLogin).getMyStudents();
     }
 
+    /**
+     * Returns Set of Students interviewed by feedbacker
+     *
+     * @param feedbackerLogin Feedbacker Login
+     * @return Set<Student>
+     */
     @Transactional
-    public List<String> getInterviewedStudents(String feedbackerLogin){
-        List<String> students = new ArrayList<String>();
-        Set<Student> studentSet = feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents();
-        for (Student student : studentSet)
-            students.add(student.getLogin());
-        return  students;
+    public Set<Student> getInterviewedStudents(String feedbackerLogin){
+        StudentService ss = new StudentService();
+        return  feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents();
     }
 }
