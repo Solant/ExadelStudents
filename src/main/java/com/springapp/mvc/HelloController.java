@@ -93,7 +93,7 @@ public class HelloController {
 
         System.out.println("test ended");*/
 
-        studentService.addCurator("curator", "student");
+        studentService.addInterviewer("interviewer", "student1");
 
     }
 }

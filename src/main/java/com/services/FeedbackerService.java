@@ -51,4 +51,8 @@ public class FeedbackerService {
             students.add(student.getLogin());
         return students;
     }
+    @Transactional
+    public Feedbacker getFeedbackerByLogin(String login){
+        return feedbackerDao.findByLogin(login);
+    }
 }

@@ -237,4 +237,9 @@ public class StudentService {
                 rev.add(review);
         return rev;
     }
+
+    @Transactional
+    public Student getStudentByLogin(String login){
+        return studentDao.findByLogin(login);
+    }
 }

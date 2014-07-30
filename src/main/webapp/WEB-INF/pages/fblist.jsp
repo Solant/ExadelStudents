@@ -56,9 +56,9 @@
             <tbody>
             <c:forEach items="${studentList}" var="name">
                 <tr>
-                    <td><a href="/curator/${account}/addFeedback/${feedbackerRole}">${name}</a></td>
-                    <td>23.07.2013</td>
-                    <td>Curator</td>
+                    <td><a href="/curator/${account}/showFeedback/${name.studentLogin}/${feedbackerRole}">${name.studentName}</a></td>
+                    <td>${name.date.time}</td>
+                    <td>${name.feedbackerName}</td>
                 </tr>
             </c:forEach>
                 <%--<tr>
