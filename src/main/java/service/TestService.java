@@ -1,15 +1,13 @@
 package service;
 
+import com.services.mail.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.*;
 import persistance.model.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -38,26 +36,26 @@ public class TestService {
     @Autowired
     private ReviewDao rewd;
 
+    @Autowired
+    private NotificationDao nd;
+
     @Transactional
     public void testMethod() {
 
         System.out.println("TEST STARTED!");
+        /*
+        Student stud = sd.findByLogin("testStud");
 
-        Student stud = new Student();
-        Set<Student> studs = new HashSet<Student> ();
-        studs.add(stud);
+        Notification notification = new Notification();
+        notification.setUser(stud);
+        notification.setTitle("new field");
+        notification.setText("Hello, please come to your personal page and set new field.");
+        notification.setSender("System");
+        notification.setTimeWhenSent(Calendar.getInstance());
 
-        System.out.println(stud.getSkype());
-        for(Student s: studs){
-            s.setSkype("ALESHA");
-        }
-        System.out.println(stud.getSkype());
-/*
-        stud.setLogin("test5Stud");
-        stud.setPassword("test5Stud");
-        stud.setFirstName("test5StudFN");
-        stud.setSecondName("test5StudSN");
-        sd.save(stud);
+        stud.getNotifications().add(notification);
+        sd.update(stud);
+
 
         Feedbacker cur1 = new Feedbacker();
         Feedbacker cur2 = new Feedbacker();
