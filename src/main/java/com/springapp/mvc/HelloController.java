@@ -1,7 +1,6 @@
 package com.springapp.mvc;
 
 import com.services.*;
-import com.services.presentation.GAVPresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import service.TestService;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 @Controller
 
@@ -71,7 +69,7 @@ public class HelloController {
         administratorService.add("admin", "123", "Petr", "Petrov");
         ts.testMethod();*/
 
-        System.out.println("test started");
+        /*System.out.println("test started");
         ArrayList<GAVPresentation> values =  new ArrayList<GAVPresentation>();
         GAVPresentation gav = new GAVPresentation();
         gav.setGroup("Institution");
@@ -93,7 +91,9 @@ public class HelloController {
 
         studentService.setValues("student", values);
 
-        System.out.println("test ended");
+        System.out.println("test ended");*/
+
+        studentService.addCurator("curator", "student");
 
     }
 }

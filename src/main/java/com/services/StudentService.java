@@ -173,7 +173,7 @@ public class StudentService {
      * @param studentLogin - - Student's login
      */
     @Transactional
-    void addInterviewer(String interviewerLogin, String studentLogin) {
+    public void addInterviewer(String interviewerLogin, String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         Feedbacker feedbacker = feedbackerDao.findByLogin(interviewerLogin);
         student.getInterviewers().add(feedbacker);
@@ -188,7 +188,7 @@ public class StudentService {
      * @param studentLogin - Student's login
      */
     @Transactional
-    void addCurator(String interviewerLogin, String studentLogin) {
+    public void addCurator(String interviewerLogin, String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         Feedbacker feedbacker = feedbackerDao.findByLogin(interviewerLogin);
         student.getCurators().add(feedbacker);

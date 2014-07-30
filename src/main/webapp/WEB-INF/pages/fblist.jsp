@@ -28,14 +28,14 @@
     <span class="currUserName"><c:out value="${account}"></c:out></span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
 
-    <a href="<c:url value="/curator/myStudents"/> ">
-        <button  class="btn">
+    <a href="<c:url value="/curator/${account}/myStudents"/> ">
+        <button  class="btn <c:if test="${feedbackerRole=='asCurator'}"> btnActive</c:if>">
             <span>My Students</span>
         </button>
     </a>
 
-    <a href="<c:url value="/curator/interview"/> ">
-        <button  class="btn">
+    <a href="<c:url value="/curator/${account}/interview"/> ">
+        <button  class="btn <c:if test="${feedbackerRole=='asInterviewer'}"> btnActive</c:if>">
             <span>Interviews</span>
         </button>
     </a>
@@ -54,15 +54,42 @@
                 </tr>
             </thead>
             <tbody>
+            <c:forEach items="${studentList}" var="name">
                 <tr>
-                    <td><a href="review.jsp">Ivanov Ivan</a></td>
+                    <td><a href="/curator/${account}/addFeedback/${feedbackerRole}">${name}</a></td>
+                    <td>23.07.2013</td>
+                    <td>Curator</td>
+                </tr>
+            </c:forEach>
+                <%--<tr>
+                    <td><a href="/curator/${account}/addFeedback/${feedbackerRole}">Ivanov Ivan</a></td>
                     <td>23.07.2013</td>
                     <td>Curator</td>
                 </tr>
                 <tr>
-                    <td><a href="review.jsp">Ivanov Alex</a></td>
+                    <td><a href="/curator/${account}/addFeedback/${feedbackerRole}">Ivanov Alex</a></td>
+                    <td>23.07.2014</td>
+                    <td>Interviewer</td>
+                </tr>--%>
+                <%--<tr>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
                     <td>23.07.2014</td>
                     <td>Curator</td>
+                </tr>
+                <tr>
+                    <td><a href="review.jsp">Ivanov Alex</a></td>
+                    <td>23.07.2013</td>
+                    <td>Feedbacker</td>
+                </tr>
+                <tr>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
+                    <td>23.07.2014</td>
+                    <td>Curator</td>
+                </tr>
+                <tr>
+                    <td><a href="review.jsp">Ivanov Ivan</a></td>
+                    <td>23.07.2013</td>
+                    <td>Feedbacker</td>
                 </tr>
                 <tr>
                     <td><a href="review.jsp">Ivanov Ivan</a></td>
@@ -81,26 +108,6 @@
                 </tr>
                 <tr>
                     <td><a href="review.jsp">Ivanov Ivan</a></td>
-                    <td>23.07.2013</td>
-                    <td>Feedbacker</td>
-                </tr>
-                <tr>
-                    <td><a href="review.jsp">Ivanov Ivan</a></td>
-                    <td>23.07.2014</td>
-                    <td>Curator</td>
-                </tr>
-                <tr>
-                    <td><a href="review.jsp">Ivanov Alex</a></td>
-                    <td>23.07.2013</td>
-                    <td>Feedbacker</td>
-                </tr>
-                <tr>
-                    <td><a href="review.jsp">Ivanov Ivan</a></td>
-                    <td>23.07.2014</td>
-                    <td>Curator</td>
-                </tr>
-                <tr>
-                    <td><a href="review.jsp">Ivanov Ivan</a></td>
                     <td>23.07.2014</td>
                     <td>Feedbacker</td>
                 </tr>
@@ -108,7 +115,7 @@
                     <td><a href="review.jsp">Ivanov Alex</a></td>
                     <td>23.07.2013</td>
                     <td>Curator</td>
-                </tr>
+                </tr>--%>
             </tbody>
         </table>
 </div>
