@@ -3,6 +3,7 @@
 
 body {
     margin: 0;      /* Убираем отступы */
+    min-width: 993px;
 }
 
 .hat{
@@ -12,7 +13,7 @@ body {
     background-color: RGB(0,156,203);
     z-index:1;
     top: 0px;
-    min-width: 900px;
+    min-width: 993px;
 }
 
 .hat button{
@@ -35,15 +36,8 @@ body {
     padding-left: 20px;
 }
 
-.loupe_logo{
+.loupe_logo, .exit_logo{
     float:right;
-    margin-top: 5px;
-    margin-right: 10px;
-}
-
-.exit_logo{
-    float: right;
-
     margin-top: 5px;
     margin-right: 10px;
 }
@@ -54,7 +48,6 @@ body {
     margin-right:10px;
     font-size: 25px;
     text-shadow: 1px 1px 1px RGB(70,186,235);
-    font-family: Arial;
     margin-top: 9px;
 }
 
@@ -62,16 +55,14 @@ table{
     background-color: white;
     text-align:center;
     border:#777777 1px solid;
-    border-collapse:collapse;
+    border-collapse:collapse !important;
     box-shadow: 0 1px 2px #d1d1d1;
-    font-family: Arial;
 }
 
 table thead,table tfoot{
     background-color: grey;
     color:white;
     font-weight:bold;
-    border-bottom:1px solid #e0e0e0;
     text-shadow: 1px 1px 0px black;
     font-family:serif;
 }
@@ -79,6 +70,10 @@ table thead,table tfoot{
 table td{
     padding: 2px 8px 2px 8px;
     border-color: grey;
+}
+
+table thead th, table thead td, table tfoot td, table tfoot tr{
+    border: 1px solid #111111;
 }
 
 .profile{
@@ -96,17 +91,20 @@ table td{
     margin-left: 5px;
 }
 
-.loginAndCreateForm{
+.loginAndCreateForm, .linkingForm, .reviewForm{
     color: #808080;
     width: 370px;
     margin: auto;
     margin-top: 100px;
     border: 3px solid;
     padding: 7px;
-    text-align:left;
-    font-size: 14px;
     background-color: white;
     border-radius: 10px;
+}
+
+.loginAndCreateForm{
+    text-align:left;
+    font-size: 14px;
 }
 
 .loginAndCreateForm p {
@@ -118,7 +116,6 @@ table td{
 }
 
 .loginAndCreateForm button{
-    float:right;
     margin-right: 10px;
     cursor: pointer;
 }
@@ -163,9 +160,16 @@ table td{
     text-align: center;
 }
 
-.displayFlex{
-    display: flex;
+.btn:hover{
+    background-color: #ffffff;
+    color:  RGB(0,156,203);
 }
+
+.btn{
+    background-color:  RGB(0,156,203);
+    color: #ffffff ;
+}
+
 /*end of common props*/
 
 /*login props*/
@@ -185,10 +189,6 @@ table td{
     color: gray;
 }
 
-
-
-
-
 /*props create.jsp*/
 
 /*all props are common*/
@@ -197,31 +197,20 @@ table td{
 
 /*linking form*/
 
-select.linkingL{
+.linkingForm{
+    width: 450px;
+}
+
+.linkingL, .linkingR{
     float: left;
     height: 300px;
     width: 30%;
     border-radius: 5px;
-    font-family: arial;
 }
 select.linkingR{
     float: right;
-    width: 30%;
-    height: 300px;
-    border-radius: 5px;
-    font-family: arial;
 }
-.linkingForm{
-    font-family: arial;
-    color: #808080;
-    margin:auto;
-    margin-top: 100px;
-    padding: 7px;
-    background-color: white;
-    border:3px solid;
-    border-radius: 10px;
-    width: 450px;
-}
+
 .radio{
     text-align: center;
 }
@@ -248,17 +237,10 @@ select.linkingR{
 /*end of linking form*/
 
 /*review form*/
+
 .reviewForm{
-    font-family: arial;
-    color: #808080;
-    margin:auto;
-    margin-top: 100px;
-    padding: 10px;
-    font-size: 14px;
-    background-color: white;
-    border:3px solid;
-    border-radius: 10px;
     width: 450px;
+    font-size: 14px;
     text-align: left;
 }
 
@@ -288,7 +270,6 @@ select.linkingR{
     font-size: 14px;
     color: gray;
 }
-
 
 .group label{
     float:left;
@@ -323,24 +304,11 @@ select.linkingR{
 
 /*fblist props*/
 
-.skyBoxPadding{
-padding-top: 100px;
-margin-left: 50px;
-    margin-right: 50px;
-}
+/*all props are common*/
+
 /*end of fblist props*/
 
 /*admin props*/
-
-.btn:hover{
-    background-color: #ffffff;
-    color:  RGB(0,156,203);
-}
-
-.btn{
-    background-color:  RGB(0,156,203);
-    color: #ffffff ;
-}
 
 .adminProfile{
     font-size: 14px;
@@ -424,3 +392,16 @@ margin-left: 50px;
     padding-right: 100px;
 }
 /*end of adminTable props*/
+
+/*interview props*/
+
+.starRating{
+    float: right;
+    margin-right: 20px;
+}
+
+.interviewGroup{
+    margin-bottom: 5px;
+}
+
+/*end of interview props*/

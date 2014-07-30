@@ -21,20 +21,17 @@
     <span class="currUserName"><c:out value="${account}"></c:out></span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
 
-    <span class="bookmarks"> <a href="../../fblist.jsp"> My Students </a> </span>
-    <span class="bookmarks"> <a href="../../fblist.jsp"> All Students </a> </span>
-    <span class="bookmarks">  <a href="../../fblist.jsp"> Interviews  </a> </span>
+    <span class="bookmarks"> <a href="fblist.jsp"> My Students </a> </span>
+    <span class="bookmarks"> <a href="fblist.jsp"> All Students </a> </span>
+    <span class="bookmarks">  <a href="fblist.jsp"> Interviews  </a> </span>
 
 
 </div>
 <form class="reviewForm" >
 
-    <div class="displayFlex">
         <div class="alignCenter">
             <h1 >Review Form </h1>
         </div>
-    </div>
-
 
     <p>
         <label for="lastname">Lastname:</label>
@@ -84,28 +81,22 @@
           </select>
     </p>
 
-    <div class="displayFlex">
         <div class="alignCenter">
             <input type="radio" name="billable" value="yes" id="bilYes">
             <label for="bilYes">Billable</label>
             <input type="radio" name="billable" value="no" id="bilNo">
             <label for="bilNo">No Billable</label>
         </div>
-    </div>
 
-    <div class="displayFlex">
         <div class="alignCenter">
             <label for="other">Other:</label><br/>
             <textarea name="other" id="other" cols="30" rows="10" class="textOther"></textarea>
         </div>
-    </div>
 
-    <div class="displayFlex">
         <div class="alignCenter">
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
             <button type="submit" class="loginAndCreateButton">Create</button>
         </div>
-    </div>
 
 </form>
 </body>

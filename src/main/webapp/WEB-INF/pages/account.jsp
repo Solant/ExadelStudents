@@ -53,13 +53,10 @@
             <input type="password" id="confirmPassword" class="field">
         </p>
 
-
-    <div class="displayFlex">
         <div class="alignCenter">
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
             <button type="submit"  class="loginAndCreateButton">Change</button>
         </div>
-    </div>
 </form>
 </body>
 

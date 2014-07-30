@@ -61,7 +61,7 @@
     </div>
 
         <div id="searchTable">
-            <table border = 1 id="example">
+            <table id="example" class="display">
 			<thead>
 				<td> Name </td>
 				<td> Hire date </td>

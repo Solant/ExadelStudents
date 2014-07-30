@@ -31,7 +31,7 @@
             <label for="remember">Remember Me</label>
             <input type="checkbox" name="_spring_security_remember_me" id="remember">
         </p>
-		<div class="allignCenter">
+		<div class="alignCenter">
 			<input type="submit" class="loginAndCreateButton" value="Login">
         </div>
 	</form>
