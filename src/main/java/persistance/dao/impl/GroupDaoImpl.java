@@ -19,8 +19,12 @@ public class GroupDaoImpl extends GenericDaoImpl<Group> implements GroupDao {
     public List<Group> getByStatus(String status){
         List<Group> groups;
 
+
         groups = sessionFactory.getCurrentSession().createCriteria(Group.class)
                 .add(Restrictions.eq("status", status)).list();
+
+        groups.addAll(sessionFactory.getCurrentSession().createCriteria(Group.class)
+                .add(Restrictions.eq("status", status)).list());
 
         return groups;
 
