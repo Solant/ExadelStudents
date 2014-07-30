@@ -12,12 +12,6 @@ import org.hibernate.annotations.CascadeType;
 @DiscriminatorValue("student")
 public class Student extends User {
 
-    @Column (name = "firstname")
-    private String firstName;
-
-    @Column (name = "secondname")
-    private String secondName;
-
     @Column (name = "skype")
     private String skype;
 
@@ -48,22 +42,6 @@ public class Student extends User {
     private Set<Value> values = new HashSet();
 
     public Student() {
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public Set<Value> getValues() {

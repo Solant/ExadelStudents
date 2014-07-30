@@ -12,28 +12,8 @@ import org.hibernate.annotations.CascadeType;
 @DiscriminatorValue("admin")
 public class Admin extends User {
 
-    @Column (name = "firstname")
-    private String firstName;
-
-    @Column (name = "secondname")
-    private String secondName;
 
     public Admin() {
     }
 
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 }
