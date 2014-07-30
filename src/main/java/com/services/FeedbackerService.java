@@ -20,6 +20,11 @@ public class FeedbackerService {
     private FeedbackerDao feedbackerDao;
 
     @Transactional
+    public Feedbacker getFeedbackerByLogin(String login){
+        return feedbackerDao.findByLogin(login);
+    }
+
+    @Transactional
     public void add(String login, String password, String name, String surname){
         Feedbacker feedbacker = new Feedbacker();
 
@@ -43,12 +48,20 @@ public class FeedbackerService {
     }
 
     @Transactional
-    public List<String> getStudents(String feedbackerLogin){
+    public List<String> getSupervisedStudents(String feedbackerLogin){
         List<String> students = new ArrayList<String>();
-        Feedbacker feedbacker = feedbackerDao.findByLogin(feedbackerLogin);
-        Set<Student> studentsSet = feedbacker.getMyStudents();
+        Set<Student> studentsSet = feedbackerDao.findByLogin(feedbackerLogin).getMyStudents();
         for (Student student : studentsSet)
             students.add(student.getLogin());
         return students;
+    }
+
+    @Transactional
+    public List<String> getInterviewedStudents(String feedbackerLogin){
+        List<String> students = new ArrayList<String>();
+        Set<Student> studentSet = feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents();
+        for (Student student : studentSet)
+            students.add(student.getLogin());
+        return  students;
     }
 }
