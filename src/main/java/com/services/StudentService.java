@@ -135,6 +135,8 @@ public class StudentService {
             }
         }
 
+        System.out.println(status);
+
         List<Group> groups = groupDao.getByStatus(status);
         List<GAVPresentation> gavs = new ArrayList<GAVPresentation>();
         for(Group group : groups){

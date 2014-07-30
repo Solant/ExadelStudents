@@ -29,7 +29,7 @@ public class StudentController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String studentPage(ModelMap modelMap, @PathVariable("current") String current) {
         ArrayList<GAVPresentation> gav = (ArrayList<GAVPresentation>)studentService.getValues(current);
-
+        System.out.println(gav.size());
         GroupedValues groupedValues = new GroupedValues();
 
         List<GAVPresentation> internal;
@@ -41,12 +41,12 @@ public class StudentController {
             for(int i = 0; i < gav.size(); i++){
                 if(gav.get(i).getGroup().equals(temp.getGroup())){
                     internal.add(gav.get(i));
-                    gav.remove(i++);
+                    gav.remove(i--);
                 }
             }
             groups.add(temp.getGroup());
             Group internalGroup = new Group();
-            internalGroup.setGroup(internal);
+            internalGroup.setGavs(internal);
             groupedValues.getValuesArray().add(internalGroup);
         }
         modelMap.addAttribute("groups", groups);
@@ -58,7 +58,7 @@ public class StudentController {
     public String saveChanges(@ModelAttribute("groupedValues") GroupedValues groupedValues, @PathVariable("current") String current){
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
         for(Group group:groupedValues.getValuesArray())
-            values.addAll(group.getGroup());
+            values.addAll(group.getGavs());
         studentService.setValues(current, values);
         return "redirect:/student/"+current;
     }

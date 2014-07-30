@@ -2,6 +2,7 @@ package com.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.GroupDao;
 import persistance.model.Group;
@@ -9,6 +10,7 @@ import persistance.model.Group;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class GroupService {
 
     @Autowired

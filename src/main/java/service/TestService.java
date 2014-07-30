@@ -44,18 +44,15 @@ public class TestService {
         Attribute attribute = new Attribute();
         attribute.setGroup(group);
         attribute.setAttributeName("University");
-        attribute.setStatus("for_everybody");
         ad.save(attribute);
 
         Attribute attribute1 = new Attribute();
         attribute1.setGroup(group);
         attribute1.setAttributeName("Faculty");
-        attribute1.setStatus("for_everybody");
         ad.save(attribute1);
 
         Attribute attribute2 = new Attribute();
         attribute2.setGroup(group2);
-        attribute2.setStatus("for_everybody");
         attribute2.setAttributeName("Project");
         ad.save(attribute2);
 

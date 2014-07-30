@@ -101,25 +101,25 @@
         <div class="tab-content" >
             <div class="tab-pane active" id="education">
                 <div class="spoilers">
-                    <div class="group"><label for="university">University</label><input type="checkbox"><input id = "university"></div>
-                    <div class="group"><label for="faculty">Faculty</label><input type="checkbox"><input id="faculty"></div>
-                    <div class="group"><label for="specialty">Specialty</label><input type="checkbox"><input id="specialty"></div>
-                    <div class="group"><label for="group">Group</label><input type="checkbox"><input id="group"></div>
+                    <div class="gavs"><label for="university">University</label><input type="checkbox"><input id = "university"></div>
+                    <div class="gavs"><label for="faculty">Faculty</label><input type="checkbox"><input id="faculty"></div>
+                    <div class="gavs"><label for="specialty">Specialty</label><input type="checkbox"><input id="specialty"></div>
+                    <div class="gavs"><label for="gavs">Group</label><input type="checkbox"><input id="gavs"></div>
                 </div>
             </div>
 
             <div class="tab-pane" id="beforeWorking">
                 <div class="spoilers">
-                    <div class="group"><label for="dateOfEmployng">Date of employing</label><input type="checkbox"><input id = "dateOfEmployng" type="date"></div>
-                    <div class="group"><label for="trainingExadel">Have you been training in Exadel before working?</label>
+                    <div class="gavs"><label for="dateOfEmployng">Date of employing</label><input type="checkbox"><input id = "dateOfEmployng" type="date"></div>
+                    <div class="gavs"><label for="trainingExadel">Have you been training in Exadel before working?</label>
                         <input type="checkbox">
                         <select id="trainingExadel">
                             <option>Yes</option>
                             <option>No</option>
                         </select></div>
-                    <div class="group"><label for="finishTraining">What year you finished training?</label>
+                    <div class="gavs"><label for="finishTraining">What year you finished training?</label>
                         <input type="checkbox"><input id="finishTraining"></div>
-                    <div class="group">
+                    <div class="gavs">
                         <label for="whatYearStartedTrain">What year you was when started training in Exadel?</label>
                         <input type="checkbox">
                         <select id="whatYearStartedTrain">
@@ -135,11 +135,11 @@
 
             <div class="tab-pane" id="currProject">
                 <div class="spoilers">
-                    <div class="group"><label for="teamLead">Team Leader</label><input type="checkbox"><input id="teamLead"></div>
-                    <div class="group"><label for="PM">Project Manager</label><input type="checkbox"><input id="PM"></div>
-                    <div class="group"><label for="curator">Curator</label><input type="checkbox"><input id="curator"></div>
-                    <div class="group"><label for="currProj">Current project</label><input type="checkbox"><input id="currProj"></div>
-                    <div class="group" style="height: 60px"><label for="currTechnologies">Technologies using in the current project</label>
+                    <div class="gavs"><label for="teamLead">Team Leader</label><input type="checkbox"><input id="teamLead"></div>
+                    <div class="gavs"><label for="PM">Project Manager</label><input type="checkbox"><input id="PM"></div>
+                    <div class="gavs"><label for="curator">Curator</label><input type="checkbox"><input id="curator"></div>
+                    <div class="gavs"><label for="currProj">Current project</label><input type="checkbox"><input id="currProj"></div>
+                    <div class="gavs" style="height: 60px"><label for="currTechnologies">Technologies using in the current project</label>
                         <input type="checkbox">
                         <select id="currTechnologies" multiple style="width: 180px; height: 60px">
                             <option>JS</option>
@@ -147,7 +147,7 @@
                             <option>HTML</option>
                             <option>Qt</option>
                         </select></div>
-                    <div class="group"><label for="currRole">Role in the current project</label>
+                    <div class="gavs"><label for="currRole">Role in the current project</label>
                         <input type="checkbox">
                         <select id="currRole">
                             <option>Junior</option>

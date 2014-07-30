@@ -9,21 +9,21 @@ import java.util.List;
  * Created by Надя on 29.07.2014.
  */
 public class Group {
-    private List<GAVPresentation> group;
+    private List<GAVPresentation> gavs;
 
     public Group(){
-        group = new ArrayList<GAVPresentation>();
+        gavs = new ArrayList<GAVPresentation>();
     }
 
     public Group(int size){
-        group = new ArrayList<GAVPresentation>(size);
+        gavs = new ArrayList<GAVPresentation>(size);
     }
 
-    public List<GAVPresentation> getGroup() {
-        return group;
+    public List<GAVPresentation> getGavs() {
+        return gavs;
     }
 
-    public void setGroup(List<GAVPresentation> group) {
-        this.group = group;
+    public void setGavs(List<GAVPresentation> gavs) {
+        this.gavs = gavs;
     }
 }

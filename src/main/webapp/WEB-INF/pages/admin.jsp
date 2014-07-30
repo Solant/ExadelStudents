@@ -147,9 +147,9 @@
         </div>
 
         <div class="adminGroup">
-            <label for="group">Group:</label>
+            <label for="gavs">Group:</label>
             <input type="checkbox"/>
-            <input type="text" id="group">
+            <input type="text" id="gavs">
         </div>
 
         <div class="adminGroup">

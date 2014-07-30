@@ -71,15 +71,15 @@
         <%pageContext.setAttribute("isActive", "active");%>
 
     <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
-    <div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].group[0].getGroup()}">
+    <div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].gavs[0].getGroup()}">
 
         <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
-            <c:forEach items="${groupedValues.valuesArray[index1.count-1].group}" varStatus="index2">
+            <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2">
                 <div class="group">
-                    <%--<label >${groupedValues.valuesArray[index1.count-1].group[index2.count-1].attribute} </label>--%>
+                    <label >${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].attribute} </label>
 
-                    <form:input type="" path="valuesArray[${index1.count-1}].group[${index2.count-1}].value" />
-                    <form:input readonly="true" path="valuesArray[${index1.count-1}].group[${index2.count-1}].attribute" />
+                    <form:input type="" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                    <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
                 </div>
             </c:forEach>
             <form:button type="submit" >Save</form:button>
@@ -128,27 +128,27 @@
 
        <%-- <div class="tab-pane active" id="common">
             <form class="spoilers">
-                <div class="group">
+                <div class="gavs">
                     <label for="lastname">Lastname:</label>
                     <input type="text" id="lastname" value="Ivanov" readonly>
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="firstname">Firstname:</label>
                     <input type="text" id="firstname" value="Ivan" readonly>
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="pNumber">Phone number:</label>
                     <input type="text" id="pNumber" >
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="email">Email:</label>
                     <input type="text" id="email" >
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="skype">Skype:</label>
                     <input type="text" id="skype" >
                 </div>
@@ -164,20 +164,20 @@
 
         <div class="tab-pane" id="education">
             <form class="spoilers">
-                    <div class="group">
+                    <div class="gavs">
                         <label for="university">University:</label>
                         <input type="text" id = "university" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="faculty">Faculty:</label><input type="text" id="faculty" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="specialty">Specialty:</label><input type="text" id="specialty" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="course">Course:</label>
 
                         <select name="course" id="course" >
@@ -190,18 +190,18 @@
                         </select>
                     </div>
 
-                    <div class="group">
-                        <label for="group">Group:</label><input type="text" id="group">
+                    <div class="gavs">
+                        <label for="gavs">Group:</label><input type="text" id="gavs">
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="year">Year graduation:</label><input type="text" id="year" >
                     </div>
                     &lt;%&ndash;
-                    <div class="group"><label for="university">University</label><input id = "university"></div>
-                    <div class="group"><label for="faculty">Faculty</label><input id="faculty"></div>
-                    <div class="group"><label for="specialty">Specialty</label><input id="specialty"></div>
-                    <div class="group"><label for="group">Group</label><input id="group"></div>&ndash;%&gt;
+                    <div class="gavs"><label for="university">University</label><input id = "university"></div>
+                    <div class="gavs"><label for="faculty">Faculty</label><input id="faculty"></div>
+                    <div class="gavs"><label for="specialty">Specialty</label><input id="specialty"></div>
+                    <div class="gavs"><label for="gavs">Group</label><input id="gavs"></div>&ndash;%&gt;
                 <div class="displayFlex">
                     <div class="alignCenter">
                     <button  type="submit" class="loginAndCreateButton">Save</button>
@@ -212,18 +212,18 @@
 
         <div class="tab-pane" id="work">
             <form class="spoilers">
-                    <div class="group">
+                    <div class="gavs">
                         <label for="dateOfEmployng">Date of employing:</label>
                         <input id = "dateOfEmployng" type="date">
                     </div>
-                    <div class="group">
+                    <div class="gavs">
                         <label for="trainingExadel">Have you been training in Exadel before working?</label>
                         <select id="trainingExadel">
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                         </select>
                     </div>
-                    <div class="group">
+                    <div class="gavs">
                         <label for="whatYearStartedTrain">What year you was when started training in Exadel?</label>
                         <select id="whatYearStartedTrain">
                             <option value="1">1</option>
@@ -235,16 +235,16 @@
                         </select>
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="hoursNow">Hours now:</label><input type="text" id="hoursNow" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="hoursFuture">Hours in future:</label>
                         <input type="text" id="hoursFuture" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="futureTechnologies">Technologies using in the Future:</label>
                         <input type="text" id="futureTechnologies"/>
                     </div>
@@ -265,14 +265,14 @@
                         </div>
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <div>
                             <label for="curatorCompany">Curator in Company:</label>
                             <input type="text" id="curatorCompany" >
                         </div>
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <div>
                             <label for="holiday">Holyday(period):</label>
                             <input type="text" id="holiday" >
@@ -287,14 +287,14 @@
             </form>
            &lt;%&ndash; <form>
                 <div class="spoilers">
-                    <div class="group"><label for="dateOfEmployng">Date of employing</label><input id = "dateOfEmployng" type="date"></div>
-                    <div class="group"><label for="trainingExadel">Have you been training in Exadel before working?</label>
+                    <div class="gavs"><label for="dateOfEmployng">Date of employing</label><input id = "dateOfEmployng" type="date"></div>
+                    <div class="gavs"><label for="trainingExadel">Have you been training in Exadel before working?</label>
                         <select id="trainingExadel">
                             <option>Yes</option>
                             <option>No</option>
                         </select></div>
-                    <div class="group"><label for="finishTraining">What year you finished training?</label><input id="finishTraining"></div>
-                    <div class="group">
+                    <div class="gavs"><label for="finishTraining">What year you finished training?</label><input id="finishTraining"></div>
+                    <div class="gavs">
                         <label for="whatYearStartedTrain">What year you was when started training in Exadel?</label>
                         <select id="whatYearStartedTrain">
                             <option>1</option>
@@ -311,20 +311,20 @@
 
         <div class="tab-pane" id="project">
             <form class="spoilers">
-                    <div class="group">
+                    <div class="gavs">
                         <label for="currProj">Current project</label>
                         <input type="text" id="currProj">
                     </div>
-                    <div class="group">
+                    <div class="gavs">
                         <label for="teamLead">Team Leader</label>
                         <input type="text" id="teamLead">
                     </div>
-                    <div class="group">
+                    <div class="gavs">
                         <label for="PM">Project Manager</label>
                         <input type="text" id="PM">
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="currRole">Your current role</label>
                         <select id="currRole">
                             <option>Junior</option>
@@ -332,7 +332,7 @@
                             <option>Tester</option>
                         </select>
                     </div>
-                    <div class="group">
+                    <div class="gavs">
                         <label for="currTechnologies">Technologies using in the current project</label>
                         <input type="text" id="currTechnologies"/>
                     </div>
@@ -356,7 +356,7 @@
         <div class="tab-pane" id="other">
             <form class="spoilers">
 
-                <div class="group">
+                <div class="gavs">
                     <label for="english">English level:</label>
                     <select id="english">
                         <option value="begginer">Begginer</option>
@@ -368,7 +368,7 @@
                     </select>
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="engCourse">English courses:</label>
                     <input type="text" id="engCourse">
                 </div>
