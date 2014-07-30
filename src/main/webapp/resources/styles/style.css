@@ -41,6 +41,11 @@ body {
     float: right;
 }
 
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: RGB(0,156,203);
+}
+
 .hat{
     position: fixed;
     height: 50px;
@@ -148,7 +153,7 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
     margin-left: 5px;
 }
 
-.loginAndCreateForm, .linkingForm, .reviewForm{
+.loginAndCreateForm, .linkingForm, .reviewForm, .createNotificationForm{
     color: #808080;
     width: 370px;
     margin: auto;
@@ -295,7 +300,7 @@ select.linkingR{
 
 /*review form*/
 
-.reviewForm{
+.reviewForm, .createNotificationForm{
     width: 450px;
     font-size: 14px;
     text-align: left;
@@ -462,3 +467,59 @@ select.linkingR{
 }
 
 /*end of interview props*/
+
+/*notification props*/
+
+.notifPadding{
+    padding-top: 100px;
+}
+.notification{
+    border: 3px solid gray;
+    border-radius: 20px;
+    width: 650px;
+    margin: auto;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+.notification h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.text{
+    margin-bottom: 20px;
+    border-bottom: 1px solid gray;
+}
+
+.date , .sender{
+    font-style: italic;
+}
+
+.date{
+    display: inline-block;
+}
+
+.sender{
+    display: inline-block;
+    float: right;
+}
+/*end of notification props*/
+
+/*create notification props*/
+
+.createNotificationForm{
+    display: flex;
+    width: 650px;
+}
+
+.centerList{
+    margin: auto;
+}
+
+.createNotificationForm select{
+    width: 200px;
+    height: 150px;
+}
+
+/*end of create notification props*/

@@ -65,9 +65,6 @@
 
 
             <ul class="nav navbar-nav navbar-right">
-
-
-
                 <li>
                     <div class="message">
             <span>
