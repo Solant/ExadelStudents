@@ -42,7 +42,7 @@ public class FeedbackerService {
     }
 
     @Transactional
-    public void delete(String login){
+    public void remove(String login){
         Feedbacker feedbacker = feedbackerDao.findByLogin(login);
         feedbackerDao.removeById(feedbacker.getId());
     }
