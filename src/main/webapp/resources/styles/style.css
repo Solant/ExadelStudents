@@ -6,6 +6,41 @@ body {
     min-width: 993px;
 }
 
+.navbar-blue{
+    background-color: RGB(0,156,203);
+}
+
+.navbar-blue .navbar-toggle {
+    border-color: #ddd;
+}
+
+.navbar-blue .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+
+@media (min-width: 768px)
+{
+    .navbar-nav > li > a {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+}
+.navbar-nav > li > a {
+    padding-top: 0;
+    padding-bottom: 0px;
+}
+.nav > li > a {
+    padding: 0px 0px;
+}
+
+.navbar-nav > li {
+    float: left;
+}
+
+.navbar-right{
+    float: right;
+}
+
 .hat{
     position: fixed;
     height: 50px;
@@ -24,7 +59,7 @@ body {
 }
 
 .account_logo {
-    float: right;
+    display: inline-block;
     margin-right: 5px;
     margin-top: 4px;
 }
@@ -52,25 +87,25 @@ body {
 }
 
 .exadel_logo{
-    float: left;
-    vertical-align: middle;
-    padding-top: 10px;
-    padding-left: 20px;
+    display: inline-block;
+/*    padding-top: 10px;
+    padding-left: 20px;*/
 }
 
 .loupe_logo, .exit_logo{
-    float:right;
+    display: inline-block;
     margin-top: 5px;
     margin-right: 10px;
 }
 
 .currUserName{
-    float:right;
+    display: inline-block;
     color: white;
     margin-right:10px;
     font-size: 25px;
     text-shadow: 1px 1px 1px RGB(70,186,235);
     margin-top: 9px;
+    padding-bottom: 1px;
 }
 
 table{
