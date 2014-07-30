@@ -10,13 +10,6 @@ import java.util.List;
 
 @Repository
 public class StudentDaoImpl extends GenericDaoImpl<Student> implements StudentDao {
-
-    public List<Student> findDisabledStudents() {
-        //
-        List<Student> disabledStudents = new ArrayList<Student>();
-        return disabledStudents;
-    }
-
     @SuppressWarnings("unchecked")
     public Student findByLogin(String login) {
 
