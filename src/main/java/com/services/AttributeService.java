@@ -39,7 +39,7 @@ public class AttributeService {
     }
 
     @Transactional
-    public List<GAVPresentation> getAll(){
+    public List<GAVPresentation> getAllAttributes(){
         List<Group> groups = groupDao.findAll();
         List<GAVPresentation> gavs = new ArrayList<GAVPresentation>();
         for(Group group : groups){
