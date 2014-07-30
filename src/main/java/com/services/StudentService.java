@@ -30,6 +30,11 @@ public class StudentService {
     private GroupDao groupDao;
 
     @Transactional
+    public Student getStudentByLogin(String login){
+        return studentDao.findByLogin(login);
+    }
+
+    @Transactional
     public void setStatus(String studentLogin, String status) {
         Student student = studentDao.findByLogin(studentLogin);
         Set<Value> values = attributeDao.findByName("status").getValues();

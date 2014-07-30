@@ -1,8 +1,6 @@
 package com.springapp.mvc;
 
 import com.View.UserUnit;
-import com.services.AdministratorService;
-import com.services.FeedbackerService;
 import com.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,15 +18,15 @@ public class AdminController {
     @Autowired
     private StudentService studentService;
 
-    @Autowired
+    /*@Autowired
     private FeedbackerService feedbackerService;
 
     @Autowired
-    private AdministratorService administratorService;
+    private AdministratorService administratorService;*/
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String workerPage(ModelMap model) {
-        return "admin";
+        return "/admin.jsp";
     }
 
     @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
@@ -39,13 +37,13 @@ public class AdminController {
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
     public String createUser(@ModelAttribute("newUser") UserUnit newUser){
-        if(newUser.getRole().toString().equals("Student"))
-            studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
-        if(newUser.getRole().toString().equals("Feedbacker"))
+        if(newUser.getRole().equals("Student"))
+            studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
+        /*if(newUser.getRole().equals("Feedbacker"))
             feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-        if(newUser.getRole().toString().equals("Admin"))
-            administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-        return "admin";
+        if(newUser.getRole().equals("Student"))
+            administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());*/
+        return "/admin.jsp";
     }
 
 
