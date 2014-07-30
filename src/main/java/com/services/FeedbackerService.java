@@ -67,7 +67,6 @@ public class FeedbackerService {
      */
     @Transactional
     public Set<Student> getInterviewedStudents(String feedbackerLogin){
-        StudentService ss = new StudentService();
-        return  feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents();
+        return  new HashSet<Student>(feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents());
     }
 }
