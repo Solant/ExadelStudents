@@ -37,6 +37,20 @@ public class StudentService {
         return studentDao.findByLogin(login);
     }
 
+    /**
+     * Returns all enabled students
+     * @return List<Student>
+     */
+    @Transactional
+    public List<Student> getAllEnabledStudents(){
+        List<Student> students = studentDao.findAll();
+        List<Student> studentsRet = new ArrayList<Student>();
+        for(Student student : students)
+            if (student.isEnabled() == true)
+                studentsRet.add(student);
+        return studentsRet;
+    }
+
     @Transactional
     public void setStatus(String studentLogin, String status) {
         Student student = studentDao.findByLogin(studentLogin);
