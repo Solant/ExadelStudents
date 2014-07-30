@@ -240,4 +240,20 @@ public class StudentService {
                 rev.add(review);
         return rev;
     }
+
+    @Transactional
+    public Review getLastReview(String login){
+        Set<Review> reviews = studentDao.findByLogin(login).getReviews();
+        Review r = null;
+        for(Review review : reviews){
+            if (r == null)
+                r = review;
+            else{
+                if (r.getDate().before(review.getDate())){
+                    r = review;
+                }
+            }
+        }
+        return r;
+    }
 }
