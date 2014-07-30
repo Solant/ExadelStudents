@@ -10,6 +10,7 @@ import persistance.model.Student;
 import persistance.model.UserRole;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -55,7 +56,7 @@ public class FeedbackerService {
      */
     @Transactional
     public Set<Student> getSupervisedStudents(String feedbackerLogin){
-        return feedbackerDao.findByLogin(feedbackerLogin).getMyStudents();
+        return new HashSet<Student>(feedbackerDao.findByLogin(feedbackerLogin).getMyStudents());
     }
 
     /**
