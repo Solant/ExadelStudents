@@ -36,4 +36,16 @@ public class UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getName();
     }
+
+    public String getFirstName(String login){
+        return userDao.findByLogin(login).getFirstName();
+    }
+
+    public String getSecondName(String login){
+        return userDao.findByLogin(login).getSecondName();
+    }
+
+    public String getPassword(String login){
+        return userDao.findByLogin(login).getPassword();
+    }
 }
