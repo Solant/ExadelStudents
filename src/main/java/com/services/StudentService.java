@@ -202,7 +202,7 @@ public class StudentService {
      * @param studentLogin - Student Login
      */
     @Transactional
-    void disable(String studentLogin) {
+    public void disable(String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         student.setEnabled(false);
 
@@ -215,7 +215,7 @@ public class StudentService {
      * @param studentLogin - Student login
      */
     @Transactional
-    void enable(String studentLogin) {
+    public void enable(String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         student.setEnabled(true);
 

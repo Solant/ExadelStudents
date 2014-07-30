@@ -21,6 +21,7 @@ public class GroupService {
         Group group = new Group();
         group.setName(groupName);
         group.setStatus(status);
+        System.out.println("CALL");
         groupDao.save(group);
     }
 
