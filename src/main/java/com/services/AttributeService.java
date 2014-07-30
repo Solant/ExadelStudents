@@ -26,4 +26,9 @@ public class AttributeService {
         attribute.setAttributeName(attributeName);
         attributeDao.save(attribute);
     }
+
+    @Transactional
+    public void removeAttribute(String attributeName){
+        attributeDao.removeById(attributeDao.findByName(attributeName).getId());
+    }
 }

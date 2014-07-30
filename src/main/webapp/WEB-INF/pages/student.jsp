@@ -71,15 +71,15 @@
         <%pageContext.setAttribute("isActive", "active");%>
 
     <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
-    <div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].group[0].getGroup()}">
+    <div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count].group[0].getGroup()}">
 
         <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
-            <c:forEach items="${groupedValues.valuesArray[index1.count-1].group}" varStatus="index2">
+            <c:forEach items="${groupedValues.valuesArray[index1.count].group}" varStatus="index2">
                 <div class="group">
                     <%--<label >${groupedValues.valuesArray[index1.count-1].group[index2.count-1].attribute} </label>--%>
 
-                    <form:input type="" path="valuesArray[${index1.count-1}].group[${index2.count-1}].value" />
-                    <form:input readonly="true" path="valuesArray[${index1.count-1}].group[${index2.count-1}].attribute" />
+                    <form:input type="" path="valuesArray[${index1.count}].group[${index2.count}].value" />
+                    <form:input readonly="true" path="valuesArray[${index1.count}].group[${index2.count}].attribute" />
                 </div>
             </c:forEach>
             <form:button type="submit" >Save</form:button>
