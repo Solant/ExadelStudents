@@ -32,7 +32,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
    // @JoinColumn(name = "user_id")
-    private Set<UserRole> userRoles = new HashSet<UserRole>(0);
+    private Set<UserRole> userRoles = new HashSet<UserRole>();
+
+    @OneToMany(mappedBy = "user")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.DELETE, org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+    private Set<Notification> notifications = new HashSet<Notification>();
 
     public User() {
     }
@@ -75,5 +79,13 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Set<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(Set<Notification> notifications) {
+        this.notifications = notifications;
     }
 }
