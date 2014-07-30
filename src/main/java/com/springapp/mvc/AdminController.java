@@ -26,7 +26,7 @@ public class AdminController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String workerPage(ModelMap model) {
-        return "admin";
+        return "/admin.jsp";
     }
 
     @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
@@ -43,7 +43,7 @@ public class AdminController {
             feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
         if(newUser.getRole().equals("Student"))
             administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());*/
-        return "admin";
+        return "/admin.jsp";
     }
 
 
