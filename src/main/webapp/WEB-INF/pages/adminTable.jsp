@@ -49,7 +49,7 @@
 
     <div class="saveTable">
         Save as: <br/>
-        <a href="">
+        <a href="/admin/exportWord">
             <img src="/resources/images/word.jpg" alt="word" title="word"/>
         </a>
         <a href="">
@@ -63,22 +63,21 @@
         <div id="searchTable">
             <table id="example" class="display">
 			<thead>
-				<td> Name </td>
-				<td> Hire date </td>
-				
-				<td> Faculty </td>
-				<td> Course/Group </td>
-				
-				<td> Year of graduation </td>
-				<td> Number of hours </td>
-				
-				<td> Billable </td>
-				<td> Role on Project </td>
-				
-				<td> Technology </td>
-				<td> English </td>
+				<c:forEach items="${tableData.get(0)}" var="item">
+                    <td>
+                    ${item}</td>
+				</c:forEach>
 			</thead>
                 <tbody>
+                <c:forEach items="${tableData}" var="student" begin="1">
+                    <tr>
+                        <c:forEach items="${student}" var="item">
+                            <td>${item}</td>
+                        </c:forEach>
+                    </tr>
+                </c:forEach>
+                </tbody>
+                <%--<tbody>
                 <tr>
                     <td>Ivanov Ivan</td>
                     <td>22.07.2014</td>
@@ -227,7 +226,7 @@
 
                 <td> Technology </td>
                 <td> English </td>
-            </tfoot>
+            </tfoot>--%>
 		</table>
 		</div>
 		

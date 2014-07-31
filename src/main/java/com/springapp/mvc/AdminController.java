@@ -106,7 +106,13 @@ public class AdminController {
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
         for(Group group:groupedValues.getValuesArray())
             values.addAll(group.getGavs());
+        List<List<String>> tableData = studentService.find(values);
+        modelMap.addAttribute("tableData", tableData);
         return "/adminTable";
     }
 
+    @RequestMapping(value = "/exportWord", method = RequestMethod.GET)
+    public String exportWord(){
+        return "";
+    }
 }
