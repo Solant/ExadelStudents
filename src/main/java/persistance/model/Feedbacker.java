@@ -31,8 +31,12 @@ public class Feedbacker extends User{
 
     @OneToMany(mappedBy = "feedbacker")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-   // @JoinColumn(name = "feedbId")
     private Set <Review> reviews = new HashSet();
+
+    @ManyToMany
+    @Cascade(CascadeType.SAVE_UPDATE)
+    @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "technology_id")}, inverseJoinColumns = {@JoinColumn(name = "feedbacker_id")})
+    private Set<Technology> myTechnologies = new HashSet();
 
     public Feedbacker() {
     }
@@ -83,6 +87,15 @@ public class Feedbacker extends User{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public Set<Technology> getMyTechnologies() {
+        return myTechnologies;
+    }
+
+    public void setMyTechnologies(Set<Technology> myTechnologies) {
+        this.myTechnologies = myTechnologies;
     }
 
 
