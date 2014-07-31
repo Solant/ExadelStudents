@@ -59,7 +59,7 @@
         <a href="#groupAndName" role="tab" data-toggle="tab">Group and Name</a>
     </li>
     <li >
-        <a href="#type" role="tab" data-toggle="tab">Type 58</a>
+        <a href="#type" role="tab" data-toggle="tab">Type</a>
     </li>
 
 </ul>
@@ -83,7 +83,7 @@
         <input type="radio" id="newg" name="group"/><label for="newg">New Group</label><br/>
         <input type="text"/><br/>
 
-            <label for="status">Status</label>
+            <label for="status">For Status</label>
             <select name="status" id="status">
                 <option value="working">Working</option>
                 <option value="studying">Studying</option>
