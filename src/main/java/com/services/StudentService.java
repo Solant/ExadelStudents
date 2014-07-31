@@ -338,6 +338,36 @@ public class StudentService {
     }
 
     @Transactional
+    public List<List<String>> getStudentValuesInTable(List<GAVPresentation> gavPresentationList, String login){
+        Student student = studentDao.findByLogin(login);
+        List<List<String>> returnStatement = new ArrayList<List<String>>();
+
+        ArrayList<String> row = new ArrayList<String>();
+        row.add("Name");
+        row.add("Login");
+        for(GAVPresentation gavPresentation : gavPresentationList)
+            if (gavPresentation.isShow())
+                row.add(gavPresentation.getAttribute());
+        returnStatement.add(row);
+
+        ArrayList<String>addStatement = new ArrayList<String>();
+        addStatement.add(student.getSecondName() + " " + student.getFirstName());
+        addStatement.add(student.getLogin());
+        for(GAVPresentation gavPresentation : gavPresentationList){
+            List<GAVPresentation> valuesGAV = getValues(student.getLogin());
+            for(GAVPresentation gavStudent : valuesGAV){
+                if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute()) && gavPresentation.isShow()){
+                    addStatement.add(gavStudent.getValue());
+                    break;
+                }
+            }
+        }
+
+        returnStatement.add(addStatement);
+        return returnStatement;
+    }
+
+    @Transactional
     public List<Student> getAllDisabledStudents(){
         List<Student> students = studentDao.findAll();
         List<Student> studentsRet = new ArrayList<Student>();
