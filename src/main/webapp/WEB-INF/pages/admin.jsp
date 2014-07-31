@@ -81,7 +81,7 @@
 </div>
         <%pageContext.setAttribute("isActive", "");%>
 </c:forEach>
-        <form:button type="submit" >Save</form:button>
+        <form:button type="submit" >Form table</form:button>
         </form:form>
 </body>
 </html>

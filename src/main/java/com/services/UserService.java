@@ -45,18 +45,29 @@ public class UserService {
         return auth.getName();
     }
 
+    @Transactional
     public String getFirstName(String login){
         return userDao.findByLogin(login).getFirstName();
     }
 
+    @Transactional
     public String getSecondName(String login){
         return userDao.findByLogin(login).getSecondName();
     }
 
+    @Transactional
     public String getPassword(String login){
         return userDao.findByLogin(login).getPassword();
     }
 
+    @Transactional
+    public void setPassword(String login, String pass){
+        User user = userDao.findByLogin(login);
+        user.setPassword(pass);
+        userDao.update(user);
+    }
+
+    @Transactional
     public List<Notification> getAllUnreadNotifications(String login) {
         User user = userDao.findByLogin(login);
         List<Notification> notifications = notificationDao.findAll();

@@ -1,9 +1,11 @@
 package com.springapp.mvc;
 
+import com.View.AccountUnit;
 import com.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import service.TestService;
@@ -45,9 +47,36 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String account() {
-        UserService.getCurrentUserLogin();
+    public String account(ModelMap modelMap) {
+        String login = UserService.getCurrentUserLogin();
+        AccountUnit accountUnit = new AccountUnit();
+        accountUnit.setFirstName(us.getFirstName(login));
+        accountUnit.setLogin(login);
+        accountUnit.setSecondName(us.getSecondName(login));
+        modelMap.addAttribute("accountUnit", accountUnit);
+        return "account";
+    }
 
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public String changePassword(ModelMap modelMap, @ModelAttribute("accountUnit")AccountUnit accountUnit) {
+        String message = new String();
+        if(accountUnit.getPassword().equals(us.getPassword(UserService.getCurrentUserLogin()))){
+            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword())) {
+                us.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
+                message = "Password was changed.";
+            }
+            else{
+                message = "Confirmed password doesn't match the new one.";
+            }
+        }
+        else{
+            message = "Wrong old password.";
+        }
+        accountUnit.setPassword("");
+        accountUnit.setNewPassword("");
+        accountUnit.setConfirmedPassword("");
+        modelMap.addAttribute("message", message);
+        modelMap.addAttribute("accountUnit", accountUnit);
         return "account";
     }
 
