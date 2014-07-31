@@ -103,6 +103,9 @@ public class AdminController {
 
     @RequestMapping(value = "/formTable", method = RequestMethod.POST)
     public String formTable(ModelMap modelMap, @ModelAttribute("groupedValues")GroupedValues groupedValues){
+        ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
+        for(Group group:groupedValues.getValuesArray())
+            values.addAll(group.getGavs());
         return "/adminTable";
     }
 

@@ -69,11 +69,33 @@
     <!-- Petya -->
 
         <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2">
-            <div class="group">
+            <div class="group"><%--
                 <label >${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].attribute} </label>
 
                 <form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" cssStyle="width: 20px"/>
-                <form:input type="" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />--%>
+
+                <label >${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].attribute} </label>
+                <form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" cssStyle="width: 20px"/>
+                <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'text'}">
+                    <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                </c:if>
+                <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'textarea'}">
+                    <form:textarea path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                </c:if>
+                    <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'select'}">
+                        <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                            <form:option value="${token}">${token}</form:option>
+                        </c:forTokens>
+                    </c:if>
+                    <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'radiobutton'}">
+                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                            <form:radiobutton path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
+                                              value="${token == groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].value}"/>
+                        </c:forTokens>
+                    </c:if>--%>
                 <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
             </div>
         </c:forEach>
