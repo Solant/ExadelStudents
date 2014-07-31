@@ -316,20 +316,28 @@ public class StudentService {
                 if(!isSuitable)
                     break;
             }
+
             if (isSuitable){
                 ArrayList<String>addStatement = new ArrayList<String>();
                 addStatement.add(student.getSecondName() + " " + student.getFirstName());
                 addStatement.add(student.getLogin());
                 for(GAVPresentation gavPresentation : gavPresentationList){
-                    Set<Value> vals = student.getValues();
+                    /*Set<Value> vals = student.getValues();
                     for (Value value : vals){
-                        if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) && gavPresentation.isShow()){
+                        if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute())
+                                && gavPresentation.isShow()){
                             addStatement.add(value.getValue());
+                            break;
+                        }
+                    }*/
+                    List<GAVPresentation> valuesGAV = getValues(student.getLogin());
+                    for(GAVPresentation gavStudent : valuesGAV){
+                        if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute())){
+                            addStatement.add(gavStudent.getValue());
                             break;
                         }
                     }
                 }
-
                 returnStatement.add(addStatement);
             }
         }
