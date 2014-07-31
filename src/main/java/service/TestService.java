@@ -43,8 +43,13 @@ public class TestService {
     public void testMethod() {
 
         System.out.println("TEST STARTED!");
-        /*
-        Student stud = sd.findByLogin("testStud");
+
+        Student stud = new Student();
+        stud.setLogin("TEST");
+        stud.setPassword("TEST");
+        stud.setFirstName("TEST");
+        stud.setSecondName("TEST");
+        sd.save(stud);
 
         Notification notification = new Notification();
         notification.setUser(stud);
@@ -71,26 +76,25 @@ public class TestService {
         cur2.setFirstName("testCur4FN");
         cur2.setSecondName("testCur4SN");
 
-        stud.getCurators().add(cur1);
-        stud.getCurators().add(cur2);
-
         fd.save(cur1);
         fd.save(cur2);
 
+        stud.getCurators().add(cur1);
+        stud.getCurators().add(cur2);
+
         Group group = new Group();
         group.setName("Institution");
+        group.setStatus("for_everybody");
         gd.save(group);
 
         Attribute attribute1 = new Attribute();
         attribute1.setGroup(group);
         attribute1.setAttributeName("Institution");
-        attribute1.setStatus("for_everybody");
         attribute1.setType("text");
 
         Attribute attribute2 = new Attribute();
         attribute2.setGroup(group);
         attribute2.setAttributeName("Faculty");
-        attribute2.setStatus("for_everybody");
         attribute2.setType("text");
 
         ad.save(attribute1);
@@ -118,12 +122,7 @@ public class TestService {
         ur.setRole("ROLE_STUDENT");
         ur.setUser(stud);
 
-        UserRole ur2 = new UserRole();
-        ur2.setRole("ROLE_ADMIN");
-        ur2.setUser(stud);
-
         stud.getUserRoles().add(ur);
-        stud.getUserRoles().add(ur2);
 
         sd.update(stud);
 
@@ -153,6 +152,12 @@ public class TestService {
         td.save(technology2);
         td.save(technology3);
 
+        cur1.getMyTechnologies().add(technology1);
+        cur2.getMyTechnologies().add(technology1);
+        cur1.getMyTechnologies().add(technology3);
+
+        fd.update(cur1);
+        fd.update(cur2);
         Rating rating1 = new Rating();
         Rating rating2 = new Rating();
         Rating rating3 = new Rating();
@@ -186,7 +191,7 @@ public class TestService {
         for (Feedbacker feedb : fd.findAll()) {
             System.out.println("F- " + feedb.getLogin());
         }
-*/
+
         System.out.println("TEST ENDED!");
     }
 }
