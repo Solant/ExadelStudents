@@ -1,4 +1,4 @@
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,7 @@
             <img src="/resources/images/add.png" class="adminMenuImages">
             <span>Add User</span>
         </button>
-        <button formaction="/admin/linkStudent" class="btn">
+        <button formaction="/admin/showLinkStudent" class="btn">
             <img src="/resources/images/yellow-link.png" class="adminMenuImages">
             <span>Link Student</span>
         </button>
@@ -45,6 +45,48 @@
     <span class="adminProfile">Zhanna Vasilenko</span>
 </div>
 
+<ul class="nav nav-tabs" role="tablist">
+
+    <%pageContext.setAttribute("isActive", "active");%>
+
+    <c:forEach items="${groups}" var="groupName">
+        <li class="${isActive}">
+            <a href="#${groupName}" role="tab" data-toggle="tab">${groupName}</a>
+        </li>
+        <%pageContext.setAttribute("isActive", "");%>
+    </c:forEach>
+
+
+</ul>
+
+
+    <form:form commandName="groupedValues" class="spoilers" method="post" action="/admin/formTable">
+<div class="tab-content">
+
+    <%pageContext.setAttribute("isActive", "active");%>
+<c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
+<div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].gavs[0].getGroup()}">
+    <!-- Petya -->
+
+        <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2">
+            <div class="group">
+                <label >${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].attribute} </label>
+
+                <form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" cssStyle="width: 20px"/>
+                <form:input type="" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
+            </div>
+        </c:forEach>
+
+</div>
+        <%pageContext.setAttribute("isActive", "");%>
+</c:forEach>
+        <form:button type="submit" >Save</form:button>
+        </form:form>
+</body>
+</html>
+
+<%--
 <ul class="nav nav-tabs" role="tablist">
     <li class="active">
         <a href="#common" role="tab" data-toggle="tab">Common</a>
@@ -330,6 +372,4 @@
 </div>
 
 </div>
-</div>
-</body>
-</html>
+</div>--%>

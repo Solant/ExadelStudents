@@ -28,8 +28,9 @@
 
 
 </div>
-<form:form commandName="review" class="reviewForm" action="/curator/${account}/addFeedback/${feedbackerRole}" method="post">
+<form:form commandName="review" class="reviewForm" action="/curator/${account}/addFeedback" method="post">
 <form:input hidden="true" path="student.login" />
+    <form:input hidden="true" path="fromInterview" />
         <div class="alignCenter">
             <h1 >Review Form </h1>
         </div>

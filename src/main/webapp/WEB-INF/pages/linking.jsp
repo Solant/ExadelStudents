@@ -1,5 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,26 +28,16 @@
         </button>
     </form>
 </div>
-<form class="linkingForm" >
+<form:form commandName="linkUnit" class="linkingForm" method="post" action="/admin/linkStudent" >
 <div class="radio">
-    <input type="radio" name="feedbacking" value="Interview" id="Interview"><label for="Interview">Interview</label>
-
-    <input type="radio" name="feedbacking" value="Curating" id="Curating"><label for="Curating">Curating</label>
+    <form:radiobutton path="isCurator" name="feedbacking" value="no" id="Interview"/><label for="Interview">Interview</label>
+    <form:radiobutton path="isCurator" name="feedbacking" value="yes" id="Curating"/><label for="Curating">Curating</label>
 </div>
-        <select multiple class="linkingL">
-            <option value="A">A</option>
-            <option value="A">B</option>
-            <option value="A">C</option>
-            <option value="A">D</option>
-            <option value="A">E</option>
-            <option value="A">F</option>
-            <option value="A">G</option>
-            <option value="A">H</option>
-            <option value="A">K</option>
-            <option value="A">L</option>
-            <option value="A">M</option>
-            <option value="A">N</option>
-        </select>
+        <form:select path="students" multiple="true" class="linkingL">
+            <c:forEach items="${linkUnit.students}" var="student">
+                <form:option value="${student}">${student}</form:option>
+            </c:forEach>
+        </form:select>
         <select multiple class="linkingR">
             <option value="A">A</option>
             <option value="A">B</option>
@@ -67,6 +58,6 @@
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
         </div>
     </div>
-</form>
+</form:form>
 </body>
 </html>

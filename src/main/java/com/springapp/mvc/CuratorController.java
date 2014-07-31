@@ -21,6 +21,7 @@ import persistance.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/curator/{current}")
@@ -42,16 +43,14 @@ public class CuratorController {
 
     @RequestMapping(value = "/myStudents", method = RequestMethod.GET)
     public String myStudents(ModelMap model, @PathVariable("current")String current){
-        List<String> studentsLogins = feedbackerService.getStudents(current);
+        Set<Student> students = feedbackerService.getSupervisedStudents(current);
         List<FeedbackingUnit> studentsNames = new ArrayList<FeedbackingUnit>();
-        for(String student:studentsLogins){
+        for(Student student:students){
             FeedbackingUnit unit = new FeedbackingUnit();
-            unit.setStudentName(studentService.getFirstName(student)+" "+ studentService.getSecondName(student));
-            unit.setStudentLogin(student);
-            List<Review> reviews = studentService.getReviews(student);
-            Review lastReview;
-            if(reviews.size()>0) {
-                lastReview = reviews.get(reviews.size() - 1);
+            unit.setStudentName(student.getFirstName()+" "+ student.getSecondName());
+            unit.setStudentLogin(student.getLogin());
+            Review lastReview = studentService.getLastReview(student.getLogin());
+            if(lastReview != null) {
                 unit.setFeedbackerName(lastReview.getFeedbacker().getFirstName() + " " + lastReview.getFeedbacker().getSecondName());
                 unit.setDate(lastReview.getDate().getTime());
             }
@@ -67,31 +66,51 @@ public class CuratorController {
     }
 
     @RequestMapping(value = "/interview", method = RequestMethod.GET)
-    public String interview(ModelMap model){
+    public String interview(ModelMap model, @PathVariable("current")String current){
+        Set<Student> students = feedbackerService.getInterviewedStudents(current);
+        List<FeedbackingUnit> studentsNames = new ArrayList<FeedbackingUnit>();
+        for(Student student:students){
+            FeedbackingUnit unit = new FeedbackingUnit();
+            unit.setStudentName(student.getFirstName()+" "+ student.getSecondName());
+            unit.setStudentLogin(student.getLogin());
+            Review lastReview = studentService.getLastReview(student.getLogin());
+            if(lastReview != null) {
+                unit.setFeedbackerName(lastReview.getFeedbacker().getFirstName() + " " + lastReview.getFeedbacker().getSecondName());
+                unit.setDate(lastReview.getDate().getTime());
+            }
+            else{
+                unit.setFeedbackerName("There is no feedbacks to this student");
+                unit.setDate(null);
+            }
+            studentsNames.add(unit);
+        }
+        model.addAttribute("studentList", studentsNames);
         model.addAttribute("feedbackerRole", "asInterviewer");
         return "fblist";
     }
 
-    @RequestMapping(value = "/showFeedback/{studentLogin}/asCurator", method = RequestMethod.GET)
-    public String showCuratorFeedback(@PathVariable("studentLogin")String studentLogin, ModelMap model){
+    @RequestMapping(value = "/showFeedback/{studentLogin}/{feedbackerRole}", method = RequestMethod.GET)
+    public String showCuratorFeedback(@PathVariable("studentLogin")String studentLogin, ModelMap model,
+                                      @PathVariable("feedbackerRole")String feedbackerRole){
         Review review = new Review();
         Student student = studentService.getStudentByLogin(studentLogin);
         review.setStudent(student);
         review.setSuitability(true);
-        review.setFromInterview(false);
-        model.addAttribute("feedbackerRole", "asCurator");
+        if(feedbackerRole.equals("asCurator")) {
+            review.setFromInterview(false);
+        }
+        else{
+            review.setFromInterview(true);
+        }
         model.addAttribute("review", review);
         return "review";
     }
 
-    @RequestMapping(value = "/addFeedback/asCurator", method = RequestMethod.POST)
+    @RequestMapping(value = "/addFeedback", method = RequestMethod.POST)
     public String addCuratorFeedback(@ModelAttribute("review")Review review){
         studentService.addReview(review.getStudent().getLogin(), UserService.getCurrentUserLogin(), review);
         return "redirect:/curator/"+UserService.getCurrentUserLogin();
     }
 
-    @RequestMapping(value = "/addFeedback/{studentLogin}/asInterviewer", method = RequestMethod.GET)
-    public String addInterwiewerFeedback(){
-        return "interview";
-    }
+
 }

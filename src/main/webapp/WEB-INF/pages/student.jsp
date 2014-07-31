@@ -72,7 +72,7 @@
 
     <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
     <div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].gavs[0].getGroup()}">
-
+<!-- Petya -->
         <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
             <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2">
                 <div class="group">
