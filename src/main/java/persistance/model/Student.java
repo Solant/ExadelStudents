@@ -4,9 +4,12 @@ import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.validator.constraints.Email;
+
 
 @Entity
 @DiscriminatorValue("student")
@@ -15,9 +18,12 @@ public class Student extends User {
     @Column (name = "skype")
     private String skype;
 
+    @Pattern(regexp = "^\\+?[0-9\\-()]+$", message = "Wrong telephone number. " +
+            "Possible symbols are numbers, -, (, ), + (at the begining)")
     @Column(name = "telephone")
     private String telephone;
 
+    @Email
     @Column(name = "email")
     private String email;
 
@@ -33,12 +39,10 @@ public class Student extends User {
 
     @OneToMany(mappedBy = "student")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-    //@JoinColumn(name = "studId")
     private Set<Review> reviews = new HashSet();
 
     @OneToMany(mappedBy = "student")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-    //@JoinColumn(name = "studId")
     private Set<Value> values = new HashSet();
 
     public Student() {

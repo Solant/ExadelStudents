@@ -25,7 +25,6 @@ public class Attribute {
 
     @OneToMany(mappedBy = "attribute")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-   // @JoinColumn(name = "attrId")
     private Set<Value> values;
 
     @ManyToOne

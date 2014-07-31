@@ -19,14 +19,11 @@ public class Group {
     @Column(name = "groupName")
     private String name;
 
-    public String getStatus() {
-        return status;
-    }
-
+    @Column(name = "status")
+    private String status;
 
     @OneToMany(mappedBy = "group")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-   // @JoinColumn(name = "groupId")
     private Set<Attribute> attributes;
 
     public Group() {
@@ -48,12 +45,13 @@ public class Group {
         this.name = name;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
-
-    @Column(name = "status")
-    private String status;
 
     public Set<Attribute> getAttributes() {
         return attributes;

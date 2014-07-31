@@ -1,10 +1,12 @@
 package persistance.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @DiscriminatorValue("feedbacker")
@@ -13,9 +15,12 @@ public class Feedbacker extends User{
     @Column (name = "skype")
     private String skype;
 
+    @Pattern(regexp = "^\\+?[0-9\\-()]", message = "Wrong telephone number. " +
+            "Possible symbols are numbers, -, (, ), + (at the begining)")
     @Column(name = "telephone")
     private String telephone;
 
+    @Email
     @Column(name = "email")
     private String email;
 
@@ -31,7 +36,6 @@ public class Feedbacker extends User{
 
     @OneToMany(mappedBy = "feedbacker")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-   // @JoinColumn(name = "feedbId")
     private Set <Review> reviews = new HashSet();
 
     public Feedbacker() {

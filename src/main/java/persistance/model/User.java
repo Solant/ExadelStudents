@@ -7,6 +7,9 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,24 +23,30 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     @Column(name = "login")
     private String login;
 
+    @NotNull
     @Column(name = "password")
     private String password;
 
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Pattern(regexp = "^[A-Za-z\\s]+$", message = "Wrong first name." +
+            " Possible symbols are latin symbols and space")
     @Column (name = "firstname")
     private String firstName;
 
+    @Pattern(regexp = "^[A-Za-z\\-\\s]+$", message = "Wrong second name." +
+            " Possible symbols are latin symbols, \"-\" and space")
     @Column (name = "secondname")
     private String secondName;
 
+    @Valid
     @OneToMany(mappedBy = "user")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-   // @JoinColumn(name = "user_id")
     private Set<UserRole> userRoles = new HashSet<UserRole>();
 
     @OneToMany(mappedBy = "user")

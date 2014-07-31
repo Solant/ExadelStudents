@@ -1,11 +1,15 @@
 package service;
 
+import com.services.validation.ValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.*;
 import persistance.model.*;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -43,6 +47,28 @@ public class TestService {
 
         System.out.println("TEST STARTED!");
 
+        Validator validator =  Validation.buildDefaultValidatorFactory().getValidator();
+        Student invalidStud = new Student();
+        invalidStud.setEmail("al@email");
+        invalidStud.setLogin("login");
+        invalidStud.setPassword("password");
+        invalidStud.setFirstName("ibn Se-asdr");
+        invalidStud.setSecondName("ibn Se-asdr");
+        invalidStud.setTelephone("+375(29)213-21-23");
+        UserRole ur = new UserRole();
+        ur.setRole("ROLE_ADMIN");
+
+        UserRole ur2 = new UserRole();
+        ur2.setRole("ROLE_ALESHA");
+        invalidStud.getUserRoles().add(ur);
+
+        invalidStud.getUserRoles().add(ur2);
+        List<String> errors = ValidatorService.getErrors(invalidStud, validator);
+        for(String error : errors){
+            System.out.println(error);
+        }
+
+        /*
         Student stud = new Student();
         Set<Student> studs = new HashSet<Student> ();
         studs.add(stud);
@@ -52,7 +78,7 @@ public class TestService {
             s.setSkype("ALESHA");
         }
         System.out.println(stud.getSkype());
-/*
+
         stud.setLogin("test5Stud");
         stud.setPassword("test5Stud");
         stud.setFirstName("test5StudFN");
