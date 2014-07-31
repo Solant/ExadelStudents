@@ -1,4 +1,4 @@
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -52,10 +52,10 @@
         <a href="/admin/exportWord">
             <img src="/resources/images/word.jpg" alt="word" title="word"/>
         </a>
-        <a href="">
+        <a href="/admin/exportPDF">
             <img src="/resources/images/pdf.jpg" alt="pdf" title="pdf"/>
         </a>
-        <a href="">
+        <a href="/admin/exportExcel">
             <img src="/resources/images/exel.jpg" alt="exel" title="exel"/>
         </a>
     </div>
@@ -77,6 +77,11 @@
                     </tr>
                 </c:forEach>
                 </tbody>
+    </table>
+    </div>
+
+    </body>
+    </html>
                 <%--<tbody>
                 <tr>
                     <td>Ivanov Ivan</td>
@@ -227,8 +232,3 @@
                 <td> Technology </td>
                 <td> English </td>
             </tfoot>--%>
-		</table>
-		</div>
-		
-	</body>
-</html>
