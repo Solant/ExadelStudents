@@ -336,4 +336,14 @@ public class StudentService {
 
         return returnStatement;
     }
+
+    @Transactional
+    public List<Student> getAllDisabledStudents(){
+        List<Student> students = studentDao.findAll();
+        List<Student> studentsRet = new ArrayList<Student>();
+        for(Student student : students)
+            if(!student.isEnabled())
+                studentsRet.add(student);
+        return studentsRet;
+    }
 }
