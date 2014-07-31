@@ -341,7 +341,10 @@ public class StudentService {
     public List<List<String>> getStudentValuesInTable(List<GAVPresentation> gavPresentationList, String login){
         Student student = studentDao.findByLogin(login);
         List<List<String>> returnStatement = new ArrayList<List<String>>();
-
+        ArrayList<String> row0 = new ArrayList<String>();
+        row0.add("Attribute");
+        row0.add("Value");
+        returnStatement.add(row0);
         ArrayList<String> row = new ArrayList<String>();
         row.add("Name");
         row.add(student.getFirstName() + " " + student.getSecondName());
