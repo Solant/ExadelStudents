@@ -70,11 +70,12 @@
 			</thead>
                 <tbody>
                 <c:forEach items="${tableData}" var="student" begin="1">
-                    <tr>
-                        <c:forEach items="${student}" var="item">
-                            <td>${item}</td>
-                        </c:forEach>
-                    </tr>
+                        <tr>
+                            <c:forEach items="${student}" var="item">
+                                <td>
+                                    <a href="/admin/studentPage/${student.get(1)}">${item}</a></td>
+                            </c:forEach>
+                        </tr>
                 </c:forEach>
                 </tbody>
     </table>

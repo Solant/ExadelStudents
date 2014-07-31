@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -185,5 +186,62 @@ public class AdminController {
 
 
         return "";
+    }
+
+    @RequestMapping("/studentPage/{student}")
+    public String studentPage(@PathVariable("student")String current, ModelMap modelMap){
+        ArrayList<GAVPresentation> gav = (ArrayList<GAVPresentation>)studentService.getValues(current);
+        System.out.println(gav.size());
+        GroupedValues groupedValues = new GroupedValues();
+
+        List<GAVPresentation> internal;
+        ArrayList<String> groups = new ArrayList<String>();
+        for(int j = 0; gav.size() > 0; j++){
+            internal = new ArrayList<GAVPresentation>();
+            GAVPresentation temp = gav.remove(0);
+            internal.add(temp);
+            for(int i = 0; i < gav.size(); i++){
+                if(gav.get(i).getGroup().equals(temp.getGroup())){
+                    internal.add(gav.get(i));
+                    gav.remove(i--);
+                }
+            }
+            groups.add(temp.getGroup());
+            Group internalGroup = new Group();
+            internalGroup.setGavs(internal);
+            groupedValues.getValuesArray().add(internalGroup);
+        }
+        UserUnit currentUser = new UserUnit();
+        currentUser.setLogin(current);
+        currentUser.setFirstname(studentService.getFirstName(current));
+        currentUser.setLastname(studentService.getSecondName(current));
+        modelMap.addAttribute("groups", groups);
+        modelMap.addAttribute("groupedValues", groupedValues);
+        modelMap.addAttribute("currentUser", currentUser);
+        return "studentForAdmin";
+    }
+
+    @RequestMapping(value = "/studentPage/{student}/saveChanges", method = RequestMethod.POST)
+    public String saveChanges(@ModelAttribute("groupedValues") GroupedValues groupedValues,
+                              @PathVariable("student") String current,
+                              ModelMap modelMap){
+        ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
+        for(Group group:groupedValues.getValuesArray())
+            values.addAll(group.getGavs());
+        studentService.setValues(current, values);
+        return "redirect:/admin/studentPage/"+current;
+    }
+
+    @RequestMapping(value = "/studentPage/{student}/formTable", method = RequestMethod.POST)
+    public String formStudentTable(ModelMap modelMap,
+                                   @ModelAttribute("groupedValues")GroupedValues groupedValues,
+                                   @PathVariable("student")String current){
+        ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
+        for(Group group:groupedValues.getValuesArray())
+            values.addAll(group.getGavs());
+        tableData= studentService.getStudentValuesInTable(values, current);
+        modelMap.addAttribute("tableData", tableData);
+
+        return "adminTable";
     }
 }
