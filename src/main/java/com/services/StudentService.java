@@ -243,12 +243,6 @@ public class StudentService {
     }
 
     @Transactional
-    List<Student> find() {
-        List<Student> studentList = new ArrayList<Student>();
-        return studentList;
-    }
-
-    @Transactional
     public List<Review> getReviews(String login){
         List<Review> reviews = reviewDao.findAll();
         List<Review> rev = new ArrayList<Review>();
@@ -289,5 +283,60 @@ public class StudentService {
             if (notification.getUser().getLogin().equalsIgnoreCase(login))
                 notificationsReturn.add(notification);
         return notificationsReturn;
+    }
+
+    @Transactional
+    public List<List<String>> find(List<GAVPresentation> gavPresentationList){
+        List<Student> students = studentDao.findAll();
+        List<List<String>> returnStatement = new ArrayList<List<String>>();
+
+        ArrayList<String> row = new ArrayList<String>();
+        row.add("Name");
+        row.add("Login");
+        for(GAVPresentation gavPresentation : gavPresentationList)
+            if (gavPresentation.isShow())
+                row.add(gavPresentation.getAttribute());
+        returnStatement.add(row);
+
+        for(Student student : students){
+            Set<Value> valueSet = student.getValues();
+            boolean isSuitable = true;
+            for(Value value : valueSet){
+                for(GAVPresentation gavPresentation : gavPresentationList){
+                    if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute())
+                            && gavPresentation.getValue() != null
+                            && !gavPresentation.getValue().equalsIgnoreCase("")
+                            && !value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
+                        isSuitable = false;
+                        break;
+                    }
+                    if (!isSuitable)
+                        break;
+                }
+                if(!isSuitable)
+                    break;
+            }
+            if (isSuitable){
+                ArrayList<String>addStatement = new ArrayList<String>();
+                addStatement.add(student.getSecondName() + " " + student.getFirstName());
+                addStatement.add(student.getLogin());
+                for(GAVPresentation gavPresentation : gavPresentationList){
+                    Set<Value> vals = student.getValues();
+                    for (Value value : vals){
+                        if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) && gavPresentation.isShow()){
+                            addStatement.add(value.getValue());
+                            break;
+                        }
+                    }
+                }
+
+                returnStatement.add(addStatement);
+            }
+        }
+
+        if (returnStatement.size() == 0)
+            return null;
+
+        return returnStatement;
     }
 }
