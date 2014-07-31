@@ -1,6 +1,13 @@
 package persistance.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Technologies")
@@ -11,6 +18,11 @@ public class Technology {
 
     @Column(name = "technology_name")
     private String technologyName;
+
+    @ManyToMany
+    @Cascade(CascadeType.SAVE_UPDATE)
+    @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "feedbacker_id")}, inverseJoinColumns = {@JoinColumn(name = "technology_id")})
+    private Set<Feedbacker> feedbackers = new HashSet();
 
     public Technology() {
     }
@@ -29,6 +41,14 @@ public class Technology {
 
     public void setTechnologyName(String technologyName) {
         this.technologyName = technologyName;
+    }
+
+    public Set<Feedbacker> getFeedbackers() {
+        return feedbackers;
+    }
+
+    public void setFeedbackers(Set<Feedbacker> feedbackers) {
+        this.feedbackers = feedbackers;
     }
 
 }
