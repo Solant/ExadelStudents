@@ -24,6 +24,10 @@ public class Technology {
     @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "feedbacker_id")}, inverseJoinColumns = {@JoinColumn(name = "technology_id")})
     private Set<Feedbacker> feedbackers = new HashSet();
 
+    @OneToMany(mappedBy = "technology")
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
+    private Set<Rating> ratings = new HashSet();
+
     public Technology() {
     }
 
@@ -49,6 +53,14 @@ public class Technology {
 
     public void setFeedbackers(Set<Feedbacker> feedbackers) {
         this.feedbackers = feedbackers;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
     }
 
 }
