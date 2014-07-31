@@ -332,7 +332,7 @@ public class StudentService {
                     }*/
                     List<GAVPresentation> valuesGAV = getValues(student.getLogin());
                     for(GAVPresentation gavStudent : valuesGAV){
-                        if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute())){
+                        if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute()) && gavPresentation.isShow()){
                             addStatement.add(gavStudent.getValue());
                             break;
                         }
