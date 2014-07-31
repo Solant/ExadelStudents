@@ -344,26 +344,24 @@ public class StudentService {
 
         ArrayList<String> row = new ArrayList<String>();
         row.add("Name");
-        row.add("Login");
-        for(GAVPresentation gavPresentation : gavPresentationList)
-            if (gavPresentation.isShow())
-                row.add(gavPresentation.getAttribute());
+        row.add(student.getFirstName() + " " + student.getSecondName());
         returnStatement.add(row);
-
-        ArrayList<String>addStatement = new ArrayList<String>();
-        addStatement.add(student.getSecondName() + " " + student.getFirstName());
-        addStatement.add(student.getLogin());
+        ArrayList<String> row2 = new ArrayList<String>();
+        row2.add("Login");
+        row2.add(student.getLogin());
+        returnStatement.add(row2);
         for(GAVPresentation gavPresentation : gavPresentationList){
             List<GAVPresentation> valuesGAV = getValues(student.getLogin());
             for(GAVPresentation gavStudent : valuesGAV){
                 if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute()) && gavPresentation.isShow()){
+                    ArrayList<String>addStatement = new ArrayList<String>();
+                    addStatement.add(gavPresentation.getAttribute());
                     addStatement.add(gavStudent.getValue());
+                    returnStatement.add(addStatement);
                     break;
                 }
             }
         }
-
-        returnStatement.add(addStatement);
         return returnStatement;
     }
 
