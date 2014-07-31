@@ -63,7 +63,7 @@
 <div class="notifPadding">
     <form class="createNotificationForm">
 
-        <div>
+        <div class="leftList">
             <input type="checkbox" id="students"/>
             <label for="students">Students: </label><br/>
                 <select name="students" multiple>
@@ -91,7 +91,7 @@
             </select>
         </div>
 
-        <div>
+        <div class="rightList">
             <input type="checkbox" id="workers"/>
             <label for="workers">Workers: </label><br/>
             <select name="workers" multiple>
@@ -105,11 +105,15 @@
             </select>
         </div>
 
+        <div class="subject"><input type="text" id="subject" value="Subject"/></div>
+        <div class="letterText">
+            <textarea name="text" id="text" cols="30" rows="10"></textarea>
+        </div>
+
         <div class="alignCenter">
             <button type="submit" class="loginAndCreateButton">Send</button>
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
         </div>
-
     </form>
 </div>
 </body>

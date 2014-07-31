@@ -94,66 +94,58 @@
 
     <table id="messageTable" class="display">
         <thead>
-                <td>Date</td>
-                <td>Sender</td>
-                <td>Title</td>
+        <td>Subject</td>
+        <td>Sender</td>
+        <td>Date</td>
         </thead>
         <tbody>
             <tr>
-                <td>30.07.2013</td>
-                <td>System</td>
                 <td><a href="">Session</a></td>
+                <td>System</td>
+                <td>30.07.2013</td>
             </tr>
             <tr>
-                <td>30.07.2013</td>
-                <td>Admin</td>
                 <td><a href="">Alert</a></td>
-            </tr>
-            <tr>
+                <td>System</td>
                 <td>30.07.2013</td>
-                <td>System</td>
-                <td><a href="">Session</a></td>
             </tr>
             <tr>
-                <td>30.07.2014</td>
-                <td>System</td>
                 <td><a href="">Session</a></td>
-            </tr>
-            <tr>
-                <td>30.07.2014</td>
                 <td>Admin</td>
-                <td><a href="">Session</a></td>
+                <td>30.07.2014</td>
             </tr>
             <tr>
+                <td><a href="">Session</a></td>
+                <td>System</td>
                 <td>30.07.2013</td>
-                <td>Admin</td>
-                <td><a href="">Session</a></td>
             </tr>
             <tr>
-                <td>30.07.2014</td>
+                <td><a href="">Alert</a></td>
                 <td>System</td>
-                <td><a href="">Session</a></td>
-            </tr>
-            <tr>
-                <td>30.07.2014</td>
-                <td>System</td>
-                <td><a href="">Session</a></td>
-            </tr>
-            <tr>
-                <td>30.07.2014</td>
-                <td>Admin</td>
-                <td><a href="">Session</a></td>
-            </tr>
-            <tr>
                 <td>30.07.2013</td>
-                <td>System</td>
-                <td><a href="">Session</a></td>
             </tr>
             <tr>
-                <td>30.07.2014</td>
-                <td>Admin</td>
                 <td><a href="">Session</a></td>
+                <td>Admin</td>
+                <td>30.07.2013</td>
             </tr>
+            <tr>
+                <td><a href="">Alert</a></td>
+                <td>System</td>
+                <td>30.07.2014</td>
+            </tr>
+            <tr>
+                <td><a href="">Session</a></td>
+                <td>System</td>
+                <td>30.07.2013</td>
+            </tr>
+            <tr>
+                <td><a href="">Session</a></td>
+                <td>System</td>
+                <td>30.07.2013</td>
+            </tr>
+
+
         </tbody>
     </table>
 

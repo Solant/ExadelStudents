@@ -8,6 +8,7 @@ body {
 
 .navbar-blue{
     background-color: RGB(0,156,203);
+    margin-bottom: 0;
 }
 
 .navbar-blue .navbar-toggle {
@@ -29,7 +30,7 @@ body {
     padding-top: 0;
     padding-bottom: 0px;
 }
-.nav > li > a {
+.navbar-nav > li > a {
     padding: 0px 0px;
 }
 
@@ -41,9 +42,14 @@ body {
     float: right;
 }
 
-.nav > li > a:hover, .nav > li > a:focus {
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
     text-decoration: none;
     background-color: RGB(0,156,203);
+}
+
+.nav > li > button{
+    margin-top: 6px;
+    margin-right: 3px;
 }
 
 .hat{
@@ -355,6 +361,7 @@ select.linkingR{
     font-size: 14px;
     text-align: left;
     color: #808080;
+    margin: 0 auto;
 }
 .group{
     white-space: nowrap;
@@ -509,12 +516,27 @@ select.linkingR{
 /*create notification props*/
 
 .createNotificationForm{
-    display: flex;
     width: 650px;
+    text-align: center;
+}
+
+.leftList{
+    float: left;
+    margin-bottom: 10px;
 }
 
 .centerList{
-    margin: auto;
+    float: left;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    margin-left: 15px;
+}
+
+.rightList{
+    float: left;
+    clear: right;
+    width: 33%;
+    margin-bottom: 10px;
 }
 
 .createNotificationForm select{
@@ -522,4 +544,66 @@ select.linkingR{
     height: 150px;
 }
 
+.subject{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.subject input{
+    width: 100%;
+}
+
+.letterText{
+
+}
+
+.letterText textarea{
+    width:100%
+}
+
 /*end of create notification props*/
+
+/*add field and technology props*/
+
+.addTech{
+    text-align: center;
+    margin-top: 20px;
+}
+
+#field{
+    padding: 40px;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.floatRight{
+    float: right;
+}
+
+.inputGroup{
+    margin-top: 30px;
+    float: left;
+    text-align: center;
+}
+
+.selectGroup{
+    float: right;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.paddingTop{
+    padding-top: 80px;
+}
+
+.spoilers > div > input:not([type="radio"]){
+    height: 20px;
+}
+
+.borderBottom{
+    border-bottom: 1px solid gray;
+}
+
+/*end of add field and technology props*/
