@@ -46,14 +46,13 @@ public class StudentService {
         List<Student> students = studentDao.findAll();
         List<Student> studentsRet = new ArrayList<Student>();
         for(Student student : students)
-            if (student.isEnabled() == true)
+            if (student.isEnabled())
                 studentsRet.add(student);
         return studentsRet;
     }
 
     @Transactional
     public void setStatus(String studentLogin, String status) {
-        Student student = studentDao.findByLogin(studentLogin);
         Set<Value> values = attributeDao.findByName("status").getValues();
         for (Value value : values){
             if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
@@ -146,7 +145,6 @@ public class StudentService {
      */
     @Transactional
     public List<GAVPresentation> getValues(String studentLogin) {
-        Student student = studentDao.findByLogin(studentLogin);
         String status = "";
         Attribute a = attributeDao.findByName("status");
         Set<Value> valuesS = a.getValues();
@@ -276,7 +274,6 @@ public class StudentService {
      */
     @Transactional
     public List<Notification> getAllNotifications(String login){
-        Student student = studentDao.findByLogin(login);
         List<Notification> notifications = notificationDao.findAll();
         List<Notification> notificationsReturn = new ArrayList<Notification>();
         for(Notification notification : notifications)
@@ -322,14 +319,6 @@ public class StudentService {
                 addStatement.add(student.getSecondName() + " " + student.getFirstName());
                 addStatement.add(student.getLogin());
                 for(GAVPresentation gavPresentation : gavPresentationList){
-                    /*Set<Value> vals = student.getValues();
-                    for (Value value : vals){
-                        if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute())
-                                && gavPresentation.isShow()){
-                            addStatement.add(value.getValue());
-                            break;
-                        }
-                    }*/
                     List<GAVPresentation> valuesGAV = getValues(student.getLogin());
                     for(GAVPresentation gavStudent : valuesGAV){
                         if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute()) && gavPresentation.isShow()){
