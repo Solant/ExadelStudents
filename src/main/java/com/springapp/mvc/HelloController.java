@@ -8,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import service.TestService;
 
 import javax.servlet.http.HttpSession;
 
@@ -80,14 +79,18 @@ public class HelloController {
         return "account";
     }
 
-    @Autowired
-    private TestService ts;
 
     @Autowired
     private AttributeService attributeService;
 
     @Autowired
     private GroupService groupService;
+
+    @Autowired
+    private TechnologyService technologyService;
+
+    @Autowired
+    private FeedbackerService feedbackerService;
 
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
@@ -122,7 +125,13 @@ public class HelloController {
 
         System.out.println("test ended");*/
 
-        studentService.addInterviewer("interviewer", "student1");
+        //studentService.addInterviewer("interviewer", "student1");
+
+       /* technologyService.add("java");
+        technologyService.add("js");*/
+
+       feedbackerService.addTechnology("curator", "java");
+
 
     }
 }

@@ -30,9 +30,9 @@
             <img src="/resources/images/yellow-link.png" class="adminMenuImages">
             <span>Link Student</span>
         </button>
-        <button formaction="#" class="btn">
+        <button formaction="/admin/showDisabled" class="btn">
             <img src="/resources/images/fired.png" class="adminMenuImages">
-            <span>Fired Students</span>
+            <span>Disabled Students</span>
         </button>
         </form>
 </div>

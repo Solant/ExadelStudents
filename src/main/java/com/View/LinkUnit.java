@@ -7,10 +7,6 @@ import java.util.List;
  */
 public class LinkUnit {
 
-    private List<String> students;
-    private List<String> feedbackers;
-    private boolean isCurator;//or Interviewer
-
     public List<String> getStudents() {
         return students;
     }
@@ -28,12 +24,18 @@ public class LinkUnit {
     }
 
     public boolean isCurator() {
-        return isCurator;
+        return curator;
     }
 
-    public void setCurator(boolean isCurator) {
-        this.isCurator = isCurator;
+    public void setCurator(boolean curator) {
+        this.curator = curator;
     }
+
+    private List<String> students;
+    private List<String> feedbackers;
+    private boolean curator;//or Interviewer
+
+
 
 
 }

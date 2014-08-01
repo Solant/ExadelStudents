@@ -20,12 +20,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import persistance.model.Feedbacker;
+import persistance.model.Student;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Надя on 16.07.2014.
@@ -81,34 +82,59 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public String createUser(@ModelAttribute("newUser") UserUnit newUser){
+    public String createUser(@ModelAttribute("newUser") UserUnit newUser, ModelMap modelMap){
         if(newUser.getRole().toString().equals("Student"))
             studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
         if(newUser.getRole().toString().equals("Feedbacker"))
             feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
         if(newUser.getRole().toString().equals("Admin"))
             administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-        return "admin";
+        if(tableData == null)
+            return "redirect:/admin";
+        modelMap.addAttribute("tableData", tableData);
+        return "adminTable";
     }
 
 
     @RequestMapping(value = "/showLinkStudent", method = RequestMethod.GET)
-    public String showLinkStudent(ModelMap model){
-        model.addAttribute("linkUnit", new LinkUnit());
-        model.addAttribute("allStudents", studentService.getAllEnabledStudents());
-       // model.addAttribute("allFeedbackers", feedbackerService.)
+    public String showLinkStudent(ModelMap modelMap){
+        LinkUnit linkUnit = new LinkUnit();
+        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
+        List<String> technologies = new ArrayList<String>();
+        Map<String, Set<Feedbacker>> feedbackerMap = new HashMap<String, Set<Feedbacker>>();
+        technologies.add("java");
+        technologies.add("js");
+        for(String tech:technologies){
+            feedbackerMap.put(tech, feedbackerService.getFeedbackersByTechnology(tech));
+        }
+        modelMap.addAttribute("feedbackerMap", feedbackerMap);
+        modelMap.addAttribute("technologies", technologies);
+        modelMap.addAttribute("linkUnit", linkUnit);
         return "linking";
     }
 
     @RequestMapping(value = "/linkStudent", method = RequestMethod.POST)
-    public String linkStudentCurator(){
-        return "linking";
+    public String linkStudentCurator(@ModelAttribute("linkUnit")LinkUnit linkUnit, ModelMap modelMap){
+        if(linkUnit.isCurator()) {
+            for (String student : linkUnit.getStudents()) {
+                for (String feed : linkUnit.getFeedbackers()) {
+                    studentService.addCurator(feed, student);
+                }
+            }
+        }
+        else {
+            for (String student : linkUnit.getStudents()) {
+                for (String feed : linkUnit.getFeedbackers()) {
+                    studentService.addInterviewer(feed, student);
+                }
+            }
+        }
+        if(tableData == null)
+            return "redirect:/admin";
+        modelMap.addAttribute("tableData", tableData);
+        return "adminTable";
     }
 
-    @RequestMapping(value = "/firedStudents", method = RequestMethod.POST)
-    public String firedStudents(){
-        return "";
-    }
 
     @RequestMapping(value = "/formTable", method = RequestMethod.POST)
     public String formTable(ModelMap modelMap, @ModelAttribute("groupedValues")GroupedValues groupedValues){
@@ -239,9 +265,31 @@ public class AdminController {
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
         for(Group group:groupedValues.getValuesArray())
             values.addAll(group.getGavs());
-        tableData= studentService.getStudentValuesInTable(values, current);
+        tableData = studentService.getStudentValuesInTable(values, current);
         modelMap.addAttribute("tableData", tableData);
 
+        return "adminTable";
+    }
+    @RequestMapping(value = "/showDisabled", method = RequestMethod.GET)
+    public String showDisabled(ModelMap modelMap){
+        List<Student> listDisabled = studentService.getAllDisabledStudents();
+        tableData = new ArrayList<List<String>>();
+        tableData.add(new ArrayList<String>());
+        tableData.get(0).add("Name");
+        tableData.get(0).add("Login");
+        tableData.get(0).add("Phone");
+        tableData.get(0).add("Skype");
+        tableData.get(0).add("Email");
+        int i = 1;
+        for(Student student:listDisabled){
+            tableData.add(new ArrayList<String>());
+            tableData.get(i).add(student.getFirstName()+" "+student.getSecondName());
+            tableData.get(i).add(student.getLogin());
+            tableData.get(i).add(student.getTelephone());
+            tableData.get(i).add(student.getSkype());
+            tableData.get(i++).add(student.getEmail());
+        }
+        modelMap.addAttribute("tableData", tableData);
         return "adminTable";
     }
 }

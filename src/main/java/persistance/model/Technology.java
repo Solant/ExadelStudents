@@ -21,7 +21,7 @@ public class Technology {
 
     @ManyToMany
     @Cascade(CascadeType.SAVE_UPDATE)
-    @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "feedbacker_id")}, inverseJoinColumns = {@JoinColumn(name = "technology_id")})
+    @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "technology_id")}, inverseJoinColumns = {@JoinColumn(name = "feedbacker_id")} )
     private Set<Feedbacker> feedbackers = new HashSet();
 
     @OneToMany(mappedBy = "technology")

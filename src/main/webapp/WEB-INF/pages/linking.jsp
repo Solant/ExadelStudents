@@ -5,8 +5,13 @@
 <html>
 <head>
     <title>Linking</title>
+    <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/styles/style.css">
+    <link rel="stylesheet" href="/resources/styles/style.css" />
+    <script src="/resources/styles/bootstrap/js/bootstrap.js"></script>
+    <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
 <div class="hat">
@@ -30,14 +35,59 @@
 </div>
 <form:form commandName="linkUnit" class="linkingForm" method="post" action="/admin/linkStudent" >
 <div class="radio">
-    <form:radiobutton path="isCurator" name="feedbacking" value="no" id="Interview"/><label for="Interview">Interview</label>
-    <form:radiobutton path="isCurator" name="feedbacking" value="yes" id="Curating"/><label for="Curating">Curating</label>
+    <form:radiobutton path="curator" name="feedbacking" value="no" id="Interview"/><label for="Interview">Interview</label>
+    <form:radiobutton path="curator" name="feedbacking" value="yes" id="Curating"/><label for="Curating">Curating</label>
 </div>
         <form:select path="students" multiple="true" class="linkingL">
-            <c:forEach items="${linkUnit.students}" var="student">
-                <form:option value="${student}">${student}</form:option>
+            <c:forEach items="${students}" var="student">
+                <form:option value="${student.login}">${student.firstName} ${student.secondName}</form:option>
             </c:forEach>
         </form:select>
+
+<ul class="nav nav-tabs nav-stacked" role="tablist" style="float:left;">
+
+    <%pageContext.setAttribute("isActive", "active");%>
+
+    <c:forEach items="${technologies}" var="tech">
+        <li class="${isActive}">
+            <a href="#${tech}" role="tab" data-toggle="tab">${tech}</a>
+        </li>
+        <%pageContext.setAttribute("isActive", "");%>
+    </c:forEach>
+
+
+</ul>
+
+
+
+<div class="tab-content" style="overflow: auto">
+
+            <%pageContext.setAttribute("isActive", "active");%>
+
+    <c:forEach items="${feedbackerMap}" var="tech">
+    <div class="tab-pane ${isActive}" id="${tech.key}">
+        <form:select path="feedbackers" multiple="true" class="linkingR">
+            <c:forEach items="${tech.value}" var="feed">
+                <form:option value="${feed.login}">${feed.firstName} ${feed.secondName}</form:option>
+            </c:forEach>
+        </form:select>
+    </div>
+            <%pageContext.setAttribute("isActive", "");%>
+    </c:forEach>
+
+
+
+    <div class="button">
+        <div>
+            <form:button  class="button">Link</form:button>
+            <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
+        </div>
+    </div>
+</form:form>
+</body>
+</html>
+
+<%--
         <select multiple class="linkingR">
             <option value="A">A</option>
             <option value="A">B</option>
@@ -51,13 +101,4 @@
             <option value="A">L</option>
             <option value="A">M</option>
             <option value="A">N</option>
-        </select>
-    <div class="button">
-        <div>
-            <button  class="button">Link</button>
-            <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
-        </div>
-    </div>
-</form:form>
-</body>
-</html>
+        </select>--%>

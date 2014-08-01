@@ -21,7 +21,7 @@
 		<h1>Login Form </h1>
 		<p>
             <label for="login">Login:</label>
-			<input type="text" name="j_username" class="field" id="login" value="student">
+			<input type="text" name="j_username" class="field" id="login" value="admin">
 		</p>
 		<p>
             <label for="password">Password:</label>

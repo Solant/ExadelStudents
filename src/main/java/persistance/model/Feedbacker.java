@@ -1,10 +1,11 @@
 package persistance.model;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @DiscriminatorValue("feedbacker")
@@ -35,7 +36,7 @@ public class Feedbacker extends User{
 
     @ManyToMany
     @Cascade(CascadeType.SAVE_UPDATE)
-    @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "technology_id")}, inverseJoinColumns = {@JoinColumn(name = "feedbacker_id")})
+    @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "feedbacker_id")}, inverseJoinColumns ={@JoinColumn(name = "technology_id")} )
     private Set<Technology> myTechnologies = new HashSet();
 
     public Feedbacker() {
