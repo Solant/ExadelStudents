@@ -26,6 +26,16 @@ public class TechnologyService {
     }
 
     @Transactional
+    public boolean isTechnologyAvailable(String name){
+        return technologyDao.findByName(name) == null;
+    }
+
+    @Transactional
+    public void remove(String name){
+        technologyDao.removeById(technologyDao.findByName(name).getId());
+    }
+
+    @Transactional
     public void addRating(short rating, String technologyName, Review review){
         Rating r = new Rating();
         r.setRating(rating);

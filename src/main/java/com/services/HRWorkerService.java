@@ -21,6 +21,7 @@ public class HRWorkerService {
         worker.setPassword(password);
         worker.setFirstName(name);
         worker.setSecondName(surname);
+        worker.setEnabled(true);
 
         UserRole ur = new UserRole();
         ur.setRole("ROLE_WORKER");
