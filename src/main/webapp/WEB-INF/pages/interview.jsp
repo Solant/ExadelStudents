@@ -29,8 +29,8 @@
     <span class="currUserName"><c:out value="${account}"></c:out></span>
     <img src="/resources/images/loupe.png" class="loupe_logo">
 
-    <button class="btn"> My Students </button>
-    <button class="btn"> Interviews </button>
+    <button formaction="/admin/linkStudent" class="btn">My students</button>
+    <button formaction="/admin/linkStudent" class="btn"> Interviews  </button>
 
 
 </div>
@@ -134,8 +134,8 @@
         <div class="alignCenter">
             <label for="other">Other:</label><br/>
             <textarea name="other" id="other" cols="30" rows="10" class="textOther"></textarea>
+            <button type="submit" class="loginAndCreateButton">Save</button>
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
-            <button type="submit" class="loginAndCreateButton">Create</button>
         </div>
 
 </form>
