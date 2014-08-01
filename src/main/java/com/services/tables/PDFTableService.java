@@ -18,8 +18,16 @@ public class PDFTableService {
     private int numberOfCell;
     private int numberOfColumns;
 
-    public PDFTableService(int numberOfColumns, OutputStream os) {
-        document = new Document();
+    public PDFTableService(int numberOfColumns, OutputStream os, boolean isHorizontal) {
+        Rectangle pageRect = new Rectangle(PageSize.A4);
+        if(isHorizontal){
+            float tempWidth = pageRect.getWidth();
+
+            pageRect.setRight(pageRect.getLeft() + pageRect.getHeight());
+            pageRect.setTop(pageRect.getBottom() + tempWidth);
+        }
+        document = new Document(pageRect);
+
         try {
             PdfWriter.getInstance(document, os);
         } catch (DocumentException e) {
@@ -34,9 +42,15 @@ public class PDFTableService {
         this.numberOfColumns = numberOfColumns;
     }
 
-    public PDFTableService(String title, int numberOfColumns, OutputStream os) {
+    public PDFTableService(String title, int numberOfColumns, OutputStream os, boolean isHorizontal) {
+        Rectangle pageRect = new Rectangle(PageSize.A4);
+        if(isHorizontal){
+            float tempWidth = pageRect.getWidth();
 
-        document = new Document();
+            pageRect.setRight(pageRect.getLeft() + pageRect.getHeight());
+            pageRect.setTop(pageRect.getBottom() + tempWidth);
+        }
+        document = new Document(pageRect);
         try {
             PdfWriter.getInstance(document, os);
         } catch (DocumentException e) {
@@ -67,7 +81,7 @@ public class PDFTableService {
 
         paragraph.add(table);
         Calendar date = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         Paragraph paragraphDate =new Paragraph(sdf.format(date.getTime()));
         try {
             document.add(paragraph);
