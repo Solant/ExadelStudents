@@ -262,11 +262,9 @@ public class StudentService {
         for(Review review : reviews){
             if (r == null)
                 r = review;
-            else{
-                if (r.getDate().before(review.getDate())){
+            else
+                if (r.getDate().before(review.getDate()))
                     r = review;
-                }
-            }
         }
         return r;
     }
@@ -410,6 +408,7 @@ public class StudentService {
         }
         if (students == null)
             return null;
+
         String[] initials = line.split("[ ,\\.:;]+");
         for(Student student : students){
             if (search.size() == numberOfResults)
