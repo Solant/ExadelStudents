@@ -295,6 +295,7 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
     text-align: center;
 }
 .button button{
+    margin-top: 0;
     background-color: #808080;
     border-style:none;
     border-radius: 3px;
@@ -311,7 +312,7 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
 
 .technology{
     text-align: center;
-    margin-top: 170px;
+    margin-top: 218px;
 }
 
 /*end of linking form*/
@@ -374,6 +375,12 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
     text-align: left;
     color: #808080;
     margin: 0 auto;
+}
+.spoilers:after{
+    clear: both;
+    content: '';
+    display: block;
+    height: 0;
 }
 .group{
     white-space: nowrap;
@@ -520,7 +527,7 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
 }
 
 .sender{
-    display: inline-block;
+    display: inline;
     float: right;
 }
 /*end of notification props*/
@@ -545,10 +552,14 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
 }
 
 .rightList{
-    float: left;
+    float: right;
     clear: right;
     width: 33%;
     margin-bottom: 10px;
+}
+
+.rightList > select{
+    float: right;
 }
 
 .createNotificationForm select{
@@ -565,10 +576,6 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
     width: 100%;
 }
 
-.letterText{
-
-}
-
 .letterText textarea{
     width:100%
 }
@@ -580,10 +587,6 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
 .addTech{
     text-align: center;
     margin-top: 20px;
-}
-
-#field{
-    padding: 40px;
 }
 
 .floatLeft{
@@ -622,10 +625,6 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
 
 .tab-content{
     margin-top: 10px;
-}
-
-.marginTop{
-    margin-top: 100px;
 }
 
 /*end of add field and technology props*/

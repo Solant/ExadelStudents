@@ -54,64 +54,104 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-    <div class="spoilers marginTop">
-        
-        <div class="floatLeft addTech">
-            <input type="radio" id="cg" name="group"/>
-            <label for="cg">Existing group:</label><br/>
-            <select name="curGrup" class="addTechField">
-                <option value="common">Common</option>
-                <option value="work">Work</option>
-                <option value="project">Project</option>
-            </select>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active">
+        <a href="#technology" role="tab" data-toggle="tab">Technology</a>
+    </li>
+    <li >
+        <a href="#field" role="tab" data-toggle="tab">Field</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+
+    <div class="tab-pane active" id="technology">
+
+        <div class="spoilers">
+            <%--<div class="linkingL">
+                <label for="existingTech">Existing:</label><br/>
+                <select id="existingTech" multiple readonly>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="hibernate">Hibernate</option>
+                </select>
+            </div>--%>
+            <div class="alignCenter">
+                <label for="newTech">New technology:</label>
+                <input type="text" id="newTech"/>
+            </div>
+
+            <div class="button">
+                    <button  class="button">Link</button>
+                    <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
+            </div>
 
         </div>
 
-        <div class="floatRight addTech">
-        <input type="radio" id="newg" name="group" />
-            <label for="newg">New Group</label><br/>
-        <input type="text" class="addTechField"/><br/>
+    </div>
 
-            <label for="status">For Status</label>
-            <select name="status" id="status"  class="addTechField">
-                <option value="working">Working</option>
-                <option value="studying">Studying</option>
-            </select>
-        </div>
+    <div class="tab-pane" id="field">
 
-        <div class="alignCenter paddingTop borderBottom">
-            <label for="fieldname">Field name:</label>
-            <input type="text" id="fieldname"  class="addTechField"/>
-        </div>
+        <div class="spoilers">
 
-        <div class="alignCenter ">
-            <input type="radio" id="string" name="type" value="string" onclick="visual();"/>
-            <label for="string">String</label>
-            <input type="radio" id="text" name="type" value="text" onclick="visual();"/>
-            <label for="text">Text</label>
-        </div>
-        <div class="alignCenter">
-            <input type="radio" id="select" name="type" onclick="visual();"/>
-            <label for="select">Select</label>
-            <br/>
-            <div id="needOption">
-                <label for="value">Possible values (via ;)</label><br/>
-                <textarea name="value" id="value" cols="30" rows="10"
-                          class="textOther addTechField"></textarea>
+            <div class="floatLeft addTech">
+                <input type="radio" id="cg" name="group"/>
+                <label for="cg">Existing group:</label><br/>
+                <select name="curGrup" class="addTechField">
+                    <option value="common">Common</option>
+                    <option value="work">Work</option>
+                    <option value="project">Project</option>
+                </select>
+
+            </div>
+
+            <div class="floatRight addTech">
+                <input type="radio" id="newg" name="group" />
+                <label for="newg">New Group</label><br/>
+                <input type="text" class="addTechField"/><br/>
+
+                <label for="status">For Status</label>
+                <select name="status" id="status"  class="addTechField">
+                    <option value="working">Working</option>
+                    <option value="studying">Studying</option>
+                </select>
+            </div>
+
+            <div class="alignCenter paddingTop borderBottom">
+                <label for="fieldname">Field name:</label>
+                <input type="text" id="fieldname"  class="addTechField"/>
+            </div>
+
+            <div class="alignCenter ">
+                <input type="radio" id="string" name="type" value="string" onclick="visual();"/>
+                <label for="string">String</label>
+                <input type="radio" id="text" name="type" value="text" onclick="visual();"/>
+                <label for="text">Text</label>
+            </div>
+            <div class="alignCenter">
+                <input type="radio" id="select" name="type" onclick="visual();"/>
+                <label for="select">Select</label>
+                <br/>
+                <div id="needOption" style="display: none">
+                    <label for="value">Possible values (via ;)</label><br/>
+                    <textarea name="value" id="value" cols="30" rows="10"
+                              class="textOther addTechField"></textarea>
+                </div>
+            </div>
+
+            <div class="alignCenter">
+                <button  type="submit" class="loginAndCreateButton">Save</button>
+                <button  type="submit" class="loginAndCreateButton">Cancel</button>
             </div>
         </div>
 
-        <div class="alignCenter">
-            <button  type="submit" class="loginAndCreateButton">Save</button>
-            <button  type="submit" class="loginAndCreateButton">Cancel</button>
-        </div>
     </div>
 
-
+</div>
 
 <script type="text/javascript">
     function visual(){
-        values=document.getElementById("needOption");
+        var values=document.getElementById("needOption");
 
         if (document.getElementsByName('type')[2].checked){
             values.style.display="block";

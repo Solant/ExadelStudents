@@ -123,10 +123,8 @@
     </div>
 
     <div class="button">
-        <div>
             <button  class="button">Link</button>
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
-        </div>
     </div>
 </form>
 </body>
