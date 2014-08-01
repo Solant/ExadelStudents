@@ -14,6 +14,10 @@ import java.util.*;
 @Service
 public class StudentService {
 
+    public final int ALL = 2;
+    public final int ENABLED = 1;
+    public final int DISABLED = 0;
+
     @Autowired
     private StudentDao studentDao;
 
@@ -377,5 +381,57 @@ public class StudentService {
             if(!student.isEnabled())
                 studentsRet.add(student);
         return studentsRet;
+    }
+
+    /**
+     * Live search method
+     *
+     * @param line Search line
+     * @param status 0 for disabled 1 for enabled 2 for all
+     * @param numberOfResults number of results to return
+     * @return null if none, List<Student> if found
+     */
+    @Transactional
+    public List<Student> liveSearch(String line, int status, int numberOfResults){
+        List<Student> search = new ArrayList<Student>();
+        List<Student> students = null;
+        switch (status){
+            case DISABLED:
+                students = getAllDisabledStudents();
+                break;
+            case ENABLED:
+                students = getAllEnabledStudents();
+            case ALL:
+                students = getAllEnabledStudents();
+                students.addAll(getAllDisabledStudents());
+                break;
+            default:
+                break;
+        }
+        if (students == null)
+            return null;
+        String[] initials = line.split("[ ,\\.:;]+");
+        for(Student student : students){
+            if (search.size() == numberOfResults)
+                break;
+            switch (initials.length){
+                case 1:
+                    if (student.getFirstName().startsWith(initials[0])
+                           || student.getSecondName().startsWith(initials[0]))
+                        search.add(student);
+                    break;
+                case 2:
+                    if (student.getFirstName().startsWith(initials[0])
+                            && student.getSecondName().startsWith(initials[1])
+                            || student.getFirstName().startsWith(initials[1])
+                            && student.getSecondName().startsWith(initials[0]))
+                        search.add(student);
+                        break;
+                default:
+                    break;
+            }
+        }
+
+        return search;
     }
 }
