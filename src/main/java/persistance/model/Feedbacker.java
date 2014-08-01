@@ -35,7 +35,7 @@ public class Feedbacker extends User{
 
     @ManyToMany
     @Cascade(CascadeType.SAVE_UPDATE)
-    @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "technology_id")}, inverseJoinColumns = {@JoinColumn(name = "feedbacker_id")})
+    @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "feedbacker_id")}, inverseJoinColumns = {@JoinColumn(name = "technology_id")})
     private Set<Technology> myTechnologies = new HashSet();
 
     public Feedbacker() {
