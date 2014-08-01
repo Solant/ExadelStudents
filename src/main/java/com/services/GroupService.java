@@ -46,4 +46,9 @@ public class GroupService {
         }
         return groupsReturn;
     }
+
+    @Transactional
+    public boolean isAvailable(String group){
+        return groupDao.findByName(group) == null;
+    }
 }

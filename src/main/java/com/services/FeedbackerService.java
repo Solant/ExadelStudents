@@ -34,6 +34,7 @@ public class FeedbackerService {
     public void add(String login, String password, String name, String surname){
         Feedbacker feedbacker = new Feedbacker();
 
+        feedbacker.setEnabled(true);
         feedbacker.setLogin(login);
         feedbacker.setPassword(password);
         feedbacker.setFirstName(name);

@@ -89,6 +89,7 @@ public class StudentService {
         student.setPassword(password);
         student.setFirstName(name);
         student.setSecondName(surname);
+        student.setEnabled(true);
 
         UserRole ur = new UserRole();
         ur.setRole("ROLE_STUDENT");
@@ -315,7 +316,7 @@ public class StudentService {
             }
 
             if (isSuitable){
-                ArrayList<String>addStatement = new ArrayList<String>();
+                ArrayList<String> addStatement = new ArrayList<String>();
                 addStatement.add(student.getSecondName() + " " + student.getFirstName());
                 addStatement.add(student.getLogin());
                 for(GAVPresentation gavPresentation : gavPresentationList){
