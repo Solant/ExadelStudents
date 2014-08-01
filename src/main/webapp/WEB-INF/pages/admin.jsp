@@ -73,12 +73,6 @@
 </nav>
 
 
-////////////////////////////////////////
-
-
-
-////////////////////////////////////////
-
 <div align="center">
 <div class="profile">
     <img src="/resources/images/account.png">
