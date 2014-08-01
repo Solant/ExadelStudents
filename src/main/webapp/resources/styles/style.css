@@ -209,18 +209,20 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
     background-color:RGB(0,156,203);
 }
 
-.field{
+.field, .addTechField {
     color: #808080;
     height: 25px;
     background-color: white;
     position: relative;
-    float: right;
     margin-right: 20px;
     border-color: #00a1d2;
     border-radius: 3px;
     border: 1px solid;
-    width:50%;
     padding: 3px;
+}
+ .field{
+    float: right;
+    width:50%;
 }
 
 .alignCenter{
@@ -319,7 +321,7 @@ select.linkingR{
 .textOther{
     width: 400px;
     max-width: 400px;
-    color: RGB(0,107,253);
+   /* color: RGB(0,107,253);*/
     height: 100px;
 }
 /*end of review form*/
@@ -582,6 +584,7 @@ select.linkingR{
     float: right;
 }
 
+
 .inputGroup{
     margin-top: 30px;
     float: left;
@@ -609,6 +612,10 @@ select.linkingR{
 
 .tab-content{
     margin-top: 10px;
+}
+
+.marginTop{
+    margin-top: 100px;
 }
 
 /*end of add field and technology props*/

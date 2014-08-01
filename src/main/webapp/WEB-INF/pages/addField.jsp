@@ -54,24 +54,12 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<ul class="nav nav-tabs" role="tablist">
-    <li class="active">
-        <a href="#groupAndName" role="tab" data-toggle="tab">Group and Name</a>
-    </li>
-    <li >
-        <a href="#type" role="tab" data-toggle="tab">Type</a>
-    </li>
-
-</ul>
-
-<div class="tab-content">
-
-<div class="tab-pane active" id="groupAndName">
-    <div class="spoilers">
+    <div class="spoilers marginTop">
         
         <div class="floatLeft addTech">
-            <input type="radio" id="cg" name="group"/><label for="cg">Existing group:</label><br/>
-            <select name="curGrup">
+            <input type="radio" id="cg" name="group"/>
+            <label for="cg">Existing group:</label><br/>
+            <select name="curGrup" class="addTechField">
                 <option value="common">Common</option>
                 <option value="work">Work</option>
                 <option value="project">Project</option>
@@ -80,43 +68,59 @@
         </div>
 
         <div class="floatRight addTech">
-        <input type="radio" id="newg" name="group"/><label for="newg">New Group</label><br/>
-        <input type="text"/><br/>
+        <input type="radio" id="newg" name="group" />
+            <label for="newg">New Group</label><br/>
+        <input type="text" class="addTechField"/><br/>
 
             <label for="status">For Status</label>
-            <select name="status" id="status">
+            <select name="status" id="status"  class="addTechField">
                 <option value="working">Working</option>
                 <option value="studying">Studying</option>
             </select>
         </div>
 
-        <div class="alignCenter paddingTop">
+        <div class="alignCenter paddingTop borderBottom">
             <label for="fieldname">Field name:</label>
-            <input type="text" id="fieldname"/>
+            <input type="text" id="fieldname"  class="addTechField"/>
         </div>
-    </div>
-</div>
 
-<div class="tab-pane" id="type">
-
-    <div class="spoilers">
-
-        <div class="alignCenter borderBottom">
-            <input type="radio" id="string" name="type" value="string"/><label for="string">String:</label>
-            <input type="radio" id="text" name="type" value="text"/><label for="text">Text:</label>
+        <div class="alignCenter ">
+            <input type="radio" id="string" name="type" value="string" onclick="visual();"/>
+            <label for="string">String</label>
+            <input type="radio" id="text" name="type" value="text" onclick="visual();"/>
+            <label for="text">Text</label>
         </div>
         <div class="alignCenter">
-            <input type="radio" id="select" name="type"/><label for="select">Select:</label>
+            <input type="radio" id="select" name="type" onclick="visual();"/>
+            <label for="select">Select</label>
             <br/>
-            <label for="value">Possible values (via ;)</label><br/>
-            <textarea name="value" id="value" cols="30" rows="10" class="textOther"></textarea>
+            <div id="needOption">
+                <label for="value">Possible values (via ;)</label><br/>
+                <textarea name="value" id="value" cols="30" rows="10"
+                          class="textOther addTechField"></textarea>
+            </div>
         </div>
 
+        <div class="alignCenter">
+            <button  type="submit" class="loginAndCreateButton">Save</button>
+            <button  type="submit" class="loginAndCreateButton">Cancel</button>
+        </div>
     </div>
 
-</div>
 
-</div>
+
+<script type="text/javascript">
+    function visual(){
+        values=document.getElementById("needOption");
+
+        if (document.getElementsByName('type')[2].checked){
+            values.style.display="block";
+        }
+        else {
+            values.style.display="none";
+        }
+    }
+</script>
 
 </body>
 </html>
