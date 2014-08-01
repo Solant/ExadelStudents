@@ -201,7 +201,7 @@ public class AdminController {
             e.printStackTrace();
         }
 
-        PDFTableService pdfts = new PDFTableService(tableData.get(0).size(), os);
+        PDFTableService pdfts = new PDFTableService(tableData.get(0).size(), os, true);
 
         for (List<String> row:tableData) {
             for (String item:row)
