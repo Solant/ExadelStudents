@@ -39,7 +39,7 @@ public class ExcelTableService {
         Row row = sheet.createRow(currentRowNum + 2);
         Cell cell = row.createCell(0);
         Calendar date = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         cell.setCellValue(sdf.format(date.getTime()));
     }
 

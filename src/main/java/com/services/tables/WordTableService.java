@@ -1,11 +1,12 @@
 package com.services.tables;
 
 import org.apache.poi.xwpf.usermodel.*;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -22,6 +23,9 @@ public class WordTableService {
     public WordTableService() {
         document = new XWPFDocument();
         table = document.createTable();
+        table.getCTTbl().getTblPr().getTblW().setW(BigInteger.valueOf(5000));
+
+        table.getCTTbl().getTblPr().getTblW().setType(STTblWidth.PCT);
         currentRowNum = 0;
         currentCellNum = 0;
 
@@ -35,6 +39,27 @@ public class WordTableService {
         paragraphRun.setFontSize(20);
         paragraphRun.setText(title);
         table = document.createTable();
+        table.getCTTbl().getTblPr().getTblW().setW(BigInteger.valueOf(5000));
+
+        table.getCTTbl().getTblPr().getTblW().setType(STTblWidth.PCT);
+    }
+
+    public WordTableService(boolean isA4, String title){
+        document = new XWPFDocument();
+        XWPFParagraph paragraph = document.createParagraph();
+        XWPFRun paragraphRun = paragraph.createRun();
+        paragraphRun.setBold(true);
+        paragraphRun.setFontSize(20);
+        paragraphRun.setText(title);
+        table = document.createTable();
+    }
+
+    public WordTableService(boolean isA4) {
+        document = new XWPFDocument();
+        table = document.createTable();
+        currentRowNum = 0;
+        currentCellNum = 0;
+
     }
 
 
@@ -60,7 +85,7 @@ public class WordTableService {
         XWPFRun paragraphRun = paragraph.createRun();
         paragraphRun.setItalic(true);
         Calendar date = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         paragraphRun.setText(sdf.format(date.getTime()));
     }
 
