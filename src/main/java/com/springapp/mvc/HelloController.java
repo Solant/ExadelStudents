@@ -67,14 +67,14 @@ public class HelloController {
         String message = new String();
         //System.out.println(UserService.stringToSha256(accountUnit.getPassword()) + " " + us.getPassword(UserService.getCurrentUserLogin()));
         if(UserService.stringToSha256(accountUnit.getPassword()).equals(us.getPassword(UserService.getCurrentUserLogin()))){
-            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword())) {
+            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword()) && !accountUnit.getNewPassword().equals("")) {
                 us.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
                 message = "Password was changed.";
             }
             else{
                 message = "Confirmed password doesn't match the new one.";
             }
-            User user = us.getByLogin(accountUnit.getLogin());
+            User user = us.getByLogin(UserService.getCurrentUserLogin());
             user.setEmail(accountUnit.getEmail());
             user.setSkype(accountUnit.getSkype());
             user.setTelephone(accountUnit.getTelephone());

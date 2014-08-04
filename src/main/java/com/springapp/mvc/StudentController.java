@@ -64,7 +64,8 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/notif", method = RequestMethod.GET)
-    public String showNotif(){
+    public String showNotif(ModelMap modelMap, @PathVariable("current")String current){
+        userService.getAllUnreadNotifications(current);
         return "notificationList";
     }
 }
