@@ -47,6 +47,36 @@ body {
     background-color: RGB(0,156,203);
 }
 
+.dropdown{
+    width: 150px;
+    text-align:center ;
+}
+
+.nav .open > a:focus{
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+.dropdown-toggle{
+    padding-top: 17px !important;
+    font-size: 20px;
+    padding-right: 10px !important;
+    color: white;
+}
+
+.dropdown-menu > li{
+    background: RGB(0,156,203);
+    text-align: center;
+}
+
+.dropdown-menu > li > button{
+    width: 100%;
+}
+
+.nav .open > a:focus {
+    background-color: RGB(0,156,203);
+}
+
 .nav > li > button{
     margin-top: 6px;
     margin-right: 3px;

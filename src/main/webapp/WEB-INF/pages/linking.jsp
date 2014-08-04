@@ -104,7 +104,8 @@
 
     <div class="technology">
         <label for="techList">Technology:</label><br/>
-        <select name="technology" id="techList" onchange="adding();">
+        <select name="technology" id="techList"
+                onchange="adding();">
             <option value="none">None</option>
             <option value="all">All</option>
             <option value="html">HTML</option>
@@ -118,7 +119,34 @@
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
     </div>
 
-    <div id="testing"></div>
+    <script>
+        $(document).ready(function(){
+           $('#techList').change(
+                   function(){
+                       $.ajax({
+                           type: GET,
+                           url:'someController',
+                           data: $("#techList option:selected").value,
+                           dataType: "json",
+                           success: function (data){
+                               var select=document.getElementById("feedbackers");
+                               removeOptions(select);
+
+                               var obj= $.parseJSON(data);
+
+                               $.each("feedbackers",function(index, feedbacker){
+                                   $.each(feedbacker,function (key, value){
+                                       var option = document.createElement("option");
+                                       option.text=feedbacker.lastName;
+                                       option.value=feedbacker.login;
+                                   })
+                               })
+                           }
+                       });
+                   }
+           )
+        });
+    </script>
 
     <script type="text/javascript">
 
@@ -131,7 +159,7 @@
           }
       }
 
-      function adding() {
+     /* function adding() {
           var txt = '{"feedbackers":[' +
                   '{"firstName":"John","lastName":"Doe","login":"jd","technology":"html" },' +
                   '{ "firstName":"Anna", "lastName":"Smith","login":"as","technology":"hibernate" },' +
@@ -149,7 +177,7 @@
               option.value=obj.feedbackers[i].login;
               select.add(option);
           }
-      }
+      }*/
     </script>
 
 </form>

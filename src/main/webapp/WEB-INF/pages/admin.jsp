@@ -28,8 +28,51 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+            </form>
+
             <ul class="nav navbar-nav navbar-right">
-                <li>
+
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <button formaction="/admin/returnCreate" class="btn">
+                                <img src="/resources/images/add.png" class="adminMenuImages">
+                                <span>Add User</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button formaction="/admin/linkStudent" class="btn">
+                                <img src="/resources/images/yellow-link.png" class="adminMenuImages">
+                                <span>Link Student</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button formaction="#" class="btn">
+                                <img src="/resources/images/fired.png" class="adminMenuImages">
+                                <span>Disabled Students</span>
+                            </button>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <button  class="btn">
+                                <img src="/resources/images/loupe.png" class="adminMenuImages">
+                                <span>Filtration</span>
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+               <%-- <li>
                     <button formaction="/admin/returnCreate" class="btn">
                         <img src="/resources/images/add.png" class="adminMenuImages">
                         <span>Add User</span>
@@ -46,7 +89,7 @@
                         <img src="/resources/images/fired.png" class="adminMenuImages">
                         <span>Disabled Students</span>
                     </button>
-                </li>
+                </li>--%>
                 <li>
                     <div class="message">
                         <span>
