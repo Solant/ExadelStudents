@@ -1,14 +1,8 @@
 package com.springapp.mvc;
 
 
-import com.View.Group;
-import com.View.GroupedValues;
-import com.View.LinkUnit;
-import com.View.UserUnit;
-import com.services.AdministratorService;
-import com.services.AttributeService;
-import com.services.FeedbackerService;
-import com.services.StudentService;
+import com.View.*;
+import com.services.*;
 import com.services.presentation.GAVPresentation;
 import com.services.tables.ExcelTableService;
 import com.services.tables.PDFTableService;
@@ -45,6 +39,12 @@ public class AdminController {
 
     @Autowired
     private AttributeService attributeService;
+
+    @Autowired
+    private HRWorkerService hrWorkerService;
+
+    @Autowired
+    private NotificationService notificationService;
 
     private List<List<String>> tableData;
 
@@ -291,5 +291,35 @@ public class AdminController {
         }
         modelMap.addAttribute("tableData", tableData);
         return "adminTable";
+    }
+
+    @RequestMapping("/createNotif")
+    public String createNotif(ModelMap modelMap){
+        CreateNotifUnit createNotifUnit = new CreateNotifUnit();
+        modelMap.addAttribute("createNotifUnit", createNotifUnit);
+        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
+        modelMap.addAttribute("feedbackers", feedbackerService.getAllFeedbackers());
+        modelMap.addAttribute("workers", hrWorkerService.getAllHRWorkers());
+        return "createNotification";
+    }
+
+    @RequestMapping("/sendNotif")
+    public String sendNotif(@ModelAttribute("createNotifUnit")CreateNotifUnit createNotifUnit){
+        String title = createNotifUnit.getTitle();
+        String text = createNotifUnit.getText();
+        String current = UserService.getCurrentUserLogin();
+        if(createNotifUnit.isForStudents())
+            for(String student:createNotifUnit.getStudents()){
+                notificationService.add(current, student,title, text);
+            }
+        if(createNotifUnit.isForFeedbackers())
+            for(String feed:createNotifUnit.getFeedbackers()){
+                notificationService.add(current, feed,title, text);
+            }
+        if(createNotifUnit.isForWorkers())
+            for(String worker:createNotifUnit.getWorkers()){
+                notificationService.add(current, worker,title, text);
+            }
+        return "redirect:/admin";
     }
 }

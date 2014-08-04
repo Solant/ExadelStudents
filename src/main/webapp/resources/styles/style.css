@@ -629,3 +629,11 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
 }
 
 /*end of add field and technology props*/
+
+/*notification list props*/
+
+.unreadNotif{
+    font-weight: bold;
+}
+
+/*end of notification list props*/

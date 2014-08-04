@@ -100,13 +100,14 @@
         <thead>
         <td>Subject</td>
         <td>Sender</td>
-        <td>Date</td>
+        <td class="sorting_desc">Date</td>
+
         </thead>
         <tbody>
         <c:forEach items="${notifs}" var="notif">
             <tr>
                 <td>
-                    <a href="/notif/${notif.id}">${notif.title}</a>
+                    <a href="/notif/${notif.id}" class="<c:if test="${!notif.read}">unreadNotif</c:if>">${notif.title}</a>
                 </td>
                 <td>
                     ${notif.sender}
