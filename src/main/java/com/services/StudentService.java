@@ -271,22 +271,6 @@ public class StudentService {
         return r;
     }
 
-    /**
-     * Get all notifications for student
-     *
-     * @param login Student login
-     * @return List<Notification>
-     */
-    @Transactional
-    public List<Notification> getAllNotifications(String login) {
-        List<Notification> notifications = notificationDao.findAll();
-        List<Notification> notificationsReturn = new ArrayList<Notification>();
-        for (Notification notification : notifications)
-            if (notification.getUser().getLogin().equalsIgnoreCase(login))
-                notificationsReturn.add(notification);
-        return notificationsReturn;
-    }
-
     @Transactional
     public List<List<String>> find(List<GAVPresentation> gavPresentationList) {
         List<Student> students = studentDao.findAll();
