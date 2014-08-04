@@ -10,6 +10,33 @@ public class AccountUnit {
     private String password;
     private String newPassword;
     private  String confirmedPassword;
+    private String email;
+    private String telephone;
+    private String skype;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
 
     public String getNewPassword() {
         return newPassword;

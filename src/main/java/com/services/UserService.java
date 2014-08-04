@@ -10,8 +10,13 @@ import persistance.dao.NotificationDao;
 import persistance.dao.UserDao;
 import persistance.model.Notification;
 import persistance.model.User;
+import sun.misc.Hashing;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -33,6 +38,11 @@ public class UserService {
     public boolean isLoginAvailable(String login){
         User user = userDao.findByLogin(login);
         return user == null;
+    }
+
+    @Transactional
+    public void update(User user){
+        userDao.update(user);
     }
 
     /**
@@ -63,8 +73,17 @@ public class UserService {
     @Transactional
     public void setPassword(String login, String pass){
         User user = userDao.findByLogin(login);
-        user.setPassword(pass);
+        user.setPassword(stringToSha256(pass));
         userDao.update(user);
+    }
+
+    public static String stringToSha256(String password){
+        return org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+    }
+
+    @Transactional
+    public User getByLogin(String login){
+        return userDao.findByLogin(login);
     }
 
     @Transactional

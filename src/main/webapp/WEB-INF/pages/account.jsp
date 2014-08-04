@@ -41,6 +41,21 @@
         <form:input path="firstName" class="field" type="text" id="firstname" readonly="true"/>
     </p>
 
+    <p>
+        <label for="skype">Skype:</label>
+        <form:input path="skype" class="field" type="text" id="skype" />
+    </p>
+
+    <p>
+        <label for="email">E-mail:</label>
+        <form:input path="email" class="field" type="text" id="email"/>
+    </p>
+
+    <p>
+        <label for="telephone">telephone:</label>
+        <form:input path="telephone" class="field" type="text" id="telephone" />
+    </p>
+
 
         <p>
             <label for="oldPassword">Password:</label>

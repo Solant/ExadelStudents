@@ -7,9 +7,6 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,30 +20,33 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
     @Column(name = "login")
     private String login;
 
-    @NotNull
     @Column(name = "password")
     private String password;
 
     @Column(name = "enabled")
     private boolean enabled;
 
-    @Pattern(regexp = "^[A-Za-z\\s]+$", message = "Wrong first name." +
-            " Possible symbols are latin symbols and space")
     @Column (name = "firstname")
     private String firstName;
 
-    @Pattern(regexp = "^[A-Za-z\\-\\s]+$", message = "Wrong second name." +
-            " Possible symbols are latin symbols, \"-\" and space")
     @Column (name = "secondname")
     private String secondName;
 
-    @Valid
+    @Column (name = "skype")
+    private String skype;
+
+    @Column(name = "telephone")
+    private String telephone;
+
+    @Column(name = "email")
+    private String email;
+
     @OneToMany(mappedBy = "user")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
+   // @JoinColumn(name = "user_id")
     private Set<UserRole> userRoles = new HashSet<UserRole>();
 
     @OneToMany(mappedBy = "user")
@@ -118,5 +118,29 @@ public class User {
 
     public void setNotifications(Set<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
