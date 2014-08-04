@@ -73,6 +73,11 @@ public class UserService {
     }
 
     @Transactional
+    public User getByLogin(String login){
+        return userDao.findByLogin(login);
+    }
+
+    @Transactional
     public List<Notification> getAllUnreadNotifications(String login) {
         User user = userDao.findByLogin(login);
         List<Notification> notifications = notificationDao.findAll();

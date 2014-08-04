@@ -62,4 +62,9 @@ public class StudentController {
         studentService.setValues(current, values);
         return "redirect:/student/"+current;
     }
+
+    @RequestMapping(value = "/notif", method = RequestMethod.GET)
+    public String showNotif(){
+        return "notificationList";
+    }
 }

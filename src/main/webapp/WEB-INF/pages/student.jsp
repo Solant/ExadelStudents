@@ -42,11 +42,11 @@
     </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
 	<span class="currUserName"><c:out value="${account}"></c:out></span>
-    <div class="message">
+    <a href="/student/" class="message">
             <span>
                 ${notifNumber}
             </span>
-    </div>
+    </a>
 	<img src="/resources/images/loupe.png" class="loupe_logo">
 </div>
 

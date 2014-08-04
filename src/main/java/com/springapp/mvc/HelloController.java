@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import persistance.model.User;
 
 import javax.servlet.http.HttpSession;
 
@@ -49,10 +50,14 @@ public class HelloController {
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(ModelMap modelMap) {
         String login = UserService.getCurrentUserLogin();
+        User user = us.getByLogin(login);
         AccountUnit accountUnit = new AccountUnit();
-        accountUnit.setFirstName(us.getFirstName(login));
+        accountUnit.setFirstName(user.getFirstName());
         accountUnit.setLogin(login);
-        accountUnit.setSecondName(us.getSecondName(login));
+        accountUnit.setSecondName(user.getSecondName());
+        accountUnit.setEmail(user.getEmail());
+        accountUnit.setSkype(user.getSkype());
+        accountUnit.setTelephone(user.getTelephone());
         modelMap.addAttribute("accountUnit", accountUnit);
         return "account";
     }
@@ -61,13 +66,18 @@ public class HelloController {
     public String changePassword(ModelMap modelMap, @ModelAttribute("accountUnit")AccountUnit accountUnit) {
         String message = new String();
         if(accountUnit.getPassword().equals(us.getPassword(UserService.getCurrentUserLogin()))){
-            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword())) {
+            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword()) && !accountUnit.getNewPassword().equals("")) {
                 us.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
                 message = "Password was changed.";
             }
             else{
                 message = "Confirmed password doesn't match the new one.";
             }
+            User user = us.getByLogin(accountUnit.getLogin());
+            user.setEmail(accountUnit.getEmail());
+            user.setSkype(accountUnit.getSkype());
+            user.setTelephone(accountUnit.getTelephone());
+            us.update(user);
         }
         else{
             message = "Wrong old password.";
