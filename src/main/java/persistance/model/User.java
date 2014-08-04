@@ -35,6 +35,15 @@ public class User {
     @Column (name = "secondname")
     private String secondName;
 
+    @Column (name = "skype")
+    private String skype;
+
+    @Column(name = "telephone")
+    private String telephone;
+
+    @Column(name = "email")
+    private String email;
+
     @OneToMany(mappedBy = "user")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
    // @JoinColumn(name = "user_id")
@@ -109,5 +118,29 @@ public class User {
 
     public void setNotifications(Set<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
