@@ -1,8 +1,55 @@
-﻿/*common props*/
+﻿﻿/*common props*/
 
 
 body {
     margin: 0;      /* Убираем отступы */
+    min-width: 993px;
+}
+
+.navbar-blue{
+    background-color: RGB(0,156,203);
+    margin-bottom: 0;
+}
+
+.navbar-blue .navbar-toggle {
+    border-color: #ddd;
+}
+
+.navbar-blue .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+
+@media (min-width: 768px)
+{
+    .navbar-nav > li > a {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+}
+.navbar-nav > li > a {
+    padding-top: 0;
+    padding-bottom: 0px;
+}
+.navbar-nav > li > a {
+    padding: 0px 0px;
+}
+
+.navbar-nav > li {
+    float: left;
+}
+
+.navbar-right{
+    float: right;
+}
+
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    text-decoration: none;
+    background-color: RGB(0,156,203);
+}
+
+.nav > li > button{
+    margin-top: 6px;
+    margin-right: 3px;
 }
 
 .hat{
@@ -12,7 +59,7 @@ body {
     background-color: RGB(0,156,203);
     z-index:1;
     top: 0px;
-    min-width: 900px;
+    min-width: 993px;
 }
 
 .hat button{
@@ -23,55 +70,67 @@ body {
 }
 
 .account_logo {
-    float: right;
+    display: inline-block;
     margin-right: 5px;
     margin-top: 4px;
 }
 
-.exadel_logo{
-    float: left;
-    vertical-align: middle;
-    padding-top: 10px;
-    padding-left: 20px;
-}
-
-.loupe_logo{
-    float:right;
-    margin-top: 5px;
-    margin-right: 10px;
-}
-
-.exit_logo{
+.message{
     float: right;
+    margin-right: 5px;
+    margin-top: 4px;
+    background-image: url(/resources/images/message1.png);
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 40px;
+    padding-top: 25px;
+    padding-left: 29px;
+    font-weight: bold;
+    display: flex;
+}
 
+.message span{
+    background-color: #ff9900;
+    border-radius: 9px;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+}
+
+.exadel_logo{
+    display: inline-block;
+/*    padding-top: 10px;
+    padding-left: 20px;*/
+}
+
+.loupe_logo, .exit_logo{
+    display: inline-block;
     margin-top: 5px;
     margin-right: 10px;
 }
 
 .currUserName{
-    float:right;
+    display: inline-block;
     color: white;
     margin-right:10px;
     font-size: 25px;
     text-shadow: 1px 1px 1px RGB(70,186,235);
-    font-family: Arial;
     margin-top: 9px;
+    padding-bottom: 1px;
 }
 
 table{
     background-color: white;
     text-align:center;
     border:#777777 1px solid;
-    border-collapse:collapse;
+    border-collapse:collapse !important;
     box-shadow: 0 1px 2px #d1d1d1;
-    font-family: Arial;
 }
 
 table thead,table tfoot{
     background-color: grey;
     color:white;
     font-weight:bold;
-    border-bottom:1px solid #e0e0e0;
     text-shadow: 1px 1px 0px black;
     font-family:serif;
 }
@@ -79,6 +138,10 @@ table thead,table tfoot{
 table td{
     padding: 2px 8px 2px 8px;
     border-color: grey;
+}
+
+table thead th, table thead td, table tfoot td, table tfoot tr{
+    border: 1px solid #111111;
 }
 
 .profile{
@@ -96,17 +159,20 @@ table td{
     margin-left: 5px;
 }
 
-.loginAndCreateForm{
+.loginAndCreateForm, .linkingForm, .reviewForm, .createNotificationForm{
     color: #808080;
     width: 370px;
     margin: auto;
     margin-top: 100px;
     border: 3px solid;
     padding: 7px;
-    text-align:left;
-    font-size: 14px;
     background-color: white;
     border-radius: 10px;
+}
+
+.loginAndCreateForm{
+    text-align:left;
+    font-size: 14px;
 }
 
 .loginAndCreateForm p {
@@ -118,7 +184,6 @@ table td{
 }
 
 .loginAndCreateForm button{
-    float:right;
     margin-right: 10px;
     cursor: pointer;
 }
@@ -144,18 +209,20 @@ table td{
     background-color:RGB(0,156,203);
 }
 
-.field{
+.field, .addTechField {
     color: #808080;
     height: 25px;
     background-color: white;
     position: relative;
-    float: right;
     margin-right: 20px;
     border-color: #00a1d2;
     border-radius: 3px;
     border: 1px solid;
-    width:50%;
     padding: 3px;
+}
+ .field{
+    float: right;
+    width:50%;
 }
 
 .alignCenter{
@@ -163,9 +230,16 @@ table td{
     text-align: center;
 }
 
-.displayFlex{
-    display: flex;
+.btn:hover, .btnActive{
+    background-color: #ffffff;
+    color:  RGB(0,156,203);
 }
+
+.btn{
+    background-color:  RGB(0,156,203);
+    color: #ffffff ;
+}
+
 /*end of common props*/
 
 /*login props*/
@@ -185,10 +259,6 @@ table td{
     color: gray;
 }
 
-
-
-
-
 /*props create.jsp*/
 
 /*all props are common*/
@@ -197,37 +267,31 @@ table td{
 
 /*linking form*/
 
-select.linkingL{
-    float: left;
-    height: 300px;
-    width: 30%;
-    border-radius: 5px;
-    font-family: arial;
-}
-select.linkingR{
-    float: right;
-    width: 30%;
-    height: 300px;
-    border-radius: 5px;
-    font-family: arial;
-}
 .linkingForm{
-    font-family: arial;
-    color: #808080;
-    margin:auto;
-    margin-top: 100px;
-    padding: 7px;
-    background-color: white;
-    border:3px solid;
-    border-radius: 10px;
     width: 450px;
 }
+
+.linkingL , .linkingR{
+    width: 30%;
+    float: left;
+    text-align: center;
+}
+
+.linkingL > select, .linkingR > select{
+    height: 300px;
+    border-radius: 5px;
+    width: 100%;
+}
+.linkingR{
+    float: right;
+}
+
 .radio{
     text-align: center;
 }
 
 .button{
-    margin-top: 150px;
+    margin-top: 50px;
     text-align: center;
 }
 .button button{
@@ -245,20 +309,18 @@ select.linkingR{
     background-color: RGB(0,156,203);
 }
 
+.technology{
+    text-align: center;
+    margin-top: 170px;
+}
+
 /*end of linking form*/
 
 /*review form*/
-.reviewForm{
-    font-family: arial;
-    color: #808080;
-    margin:auto;
-    margin-top: 100px;
-    padding: 10px;
-    font-size: 14px;
-    background-color: white;
-    border:3px solid;
-    border-radius: 10px;
+
+.reviewForm, .createNotificationForm{
     width: 450px;
+    font-size: 14px;
     text-align: left;
 }
 
@@ -269,14 +331,14 @@ select.linkingR{
 .textOther{
     width: 400px;
     max-width: 400px;
-    color: RGB(0,107,253);
+   /* color: RGB(0,107,253);*/
     height: 100px;
 }
 /*end of review form*/
 
 /*student page*/
 .nav-tabs {
-    margin-top: 50px;
+    margin-top: 55px;
 }
 
 #reviewsTable{
@@ -288,7 +350,6 @@ select.linkingR{
     font-size: 14px;
     color: gray;
 }
-
 
 .group label{
     float:left;
@@ -312,6 +373,7 @@ select.linkingR{
     font-size: 14px;
     text-align: left;
     color: #808080;
+    margin: 0 auto;
 }
 .group{
     white-space: nowrap;
@@ -323,24 +385,11 @@ select.linkingR{
 
 /*fblist props*/
 
-.skyBoxPadding{
-padding-top: 100px;
-margin-left: 50px;
-    margin-right: 50px;
-}
+/*all props are common*/
+
 /*end of fblist props*/
 
 /*admin props*/
-
-.btn:hover{
-    background-color: #ffffff;
-    color:  RGB(0,156,203);
-}
-
-.btn{
-    background-color:  RGB(0,156,203);
-    color: #ffffff ;
-}
 
 .adminProfile{
     font-size: 14px;
@@ -424,3 +473,159 @@ margin-left: 50px;
     padding-right: 100px;
 }
 /*end of adminTable props*/
+
+/*interview props*/
+
+.starRating{
+    float: right;
+    margin-right: 20px;
+}
+
+.interviewGroup{
+    margin-bottom: 5px;
+}
+
+/*end of interview props*/
+
+/*notification props*/
+
+.notifPadding{
+    padding-top: 100px;
+}
+.notification{
+    border: 3px solid gray;
+    border-radius: 20px;
+    width: 650px;
+    margin: auto;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+.notification h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.text{
+    margin-bottom: 20px;
+    border-bottom: 1px solid gray;
+}
+
+.date , .sender{
+    font-style: italic;
+}
+
+.date{
+    display: inline-block;
+}
+
+.sender{
+    display: inline-block;
+    float: right;
+}
+/*end of notification props*/
+
+/*create notification props*/
+
+.createNotificationForm{
+    width: 650px;
+    text-align: center;
+}
+
+.leftList{
+    float: left;
+    margin-bottom: 10px;
+}
+
+.centerList{
+    float: left;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    margin-left: 15px;
+}
+
+.rightList{
+    float: left;
+    clear: right;
+    width: 33%;
+    margin-bottom: 10px;
+}
+
+.createNotificationForm select{
+    width: 200px;
+    height: 150px;
+}
+
+.subject{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.subject input{
+    width: 100%;
+}
+
+.letterText{
+
+}
+
+.letterText textarea{
+    width:100%
+}
+
+/*end of create notification props*/
+
+/*add field and technology props*/
+
+.addTech{
+    text-align: center;
+    margin-top: 20px;
+}
+
+#field{
+    padding: 40px;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.floatRight{
+    float: right;
+}
+
+
+.inputGroup{
+    margin-top: 30px;
+    float: left;
+    text-align: center;
+}
+
+.selectGroup{
+    float: right;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.paddingTop{
+    padding-top: 100px;
+}
+
+.spoilers > div > input:not([type="radio"]){
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.borderBottom{
+    border-bottom: 1px solid gray;
+}
+
+.tab-content{
+    margin-top: 10px;
+}
+
+.marginTop{
+    margin-top: 100px;
+}
+
+/*end of add field and technology props*/

@@ -1,19 +1,15 @@
 package com.springapp.mvc;
 
-import com.services.AdministratorService;
-import com.services.SecurityService;
-import com.services.StudentService;
-import com.services.UserService;
-import com.services.presentation.GAVPresentation;
+import com.View.AccountUnit;
+import com.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import service.TestService;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 @Controller
 
@@ -27,38 +23,86 @@ public class HelloController {
     @Autowired
     private StudentService studentService;
 
-   /* @RequestMapping(value = {"*//**"}, method = RequestMethod.GET)
-    public void start(HttpSession session) {
-        session.setAttribute("account", us.getCurrentUserLogin());
-    }*/
+   /* @RequestMapping(value = {"*/
+
+    /**
+     * "}, method = RequestMethod.GET)
+     * public void start(HttpSession session) {
+     * session.setAttribute("account", us.getCurrentUserLogin());
+     * }
+     */
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String welcomePage(ModelMap model,HttpSession session) {
+    public String welcomePage(ModelMap model, HttpSession session) {
         session.setAttribute("account", us.getCurrentUserLogin());
+        session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
         if (SecurityService.hasRole("ROLE_STUDENT"))
-            return "redirect:student/"+us.getCurrentUserLogin();
+            return "redirect:student/" + us.getCurrentUserLogin();
         if (SecurityService.hasRole("ROLE_CURATOR"))
-            return "redirect:curator";
+            return "redirect:curator/" + us.getCurrentUserLogin();
         if (SecurityService.hasRole("ROLE_ADMIN"))
             return "redirect:admin";
 
         return "login";
     }
-    @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String account(){
-        UserService.getCurrentUserLogin();
 
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    public String account(ModelMap modelMap) {
+        String login = UserService.getCurrentUserLogin();
+        AccountUnit accountUnit = new AccountUnit();
+        accountUnit.setFirstName(us.getFirstName(login));
+        accountUnit.setLogin(login);
+        accountUnit.setSecondName(us.getSecondName(login));
+        modelMap.addAttribute("accountUnit", accountUnit);
         return "account";
     }
 
-    @Autowired
-    private TestService ts;
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public String changePassword(ModelMap modelMap, @ModelAttribute("accountUnit")AccountUnit accountUnit) {
+        String message = new String();
+        if(accountUnit.getPassword().equals(us.getPassword(UserService.getCurrentUserLogin()))){
+            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword())) {
+                us.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
+                message = "Password was changed.";
+            }
+            else{
+                message = "Confirmed password doesn't match the new one.";
+            }
+        }
+        else{
+            message = "Wrong old password.";
+        }
+        accountUnit.setPassword("");
+        accountUnit.setNewPassword("");
+        accountUnit.setConfirmedPassword("");
+        modelMap.addAttribute("message", message);
+        modelMap.addAttribute("accountUnit", accountUnit);
+        return "account";
+    }
 
+
+    @Autowired
+    private AttributeService attributeService;
+
+    @Autowired
+    private GroupService groupService;
+
+    @Autowired
+    private TechnologyService technologyService;
+
+    @Autowired
+    private FeedbackerService feedbackerService;
 
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
-    public void welcomePage() {
-        //ts.testMethod();
+    public void welcomePage() {/*
+        groupService.addGroup("service", "service");
+        attributeService.addAttribute("service", "status", "notShow");
+        studentService.add("student", "123", "Ivan", "Ivanov", "STUDYING");
+        administratorService.add("admin", "123", "Petr", "Petrov");
+        ts.testMethod();*/
+
+        /*System.out.println("test started");
         ArrayList<GAVPresentation> values =  new ArrayList<GAVPresentation>();
         GAVPresentation gav = new GAVPresentation();
         gav.setGroup("Institution");
@@ -66,16 +110,30 @@ public class HelloController {
         gav.setValue("BSU");
         values.add(gav);
 
-        gav.setGroup("Institution");
-        gav.setAttribute("Faculty");
-        gav.setValue("FAMCS");
-        values.add(gav);
+        GAVPresentation gav1 = new GAVPresentation();
+        gav1.setGroup("Institution");
+        gav1.setAttribute("Faculty");
+        gav1.setValue("FAMCS");
+        values.add(gav1);
 
-        gav.setGroup("Work");
-        gav.setAttribute("Project");
-        gav.setValue("some");
-        values.add(gav);
+        GAVPresentation gav2 = new GAVPresentation();
+        gav2.setGroup("Work");
+        gav2.setAttribute("Project");
+        gav2.setValue("some");
+        values.add(gav2);
 
         studentService.setValues("student", values);
+
+        System.out.println("test ended");*/
+
+        //studentService.addInterviewer("interviewer", "student1");
+
+       /* technologyService.add("java");
+        technologyService.add("js");*/
+
+//       feedbackerService.addTechnology("curator", "java");
+       // return "notificationList";
+
+
     }
 }

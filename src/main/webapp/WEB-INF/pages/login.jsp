@@ -21,7 +21,7 @@
 		<h1>Login Form </h1>
 		<p>
             <label for="login">Login:</label>
-			<input type="text" name="j_username" class="field" id="login" value="student">
+			<input type="text" name="j_username" class="field" id="login" value="admin">
 		</p>
 		<p>
             <label for="password">Password:</label>
@@ -31,7 +31,7 @@
             <label for="remember">Remember Me</label>
             <input type="checkbox" name="_spring_security_remember_me" id="remember">
         </p>
-		<div class="allignCenter">
+		<div class="alignCenter">
 			<input type="submit" class="loginAndCreateButton" value="Login">
         </div>
 	</form>

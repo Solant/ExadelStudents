@@ -1,4 +1,4 @@
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -9,36 +9,75 @@
     <link rel="stylesheet" href="/resources/styles/style.css" />
     <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
-    <title>Choosing table fields</title>
-    <link rel="stylesheet" href="/resources/styles/style.css" />
+    <title>Admin</title>
 </head>
 <body>
 
-<div class="hat">
-    <form method="get">
-        <img src="/resources/images/exadel-logo.png" class="exadel_logo">
-        <a href="<c:url value="/account"/> ">
-    <img src="/resources/images/account.png" class="account_logo">
-            </a>
-    <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
-    <span class="currUserName"><c:out value="${account}"></c:out></span>
-        <a href="<c:url value="/admin" />"><img src="/resources/images/loupe.png" class="loupe_logo"></a>
-        <button formaction="/admin/returnCreate" class="btn">
-            <img src="/resources/images/add.png" class="adminMenuImages">
-            <span>Add User</span>
-        </button>
-        <button formaction="/admin/linkStudent" class="btn">
-            <img src="/resources/images/yellow-link.png" class="adminMenuImages">
-            <span>Link Student</span>
-        </button>
-        <button formaction="#" class="btn">
-            <img src="/resources/images/fired.png" class="adminMenuImages">
-            <span>Fired Students</span>
-        </button>
-        </form>
-</div>
-    </form>
-</div>
+<nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form method="get">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button formaction="/admin/returnCreate" class="btn">
+                            <img src="/resources/images/add.png" class="adminMenuImages">
+                            <span>Add User</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button formaction="/admin/showLinkStudent" class="btn">
+                            <img src="/resources/images/yellow-link.png" class="adminMenuImages">
+                            <span>Link Student</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button formaction="/admin/showDisabled" class="btn">
+                            <img src="/resources/images/fired.png" class="adminMenuImages">
+                            <span>Disabled Students</span>
+                        </button>
+                    </li>
+                    <li>
+                        <div class="message">
+                            <span>
+                                1
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="currUserName"><c:out value="${account}"></c:out></span>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/admin"/> ">
+                            <img src="/resources/images/loupe.png" class="account_logo">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="j_spring_security_logout" />">
+                            <img src="/resources/images/exit.png" class="exit_logo">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/account"/> ">
+                            <img src="/resources/images/account.png" class="account_logo">
+                        </a>
+                    </li>
+                </ul>
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 
 <div align="center">
 <div class="profile">
@@ -46,6 +85,70 @@
     <span class="adminProfile">Zhanna Vasilenko</span>
 </div>
 
+<ul class="nav nav-tabs" role="tablist">
+
+    <%pageContext.setAttribute("isActive", "active");%>
+
+    <c:forEach items="${groups}" var="groupName">
+        <li class="${isActive}">
+            <a href="#${groupName}" role="tab" data-toggle="tab">${groupName}</a>
+        </li>
+        <%pageContext.setAttribute("isActive", "");%>
+    </c:forEach>
+
+
+</ul>
+
+
+    <form:form commandName="groupedValues" class="spoilers" method="post" action="/admin/formTable">
+<div class="tab-content">
+
+    <%pageContext.setAttribute("isActive", "active");%>
+<c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
+<div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].gavs[0].getGroup()}">
+    <!-- Petya -->
+
+        <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2">
+            <div class="group"><%--
+                <label >${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].attribute} </label>
+
+                <form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" cssStyle="width: 20px"/>
+                <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />--%>
+
+                <label >${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].attribute} </label>
+                <form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" cssStyle="width: 20px"/>
+                <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'text'}">
+                    <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                </c:if>
+                <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'textarea'}">
+                    <form:textarea path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                </c:if>
+                    <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'select'}">
+                        <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                            <form:option value="${token}">${token}</form:option>
+                        </c:forTokens>
+                    </c:if>
+                    <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'radiobutton'}">
+                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                            <form:radiobutton path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
+                                              value="${token == groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].value}"/>
+                        </c:forTokens>
+                    </c:if>--%>
+                <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
+            </div>
+        </c:forEach>
+
+</div>
+        <%pageContext.setAttribute("isActive", "");%>
+</c:forEach>
+        <form:button type="submit" >Form table</form:button>
+        </form:form>
+</body>
+</html>
+
+<%--
 <ul class="nav nav-tabs" role="tablist">
     <li class="active">
         <a href="#common" role="tab" data-toggle="tab">Common</a>
@@ -147,9 +250,9 @@
         </div>
 
         <div class="adminGroup">
-            <label for="group">Group:</label>
+            <label for="gavs">Group:</label>
             <input type="checkbox"/>
-            <input type="text" id="group">
+            <input type="text" id="gavs">
         </div>
 
         <div class="adminGroup">
@@ -206,7 +309,7 @@
             <input type="text" id="futureTechnologies"/>
         </div>
 
-        <div class="allignCenter">
+        <div class="alignCenter">
             <div>
                 <label for="pastProject">Past projects:</label>
                 <input type="checkbox"/><br/>
@@ -214,7 +317,6 @@
             </div>
         </div>
 
-        <div class="displayFlex">
             <div class="alignCenter">
                 Is Billable:
                 <input type="checkbox"/><br/>
@@ -223,15 +325,6 @@
                 <input type="radio" name="billable" value="no" id="bilNo">
                 <label for="bilNo">No Billable</label>
             </div>
-        </div>
-
-        <div class="adminGroup">
-            <div>
-                <label for="curatorCompany">Curator in Company:</label>
-                <input type="checkbox"/>
-                <input type="text" id="curatorCompany" >
-            </div>
-        </div>
 
         <div class="adminGroup">
             <div>
@@ -264,6 +357,14 @@
         </div>
 
         <div class="adminGroup">
+            <div>
+                <label for="curator">Curator:</label>
+                <input type="checkbox"/>
+                <input type="text" id="curator" >
+            </div>
+        </div>
+
+        <div class="adminGroup">
             <label for="currRole">Current role</label>
             <input type="checkbox"/>
             <select id="currRole">
@@ -277,7 +378,7 @@
             <input type="checkbox"/>
             <input type="text" id="currTechnologies"/>
         </div>
-        <div class="allignCenter">
+        <div class="alignCenter">
             <div>
                 Change Project:
                 <input type="checkbox"/> <br/>
@@ -313,7 +414,7 @@
             <input type="text" id="engCourse">
         </div>
 
-        <div class="allignCenter">
+        <div class="alignCenter">
             <div>
                 <label for="trainings">Trainings:</label>
                 <input type="checkbox"/><br/>
@@ -321,7 +422,7 @@
             </div>
         </div>
 
-        <div class="allignCenter">
+        <div class="alignCenter">
             <div>
                 <label for="certificates">Certificates:</label>
                 <input type="checkbox"/><br/>
@@ -333,6 +434,4 @@
 </div>
 
 </div>
-</div>
-</body>
-</html>
+</div>--%>

@@ -1,5 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -23,44 +24,44 @@
 
 </div>
 
-<form class="loginAndCreateForm" >
+<form:form commandName="accountUnit" class="loginAndCreateForm" method="post" action="/changePassword">
 
     <h1>Account Form</h1>
+    <p>
+        ${message}
+    </p>
 
     <p>
         <label for="lastname">Lastname:</label>
-        <input class="field" type="text" id="lastname" value="Ivanov" readonly>
+        <form:input path="secondName" class="field" type="text" id="lastname" readonly="true"/>
     </p>
 
     <p>
         <label for="firstname">Firstname:</label>
-        <input class="field" type="text" id="firstname" value="Ivan" readonly>
+        <form:input path="firstName" class="field" type="text" id="firstname" readonly="true"/>
     </p>
 
 
         <p>
             <label for="oldPassword">Password:</label>
-            <input type="password" id="oldPassword" class="field">
+            <form:input path="password" type="password" id="oldPassword" class="field"/>
         </p>
 
         <p>
             <label for="newPassword">New Password:</label>
-            <input type="password" id="newPassword" class="field">
+            <form:input path="newPassword" type="password" id="newPassword" class="field"/>
         </p>
 
         <p>
             <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" class="field">
+            <form:input path="confirmedPassword" type="password" id="confirmPassword" class="field"/>
         </p>
 
-
-    <div class="displayFlex">
         <div class="alignCenter">
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
             <button type="submit"  class="loginAndCreateButton">Change</button>
         </div>
-    </div>
-</form>
+</form:form>
 </body>
 
 </html>

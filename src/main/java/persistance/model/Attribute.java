@@ -23,6 +23,9 @@ public class Attribute {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "possible_values")
+    private String possibleValues;
+
     @OneToMany(mappedBy = "attribute")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
     private Set<Value> values;
@@ -72,6 +75,14 @@ public class Attribute {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public String getPossibleValues() {
+        return possibleValues;
+    }
+
+    public void setPossibleValues(String possibleValues) {
+        this.possibleValues = possibleValues;
     }
 
 

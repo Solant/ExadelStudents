@@ -24,6 +24,7 @@ public class AdministratorService {
     @Transactional
     public void add(String login, String password, String name, String surname){
         Admin admin = new Admin();
+        admin.setEnabled(true);
         admin.setLogin(login);
         admin.setPassword(password);
         admin.setFirstName(name);
@@ -40,6 +41,7 @@ public class AdministratorService {
      * Removes administrator
      * @param login Administrator login
      */
+    @Transactional
     public void remove(String login){
         adminDao.removeById(adminDao.findByLogin(login).getId());
     }

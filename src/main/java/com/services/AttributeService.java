@@ -55,4 +55,9 @@ public class AttributeService {
         }
         return gavs;
     }
+
+    @Transactional
+    public boolean isAttributeAvailable(String attribute){
+        return attributeDao.findByName(attribute) == null;
+    }
 }

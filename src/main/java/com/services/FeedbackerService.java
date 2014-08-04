@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.FeedbackerDao;
+import persistance.dao.TechnologyDao;
 import persistance.model.Feedbacker;
 import persistance.model.Student;
+import persistance.model.Technology;
 import persistance.model.UserRole;
 
 import java.util.ArrayList;
@@ -20,6 +22,9 @@ public class FeedbackerService {
     @Autowired
     private FeedbackerDao feedbackerDao;
 
+    @Autowired
+    private TechnologyDao technologyDao;
+
     @Transactional
     public Feedbacker getFeedbackerByLogin(String login){
         return feedbackerDao.findByLogin(login);
@@ -29,6 +34,7 @@ public class FeedbackerService {
     public void add(String login, String password, String name, String surname){
         Feedbacker feedbacker = new Feedbacker();
 
+        feedbacker.setEnabled(true);
         feedbacker.setLogin(login);
         feedbacker.setPassword(password);
         feedbacker.setFirstName(name);
@@ -68,5 +74,24 @@ public class FeedbackerService {
     @Transactional
     public Set<Student> getInterviewedStudents(String feedbackerLogin){
         return  new HashSet<Student>(feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents());
+    }
+
+    @Transactional
+    public void addTechnology(String login, String technologyName){
+        Technology technology = technologyDao.findByName(technologyName);
+        Feedbacker feedbacker = feedbackerDao.findByLogin(login);
+        feedbacker.getMyTechnologies().add(technology);
+        feedbackerDao.update(feedbacker);
+    }
+
+    /**
+     *Get all feedbackers by technology
+     *
+     * @param technologyName Technology
+     * @return Set<Feedbacker>
+     */
+    @Transactional
+    public Set<Feedbacker> getFeedbackersByTechnology(String technologyName){
+        return new HashSet<Feedbacker>(technologyDao.findByName(technologyName).getFeedbackers());
     }
 }
