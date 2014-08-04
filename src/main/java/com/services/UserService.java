@@ -81,6 +81,22 @@ public class UserService {
         return org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
     }
 
+    /**
+     * Get all notifications for user
+     *
+     * @param login Student login
+     * @return List<Notification>
+     */
+    @Transactional
+    public List<Notification> getAllNotifications(String login) {
+        List<Notification> notifications = notificationDao.findAll();
+        List<Notification> notificationsReturn = new ArrayList<Notification>();
+        for (Notification notification : notifications)
+            if (notification.getUser().getLogin().equalsIgnoreCase(login))
+                notificationsReturn.add(notification);
+        return notificationsReturn;
+    }
+
     @Transactional
     public List<Notification> getAllUnreadNotifications(String login) {
         User user = userDao.findByLogin(login);
