@@ -13,7 +13,7 @@ public class GAVPresentation {
     private boolean show;
 
     public static List<String> parse(String line){
-        String[] values = line.split("[,;( ,)]+");
+        String[] values = line.split("[,;(, )]+");
         ArrayList<String> valuesList = new ArrayList<String>();
         for(String str : values)
             valuesList.add(str);
