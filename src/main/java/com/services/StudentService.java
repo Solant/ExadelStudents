@@ -303,31 +303,25 @@ public class StudentService {
         List<Student> students1 = new ArrayList<Student>();
         for (GAVPresentation gavPresentation : gavPresentationList) {
 
-            boolean isSuitable = true;
             students1.clear();
             students1.addAll(students);
+            students.clear();
             for (Student student : students1) {
+
+                boolean isSuitable = false;
                 Set<Value> valueSet = student.getValues();
-                boolean hasAttribute = false;
                 for (Value value : valueSet) {
-                    if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute())) {
-                        hasAttribute = true;
-                        if (gavPresentation.getValue() != null
-                                && !gavPresentation.getValue().equalsIgnoreCase("")
-                                && !value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
-                            isSuitable = false;
-                            break;
-                        }
+                    if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) &&
+                            value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
+                        isSuitable = true;
+                        break;
                     }
-                    if (!isSuitable)
+
+                    if (isSuitable)
                         break;
                 }
-                if (!hasAttribute) {
-                    isSuitable = false;
-                    break;
-                }
-                if(!isSuitable)
-                    students.remove(student);
+                if (isSuitable)
+                    students.add(student);
             }
 //
 //            if (isSuitable) {
@@ -348,22 +342,22 @@ public class StudentService {
 //                returnStatement.add(addStatement);
 //            }
         }
-        for(Student student: students){
+        for (Student student : students) {
             ArrayList<String> addStatement = new ArrayList<String>();
-                addStatement.add(student.getSecondName() + " " + student.getFirstName());
-                addStatement.add(student.getLogin());
-                for (GAVPresentation gavPresentation : gavPresentationList) {
-                    if (gavPresentation.isShow()) {
-                        List<GAVPresentation> valuesGAV = getValues(student.getLogin());
-                        for (GAVPresentation gavStudent : valuesGAV) {
-                            if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute())) {
-                                addStatement.add(gavStudent.getValue());
-                                break;
-                            }
+            addStatement.add(student.getSecondName() + " " + student.getFirstName());
+            addStatement.add(student.getLogin());
+            for (GAVPresentation gavPresentation : gavPresentationList) {
+                if (gavPresentation.isShow()) {
+                    List<GAVPresentation> valuesGAV = getValues(student.getLogin());
+                    for (GAVPresentation gavStudent : valuesGAV) {
+                        if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute())) {
+                            addStatement.add(gavStudent.getValue());
+                            break;
                         }
                     }
                 }
-                returnStatement.add(addStatement);
+            }
+            returnStatement.add(addStatement);
         }
 
         if (returnStatement.size() == 0)
