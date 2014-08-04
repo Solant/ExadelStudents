@@ -1,4 +1,4 @@
-﻿﻿/*common props*/
+﻿/*common props*/
 
 
 body {
@@ -238,6 +238,10 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
 .btn{
     background-color:  RGB(0,156,203);
     color: #ffffff ;
+}
+
+.errorText{
+    color:red;
 }
 
 /*end of common props*/

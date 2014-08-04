@@ -6,7 +6,6 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +22,6 @@ public class UserRole {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Pattern(regexp = "^ROLE_(CURATOR|STUDENT|ADMIN|WORKER)$")
     @Column(name = "role")
     private String role;
 
