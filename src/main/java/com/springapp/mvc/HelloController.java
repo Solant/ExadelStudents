@@ -65,8 +65,9 @@ public class HelloController {
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public String changePassword(ModelMap modelMap, @ModelAttribute("accountUnit")AccountUnit accountUnit) {
         String message = new String();
-        if(accountUnit.getPassword().equals(us.getPassword(UserService.getCurrentUserLogin()))){
-            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword()) && !accountUnit.getNewPassword().equals("")) {
+        //System.out.println(UserService.stringToSha256(accountUnit.getPassword()) + " " + us.getPassword(UserService.getCurrentUserLogin()));
+        if(UserService.stringToSha256(accountUnit.getPassword()).equals(us.getPassword(UserService.getCurrentUserLogin()))){
+            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword())) {
                 us.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
                 message = "Password was changed.";
             }
