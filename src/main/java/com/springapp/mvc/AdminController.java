@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import persistance.model.Feedbacker;
+import persistance.model.Notification;
 import persistance.model.Student;
 
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +43,9 @@ public class AdminController {
 
     @Autowired
     private HRWorkerService hrWorkerService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private NotificationService notificationService;
@@ -321,5 +325,12 @@ public class AdminController {
                 notificationService.add(current, worker,title, text);
             }
         return "redirect:/admin";
+    }
+
+    @RequestMapping("studentPage/{student}/notif")
+    public String studentNotif(@PathVariable("student")String student, ModelMap modelMap){
+        List<Notification> notifications = userService.getAllNotifications(student);
+        modelMap.addAttribute("notifs", notifications);
+        return "notificationList";
     }
 }

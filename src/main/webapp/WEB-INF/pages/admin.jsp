@@ -90,10 +90,11 @@
 </nav>
 
 <div align="center">
-<div class="profile">
-    <img src="/resources/images/account.png">
-    <span class="adminProfile">Zhanna Vasilenko</span>
-</div>
+    <div class="profile">
+        <img src="/resources/images/account.png">
+        <c:out value="${secondName}"></c:out>
+        <c:out value="${firstName}"></c:out>
+    </div>
 
 <ul class="nav nav-tabs" role="tablist">
 
