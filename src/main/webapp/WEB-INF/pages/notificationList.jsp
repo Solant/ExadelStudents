@@ -66,11 +66,15 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <div class="message">
-            <span>
-                1
-            </span>
-                    </div>
+                    <a href="/notif">
+                        <div class="message">
+                            <c:if test="${notifNumber > 0}">
+                                <span>
+                                        ${notifNumber}
+                                </span>
+                            </c:if>
+                        </div>
+                    </a>
                 </li>
                 <li>
                     <span class="currUserName"><c:out value="${account}"></c:out></span>
@@ -99,51 +103,19 @@
         <td>Date</td>
         </thead>
         <tbody>
+        <c:forEach items="${notifs}" var="notif">
             <tr>
-                <td><a href="">Session</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
+                <td>
+                    <a href="/notif/${notif.id}">${notif.title}</a>
+                </td>
+                <td>
+                    ${notif.sender}
+                </td>
+                <td>
+                    ${notif.timeWhenSent.time}
+                </td>
             </tr>
-            <tr>
-                <td><a href="">Alert</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>Admin</td>
-                <td>30.07.2014</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Alert</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>Admin</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Alert</a></td>
-                <td>System</td>
-                <td>30.07.2014</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
+        </c:forEach>
 
 
         </tbody>
@@ -153,3 +125,51 @@
 
 </body>
 </html>
+
+
+
+<%--<tr>
+                <td><a href="">Session</a></td>
+                <td>System</td>
+                <td>30.07.2013</td>
+            </tr>
+            <tr>
+                <td><a href="">Alert</a></td>
+                <td>System</td>
+                <td>30.07.2013</td>
+            </tr>
+            <tr>
+                <td><a href="">Session</a></td>
+                <td>Admin</td>
+                <td>30.07.2014</td>
+            </tr>
+            <tr>
+                <td><a href="">Session</a></td>
+                <td>System</td>
+                <td>30.07.2013</td>
+            </tr>
+            <tr>
+                <td><a href="">Alert</a></td>
+                <td>System</td>
+                <td>30.07.2013</td>
+            </tr>
+            <tr>
+                <td><a href="">Session</a></td>
+                <td>Admin</td>
+                <td>30.07.2013</td>
+            </tr>
+            <tr>
+                <td><a href="">Alert</a></td>
+                <td>System</td>
+                <td>30.07.2014</td>
+            </tr>
+            <tr>
+                <td><a href="">Session</a></td>
+                <td>System</td>
+                <td>30.07.2013</td>
+            </tr>
+            <tr>
+                <td><a href="">Session</a></td>
+                <td>System</td>
+                <td>30.07.2013</td>
+            </tr>--%>

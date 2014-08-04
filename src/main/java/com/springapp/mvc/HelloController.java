@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import persistance.model.Notification;
 import persistance.model.User;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 
@@ -23,6 +26,9 @@ public class HelloController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private NotificationService notificationService;
 
    /* @RequestMapping(value = {"*/
 
@@ -91,6 +97,20 @@ public class HelloController {
         return "account";
     }
 
+    @RequestMapping(value = "/notif", method = RequestMethod.GET)
+    public String showNotifs(ModelMap modelMap){
+        List<Notification> notifications = us.getAllNotifications(UserService.getCurrentUserLogin());
+        modelMap.addAttribute("notifs", notifications);
+        return "notificationList";
+    }
+
+    @RequestMapping(value = "/notif/{notifId}", method = RequestMethod.GET)
+    public String showNotif(ModelMap modelMap, @PathVariable("notifId")Long id){
+        Notification notification = notificationService.getNotificationById(id);
+        notificationService.setRead(id);
+        modelMap.addAttribute("notif", notification);
+        return "notification";
+    }
 
     @Autowired
     private AttributeService attributeService;
@@ -144,6 +164,8 @@ public class HelloController {
 
 //       feedbackerService.addTechnology("curator", "java");
        // return "notificationList";
+
+        notificationService.add("system", "student", "wtestNotif", "some text here");
 
 
     }
