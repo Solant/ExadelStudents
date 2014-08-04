@@ -35,6 +35,11 @@ public class UserService {
         return user == null;
     }
 
+    @Transactional
+    public void update(User user){
+        userDao.update(user);
+    }
+
     /**
      * Returns login of current user from SpringSecurity, non Transactional
      *
