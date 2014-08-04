@@ -1,5 +1,6 @@
 package com.services.presentation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GAVPresentation {
@@ -10,6 +11,14 @@ public class GAVPresentation {
     private String type;
     private List<String> possibleValues;
     private boolean show;
+
+    public static List<String> parse(String line){
+        String[] values = line.split("[,;(, )]+");
+        ArrayList<String> valuesList = new ArrayList<String>();
+        for(String str : values)
+            valuesList.add(str);
+        return valuesList;
+    }
 
     public void setPossibleValues(List<String> list){
         possibleValues.addAll(list);
