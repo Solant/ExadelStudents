@@ -1,12 +1,23 @@
 package com.services.presentation;
 
+import java.util.List;
+
 public class GAVPresentation {
 
     private String group;
     private String attribute;
     private String value;
     private String type;
+    private List<String> possibleValues;
     private boolean show;
+
+    public void setPossibleValues(List<String> list){
+        possibleValues.addAll(list);
+    }
+
+    public List<String> getPossibleValues(){
+        return possibleValues;
+    }
 
     public boolean isShow() {
         return show;
