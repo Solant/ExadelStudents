@@ -35,6 +35,7 @@ public class HelloController {
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String welcomePage(ModelMap model, HttpSession session) {
         session.setAttribute("account", us.getCurrentUserLogin());
+        session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
         if (SecurityService.hasRole("ROLE_STUDENT"))
             return "redirect:student/" + us.getCurrentUserLogin();
         if (SecurityService.hasRole("ROLE_CURATOR"))
@@ -130,7 +131,8 @@ public class HelloController {
        /* technologyService.add("java");
         technologyService.add("js");*/
 
-       feedbackerService.addTechnology("curator", "java");
+//       feedbackerService.addTechnology("curator", "java");
+       // return "notificationList";
 
 
     }

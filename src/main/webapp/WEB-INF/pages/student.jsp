@@ -1,5 +1,7 @@
 <%@ page import="com.services.UserService" %>
 <%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
+<%@ page import="java.util.List" %>
+<%@ page import="persistance.model.Notification" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
@@ -42,7 +44,7 @@
 	<span class="currUserName"><c:out value="${account}"></c:out></span>
     <div class="message">
             <span>
-                1
+                ${notifNumber}
             </span>
     </div>
 	<img src="/resources/images/loupe.png" class="loupe_logo">
