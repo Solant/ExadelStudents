@@ -8,11 +8,18 @@ import persistance.dao.HRWorkerDao;
 import persistance.model.HRWorker;
 import persistance.model.UserRole;
 
+import java.util.List;
+
 @Service
 public class HRWorkerService {
 
     @Autowired
     private HRWorkerDao hrWorkerDao;
+
+    @Transactional
+    public List<HRWorker> getAllHRWorkers(){
+        return hrWorkerDao.findAll();
+    }
 
     @Transactional
     public void add(String hrDepartmentLogin, String password, String name, String surname){
