@@ -98,24 +98,15 @@
     <div  class="linkingR">
         <label for="feedbackers">Feedbackers</label><br/>
             <select multiple id="feedbackers">
-                <option value="A">A</option>
-                <option value="A">B</option>
-                <option value="A">C</option>
-                <option value="A">D</option>
-                <option value="A">E</option>
-                <option value="A">F</option>
-                <option value="A">G</option>
-                <option value="A">H</option>
-                <option value="A">K</option>
-                <option value="A">L</option>
-                <option value="A">M</option>
-                <option value="A">N</option>
+
             </select>
     </div>
 
     <div class="technology">
         <label for="techList">Technology:</label><br/>
-        <select name="technology" id="techList">
+        <select name="technology" id="techList" onchange="adding();">
+            <option value="none">None</option>
+            <option value="all">All</option>
             <option value="html">HTML</option>
             <option value="css">CSS</option>
             <option value="hibernate">hibernate</option>
@@ -126,6 +117,41 @@
             <button  class="button">Link</button>
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
     </div>
+
+    <div id="testing"></div>
+
+    <script type="text/javascript">
+
+      function removeOptions(selectbox)
+      {
+          var i;
+          for(i=selectbox.options.length-1;i>=0;i--)
+          {
+              selectbox.remove(i);
+          }
+      }
+
+      function adding() {
+          var txt = '{"feedbackers":[' +
+                  '{"firstName":"John","lastName":"Doe","login":"jd","technology":"html" },' +
+                  '{ "firstName":"Anna", "lastName":"Smith","login":"as","technology":"hibernate" },' +
+                  '{ "firstName":"Peter", "lastName":"Jones","login":"pj","technology": "css" }]}';
+
+          var select=document.getElementById("feedbackers");
+          removeOptions(select);
+
+          var obj = JSON.parse(txt);
+          var number=obj.feedbackers.length;
+
+          for (var i=0;i<number;i++){
+              var option = document.createElement("option");
+              option.text=obj.feedbackers[i].lastName;
+              option.value=obj.feedbackers[i].login;
+              select.add(option);
+          }
+      }
+    </script>
+
 </form>
 </body>
 </html>
