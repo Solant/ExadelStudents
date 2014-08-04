@@ -42,4 +42,9 @@ public class NotificationService {
         n.setTimeWhenRead(Calendar.getInstance());
         notificationDao.update(n);
     }
+
+    @Transactional
+    public Notification getNotificationById(long id){
+        return notificationDao.findById(id);
+    }
 }
