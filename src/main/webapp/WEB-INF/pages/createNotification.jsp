@@ -1,6 +1,7 @@
 <%@ page import="com.services.UserService" %>
 <%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -34,87 +35,110 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <div class="message">
-            <span>
-                1
-            </span>
-                    </div>
-                </li>
-                <li>
-                    <span class="currUserName"><c:out value="${account}"></c:out></span>
-                </li>
-                <li>
-                    <a href="<c:url value="j_spring_security_logout" />">
-                        <img src="/resources/images/exit.png" class="exit_logo">
-                    </a>
-                </li>
-                <li>
-                    <a href="<c:url value="/account"/> ">
-                        <img src="/resources/images/account.png" class="account_logo">
-                    </a>
-                </li>
-            </ul>
+            <form method="get">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button formaction="/admin/returnCreate" class="btn">
+                            <img src="/resources/images/add.png" class="adminMenuImages">
+                            <span>Add User</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button formaction="/admin/showLinkStudent" class="btn">
+                            <img src="/resources/images/yellow-link.png" class="adminMenuImages">
+                            <span>Link Student</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button formaction="/admin/showDisabled" class="btn">
+                            <img src="/resources/images/fired.png" class="adminMenuImages">
+                            <span>Disabled Students</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button formaction="/admin/createNotif" class="btn">
+                            <img src="/resources/images/message1.png" class="adminMenuImages">
+                            <span>Create notification</span>
+                        </button>
+                    </li>
+                    <li>
+                        <a href="/notif">
+                            <div class="message">
+                                <c:if test="${notifNumber > 0}">
+                                <span>
+                                        ${notifNumber}
+                                </span>
+                                </c:if>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <span class="currUserName"><c:out value="${account}"></c:out></span>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/admin"/> ">
+                            <img src="/resources/images/loupe.png" class="account_logo">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="j_spring_security_logout" />">
+                            <img src="/resources/images/exit.png" class="exit_logo">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/account"/> ">
+                            <img src="/resources/images/account.png" class="account_logo">
+                        </a>
+                    </li>
+                </ul>
+            </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 
 <div class="notifPadding">
-    <form class="createNotificationForm">
+    <form:form commandName="createNotifUnit" action="/admin/sendNotif" method="post" class="createNotificationForm">
 
         <div class="leftList">
-            <input type="checkbox" id="students"/>
+            <form:checkbox path="forStudents" id="students"/>
             <label for="students">Students: </label><br/>
-                <select name="students" multiple>
-                    <option value="A">A</option>
-                    <option value="A">A</option>
-                    <option value="A">A</option>
-                    <option value="A">A</option>
-                    <option value="A">A</option>
-                    <option value="A">A</option>
-                    <option value="A">A</option>
-                </select>
+                <form:select path="students" name="students" multiple="true">
+                    <c:forEach items="${students}" var="student">
+                        <form:option value="${student.login}">${student.firstName} ${student.secondName}</form:option>
+                    </c:forEach>
+                </form:select>
         </div>
 
         <div class="centerList">
-            <input type="checkbox" id="feedbackers"/>
+            <form:checkbox path="forFeedbackers" id="feedbackers"/>
             <label for="feedbackers">Feedbackers: </label><br/>
-            <select name="feedbackers" multiple>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-            </select>
+            <form:select path="feedbackers" name="feedbackers" multiple="true">
+                <c:forEach items="${feedbackers}" var="feedbacker">
+                    <form:option value="${feedbacker.login}">${feedbacker.firstName} ${feedbacker.secondName}</form:option>
+                </c:forEach>
+            </form:select>
         </div>
 
         <div class="rightList">
-            <input type="checkbox" id="workers"/>
+            <form:checkbox path="forWorkers" id="workers"/>
             <label for="workers">Workers: </label><br/>
-            <select name="workers" multiple>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-                <option value="A">A</option>
-            </select>
+            <form:select path="workers" name="workers" multiple="true">
+                <c:forEach items="${workers}" var="worker">
+                    <form:option value="${worker.login}">${worker.firstName} ${worker.secondName}</form:option>
+                </c:forEach>
+            </form:select>
         </div>
 
-        <div class="subject"><input type="text" id="subject" value="Subject"/></div>
+        <div class="subject"><form:input path="title" type="text" id="subject" value="Subject"/></div>
         <div class="letterText">
-            <textarea name="text" id="text" cols="30" rows="10"></textarea>
+            <form:textarea path="text" name="text" id="text" cols="30" rows="10"/>
         </div>
 
         <div class="alignCenter">
-            <button type="submit" class="loginAndCreateButton">Send</button>
+            <form:button type="submit" class="loginAndCreateButton">Send</form:button>
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
         </div>
-    </form>
+    </form:form>
 </div>
 </body>
 </html>

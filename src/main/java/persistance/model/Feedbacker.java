@@ -1,29 +1,15 @@
 package persistance.model;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @DiscriminatorValue("feedbacker")
 public class Feedbacker extends User{
-
-    @Column(name = "firstname")
-    private String firstName;
-
-    @Column(name = "secondname")
-    private String secondName;
-
-    @Column (name = "skype")
-    private String skype;
-
-    @Column(name = "telephone")
-    private String telephone;
-
-    @Column(name = "email")
-    private String email;
 
     @ManyToMany
     @Cascade(CascadeType.SAVE_UPDATE)
@@ -37,26 +23,14 @@ public class Feedbacker extends User{
 
     @OneToMany(mappedBy = "feedbacker")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-   // @JoinColumn(name = "feedbId")
     private Set <Review> reviews = new HashSet();
 
+    @ManyToMany
+    @Cascade(CascadeType.SAVE_UPDATE)
+    @JoinTable(name = "UsersAndTechnologies", joinColumns = {@JoinColumn(name = "feedbacker_id")}, inverseJoinColumns ={@JoinColumn(name = "technology_id")} )
+    private Set<Technology> myTechnologies = new HashSet();
+
     public Feedbacker() {
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public Set<Student> getMyStudents() {
@@ -83,28 +57,12 @@ public class Feedbacker extends User{
         this.reviews = reviews;
     }
 
-    public String getSkype() {
-        return skype;
+    public Set<Technology> getMyTechnologies() {
+        return myTechnologies;
     }
 
-    public void setSkype(String skype) {
-        this.skype = skype;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMyTechnologies(Set<Technology> myTechnologies) {
+        this.myTechnologies = myTechnologies;
     }
 
 

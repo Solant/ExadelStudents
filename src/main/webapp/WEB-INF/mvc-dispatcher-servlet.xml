@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <mvc:annotation-driven />
-    <context:component-scan base-package="com.springapp.mvc, persistance.model, persistance.dao.impl, service, com.services"/>
+    <context:component-scan base-package="com.springapp.mvc, persistance.model, persistance.dao.impl, com.services"/>
 
     <import resource="dao.xml"/> <!-- SHEEEET -->
 
@@ -22,3 +22,4 @@
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
    </beans>
+

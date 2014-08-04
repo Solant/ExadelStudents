@@ -1,26 +1,23 @@
 package com.services;
 
 import com.services.presentation.GAVPresentation;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import persistance.dao.AttributeDao;
-import persistance.dao.FeedbackerDao;
-import persistance.dao.StudentDao;
-import persistance.model.Feedbacker;
-import persistance.model.Student;
-import persistance.model.UserRole;
-import persistance.model.Value;
+import persistance.dao.*;
+import persistance.model.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
 @Service
 public class StudentService {
+
+    public final int ALL = 2;
+    public final int ENABLED = 1;
+    public final int DISABLED = 0;
 
     @Autowired
     private StudentDao studentDao;
@@ -31,6 +28,57 @@ public class StudentService {
     @Autowired
     private FeedbackerDao feedbackerDao;
 
+    @Autowired
+    private ReviewDao reviewDao;
+
+    @Autowired
+    private GroupDao groupDao;
+
+    @Autowired
+    private NotificationDao notificationDao;
+
+    @Transactional
+    public Student getStudentByLogin(String login) {
+        return studentDao.findByLogin(login);
+    }
+
+    /**
+     * Returns all enabled students
+     *
+     * @return List<Student>
+     */
+    @Transactional
+    public List<Student> getAllEnabledStudents() {
+        List<Student> students = studentDao.findAll();
+        List<Student> studentsRet = new ArrayList<Student>();
+        for (Student student : students)
+            if (student.isEnabled())
+                studentsRet.add(student);
+        return studentsRet;
+    }
+
+    @Transactional
+    public void setStatus(String studentLogin, String status) {
+        Set<Value> values = attributeDao.findByName("status").getValues();
+        for (Value value : values) {
+            if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
+                value.setValue(status);
+                break;
+            }
+        }
+        attributeDao.update(attributeDao.findByName("status"));
+    }
+
+    @Transactional
+    public String getFirstName(String login) {
+        return studentDao.findByLogin(login).getFirstName();
+    }
+
+    @Transactional
+    public String getSecondName(String login) {
+        return studentDao.findByLogin(login).getSecondName();
+    }
+
     /**
      * Creates new student
      *
@@ -40,41 +88,60 @@ public class StudentService {
      * @param surname  - Student second name
      */
     @Transactional
-    public void add(String login, String password, String name, String surname) {
+    public void add(String login, String password, String name, String surname, String status) {
         Student student = new Student();
 
         student.setLogin(login);
         student.setPassword(password);
         student.setFirstName(name);
         student.setSecondName(surname);
+        student.setEnabled(true);
 
         UserRole ur = new UserRole();
         ur.setRole("ROLE_STUDENT");
         ur.setUser(student);
         student.getUserRoles().add(ur);
 
+        Attribute attribute = attributeDao.findByName("status");
+        Set<Value> values = attribute.getValues();
+        Value val = new Value();
+        val.setAttribute(attribute);
+        val.setStudent(student);
+        val.setValue(status);
+        values.add(val);
+
         studentDao.save(student);
+        attributeDao.update(attribute);
     }
 
     /**
      * Sets student values
      *
      * @param studentLogin - Student login
-     * @param gavList - ArrayList of GAVPresentation
+     * @param gavList      - ArrayList of GAVPresentation
      */
     @Transactional
-    public void setValues(String studentLogin, ArrayList<GAVPresentation> gavList) {
+    public void setValues(String studentLogin, List<GAVPresentation> gavList) {
         Student student = studentDao.findByLogin(studentLogin);
-        Set<Value> values = new HashSet<Value>();
         for (GAVPresentation gav : gavList) {
-            Value v = new Value();
-            v.setValue(gav.getValue());
-            v.setStudent(student);
-            v.setAttribute(attributeDao.findByName(gav.getAttribute()));
-            values.add(v);
+            Set<Value> values = attributeDao.findByName(gav.getAttribute()).getValues();
+            boolean edited = false;
+            for (Value value : values) {
+                if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
+                    edited = true;
+                    value.setValue(gav.getValue());
+                    break;
+                }
+            }
+            if (!edited) {
+                Value value = new Value();
+                value.setStudent(student);
+                value.setValue(gav.getValue());
+                value.setAttribute(attributeDao.findByName(gav.getAttribute()));
+                attributeDao.findByName(gav.getAttribute()).getValues().add(value);
+            }
+            attributeDao.update(attributeDao.findByName(gav.getAttribute()));
         }
-        student.setValues(values);
-        studentDao.update(student);
     }
 
     /**
@@ -84,32 +151,55 @@ public class StudentService {
      * @return ArrayList<GAVPresentation>
      */
     @Transactional
-    public ArrayList<GAVPresentation> getValues(String studentLogin) {
-        ArrayList<GAVPresentation> wow = new ArrayList<GAVPresentation>();
-        Student student = studentDao.findByLogin(studentLogin);
-        Set<Value> values = student.getValues();
-        for (Value value : values) {
-            GAVPresentation gav = new GAVPresentation();
-            gav.setAttribute(value.getAttribute().getAttributeName());
-            gav.setValue(value.getValue());
-            gav.setGroup(value.getAttribute().getGroup().getName());
-            gav.setType(value.getAttribute().getType());
-            wow.add(gav);
+    public List<GAVPresentation> getValues(String studentLogin) {
+        String status = "";
+        Attribute a = attributeDao.findByName("status");
+        Set<Value> valuesS = a.getValues();
+        for (Value valera : valuesS) {
+            if (valera.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
+                status = valera.getValue();
+                break;
+            }
         }
-        return wow;
+
+        List<Group> groups = groupDao.getByStatus(status);
+        List<GAVPresentation> gavs = new ArrayList<GAVPresentation>();
+        for (Group group : groups) {
+            Set<Attribute> attributes = group.getAttributes();
+            for (Attribute attribute : attributes) {
+                Set<Value> values = attribute.getValues();
+                GAVPresentation gav = new GAVPresentation();
+                gav.setGroup(group.getName());
+                gav.setAttribute(attribute.getAttributeName());
+                gav.setType(attribute.getType());
+                gav.setValue("");
+                for (Value value : values)
+                    if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin))
+                        gav.setValue(value.getValue());
+                gavs.add(gav);
+            }
+        }
+
+        return gavs;
     }
 
     @Transactional
-    void addReview(String studentLogin, String curatorLogin, boolean fromInterview /*some shit here*/) {
+    public void addReview(String studentLogin, String curatorLogin, Review review) {
+        review.setFeedbacker(feedbackerDao.findByLogin(curatorLogin));
+        review.setStudent(studentDao.findByLogin(studentLogin));
+        review.setDate(Calendar.getInstance());
 
+        reviewDao.save(review);
     }
 
     /**
      * Add Interviewer for a student
+     *
      * @param interviewerLogin - Interviewer's login
-     * @param studentLogin - - Student's login
+     * @param studentLogin     - - Student's login
      */
-    void addInterviewer(String interviewerLogin, String studentLogin) {
+    @Transactional
+    public void addInterviewer(String interviewerLogin, String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         Feedbacker feedbacker = feedbackerDao.findByLogin(interviewerLogin);
         student.getInterviewers().add(feedbacker);
@@ -121,9 +211,10 @@ public class StudentService {
      * Add curator for a student
      *
      * @param interviewerLogin - Curator's login
-     * @param studentLogin - Student's login
+     * @param studentLogin     - Student's login
      */
-    void addCurator(String interviewerLogin, String studentLogin) {
+    @Transactional
+    public void addCurator(String interviewerLogin, String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         Feedbacker feedbacker = feedbackerDao.findByLogin(interviewerLogin);
         student.getCurators().add(feedbacker);
@@ -136,7 +227,8 @@ public class StudentService {
      *
      * @param studentLogin - Student Login
      */
-    void disable(String studentLogin) {
+    @Transactional
+    public void disable(String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         student.setEnabled(false);
 
@@ -148,16 +240,195 @@ public class StudentService {
      *
      * @param studentLogin - Student login
      */
-    void enable(String studentLogin) {
+    @Transactional
+    public void enable(String studentLogin) {
         Student student = studentDao.findByLogin(studentLogin);
         student.setEnabled(true);
 
         studentDao.update(student);
     }
 
-    List<Student> find() {
-        List<Student> studentList = new ArrayList<Student>();
-        return studentList;
+    @Transactional
+    public List<Review> getReviews(String login) {
+        List<Review> reviews = reviewDao.findAll();
+        List<Review> rev = new ArrayList<Review>();
+        for (Review review : reviews)
+            if (review.getStudent().getLogin().equalsIgnoreCase(login))
+                rev.add(review);
+        return rev;
     }
 
+    @Transactional
+    public Review getLastReview(String login) {
+        Set<Review> reviews = studentDao.findByLogin(login).getReviews();
+        Review r = null;
+        for (Review review : reviews) {
+            if (r == null)
+                r = review;
+            else if (r.getDate().before(review.getDate()))
+                r = review;
+        }
+        return r;
+    }
+
+    @Transactional
+    public List<List<String>> find(List<GAVPresentation> gavPresentationList) {
+        List<Student> students = studentDao.findAll();
+        List<List<String>> returnStatement = new ArrayList<List<String>>();
+
+        ArrayList<String> row = new ArrayList<String>();
+        row.add("Name");
+        row.add("Login");
+        for (GAVPresentation gavPresentation : gavPresentationList)
+            if (gavPresentation.isShow())
+                row.add(gavPresentation.getAttribute());
+        returnStatement.add(row);
+
+        List<Student> students1 = new ArrayList<Student>();
+        for (GAVPresentation gavPresentation : gavPresentationList) {
+
+            students1.clear();
+            students1.addAll(students);
+            students.clear();
+            for (Student student : students1) {
+
+                boolean isSuitable = false;
+                if(gavPresentation.getValue().equals("")||gavPresentation.getValue()==null)
+                    isSuitable = true;
+                Set<Value> valueSet = student.getValues();
+                for (Value value : valueSet) {
+                    if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) &&
+                            value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
+                        isSuitable = true;
+                        break;
+                    }
+
+                    if (isSuitable)
+                        break;
+                }
+                if (isSuitable)
+                    students.add(student);
+            }
+        }
+        for(Student student: students){
+            ArrayList<String> addStatement = new ArrayList<String>();
+                addStatement.add(student.getSecondName() + " " + student.getFirstName());
+                addStatement.add(student.getLogin());
+                for (GAVPresentation gavPresentation : gavPresentationList) {
+                    if (gavPresentation.isShow()) {
+                        List<GAVPresentation> valuesGAV = getValues(student.getLogin());
+                        boolean foundAttribute = false;
+                        for (GAVPresentation gavStudent : valuesGAV) {
+                            if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute())) {
+                                addStatement.add(gavStudent.getValue());
+                                foundAttribute = true;
+                                break;
+                            }
+                        }
+                        if(foundAttribute == false)
+                            addStatement.add("");
+                    }
+                }
+                returnStatement.add(addStatement);
+        }
+
+        if (returnStatement.size() == 0)
+            return null;
+
+        return returnStatement;
+    }
+
+    @Transactional
+    public List<List<String>> getStudentValuesInTable(List<GAVPresentation> gavPresentationList, String login) {
+        Student student = studentDao.findByLogin(login);
+        List<List<String>> returnStatement = new ArrayList<List<String>>();
+        ArrayList<String> row0 = new ArrayList<String>();
+        row0.add("Attribute");
+        row0.add("Value");
+        returnStatement.add(row0);
+        ArrayList<String> row = new ArrayList<String>();
+        row.add("Name");
+        row.add(student.getFirstName() + " " + student.getSecondName());
+        returnStatement.add(row);
+        ArrayList<String> row2 = new ArrayList<String>();
+        row2.add("Login");
+        row2.add(student.getLogin());
+        returnStatement.add(row2);
+        for (GAVPresentation gavPresentation : gavPresentationList) {
+            List<GAVPresentation> valuesGAV = getValues(student.getLogin());
+            for (GAVPresentation gavStudent : valuesGAV) {
+                if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute()) && gavPresentation.isShow()) {
+                    ArrayList<String> addStatement = new ArrayList<String>();
+                    addStatement.add(gavPresentation.getAttribute());
+                    addStatement.add(gavStudent.getValue());
+                    returnStatement.add(addStatement);
+                    break;
+                }
+            }
+        }
+        return returnStatement;
+    }
+
+    @Transactional
+    public List<Student> getAllDisabledStudents() {
+        List<Student> students = studentDao.findAll();
+        List<Student> studentsRet = new ArrayList<Student>();
+        for (Student student : students)
+            if (!student.isEnabled())
+                studentsRet.add(student);
+        return studentsRet;
+    }
+
+    /**
+     * Live search method
+     *
+     * @param line            Search line
+     * @param status          0 for disabled 1 for enabled 2 for all
+     * @param numberOfResults number of results to return
+     * @return null if none, List<Student> if found
+     */
+    @Transactional
+    public List<Student> liveSearch(String line, int status, int numberOfResults) {
+        List<Student> search = new ArrayList<Student>();
+        List<Student> students = null;
+        switch (status) {
+            case DISABLED:
+                students = getAllDisabledStudents();
+                break;
+            case ENABLED:
+                students = getAllEnabledStudents();
+            case ALL:
+                students = getAllEnabledStudents();
+                students.addAll(getAllDisabledStudents());
+                break;
+            default:
+                break;
+        }
+        if (students == null)
+            return null;
+
+        String[] initials = line.split("[ ,\\.:;]+");
+        for (Student student : students) {
+            if (search.size() == numberOfResults)
+                break;
+            switch (initials.length) {
+                case 1:
+                    if (student.getFirstName().startsWith(initials[0])
+                            || student.getSecondName().startsWith(initials[0]))
+                        search.add(student);
+                    break;
+                case 2:
+                    if (student.getFirstName().startsWith(initials[0])
+                            && student.getSecondName().startsWith(initials[1])
+                            || student.getFirstName().startsWith(initials[1])
+                            && student.getSecondName().startsWith(initials[0]))
+                        search.add(student);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return search;
+    }
 }

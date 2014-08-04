@@ -1,6 +1,9 @@
 <%@ page import="com.services.UserService" %>
 <%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
+<%@ page import="java.util.List" %>
+<%@ page import="persistance.model.Notification" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -30,6 +33,7 @@
 </head>
 <body>
 
+
 <div class="hat">
 	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
 
@@ -38,11 +42,15 @@
     </a>
     <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
 	<span class="currUserName"><c:out value="${account}"></c:out></span>
-    <div class="message">
-            <span>
-                1
-            </span>
-    </div>
+    <a href="/notif">
+        <div class="message">
+            <c:if test="${notifNumber > 0}">
+                <span>
+                    ${notifNumber}
+                </span>
+            </c:if>
+        </div>
+    </a>
 	<img src="/resources/images/loupe.png" class="loupe_logo">
 </div>
 
@@ -61,29 +69,58 @@
                 <li class="${isActive}">
                     <a href="#${groupName}" role="tab" data-toggle="tab">${groupName}</a>
                 </li>
+                <%pageContext.setAttribute("isActive", "");%>
             </c:forEach>
 
-            <%pageContext.setAttribute("isActive", "");%>
 
         </ul>
+
+
 
     <div class="tab-content">
 
         <%pageContext.setAttribute("isActive", "active");%>
 
-    <c:forEach items="${groupedValues}" var="group">
-    <div class="tab-pane ${isActive}" id="${group.get(0).getGroup()}">
-        <form class="spoilers">
-            <c:forEach items="${group}" var="value">
+    <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
+    <div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].gavs[0].getGroup()}">
+<!-- Petya -->
+        <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
+            <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2">
                 <div class="group">
-                    <label>${value.getAttribute()}</label>
-                    <input value="${value.getValue()}">
+                    <label >${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].attribute} </label>
+                    <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'text'}">
+                        <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                    </c:if>
+                    <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'textarea'}">
+                        <form:textarea path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                    </c:if>
+                    <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'select'}">
+                        <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                            <form:option value="${token}">${token}</form:option>
+                        </c:forTokens>
+                    </c:if>
+                    <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'radiobutton'}">
+                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                            <form:radiobutton path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
+                                              value="${token == groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].value}"/>
+                        </c:forTokens>
+                    </c:if>--%>
+                    <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
                 </div>
             </c:forEach>
-        </form>
+            <form:button type="submit" >Save</form:button>
+        </form:form>
+
     </div>
                 <%pageContext.setAttribute("isActive", "");%>
     </c:forEach>
+
+       <%-- <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
+            <form:input path="test" />
+            <form:button type="submit">Save</form:button>
+        </form:form>
+--%>
 
 
 </body>
@@ -118,54 +155,56 @@
 
        <%-- <div class="tab-pane active" id="common">
             <form class="spoilers">
-                <div class="group">
+                <div class="gavs">
                     <label for="lastname">Lastname:</label>
                     <input type="text" id="lastname" value="Ivanov" readonly>
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="firstname">Firstname:</label>
                     <input type="text" id="firstname" value="Ivan" readonly>
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="pNumber">Phone number:</label>
                     <input type="text" id="pNumber" >
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="email">Email:</label>
                     <input type="text" id="email" >
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="skype">Skype:</label>
                     <input type="text" id="skype" >
                 </div>
 
+                <div class="displayFlex">
                     <div class="alignCenter">
                         <button  type="submit" class="loginAndCreateButton">Save</button>
                     </div>
+                </div>
 
             </form>
         </div>
 
         <div class="tab-pane" id="education">
             <form class="spoilers">
-                    <div class="group">
+                    <div class="gavs">
                         <label for="university">University:</label>
                         <input type="text" id = "university" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="faculty">Faculty:</label><input type="text" id="faculty" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="specialty">Specialty:</label><input type="text" id="specialty" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="course">Course:</label>
 
                         <select name="course" id="course" >
@@ -178,39 +217,40 @@
                         </select>
                     </div>
 
-                    <div class="group">
-                        <label for="group">Group:</label><input type="text" id="group">
+                    <div class="gavs">
+                        <label for="gavs">Group:</label><input type="text" id="gavs">
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="year">Year graduation:</label><input type="text" id="year" >
                     </div>
                     &lt;%&ndash;
-                    <div class="group"><label for="university">University</label><input id = "university"></div>
-                    <div class="group"><label for="faculty">Faculty</label><input id="faculty"></div>
-                    <div class="group"><label for="specialty">Specialty</label><input id="specialty"></div>
-                    <div class="group"><label for="group">Group</label><input id="group"></div>&ndash;%&gt;
-                
-                        <div class="alignCenter">
-                            <button  type="submit" class="loginAndCreateButton">Save</button>
+                    <div class="gavs"><label for="university">University</label><input id = "university"></div>
+                    <div class="gavs"><label for="faculty">Faculty</label><input id="faculty"></div>
+                    <div class="gavs"><label for="specialty">Specialty</label><input id="specialty"></div>
+                    <div class="gavs"><label for="gavs">Group</label><input id="gavs"></div>&ndash;%&gt;
+                <div class="displayFlex">
+                    <div class="alignCenter">
+                    <button  type="submit" class="loginAndCreateButton">Save</button>
                         </div>
+                    </div>
             </form>
         </div>
 
         <div class="tab-pane" id="work">
             <form class="spoilers">
-                    <div class="group">
+                    <div class="gavs">
                         <label for="dateOfEmployng">Date of employing:</label>
                         <input id = "dateOfEmployng" type="date">
                     </div>
-                    <div class="group">
+                    <div class="gavs">
                         <label for="trainingExadel">Have you been training in Exadel before working?</label>
                         <select id="trainingExadel">
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                         </select>
                     </div>
-                    <div class="group">
+                    <div class="gavs">
                         <label for="whatYearStartedTrain">What year you was when started training in Exadel?</label>
                         <select id="whatYearStartedTrain">
                             <option value="1">1</option>
@@ -222,55 +262,66 @@
                         </select>
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="hoursNow">Hours now:</label><input type="text" id="hoursNow" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="hoursFuture">Hours in future:</label>
                         <input type="text" id="hoursFuture" >
                     </div>
 
-                    <div class="group">
+                    <div class="gavs">
                         <label for="futureTechnologies">Technologies using in the Future:</label>
                         <input type="text" id="futureTechnologies"/>
                     </div>
 
-                    <div class="alignCenter">
+                    <div class="allignCenter">
                         <div>
                             <label for="pastProject">Past projects:</label><br/>
                             <textarea name="pastProject" id="pastProject" cols="30" rows="10" class="textOther"></textarea>
                         </div>
                     </div>
 
+                    <div class="displayFlex">
                         <div class="alignCenter">
                             <input type="radio" name="billable" value="yes" id="bilYes">
                             <label for="bilYes">Billable</label>
                             <input type="radio" name="billable" value="no" id="bilNo">
                             <label for="bilNo">No Billable</label>
                         </div>
+                    </div>
 
-                    <div class="group">
+                    <div class="gavs">
+                        <div>
+                            <label for="curatorCompany">Curator in Company:</label>
+                            <input type="text" id="curatorCompany" >
+                        </div>
+                    </div>
+
+                    <div class="gavs">
                         <div>
                             <label for="holiday">Holyday(period):</label>
                             <input type="text" id="holiday" >
                         </div>
                     </div>
 
+                <div class="displayFlex">
                     <div class="alignCenter">
                             <button  type="submit" class="loginAndCreateButton">Save</button>
+                        </div>
                     </div>
             </form>
-           <%-- <form>
+           &lt;%&ndash; <form>
                 <div class="spoilers">
-                    <div class="group"><label for="dateOfEmployng">Date of employing</label><input id = "dateOfEmployng" type="date"></div>
-                    <div class="group"><label for="trainingExadel">Have you been training in Exadel before working?</label>
+                    <div class="gavs"><label for="dateOfEmployng">Date of employing</label><input id = "dateOfEmployng" type="date"></div>
+                    <div class="gavs"><label for="trainingExadel">Have you been training in Exadel before working?</label>
                         <select id="trainingExadel">
                             <option>Yes</option>
                             <option>No</option>
                         </select></div>
-                    <div class="group"><label for="finishTraining">What year you finished training?</label><input id="finishTraining"></div>
-                    <div class="group">
+                    <div class="gavs"><label for="finishTraining">What year you finished training?</label><input id="finishTraining"></div>
+                    <div class="gavs">
                         <label for="whatYearStartedTrain">What year you was when started training in Exadel?</label>
                         <select id="whatYearStartedTrain">
                             <option>1</option>
@@ -287,39 +338,32 @@
 
         <div class="tab-pane" id="project">
             <form class="spoilers">
-                    <div class="group">
-                        <label for="currProj">Current project:</label>
+                    <div class="gavs">
+                        <label for="currProj">Current project</label>
                         <input type="text" id="currProj">
                     </div>
-                    <div class="group">
-                        <label for="teamLead">Team Leader:</label>
+                    <div class="gavs">
+                        <label for="teamLead">Team Leader</label>
                         <input type="text" id="teamLead">
                     </div>
-                    <div class="group">
-                        <label for="PM">Project Manager:</label>
+                    <div class="gavs">
+                        <label for="PM">Project Manager</label>
                         <input type="text" id="PM">
                     </div>
 
-                    <div class="group">
-                        <div>
-                            <label for="curator">Curator:</label>
-                            <input type="text" id="curator" >
-                        </div>
-                    </div>
-
-                    <div class="group">
-                        <label for="currRole">Your current role:</label>
+                    <div class="gavs">
+                        <label for="currRole">Your current role</label>
                         <select id="currRole">
                             <option>Junior</option>
                             <option>Developer</option>
                             <option>Tester</option>
                         </select>
                     </div>
-                    <div class="group">
-                        <label for="currTechnologies">Technologies using in the current project:</label>
+                    <div class="gavs">
+                        <label for="currTechnologies">Technologies using in the current project</label>
                         <input type="text" id="currTechnologies"/>
                     </div>
-                    <div class="alignCenter">
+                    <div class="allignCenter">
                         <div>
                             <input type="radio" name="changeProject" value="yes" id="chPrYes">
                             <label for="chPrYes">I want change Project</label>
@@ -328,16 +372,18 @@
                         </div>
                     </div>
 
+                <div class="displayFlex">
                     <div class="alignCenter">
                         <button  type="submit" class="loginAndCreateButton">Save</button>
                     </div>
+                </div>
             </form>
         </div>
 
         <div class="tab-pane" id="other">
             <form class="spoilers">
 
-                <div class="group">
+                <div class="gavs">
                     <label for="english">English level:</label>
                     <select id="english">
                         <option value="begginer">Begginer</option>
@@ -349,28 +395,30 @@
                     </select>
                 </div>
 
-                <div class="group">
+                <div class="gavs">
                     <label for="engCourse">English courses:</label>
                     <input type="text" id="engCourse">
                 </div>
 
-                <div class="alignCenter">
+                <div class="allignCenter">
                     <div>
                         <label for="trainings">Trainings:</label><br/>
                         <textarea name="certificates" id="trainings" cols="30" rows="10" class="textOther"></textarea>
                     </div>
                 </div>
 
-                <div class="alignCenter">
+                <div class="allignCenter">
                     <div>
                         <label for="certificates">Certificates:</label><br/>
                         <textarea name="certificates" id="certificates" cols="30" rows="10" class="textOther"></textarea>
                     </div>
                 </div>
 
+                <div class="displayFlex">
                     <div class="alignCenter">
                         <button  type="submit" class="loginAndCreateButton">Save</button>
                     </div>
+                </div>
 
             </form>
         </div>
@@ -378,7 +426,7 @@
         <div class="tab-pane" id="reviews">
             <div class="spoilers">
 
-                    <table id="reviewsTable" class="display">
+                    <table border="1px" id="reviewsTable">
                         <thead>
                             <td>Curator</td>
                             <td>Date</td>

@@ -12,21 +12,6 @@ import org.hibernate.annotations.CascadeType;
 @DiscriminatorValue("student")
 public class Student extends User {
 
-    @Column (name = "firstname")
-    private String firstName;
-
-    @Column (name = "secondname")
-    private String secondName;
-
-    @Column (name = "skype")
-    private String skype;
-
-    @Column(name = "telephone")
-    private String telephone;
-
-    @Column(name = "email")
-    private String email;
-
     @ManyToMany
     @Cascade(CascadeType.SAVE_UPDATE)
     @JoinTable(name = "StudentsAndCurators", joinColumns = {@JoinColumn(name = "StudId")}, inverseJoinColumns = {@JoinColumn(name = "CurId")})
@@ -48,22 +33,6 @@ public class Student extends User {
     private Set<Value> values = new HashSet();
 
     public Student() {
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public Set<Value> getValues() {
@@ -96,30 +65,6 @@ public class Student extends User {
 
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
-    }
-
-    public String getSkype() {
-        return skype;
-    }
-
-    public void setSkype(String skype) {
-        this.skype = skype;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
 

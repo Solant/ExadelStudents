@@ -17,5 +17,7 @@
         <mapping class="persistance.model.UserRole" />
         <mapping class="persistance.model.Rating" />
         <mapping class="persistance.model.Technology" />
+        <mapping class="persistance.model.Admin" />
+        <mapping class="persistance.model.Notification" />
     </session-factory>
 </hibernate-configuration>

@@ -9,6 +9,7 @@ public class UserUnit {
     private String lastname;
     private String firstname;
     private Role role;
+   // private Status status;
 
     public Role getRole() {
         return role;
@@ -18,11 +19,23 @@ public class UserUnit {
         this.role = role;
     }
 
+   /* public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+*/
     public enum Role{
         Student, Feedbacker, Admin
     }
-   // public
-   // private List<String> role;
+
+    /*public enum Status{
+        WORKING, STUDYING
+    }*/
+    // public
+    // private List<String> role;
 
     public String getLogin() {
         return login;
@@ -56,11 +69,5 @@ public class UserUnit {
         this.firstname = firstname;
     }
 
-    /*public List<String> getRole() {
-        return role;
-    }
 
-    public void setRole(List<String> role) {
-        this.role = role;
-    }*/
 }

@@ -25,7 +25,7 @@ public class Review
     private String workAttitude;
 
     @Column(name = "team_attitude")
-    private String teamAttitude;
+        private String teamAttitude;
 
     @Column(name = "prof_progress")
     private String profProgress;

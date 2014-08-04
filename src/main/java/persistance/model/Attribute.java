@@ -20,15 +20,14 @@ public class Attribute {
     @Column(name = "attrName")
     private String attributeName;
 
-    @Column(name = "status")
-    private String status;
-
     @Column(name = "type")
     private String type;
 
+    @Column(name = "possible_values")
+    private String possibleValues;
+
     @OneToMany(mappedBy = "attribute")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-   // @JoinColumn(name = "attrId")
     private Set<Value> values;
 
     @ManyToOne
@@ -62,14 +61,6 @@ public class Attribute {
         this.attributeName = attributeName;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getType() {
         return type;
     }
@@ -84,6 +75,14 @@ public class Attribute {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public String getPossibleValues() {
+        return possibleValues;
+    }
+
+    public void setPossibleValues(String possibleValues) {
+        this.possibleValues = possibleValues;
     }
 
 
