@@ -31,6 +31,11 @@ public class FeedbackerService {
     }
 
     @Transactional
+    public List<Feedbacker> getAllFeedbackers(){
+        return feedbackerDao.findAll();
+    }
+
+    @Transactional
     public void add(String login, String password, String name, String surname){
         Feedbacker feedbacker = new Feedbacker();
 
