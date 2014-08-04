@@ -119,6 +119,10 @@
         <c:out value="${currentUser.firstname}"></c:out>
         <c:out value="${currentUser.lastname}"></c:out>
     </div>
+    <a href="/admin/studentPage/${currentUser.login}/notif">
+        <div class="message">
+        </div>
+    </a>
 
     <ul class="nav nav-tabs" role="tablist">
 

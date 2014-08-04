@@ -5,7 +5,7 @@ package com.springapp.mvc;
  */
 
 
-import com.View.FeedbackingUnit;
+import com.forView.FeedbackingUnit;
 import com.services.FeedbackerService;
 import com.services.StudentService;
 import com.services.UserService;

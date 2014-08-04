@@ -56,6 +56,12 @@
                             </button>
                         </li>
                         <li>
+                            <button formaction="/admin/createNotif" class="btn">
+                                <img src="/resources/images/message1.png" class="adminMenuImages">
+                                <span>Create notification</span>
+                            </button>
+                        </li>
+                        <li>
                             <a href="/notif">
                                 <div class="message">
                                     <c:if test="${notifNumber > 0}">

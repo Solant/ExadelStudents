@@ -1,6 +1,6 @@
 package com.springapp.mvc;
 
-import com.View.AccountUnit;
+import com.forView.AccountUnit;
 import com.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

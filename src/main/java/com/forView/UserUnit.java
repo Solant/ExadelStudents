@@ -1,4 +1,4 @@
-package com.View;
+package com.forView;
 
 /**
  * Created by Надя on 25.07.2014.
