@@ -58,6 +58,15 @@ public class StudentService {
     }
 
     @Transactional
+    public String getStatus(String login){
+        Set<Value> values = attributeDao.findByName("status").getValues();
+        for (Value value : values)
+            if (value.getStudent().getLogin().equalsIgnoreCase(login))
+                return value.getValue();
+        return null;
+    }
+
+    @Transactional
     public void setStatus(String studentLogin, String status) {
         Set<Value> values = attributeDao.findByName("status").getValues();
         for (Value value : values) {
