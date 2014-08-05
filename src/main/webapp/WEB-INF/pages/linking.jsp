@@ -96,9 +96,9 @@
                     </li>
 
                     <li>
-                        <a href="<c:url value="j_spring_security_logout" />">
-                            <img src="/resources/images/exit.png" class="exit_logo">
-                        </a>
+                        <%--<a href="<c:url value="j_spring_security_logout" />">--%>
+                            <%--<img src="/resources/images/exit.png" class="exit_logo">--%>
+                        <%--</a>--%>
                     </li>
                     <li>
                         <a href="<c:url value="/account"/> ">
@@ -143,8 +143,7 @@
 
     <div class="technology">
         <label for="techList">Technology:</label><br/>
-        <select name="technology" id="techList"
-                onchange="adding();">
+        <select name="technology" id="techList">
             <option value="none">None</option>
             <option value="all">All</option>
             <option value="html">HTML</option>
@@ -162,24 +161,19 @@
         $(document).ready(function(){
            $('#techList').change(
                    function(){
-                       $.ajax({
-                           type: GET,
-                           url:'someController',
-                           data: $("#techList option:selected").value,
-                           dataType: "json",
-                           success: function (data){
-                               var select=document.getElementById("feedbackers");
-                               removeOptions(select);
+                       var url="controller?tech="+document.getElementById("techList").value;
+                       $.get( url , function( data ) {
+                           var select=document.getElementById("feedbackers");
+                           removeOptions(select);
 
-                               var obj= $.parseJSON(data);
+                           var obj= data;
 
-                               $.each("feedbackers",function(index, feedbacker){
-                                   var option = document.createElement("option");
-                                   option.text=feedbacker.lastName;
-                                   option.value=feedbacker.login;
-                                   select.add(option);
-                               })
-                           }
+                           $.each(data["feedbackers"], function(index, feedbacker){
+                               var option = document.createElement("option");
+                               option.text=feedbacker.lastName;
+                               option.value=feedbacker.login;
+                               select.add(option);
+                           })
                        });
                    }
            )
@@ -197,24 +191,14 @@
           }
       }
 
-     /* function adding() {
+     /*  {
           var txt = '{"feedbackers":[' +
                   '{"firstName":"John","lastName":"Doe","login":"jd","technology":"html" },' +
                   '{ "firstName":"Anna", "lastName":"Smith","login":"as","technology":"hibernate" },' +
                   '{ "firstName":"Peter", "lastName":"Jones","login":"pj","technology": "css" }]}';
 
-          var select=document.getElementById("feedbackers");
-          removeOptions(select);
+      // http:www.json-generator.com/api/json/get/cpviMdcaZK?indent=2
 
-          var obj = JSON.parse(txt);
-          var number=obj.feedbackers.length;
-
-          for (var i=0;i<number;i++){
-              var option = document.createElement("option");
-              option.text=obj.feedbackers[i].lastName;
-              option.value=obj.feedbackers[i].login;
-              select.add(option);
-          }
       }*/
     </script>
 
