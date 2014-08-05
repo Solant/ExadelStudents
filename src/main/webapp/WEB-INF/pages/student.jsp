@@ -126,6 +126,9 @@
                         </c:forEach>
                         </form:select>
                     </c:if>
+                    <%--<c:if test="${attr.type == 'date'}">
+                        <form:input typ path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                    </c:if>--%>
                     <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'select'}">
                         <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
                         <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possibleValues" var="token">

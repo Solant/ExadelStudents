@@ -210,15 +210,19 @@ public class StudentService {
         review.setFeedbacker(feedbackerDao.findByLogin(feedbackerLogin));
         review.setStudent(studentDao.findByLogin(studentLogin));
         review.setDate(Calendar.getInstance());
-        Set<Rating> ratings = review.getRatings();
+        List<Rating> ratings = new ArrayList<Rating>();
+        ratings.addAll(review.getRatings());
+        System.out.println("+++++++++++++++"+review.getRatings().size());
         review.getRatings().clear();
-        for(Rating rating : ratings){
-            rating.setTechnology(technologyDao.findByName(rating.getTechnology().getTechnologyName()));
-            rating.setReview(review);
-            review.getRatings().add(rating);
-        }
-
         reviewDao.save(review);
+        for(Rating rating : ratings){
+            Technology technology = technologyDao.findByName(rating.getTechnology().getTechnologyName());
+            rating.setTechnology(technology);
+            rating.setReview(review);
+            technology.getRatings().add(rating);
+            technologyDao.update(technology);
+            System.out.println("Ya ALESHA!");
+        }
     }
 
     /**
