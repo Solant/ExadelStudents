@@ -1,17 +1,29 @@
-package com.View;
+package com.forView;
+
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.Pattern;
 
 /**
  * Created by Надя on 31.07.2014.
  */
 public class AccountUnit {
+
     private String login;
     private String firstName;
     private String secondName;
     private String password;
     private String newPassword;
-    private  String confirmedPassword;
+    private String confirmedPassword;
+
+    @Email
     private String email;
+
+    @Pattern(regexp = "^\\+?[0-9\\-()]*$", message = "Wrong telephone number.")
     private String telephone;
+
+
+    @Pattern(regexp = "^[a-zA-Z0-9,\\._-]*$", message = "Wrong skype login.")
     private String skype;
 
     public String getEmail() {
@@ -53,7 +65,6 @@ public class AccountUnit {
     public void setConfirmedPassword(String confirmedPassword) {
         this.confirmedPassword = confirmedPassword;
     }
-
 
     public String getLogin() {
         return login;

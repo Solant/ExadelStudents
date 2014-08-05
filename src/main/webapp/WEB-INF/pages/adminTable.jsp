@@ -56,11 +56,21 @@
                             </button>
                         </li>
                         <li>
-                            <div class="message">
-                            <span>
-                                1
-                            </span>
-                            </div>
+                            <button formaction="/admin/createNotif" class="btn">
+                                <img src="/resources/images/message1.png" class="adminMenuImages">
+                                <span>Create notification</span>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="/notif">
+                                <div class="message">
+                                    <c:if test="${notifNumber > 0}">
+                                <span>
+                                        ${notifNumber}
+                                </span>
+                                    </c:if>
+                                </div>
+                            </a>
                         </li>
                         <li>
                             <span class="currUserName"><c:out value="${account}"></c:out></span>

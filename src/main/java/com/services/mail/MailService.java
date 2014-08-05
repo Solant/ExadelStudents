@@ -1,10 +1,9 @@
 package com.services.mail;
 
-import java.util.Properties;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
 public class MailService {
 
@@ -25,23 +24,24 @@ public class MailService {
         props.put("mail.smtp.port", "587");
     }
 
-    public void send(String title, String text, String toEmail){
+    public void send(String title, String text, String toEmail) {
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
+        if (toEmail != null && !toEmail.equals("")) {
+            try {
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(fromEmail));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+                message.setSubject(title);
+                message.setText(text);
 
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(fromEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject(title);
-            message.setText(text);
-
-            Transport.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+                Transport.send(message);
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

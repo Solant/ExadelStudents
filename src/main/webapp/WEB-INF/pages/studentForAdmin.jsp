@@ -68,11 +68,21 @@
                         </button>
                     </li>
                     <li>
-                        <div class="message">
-                            <span>
-                                1
-                            </span>
-                        </div>
+                        <button formaction="/admin/createNotif" class="btn">
+                            <img src="/resources/images/message1.png" class="adminMenuImages">
+                            <span>Create notification</span>
+                        </button>
+                    </li>
+                    <li>
+                        <a href="/notif">
+                            <div class="message">
+                                <c:if test="${notifNumber > 0}">
+                                <span>
+                                        ${notifNumber}
+                                </span>
+                                </c:if>
+                            </div>
+                        </a>
                     </li>
                     <li>
                         <span class="currUserName"><c:out value="${account}"></c:out></span>
@@ -109,6 +119,10 @@
         <c:out value="${currentUser.firstname}"></c:out>
         <c:out value="${currentUser.lastname}"></c:out>
     </div>
+    <a href="/admin/studentPage/${currentUser.login}/notif">
+        <div class="message">
+        </div>
+    </a>
 
     <ul class="nav nav-tabs" role="tablist">
 
@@ -134,15 +148,22 @@
         <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
         <div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].gavs[0].getGroup()}">
             <!-- Petya -->
-            <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2">
+            <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
             <div class="group">
-                <label >${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].attribute} </label>
+                <label >${attr.attribute} </label>
                 <form:checkbox  path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" value="yes" cssStyle="width: 20px"/>
-                <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'text'}">
+                <c:if test="${attr.type == 'text'}">
                     <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
                 </c:if>
-                <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'textarea'}">
+                <c:if test="${attr.type == 'textarea'}">
                     <form:textarea path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                </c:if>
+                <c:if test="${attr.type == 'select'}">
+                    <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" >
+                        <c:forEach items="${attr.possibleValues}"  var="token">
+                            <form:option value="${token}">${token}</form:option>
+                        </c:forEach>
+                    </form:select>
                 </c:if>
                 <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
             </div>

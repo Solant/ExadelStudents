@@ -14,6 +14,10 @@ public class GAVPresentation {
     private boolean show;
 
     private List<String> parse(String line){
+        if(line == null)
+            return null;
+        if(line.equals(""))
+            return null;
         String[] values = line.split("[,;(, )]+");
         ArrayList<String> valuesList = new ArrayList<String>();
         valuesList.add("");

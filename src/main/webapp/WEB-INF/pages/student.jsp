@@ -34,38 +34,65 @@
 <body>
 
 
-<div class="hat">
-	<img src="/resources/images/exadel-logo.png" class="exadel_logo">
-
-    <a href="<c:url value="/account"/> ">
-        <img src="/resources/images/account.png" class="account_logo">
-    </a>
-    <a href="<c:url value="j_spring_security_logout" />"><img src="/resources/images/exit.png" class="exit_logo"></a>
-	<span class="currUserName"><c:out value="${account}"></c:out></span>
-    <a href="/student/${account}/notif">
-        <div class="message">
-                <span>
-                    ${notifNumber}
-                </span>
+<nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
         </div>
-    </a>
-	<img src="/resources/images/loupe.png" class="loupe_logo">
-</div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/notif">
+                        <div class="message">
+                            <c:if test="${notifNumber > 0}">
+                                <span>
+                                        ${notifNumber}
+                                </span>
+                            </c:if>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <span class="currUserName"><c:out value="${account}"></c:out></span>
+                </li>
+                <li>
+                    <a href="<c:url value="j_spring_security_logout" />">
+                        <img src="/resources/images/exit.png" class="exit_logo">
+                    </a>
+                </li>
+                <li>
+                    <a href="<c:url value="/account"/> ">
+                        <img src="/resources/images/account.png" class="account_logo">
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 
 <div align="center">
     <div class="profile">
         <img src="/resources/images/account.png">
-        <c:out value="Ivanov"></c:out>
-        <c:out value="Ivan"></c:out>
+        <c:out value="${secondName}"></c:out>
+        <c:out value="${firstName}"></c:out>
     </div>
 
         <ul class="nav nav-tabs" role="tablist">
 
             <%pageContext.setAttribute("isActive", "active");%>
 
-            <c:forEach items="${groups}" var="groupName">
+            <c:forEach items="${groups}" var="groupName" varStatus="index">
                 <li class="${isActive}">
-                    <a href="#${groupName}" role="tab" data-toggle="tab">${groupName}</a>
+                    <a href="#${index.count}" role="tab" data-toggle="tab">${groupName}</a>
                 </li>
                 <%pageContext.setAttribute("isActive", "");%>
             </c:forEach>
@@ -80,29 +107,36 @@
         <%pageContext.setAttribute("isActive", "active");%>
 
     <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
-    <div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].gavs[0].getGroup()}">
+    <div class="tab-pane ${isActive}" id="${index1.count}">
 <!-- Petya -->
         <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
-            <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2">
+            <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
                 <div class="group">
                     <label >${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].attribute} </label>
-                    <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'text'}">
+                    <c:if test="${attr.type == 'text'}">
                         <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
                     </c:if>
-                    <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'textarea'}">
+                    <c:if test="${attr.type == 'textarea'}">
                         <form:textarea path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                    </c:if>
+                    <c:if test="${attr.type == 'select'}">
+                        <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" >
+                        <c:forEach items="${attr.possibleValues}"  var="token">
+                            <form:option value="${token}">${token}</form:option>
+                        </c:forEach>
+                        </form:select>
                     </c:if>
                     <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'select'}">
                         <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
-                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                        <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possibleValues" var="token">
                             <form:option value="${token}">${token}</form:option>
-                        </c:forTokens>
+                        </c:forEach>
                     </c:if>
                     <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'radiobutton'}">
-                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                        <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possibleValues" var="token">
                             <form:radiobutton path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
                                               value="${token == groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].value}"/>
-                        </c:forTokens>
+                        </c:forEach>
                     </c:if>--%>
                     <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
                 </div>

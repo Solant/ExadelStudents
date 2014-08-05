@@ -3189,7 +3189,7 @@ jQuery.event = {
 	},
 
 	// Includes some event props shared by KeyEvent and MouseEvent
-	props: "altKey bubbles cancelable ctrlKey currentTarget eventPhase metaKey relatedTarget shiftKey target timeStamp view which".split(" "),
+	props: "altKey bubbles cancelable ctrlKey currentTarget eventPhase metaKey relatedTarget shiftKey target timeStamp forView which".split(" "),
 
 	fixHooks: {},
 

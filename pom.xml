@@ -69,6 +69,7 @@
             <artifactId>hibernate-annotations</artifactId>
             <version>3.3.1.GA</version>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-commons-annotations</artifactId>
@@ -129,6 +130,13 @@
         </dependency>
 
 
+
+        <!-- Bean Validation -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.1.1.Final</version>
+        </dependency>
 
     </dependencies>
 

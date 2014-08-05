@@ -1,6 +1,8 @@
 package persistance.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "Ratings")
@@ -9,6 +11,8 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Min(0)
+    @Max(10)
     @Column(name = "rating")
     private short rating;
 

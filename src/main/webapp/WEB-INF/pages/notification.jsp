@@ -36,11 +36,15 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <div class="message">
-            <span>
-                1
-            </span>
-                    </div>
+                    <a href="/notif">
+                        <div class="message">
+                            <c:if test="${notifNumber > 0}">
+                                <span>
+                                        ${notifNumber}
+                                </span>
+                            </c:if>
+                        </div>
+                    </a>
                 </li>
                 <li>
                     <span class="currUserName"><c:out value="${account}"></c:out></span>
@@ -63,26 +67,20 @@
 <div class="notifPadding">
     <div class="notification">
 
-        <h2>Title</h2>
+        <h2>${notif.title}</h2>
 
         <div class="text">
             <p>
-                The Simple Logging Facade for Java (SLF4J) serves as a simple facade or abstraction for various logging frameworks (e.g. java.util.logging, logback, log4j) allowing the end user to plug in the desired logging framework at deployment time.
-                Before you start using SLF4J, we highly recommend that you read the two-page SLF4J user manual.
-                Note that SLF4J-enabling your library implies the addition of only a single mandatory dependency, namely slf4j-api.jar. If no binding is found on the class path, then SLF4J will default to a no-operation implementation.
-            </p>
-            <p>
-                In case you wish to migrate your Java source files to SLF4J, consider our migrator tool which can migrate your project to use the SLF4J API in just a few minutes.
-                In case an externally-maintained component you depend on uses a logging API other than SLF4J, such as commons logging, log4j or java.util.logging, have a look at SLF4J's binary-support for legacy APIs.
+               ${notif.text}
             </p>
         </div>
 
         <span class="date">
-            30.07.2014
+            ${notif.timeWhenSent.time}
         </span>
 
         <span class="sender">
-            Administrator
+            ${notif.sender}
         </span>
 
     </div>

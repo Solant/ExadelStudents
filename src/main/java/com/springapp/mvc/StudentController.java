@@ -1,7 +1,7 @@
 package com.springapp.mvc;
 
-import com.View.Group;
-import com.View.GroupedValues;
+import com.forView.Group;
+import com.forView.GroupedValues;
 import com.services.StudentService;
 import com.services.UserService;
 import com.services.presentation.GAVPresentation;
@@ -63,9 +63,5 @@ public class StudentController {
         return "redirect:/student/"+current;
     }
 
-    @RequestMapping(value = "/notif", method = RequestMethod.GET)
-    public String showNotif(ModelMap modelMap, @PathVariable("current")String current){
-        userService.getAllUnreadNotifications(current);
-        return "notificationList";
-    }
+
 }

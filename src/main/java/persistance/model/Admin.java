@@ -12,7 +12,6 @@ import org.hibernate.annotations.CascadeType;
 @DiscriminatorValue("admin")
 public class Admin extends User {
 
-
     public Admin() {
     }
 

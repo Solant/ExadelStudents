@@ -42,11 +42,15 @@
                         </button>
                     </li>
                     <li>
-                        <div class="message">
-                            <span>
-                                1
-                            </span>
-                        </div>
+                        <a href="/notif">
+                            <div class="message">
+                                <c:if test="${notifNumber > 0}">
+                                <span>
+                                        ${notifNumber}
+                                </span>
+                                </c:if>
+                            </div>
+                        </a>
                     </li>
                     <li>
                         <span class="currUserName"><c:out value="${account}"></c:out></span>
@@ -74,7 +78,9 @@
 
     <form:form commandName="newUser" cssClass="loginAndCreateForm" action="/admin/createUser" method="post">
 		<h1>Adding user Form </h1>
-
+        <p class="errorText">
+            <form:errors path="*" />
+        </p>
             <p>
 				<label for="login">Login:</label>
 				<form:input path="login" type="text" name="login" id="login" class="field" />
