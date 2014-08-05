@@ -49,6 +49,7 @@ public class AttributeService {
                 gav.setGroup(group.getName());
                 gav.setAttribute(attribute.getAttributeName());
                 gav.setType(attribute.getType());
+                gav.setPossibleValues(attribute.getPossibleValues());
                 gavs.add(gav);
             }
         }
