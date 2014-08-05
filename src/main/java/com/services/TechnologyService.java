@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.RatingDao;
+import persistance.dao.ReviewDao;
 import persistance.dao.TechnologyDao;
 import persistance.model.Rating;
 import persistance.model.Review;
@@ -19,6 +20,9 @@ public class TechnologyService {
 
     @Autowired
     private RatingDao ratingDao;
+
+    @Autowired
+    private ReviewDao reviewDao;
 
     @Transactional
     public void add(String name){
@@ -46,6 +50,8 @@ public class TechnologyService {
     public void addRating(short rating, String technologyName, Review review){
         Rating r = new Rating();
         r.setRating(rating);
+        if (reviewDao.findById(review.getId()) == null)
+        reviewDao.save(review);
         r.setReview(review);
         r.setTechnology(technologyDao.findByName(technologyName));
         ratingDao.save(r);

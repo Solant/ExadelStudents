@@ -1,16 +1,14 @@
 package com.services;
 
 import com.services.presentation.GAVPresentation;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.*;
 import persistance.model.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -36,6 +34,9 @@ public class StudentService {
 
     @Autowired
     private NotificationDao notificationDao;
+
+    @Autowired
+    private TechnologyDao technologyDao;
 
     @Transactional
     public Student getStudentByLogin(String login) {
@@ -186,18 +187,36 @@ public class StudentService {
                 for (Value value : values)
                     if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin))
                         gav.setValue(value.getValue());
+
                 gavs.add(gav);
             }
         }
 
+        Collections.sort(gavs);
         return gavs;
     }
 
     @Transactional
-    public void addReview(String studentLogin, String curatorLogin, Review review) {
-        review.setFeedbacker(feedbackerDao.findByLogin(curatorLogin));
+    public void addWorkingReview(String studentLogin, String feedbackerLogin, Review review) {
+        review.setFeedbacker(feedbackerDao.findByLogin(feedbackerLogin));
         review.setStudent(studentDao.findByLogin(studentLogin));
         review.setDate(Calendar.getInstance());
+
+        reviewDao.save(review);
+    }
+
+    @Transactional
+    public void addStudyingReview(String studentLogin, String feedbackerLogin, Review review){
+        review.setFeedbacker(feedbackerDao.findByLogin(feedbackerLogin));
+        review.setStudent(studentDao.findByLogin(studentLogin));
+        review.setDate(Calendar.getInstance());
+        Set<Rating> ratings = review.getRatings();
+        review.getRatings().clear();
+        for(Rating rating : ratings){
+            rating.setTechnology(technologyDao.findByName(rating.getTechnology().getTechnologyName()));
+            rating.setReview(review);
+            review.getRatings().add(rating);
+        }
 
         reviewDao.save(review);
     }
@@ -401,6 +420,7 @@ public class StudentService {
      */
     @Transactional
     public List<Student> liveSearch(String line, int status, int numberOfResults) {
+        JSONObject json = new JSONObject();
         List<Student> search = new ArrayList<Student>();
         List<Student> students = null;
         switch (status) {
@@ -427,15 +447,17 @@ public class StudentService {
             switch (initials.length) {
                 case 1:
                     if (student.getFirstName().startsWith(initials[0])
-                            || student.getSecondName().startsWith(initials[0]))
+                            || student.getSecondName().startsWith(initials[0])) {
                         search.add(student);
+                    }
                     break;
                 case 2:
                     if (student.getFirstName().startsWith(initials[0])
                             && student.getSecondName().startsWith(initials[1])
                             || student.getFirstName().startsWith(initials[1])
-                            && student.getSecondName().startsWith(initials[0]))
+                            && student.getSecondName().startsWith(initials[0])) {
                         search.add(student);
+                    }
                     break;
                 default:
                     break;
