@@ -1,13 +1,10 @@
 package com.springapp.mvc;
 
 
-import com.View.validators.UserFormValidator;
-import com.services.AdministratorService;
-import com.services.AttributeService;
-import com.services.FeedbackerService;
-import com.services.StudentService;
 import com.forView.*;
+import com.forView.validators.UserFormValidator;
 import com.services.*;
+import com.services.mail.MailService;
 import com.services.presentation.GAVPresentation;
 import com.services.tables.ExcelTableService;
 import com.services.tables.PDFTableService;
@@ -327,20 +324,24 @@ public class AdminController {
 
     @RequestMapping("/sendNotif")
     public String sendNotif(@ModelAttribute("createNotifUnit")CreateNotifUnit createNotifUnit){
+        MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com");
         String title = createNotifUnit.getTitle();
         String text = createNotifUnit.getText();
         String current = UserService.getCurrentUserLogin();
         if(createNotifUnit.isForStudents())
             for(String student:createNotifUnit.getStudents()){
                 notificationService.add(current, student,title, text);
+                mailService.send(title, text, userService.getByLogin(student).getEmail());
             }
         if(createNotifUnit.isForFeedbackers())
             for(String feed:createNotifUnit.getFeedbackers()){
                 notificationService.add(current, feed,title, text);
+                mailService.send(title, text, userService.getByLogin(feed).getEmail());
             }
         if(createNotifUnit.isForWorkers())
             for(String worker:createNotifUnit.getWorkers()){
                 notificationService.add(current, worker,title, text);
+                mailService.send(title, text, userService.getByLogin(worker).getEmail());
             }
         return "redirect:/admin";
     }
@@ -361,6 +362,13 @@ public class AdminController {
 
     @RequestMapping(value = "/addField", method = RequestMethod.POST)
     public String addField(@ModelAttribute("addFieldUnit")AddFieldUnit addFieldUnit, ModelMap modelMap){
+        if(addFieldUnit.isExistingGroup()){
+            attributeService.addAttribute(addFieldUnit.getGroupNameExist(), addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues());
+        }
+        else{
+            groupService.addGroup(addFieldUnit.getGroupNameNew(), addFieldUnit.getForStatus());
+            attributeService.addAttribute(addFieldUnit.getGroupNameNew(), addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues());
+        }
         if(tableData == null)
             return "redirect:/admin";
         modelMap.addAttribute("tableData", tableData);

@@ -4,12 +4,23 @@ package com.forView;
  * Created by Надя on 05.08.2014.
  */
 public class AddFieldUnit {
-    private String groupName;
+    private String groupNameExist;
+    private String groupNameNew;
     private String fieldName;
     private String type;
     private String possibleValues;
     private boolean existingGroup;
     private String forStatus;
+
+
+    public String getGroupNameNew() {
+        return groupNameNew;
+    }
+
+    public void setGroupNameNew(String groupNameNew) {
+        this.groupNameNew = groupNameNew;
+    }
+
 
     public String getForStatus() {
         return forStatus;
@@ -27,12 +38,12 @@ public class AddFieldUnit {
         this.existingGroup = existingGroup;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getGroupNameExist() {
+        return groupNameExist;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setGroupNameExist(String groupNameExist) {
+        this.groupNameExist = groupNameExist;
     }
 
     public String getFieldName() {

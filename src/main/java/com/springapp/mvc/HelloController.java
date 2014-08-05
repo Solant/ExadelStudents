@@ -1,7 +1,7 @@
 package com.springapp.mvc;
 
 import com.forView.AccountUnit;
-import com.View.validators.AccountFormValidator;
+import com.forView.validators.AccountFormValidator;
 import com.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

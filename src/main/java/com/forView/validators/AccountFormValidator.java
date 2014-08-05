@@ -1,6 +1,6 @@
-package com.View.validators;
+package com.forView.validators;
 
-import com.View.AccountUnit;
+import com.forView.AccountUnit;
 import com.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -61,7 +61,7 @@
         <div class="floatLeft addTech">
             <form:radiobutton path="existingGroup" value="yes" id="cg" name="group"/>
             <label for="cg">Existing group:</label><br/>
-            <form:select path="groupName" name="curGrup" class="addTechField">
+            <form:select path="groupNameExist" name="curGrup" class="addTechField">
                 <c:forEach items="${groups}" var="group">
                     <form:option value="${group}">${group}</form:option>
                 </c:forEach>
@@ -71,12 +71,13 @@
         <div class="floatRight addTech">
         <form:radiobutton path="existingGroup" value="no" id="newg" name="group" />
             <label for="newg">New Group</label><br/>
-        <form:input path="groupName" type="text" class="addTechField"/><br/>
+        <form:input path="groupNameNew" type="text" class="addTechField"/><br/>
 
             <label for="status">For Status</label>
             <form:select path="forStatus" name="status" id="status"  class="addTechField">
                 <form:option value="WORKING">Working</form:option>
                 <form:option value="STUDYING">Studying</form:option>
+                <form:option value="for_everybody">For everybody</form:option>
             </form:select>
         </div>
 
@@ -86,9 +87,9 @@
         </div>
 
         <div class="alignCenter ">
-            <form:radiobutton path="type" id="string" name="type" value="string" onclick="visual();"/>
+            <form:radiobutton path="type" id="string" name="type" value="text" onclick="visual();"/>
             <label for="string">String</label>
-            <form:radiobutton path="type" id="text" name="type" value="text" onclick="visual();"/>
+            <form:radiobutton path="type" id="text" name="type" value="textarea" onclick="visual();"/>
             <label for="text">Text</label>
         </div>
         <div class="alignCenter">

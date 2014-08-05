@@ -360,7 +360,7 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
     margin-left: 2%;
     height: 40px;
 }
-.group input, .group select{
+.group input, .group select, .group textarea{
     float:right;
     margin-right: 2%;
     width: 40%;
@@ -381,7 +381,7 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
 }
 .group{
     white-space: nowrap;
-    height: 45px;
+    /*height: 45px;*/
     overflow: auto;
 }
 

@@ -293,7 +293,9 @@ public class StudentService {
             for (Student student : students1) {
 
                 boolean isSuitable = false;
-                if(gavPresentation.getValue().equals("")||gavPresentation.getValue()==null)
+                if(gavPresentation.getValue()==null)
+                    isSuitable = true;
+                else if(gavPresentation.getValue().equals(""))
                     isSuitable = true;
                 Set<Value> valueSet = student.getValues();
                 for (Value value : valueSet) {
