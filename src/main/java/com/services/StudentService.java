@@ -273,7 +273,7 @@ public class StudentService {
 
     @Transactional
     public List<List<String>> find(List<GAVPresentation> gavPresentationList) {
-        List<Student> students = studentDao.findAll();
+        List<Student> students = getAllEnabledStudents();
         List<List<String>> returnStatement = new ArrayList<List<String>>();
 
         ArrayList<String> row = new ArrayList<String>();
