@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="/resources/styles/style.css" />
     <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
+
     <title>Admin</title>
 </head>
 <body>
@@ -28,11 +33,11 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left" role="search">
+            <div class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search Student">
+                    <input type="text" class="form-control" placeholder="Search Student" id="search">
                 </div>
-            </form>
+            </div>
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
 
@@ -113,6 +118,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 
+<div id="searchResult" style="display: none;"></div>
 
 <div align="center">
 <div class="profile">
@@ -180,6 +186,60 @@
 </c:forEach>
         <form:button type="submit" >Form table</form:button>
         </form:form>
+</div>
+
+<script>
+    $(document).ready(function(){
+       $('#search').keyup(
+               function(){
+                   /*var url="controller?name="+this.value;
+                   $.get( url , function( data ){
+                       var result=document.getElementById("result")
+                   })*/
+
+
+                   var remove={
+                       display: "none"
+                   }
+
+                   var length=$('#search').val().length;
+
+                   if(length==0){
+                       $('#searchResult').css(remove);
+                       return;
+                   }
+                   var show={
+                       backgroundColor: "yellow",
+                       width: "400px",
+                       display: "block",
+                      /* position:"absolute",*/
+                       zIndex:"-1"
+                   }
+                   $('#searchResult').css(show);
+
+                   var buttonStyle={
+                       width:"100%"
+                   }
+
+                   for(var i=0;i<5;i++){
+                       var $input=$('<input type="button" value="new button"/>')
+                       /*$input.value=i;
+                       $input.appendTo($("searchResult"));*/
+                       $input.css(buttonStyle);
+                       $("#searchResult").append($input);
+                   }
+
+                 /*  $('#searchResult').css(show);*/
+
+               }
+       )
+    });
+</script>
+<%--<script type="text/javascript" class="init">
+    $(document).ready(function() {
+        $('#searchResult').dataTable();
+    } );
+</script>--%>
 </body>
 </html>
 
