@@ -16,6 +16,7 @@ public class GAVPresentation {
     private List<String> parse(String line){
         String[] values = line.split("[,;(, )]+");
         ArrayList<String> valuesList = new ArrayList<String>();
+        valuesList.add("");
         Collections.addAll(valuesList, values);
         return valuesList;
     }
