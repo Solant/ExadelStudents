@@ -9,6 +9,8 @@ import persistance.model.Rating;
 import persistance.model.Review;
 import persistance.model.Technology;
 
+import java.util.List;
+
 @Service
 public class TechnologyService {
 
@@ -33,6 +35,11 @@ public class TechnologyService {
     @Transactional
     public void remove(String name){
         technologyDao.removeById(technologyDao.findByName(name).getId());
+    }
+
+    @Transactional
+    public List<Technology> getAllTechnologies(){
+        return technologyDao.findAll();
     }
 
     @Transactional
