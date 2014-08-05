@@ -1,10 +1,12 @@
 package com.springapp.mvc;
 
 import com.forView.AccountUnit;
+import com.View.validators.AccountFormValidator;
 import com.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import persistance.model.Notification;
 import persistance.model.User;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -26,6 +29,9 @@ public class HelloController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private AccountFormValidator accountFormValidator;
 
     @Autowired
     private NotificationService notificationService;
@@ -82,31 +88,22 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-    public String changePassword(ModelMap modelMap, @ModelAttribute("accountUnit")AccountUnit accountUnit) {
-        String message = new String();
-        //System.out.println(UserService.stringToSha256(accountUnit.getPassword()) + " " + us.getPassword(UserService.getCurrentUserLogin()));
-        if(UserService.stringToSha256(accountUnit.getPassword()).equals(us.getPassword(UserService.getCurrentUserLogin()))){
-            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword()) && !accountUnit.getNewPassword().equals("")) {
+    public String changePassword(ModelMap modelMap, @Valid @ModelAttribute("accountUnit") AccountUnit accountUnit, BindingResult result) {
+        accountUnit.setLogin(UserService.getCurrentUserLogin());
+        accountFormValidator.validate(accountUnit, result);
+        if (!result.hasErrors()) {
+            if(!accountUnit.getNewPassword().equals("") &&
+                    accountUnit.getNewPassword()!=null) {
                 us.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
-                message = "Password was changed.";
-            }
-            else{
-                message = "Confirmed password doesn't match the new one.";
             }
             User user = us.getByLogin(UserService.getCurrentUserLogin());
             user.setEmail(accountUnit.getEmail());
             user.setSkype(accountUnit.getSkype());
             user.setTelephone(accountUnit.getTelephone());
             us.update(user);
+
+            modelMap.addAttribute("accountUnit", accountUnit);
         }
-        else{
-            message = "Wrong old password.";
-        }
-        accountUnit.setPassword("");
-        accountUnit.setNewPassword("");
-        accountUnit.setConfirmedPassword("");
-        modelMap.addAttribute("message", message);
-        modelMap.addAttribute("accountUnit", accountUnit);
         return "account";
     }
 

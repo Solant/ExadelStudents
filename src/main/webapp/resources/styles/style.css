@@ -240,6 +240,10 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
     color: #ffffff ;
 }
 
+.errorText{
+    color:red;
+}
+
 /*end of common props*/
 
 /*login props*/

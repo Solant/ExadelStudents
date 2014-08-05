@@ -1,6 +1,11 @@
 package com.springapp.mvc;
 
 
+import com.View.validators.UserFormValidator;
+import com.services.AdministratorService;
+import com.services.AttributeService;
+import com.services.FeedbackerService;
+import com.services.StudentService;
 import com.forView.*;
 import com.services.*;
 import com.services.presentation.GAVPresentation;
@@ -10,6 +15,7 @@ import com.services.tables.WordTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +25,7 @@ import persistance.model.Notification;
 import persistance.model.Student;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.*;
@@ -52,6 +59,9 @@ public class AdminController {
 
     @Autowired
     private GroupService groupService;
+
+    @Autowired
+    private UserFormValidator userFormValidator;
 
     private List<List<String>> tableData;
 
@@ -89,17 +99,22 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public String createUser(@ModelAttribute("newUser") UserUnit newUser, ModelMap modelMap){
-        if(newUser.getRole().toString().equals("Student"))
-            studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
-        if(newUser.getRole().toString().equals("Feedbacker"))
-            feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-        if(newUser.getRole().toString().equals("Admin"))
-            administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-        if(tableData == null)
-            return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+    public String createUser( ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser,BindingResult result){
+        userFormValidator.validate(newUser, result);
+        if (result.hasErrors())
+            return "create";
+        else {
+            if (newUser.getRole().toString().equals("Student"))
+                studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
+            if (newUser.getRole().toString().equals("Feedbacker"))
+                feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
+            if (newUser.getRole().toString().equals("Admin"))
+                administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
+            if (tableData == null)
+                return "redirect:/admin";
+            modelMap.addAttribute("tableData", tableData);
+            return "adminTable";
+        }
     }
 
 
