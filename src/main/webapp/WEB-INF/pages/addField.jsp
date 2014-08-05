@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -55,56 +56,57 @@
 </nav>
 
     <div class="spoilers marginTop">
+        <form:form commandName="addFieldUnit" action="/admin/addField" method="post">
         
         <div class="floatLeft addTech">
-            <input type="radio" id="cg" name="group"/>
+            <form:radiobutton path="existingGroup" value="yes" id="cg" name="group"/>
             <label for="cg">Existing group:</label><br/>
-            <select name="curGrup" class="addTechField">
-                <option value="common">Common</option>
-                <option value="work">Work</option>
-                <option value="project">Project</option>
-            </select>
-
+            <form:select path="groupName" name="curGrup" class="addTechField">
+                <c:forEach items="${groups}" var="group">
+                    <form:option value="${group}">${group}</form:option>
+                </c:forEach>
+            </form:select>
         </div>
 
         <div class="floatRight addTech">
-        <input type="radio" id="newg" name="group" />
+        <form:radiobutton path="existingGroup" value="no" id="newg" name="group" />
             <label for="newg">New Group</label><br/>
-        <input type="text" class="addTechField"/><br/>
+        <form:input path="groupName" type="text" class="addTechField"/><br/>
 
             <label for="status">For Status</label>
-            <select name="status" id="status"  class="addTechField">
-                <option value="working">Working</option>
-                <option value="studying">Studying</option>
-            </select>
+            <form:select path="forStatus" name="status" id="status"  class="addTechField">
+                <form:option value="WORKING">Working</form:option>
+                <form:option value="STUDYING">Studying</form:option>
+            </form:select>
         </div>
 
         <div class="alignCenter paddingTop borderBottom">
             <label for="fieldname">Field name:</label>
-            <input type="text" id="fieldname"  class="addTechField"/>
+            <form:input path="fieldName" type="text" id="fieldname"  class="addTechField"/>
         </div>
 
         <div class="alignCenter ">
-            <input type="radio" id="string" name="type" value="string" onclick="visual();"/>
+            <form:radiobutton path="type" id="string" name="type" value="string" onclick="visual();"/>
             <label for="string">String</label>
-            <input type="radio" id="text" name="type" value="text" onclick="visual();"/>
+            <form:radiobutton path="type" id="text" name="type" value="text" onclick="visual();"/>
             <label for="text">Text</label>
         </div>
         <div class="alignCenter">
-            <input type="radio" id="select" name="type" onclick="visual();"/>
+            <form:radiobutton path="type" value="select" id="select" name="type" onclick="visual();"/>
             <label for="select">Select</label>
             <br/>
             <div id="needOption">
                 <label for="value">Possible values (via ;)</label><br/>
-                <textarea name="value" id="value" cols="30" rows="10"
-                          class="textOther addTechField"></textarea>
+                <form:textarea path="possibleValues" name="value" id="value" cols="30" rows="10"
+                          class="textOther addTechField"></form:textarea>
             </div>
         </div>
 
         <div class="alignCenter">
-            <button  type="submit" class="loginAndCreateButton">Save</button>
-            <button  type="submit" class="loginAndCreateButton">Cancel</button>
+            <form:button  type="submit" class="loginAndCreateButton">Save</form:button>
+            <button  type="submit" onclick="history.back();return false;" class="loginAndCreateButton">Cancel</button>
         </div>
+        </form:form>
     </div>
 
 

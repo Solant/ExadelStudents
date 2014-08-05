@@ -119,18 +119,18 @@
                     <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'textarea'}">
                         <form:textarea path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
                     </c:if>
-                    <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'select'}">
+                    <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'select'}">
                         <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
-                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                        <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possibleValues" var="token">
                             <form:option value="${token}">${token}</form:option>
-                        </c:forTokens>
+                        </c:forEach>
                     </c:if>
                     <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'radiobutton'}">
-                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                        <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possibleValues" var="token">
                             <form:radiobutton path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
                                               value="${token == groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].value}"/>
-                        </c:forTokens>
-                    </c:if>--%>
+                        </c:forEach>
+                    </c:if>
                     <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
                 </div>
             </c:forEach>

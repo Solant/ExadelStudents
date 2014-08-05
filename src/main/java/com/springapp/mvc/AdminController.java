@@ -50,6 +50,9 @@ public class AdminController {
     @Autowired
     private NotificationService notificationService;
 
+    @Autowired
+    private GroupService groupService;
+
     private List<List<String>> tableData;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -332,5 +335,20 @@ public class AdminController {
         List<Notification> notifications = userService.getAllNotifications(student);
         modelMap.addAttribute("notifs", notifications);
         return "notificationList";
+    }
+
+    @RequestMapping("/showAddField")
+    public String showAddField(ModelMap modelMap){
+        modelMap.addAttribute("addFieldUnit", new AddFieldUnit());
+        modelMap.addAttribute("groups",groupService.getAllGroups() );
+        return "addField";
+    }
+
+    @RequestMapping(value = "/addField", method = RequestMethod.POST)
+    public String addField(@ModelAttribute("addFieldUnit")AddFieldUnit addFieldUnit, ModelMap modelMap){
+        if(tableData == null)
+            return "redirect:/admin";
+        modelMap.addAttribute("tableData", tableData);
+        return "adminTable";
     }
 }

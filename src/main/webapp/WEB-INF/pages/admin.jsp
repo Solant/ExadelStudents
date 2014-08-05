@@ -55,6 +55,12 @@
                         </button>
                     </li>
                     <li>
+                        <button formaction="/admin/showAddField" class="btn">
+                            <img src="/resources/images/add.png" class="adminMenuImages">
+                            <span>Add field</span>
+                        </button>
+                    </li>
+                    <li>
                         <a href="/notif">
                             <div class="message">
                                 <c:if test="${notifNumber > 0}">
