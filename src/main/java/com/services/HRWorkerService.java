@@ -25,7 +25,7 @@ public class HRWorkerService {
     public void add(String hrDepartmentLogin, String password, String name, String surname){
         HRWorker worker = new HRWorker();
         worker.setLogin(hrDepartmentLogin);
-        worker.setPassword(password);
+        worker.setPassword(UserService.stringToSha256(password));
         worker.setFirstName(name);
         worker.setSecondName(surname);
         worker.setEnabled(true);

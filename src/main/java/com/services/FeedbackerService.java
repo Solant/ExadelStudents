@@ -41,7 +41,7 @@ public class FeedbackerService {
 
         feedbacker.setEnabled(true);
         feedbacker.setLogin(login);
-        feedbacker.setPassword(password);
+        feedbacker.setPassword(UserService.stringToSha256(password));
         feedbacker.setFirstName(name);
         feedbacker.setSecondName(surname);
 

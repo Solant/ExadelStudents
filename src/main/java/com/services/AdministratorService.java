@@ -26,7 +26,7 @@ public class AdministratorService {
         Admin admin = new Admin();
         admin.setEnabled(true);
         admin.setLogin(login);
-        admin.setPassword(password);
+        admin.setPassword(UserService.stringToSha256(password));
         admin.setFirstName(name);
         admin.setSecondName(surname);
         UserRole ur = new UserRole();

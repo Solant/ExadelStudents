@@ -92,7 +92,7 @@ public class StudentService {
         Student student = new Student();
 
         student.setLogin(login);
-        student.setPassword(password);
+        student.setPassword(UserService.stringToSha256(password));
         student.setFirstName(name);
         student.setSecondName(surname);
         student.setEnabled(true);
