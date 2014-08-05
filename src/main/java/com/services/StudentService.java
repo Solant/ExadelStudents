@@ -325,7 +325,7 @@ public class StudentService {
                                 break;
                             }
                         }
-                        if(foundAttribute == false)
+                        if(!foundAttribute)
                             addStatement.add("");
                     }
                 }
@@ -397,6 +397,7 @@ public class StudentService {
                 break;
             case ENABLED:
                 students = getAllEnabledStudents();
+                break;
             case ALL:
                 students = getAllEnabledStudents();
                 students.addAll(getAllDisabledStudents());
