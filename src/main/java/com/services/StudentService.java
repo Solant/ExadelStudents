@@ -172,6 +172,7 @@ public class StudentService {
                 gav.setGroup(group.getName());
                 gav.setAttribute(attribute.getAttributeName());
                 gav.setType(attribute.getType());
+                gav.setPossibleValues(attribute.getPossibleValues());
                 gav.setValue("");
                 for (Value value : values)
                     if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin))
