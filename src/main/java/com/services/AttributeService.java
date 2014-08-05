@@ -11,6 +11,7 @@ import persistance.model.Group;
 import persistance.model.Value;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -53,6 +54,8 @@ public class AttributeService {
                 gavs.add(gav);
             }
         }
+
+        Collections.sort(gavs);
         return gavs;
     }
 

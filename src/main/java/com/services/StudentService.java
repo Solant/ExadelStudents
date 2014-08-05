@@ -7,10 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.*;
 import persistance.model.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -190,6 +187,7 @@ public class StudentService {
             }
         }
 
+        Collections.sort(gavs);
         return gavs;
     }
 

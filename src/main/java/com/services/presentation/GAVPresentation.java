@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GAVPresentation {
+public class GAVPresentation implements Comparable<GAVPresentation>{
 
     private String group;
     private String attribute;
@@ -14,10 +14,9 @@ public class GAVPresentation {
     private boolean show;
 
     private List<String> parse(String line){
-        if(line == null)
+        if(line == null || line.equals(""))
             return null;
-        if(line.equals(""))
-            return null;
+
         String[] values = line.split("[,;(, )]+");
         ArrayList<String> valuesList = new ArrayList<String>();
         valuesList.add("");
@@ -76,5 +75,10 @@ public class GAVPresentation {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public int compareTo(GAVPresentation gavPresentation) {
+        return this.getAttribute().compareTo(gavPresentation.getAttribute());
     }
 }
