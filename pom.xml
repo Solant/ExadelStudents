@@ -127,7 +127,11 @@
             <artifactId>itextpdf</artifactId>
             <version>5.5.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>1.0</version>
+        </dependency>
 
 
     </dependencies>

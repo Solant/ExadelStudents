@@ -64,13 +64,14 @@ body {
     color: white;
 }
 
+
 .dropdown-menu > li{
     background: RGB(0,156,203);
-    text-align: center;
 }
 
 .dropdown-menu > li > button{
     width: 100%;
+    text-align: left;
 }
 
 .nav .open > a:focus {
@@ -80,6 +81,11 @@ body {
 .nav > li > button{
     margin-top: 6px;
     margin-right: 3px;
+    font-size: 20px;
+}
+
+.dropdown-menu{
+    background-color: RGB(0,156,203);
 }
 
 .hat{

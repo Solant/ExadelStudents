@@ -10,7 +10,6 @@ import persistance.dao.NotificationDao;
 import persistance.dao.UserDao;
 import persistance.model.Notification;
 import persistance.model.User;
-//import sun.misc.Hashing;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

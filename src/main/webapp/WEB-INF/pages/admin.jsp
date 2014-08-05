@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search Student">
                 </div>
             </form>
             <form method="get">
@@ -59,10 +59,24 @@
                             <span>Disabled Students</span>
                         </button>
                     </li>
+                            <li class="divider"></li>
                     <li>
                         <button formaction="/admin/createNotif" class="btn">
                             <img src="/resources/images/message1.png" class="adminMenuImages">
                             <span>Create notification</span>
+                        </button>
+                    </li>
+                            <li>
+                                <button formaction="/admin/" class="btn">
+                                    <img src="/resources/images/add.png" class="adminMenuImages">
+                                    <span>Add new Field</span>
+                                </button>
+                            </li>
+                            <li class="divider"></li>
+                    <li>
+                        <button formaction="/admin/" class="btn">
+                            <img src="/resources/images/loupe.png" class="adminMenuImages">
+                            <span>Filtration</span>
                         </button>
                     </li>
                         </ul>
@@ -82,11 +96,7 @@
                     <li>
                         <span class="currUserName"><c:out value="${account}"></c:out></span>
                     </li>
-                    <li>
-                        <a href="<c:url value="/admin"/> ">
-                            <img src="/resources/images/loupe.png" class="account_logo">
-                        </a>
-                    </li>
+
                     <li>
                         <a href="<c:url value="j_spring_security_logout" />">
                             <img src="/resources/images/exit.png" class="exit_logo">
