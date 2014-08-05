@@ -70,13 +70,22 @@ public class HelloController {
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public String changePassword(ModelMap modelMap, @Valid @ModelAttribute("accountUnit") AccountUnit accountUnit, BindingResult result) {
-
+        accountUnit.setLogin(UserService.getCurrentUserLogin());
         accountFormValidator.validate(accountUnit, result);
-        if (result.hasErrors())
-            return "account";
+        if (!result.hasErrors()) {
+            if(!accountUnit.getNewPassword().equals("") &&
+                    accountUnit.getNewPassword()!=null) {
+                us.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
+            }
+            User user = us.getByLogin(UserService.getCurrentUserLogin());
+            user.setEmail(accountUnit.getEmail());
+            user.setSkype(accountUnit.getSkype());
+            user.setTelephone(accountUnit.getTelephone());
+            us.update(user);
 
-        else
-            return "admin";
+            modelMap.addAttribute("accountUnit", accountUnit);
+        }
+        return "account";
     }
 
     @Autowired

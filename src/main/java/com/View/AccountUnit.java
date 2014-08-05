@@ -13,9 +13,7 @@ public class AccountUnit {
 
     private String login;
     private String firstName;
-
     private String secondName;
-
     private String password;
     private String newPassword;
     private String confirmedPassword;
