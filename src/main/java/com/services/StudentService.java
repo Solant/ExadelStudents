@@ -92,7 +92,7 @@ public class StudentService {
         Student student = new Student();
 
         student.setLogin(login);
-        student.setPassword(password);
+        student.setPassword(UserService.stringToSha256(password));
         student.setFirstName(name);
         student.setSecondName(surname);
         student.setEnabled(true);
@@ -273,7 +273,7 @@ public class StudentService {
 
     @Transactional
     public List<List<String>> find(List<GAVPresentation> gavPresentationList) {
-        List<Student> students = studentDao.findAll();
+        List<Student> students = getAllEnabledStudents();
         List<List<String>> returnStatement = new ArrayList<List<String>>();
 
         ArrayList<String> row = new ArrayList<String>();
@@ -325,7 +325,7 @@ public class StudentService {
                                 break;
                             }
                         }
-                        if(foundAttribute == false)
+                        if(!foundAttribute)
                             addStatement.add("");
                     }
                 }
@@ -397,6 +397,7 @@ public class StudentService {
                 break;
             case ENABLED:
                 students = getAllEnabledStudents();
+                break;
             case ALL:
                 students = getAllEnabledStudents();
                 students.addAll(getAllDisabledStudents());
