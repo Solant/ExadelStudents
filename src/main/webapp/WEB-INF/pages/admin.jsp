@@ -138,12 +138,13 @@
                     <form:textarea cssClass="textOther" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
                     </div>
                 </c:if>
-                    <%--<c:if test="${attr.type == 'select'}">
-                        <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
-                        <c:forEach items="${attr.possibleValues"  var="token">
+                <c:if test="${attr.type == 'select'}">
+                    <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" >
+                        <c:forEach items="${attr.possibleValues}"  var="token">
                             <form:option value="${token}">${token}</form:option>
                         </c:forEach>
-                    </c:if>--%>
+                    </form:select>
+                </c:if>
                     <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'radiobutton'}">
                         <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
                             <form:radiobutton path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"

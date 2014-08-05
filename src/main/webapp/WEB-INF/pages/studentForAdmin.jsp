@@ -158,6 +158,13 @@
                 <c:if test="${attr.type == 'textarea'}">
                     <form:textarea path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
                 </c:if>
+                <c:if test="${attr.type == 'select'}">
+                    <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" >
+                        <c:forEach items="${attr.possibleValues}"  var="token">
+                            <form:option value="${token}">${token}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </c:if>
                 <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
             </div>
             </c:forEach>
