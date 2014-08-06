@@ -115,7 +115,9 @@
 
     <form:form commandName="newUser" cssClass="loginAndCreateForm" action="/admin/createUser" method="post">
 		<h1>Adding user Form </h1>
-
+        <p class="errorText">
+            <form:errors path="*" />
+        </p>
             <p>
 				<label for="login">Login:</label>
 				<form:input path="login" type="text" name="login" id="login" class="field" />

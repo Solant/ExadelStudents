@@ -1,4 +1,4 @@
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -18,6 +18,8 @@
 </head>
 <body>
 
+
+
 <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -35,16 +37,6 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <button formaction="/curator/${account}/myStudents" type="submit" class="btn <c:if test="${feedbackerRole=='asCurator'}">btnActive</c:if>">
-                            <span>My Students</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button formaction="/curator/${account}/interview" type="submit" class="btn <c:if test="${feedbackerRole=='asInterviewer'}">btnActive</c:if>">
-                            <span>Interviews</span>
-                        </button>
-                    </li>
                     <li>
                         <a href="/notif">
                             <div class="message">
@@ -76,11 +68,14 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-</div>
-<form class="reviewForm" >
 
+
+</div>
+<form:form commandName="review" action="/curator/${account}/addRatingReview" method="post" class="reviewForm" >
+    <form:input hidden="true" path="student.login" />
+    <form:input hidden="true" path="fromInterview" />
         <div class="alignCenter">
-            <h1 >Interview Form </h1>
+            <h1 >Review Form </h1>
         </div>
 
 
@@ -95,92 +90,135 @@
     </p>
 
     <div>
-        <label >English:</label>
+        <label value="English">English:</label>
+            <form:input path="ratings[0].technology.technologyName" value="English" hidden="true"/>
 
         <div class="starRating">
-            <input name="valueEnglish" type="radio" class="star" value="1"/>
-            <input name="valueEnglish" type="radio" class="star" value="2"/>
-            <input name="valueEnglish" type="radio" class="star" value="3"/>
-            <input name="valueEnglish" type="radio" class="star" value="4"/>
-            <input name="valueEnglish" type="radio" class="star" value="5"/>
+            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="1"/>
+            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="2"/>
+            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="3"/>
+            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="4"/>
+            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="5"/>
         </div>
     </div>
+    <c:forEach begin="1" end="4" var="i">
 
     <div class="interviewGroup">
-        <select name="criteria1">
-            <option value="html">html</option>
-            <option value="css">css</option>
-            <option value="java">java</option>
-            <option value="hibernate">hibernate</option>
-        </select>
+        <form:select path="ratings[${i}].technology.technologyName" name="criteria2">
+            <c:forEach items="${techologies}" var="tech">
+                <form:option value="${tech.technologyName}">${tech.technologyName}</form:option>
+            </c:forEach>
+        </form:select>
 
-        <div class="starRating">
-            <input name="valueCriteria1" type="radio" class="star" value="1"/>
-            <input name="valueCriteria1" type="radio" class="star" value="2"/>
-            <input name="valueCriteria1" type="radio" class="star" value="3"/>
-            <input name="valueCriteria1" type="radio" class="star" value="4"/>
-            <input name="valueCriteria1" type="radio" class="star" value="5"/>
+         <div class="starRating">
+            <form:radiobutton path="ratings[${i}].rating" name="value2" class="star" value="1"/>
+            <form:radiobutton path="ratings[${i}].rating" name="value2" class="star" value="2"/>
+            <form:radiobutton path="ratings[${i}].rating" name="value2" class="star" value="3"/>
+            <form:radiobutton path="ratings[${i}].rating" name="value2" class="star" value="4"/>
+            <form:radiobutton path="ratings[${i}].rating" name="value2" class="star" value="5"/>
         </div>
     </div>
+    </c:forEach>
+
+    <%--<div class="interviewGroup">
+        <form:select path="tech3" name="criteria3">
+            <c:forEach items="${techologies}" var="tech">
+                <form:option value="${tech.technologyName}">${tech.technologyName}</form:option>
+            </c:forEach>
+        </form:select>
+
+        <div class="starRating">
+            <form:radiobutton path="rating3" name="value3" class="star" value="1"/>
+            <form:radiobutton path="rating3" name="value3" class="star" value="2"/>
+            <form:radiobutton path="rating3" name="value3" class="star" value="3"/>
+            <form:radiobutton path="rating3" name="value3" class="star" value="4"/>
+            <form:radiobutton path="rating3" name="value3" class="star" value="5"/>
+        </div>
+    </div>
+
 
     <div class="interviewGroup">
-        <select name="criteria2">
-            <option value="html">html</option>
-            <option value="css">css</option>
-            <option value="java">java</option>
-            <option value="hibernate">hibernate</option>
-        </select>
+        <form:select path="tech4" name="criteria4">
+            <c:forEach items="${techologies}" var="tech">
+                <form:option value="${tech.technologyName}">${tech.technologyName}</form:option>
+            </c:forEach>
+        </form:select>
 
         <div class="starRating">
-            <input name="valueCriteria2" type="radio" class="star" value="1"/>
-            <input name="valueCriteria2" type="radio" class="star" value="2"/>
-            <input name="valueCriteria2" type="radio" class="star" value="3"/>
-            <input name="valueCriteria2" type="radio" class="star" value="4"/>
-            <input name="valueCriteria2" type="radio" class="star" value="5"/>
+            <form:radiobutton path="rating4" name="value4" class="star" value="1"/>
+            <form:radiobutton path="rating4" name="value4" class="star" value="2"/>
+            <form:radiobutton path="rating4" name="value4" class="star" value="3"/>
+            <form:radiobutton path="rating4" name="value4" class="star" value="4"/>
+            <form:radiobutton path="rating4" name="value4" class="star" value="5"/>
         </div>
     </div>
 
-    <div class="interviewGroup">
-        <select name="criteria3">
-            <option value="html">html</option>
-            <option value="css">css</option>
-            <option value="java">java</option>
-            <option value="hibernate">hibernate</option>
-        </select>
+--%>
 
-        <div class="starRating">
-            <input name="valueCriteria3" type="radio" class="star" value="1"/>
-            <input name="valueCriteria3" type="radio" class="star" value="2"/>
-            <input name="valueCriteria3" type="radio" class="star" value="3"/>
-            <input name="valueCriteria3" type="radio" class="star" value="4"/>
-            <input name="valueCriteria3" type="radio" class="star" value="5"/>
-        </div>
-    </div>
-
-    <div class="interviewGroup">
-        <select name="criteria4">
-            <option value="html">html</option>
-            <option value="css">css</option>
-            <option value="java">java</option>
-            <option value="hibernate">hibernate</option>
-        </select>
-
-        <div class="starRating">
-            <input name="valueCriteria4" type="radio" class="star" value="1"/>
-            <input name="valueCriteria4" type="radio" class="star" value="2"/>
-            <input name="valueCriteria4" type="radio" class="star" value="3"/>
-            <input name="valueCriteria4" type="radio" class="star" value="4"/>
-            <input name="valueCriteria4" type="radio" class="star" value="5"/>
-        </div>
-    </div>
-
-        <div class="alignCenter">
+    <div class="alignCenter">
             <label for="other">Other:</label><br/>
-            <textarea name="other" id="other" cols="30" rows="10" class="textOther"></textarea>
+            <form:textarea path="comment" name="other" id="other" cols="30" rows="10" class="textOther"/>
             <button type="submit" class="loginAndCreateButton">Save</button>
             <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
         </div>
 
-</form>
+</form:form>
 </body>
 </html>
+
+
+<%--
+
+
+<div class="interviewGroup">
+    <select name="criteria2">
+        <option value="html">html</option>
+        <option value="css">css</option>
+        <option value="java">java</option>
+        <option value="hibernate">hibernate</option>
+    </select>
+
+    <div class="starRating">
+        <input name="valueCriteria2" type="radio" class="star" value="1"/>
+        <input name="valueCriteria2" type="radio" class="star" value="2"/>
+        <input name="valueCriteria2" type="radio" class="star" value="3"/>
+        <input name="valueCriteria2" type="radio" class="star" value="4"/>
+        <input name="valueCriteria2" type="radio" class="star" value="5"/>
+    </div>
+</div>
+
+<div class="interviewGroup">
+    <select name="criteria3">
+        <option value="html">html</option>
+        <option value="css">css</option>
+        <option value="java">java</option>
+        <option value="hibernate">hibernate</option>
+    </select>
+
+    <div class="starRating">
+        <input name="valueCriteria3" type="radio" class="star" value="1"/>
+        <input name="valueCriteria3" type="radio" class="star" value="2"/>
+        <input name="valueCriteria3" type="radio" class="star" value="3"/>
+        <input name="valueCriteria3" type="radio" class="star" value="4"/>
+        <input name="valueCriteria3" type="radio" class="star" value="5"/>
+    </div>
+</div>
+
+<div class="interviewGroup">
+    <select name="criteria4">
+        <option value="html">html</option>
+        <option value="css">css</option>
+        <option value="java">java</option>
+        <option value="hibernate">hibernate</option>
+    </select>
+
+    <div class="starRating">
+        <input name="valueCriteria4" type="radio" class="star" value="1"/>
+        <input name="valueCriteria4" type="radio" class="star" value="2"/>
+        <input name="valueCriteria4" type="radio" class="star" value="3"/>
+        <input name="valueCriteria4" type="radio" class="star" value="4"/>
+        <input name="valueCriteria4" type="radio" class="star" value="5"/>
+    </div>
+</div>
+--%>
+

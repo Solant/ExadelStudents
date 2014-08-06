@@ -1,9 +1,10 @@
 package com.services.presentation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class GAVPresentation {
+public class GAVPresentation implements Comparable<GAVPresentation>{
 
     private String group;
     private String attribute;
@@ -12,16 +13,23 @@ public class GAVPresentation {
     private List<String> possibleValues;
     private boolean show;
 
-    public static List<String> parse(String line){
+    private List<String> parse(String line){
+        if(line == null || line.equals(""))
+            return null;
+
         String[] values = line.split("[,;(, )]+");
         ArrayList<String> valuesList = new ArrayList<String>();
-        for(String str : values)
-            valuesList.add(str);
+        valuesList.add("");
+        Collections.addAll(valuesList, values);
         return valuesList;
     }
 
+    public void setPossibleValues(String line){
+        possibleValues = parse(line);
+    }
+
     public void setPossibleValues(List<String> list){
-        possibleValues.addAll(list);
+        this.possibleValues = list;
     }
 
     public List<String> getPossibleValues(){
@@ -67,5 +75,10 @@ public class GAVPresentation {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public int compareTo(GAVPresentation gavPresentation) {
+        return this.getAttribute().compareTo(gavPresentation.getAttribute());
     }
 }

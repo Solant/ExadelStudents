@@ -1,10 +1,12 @@
 package com.springapp.mvc;
 
-import com.View.AccountUnit;
+import com.forView.AccountUnit;
+import com.forView.validators.AccountFormValidator;
 import com.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import persistance.model.Notification;
 import persistance.model.User;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -28,6 +31,9 @@ public class HelloController {
     private StudentService studentService;
 
     @Autowired
+    private AccountFormValidator accountFormValidator;
+
+    @Autowired
     private NotificationService notificationService;
 
    /* @RequestMapping(value = {"*/
@@ -41,14 +47,27 @@ public class HelloController {
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String welcomePage(ModelMap model, HttpSession session) {
-        session.setAttribute("account", us.getCurrentUserLogin());
-        session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
-        if (SecurityService.hasRole("ROLE_STUDENT"))
+        if (SecurityService.hasRole("ROLE_STUDENT")) {
+            session.setAttribute("account", us.getCurrentUserLogin());
+            session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
+            session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
+            session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
             return "redirect:student/" + us.getCurrentUserLogin();
-        if (SecurityService.hasRole("ROLE_CURATOR"))
+        }
+        if (SecurityService.hasRole("ROLE_CURATOR")) {
+            session.setAttribute("account", us.getCurrentUserLogin());
+            session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
+            session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
+            session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
             return "redirect:curator/" + us.getCurrentUserLogin();
-        if (SecurityService.hasRole("ROLE_ADMIN"))
+        }
+        if (SecurityService.hasRole("ROLE_ADMIN")) {
+            session.setAttribute("account", us.getCurrentUserLogin());
+            session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
+            session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
+            session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
             return "redirect:admin";
+        }
 
         return "login";
     }
@@ -69,31 +88,22 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-    public String changePassword(ModelMap modelMap, @ModelAttribute("accountUnit")AccountUnit accountUnit) {
-        String message = new String();
-        //System.out.println(UserService.stringToSha256(accountUnit.getPassword()) + " " + us.getPassword(UserService.getCurrentUserLogin()));
-        if(UserService.stringToSha256(accountUnit.getPassword()).equals(us.getPassword(UserService.getCurrentUserLogin()))){
-            if(accountUnit.getNewPassword().equals(accountUnit.getConfirmedPassword()) && !accountUnit.getNewPassword().equals("")) {
+    public String changePassword(ModelMap modelMap, @Valid @ModelAttribute("accountUnit") AccountUnit accountUnit, BindingResult result) {
+        accountUnit.setLogin(UserService.getCurrentUserLogin());
+        accountFormValidator.validate(accountUnit, result);
+        if (!result.hasErrors()) {
+            if(!accountUnit.getNewPassword().equals("") &&
+                    accountUnit.getNewPassword()!=null) {
                 us.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
-                message = "Password was changed.";
-            }
-            else{
-                message = "Confirmed password doesn't match the new one.";
             }
             User user = us.getByLogin(UserService.getCurrentUserLogin());
             user.setEmail(accountUnit.getEmail());
             user.setSkype(accountUnit.getSkype());
             user.setTelephone(accountUnit.getTelephone());
             us.update(user);
+
+            modelMap.addAttribute("accountUnit", accountUnit);
         }
-        else{
-            message = "Wrong old password.";
-        }
-        accountUnit.setPassword("");
-        accountUnit.setNewPassword("");
-        accountUnit.setConfirmedPassword("");
-        modelMap.addAttribute("message", message);
-        modelMap.addAttribute("accountUnit", accountUnit);
         return "account";
     }
 

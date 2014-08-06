@@ -30,16 +30,6 @@
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <button formaction="/curator/${account}/myStudents" type="submit" class="btn <c:if test="${feedbackerRole=='asCurator'}">btnActive</c:if>">
-                            <span>My Students</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button formaction="/curator/${account}/interview" type="submit" class="btn <c:if test="${feedbackerRole=='asInterviewer'}">btnActive</c:if>">
-                            <span>Interviews</span>
-                        </button>
-                    </li>
-                    <li>
                         <a href="/notif">
                             <div class="message">
                                 <c:if test="${notifNumber > 0}">
@@ -69,7 +59,6 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
 
 <form:form commandName="review" class="reviewForm" action="/curator/${account}/addFeedback" method="post">
 <form:input hidden="true" path="student.login" />

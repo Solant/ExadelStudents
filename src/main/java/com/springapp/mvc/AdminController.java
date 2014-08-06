@@ -1,8 +1,10 @@
 package com.springapp.mvc;
 
 
-import com.View.*;
+import com.forView.*;
+import com.forView.validators.UserFormValidator;
 import com.services.*;
+import com.services.mail.MailService;
 import com.services.presentation.GAVPresentation;
 import com.services.tables.ExcelTableService;
 import com.services.tables.PDFTableService;
@@ -10,14 +12,17 @@ import com.services.tables.WordTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import persistance.model.Feedbacker;
+import persistance.model.Notification;
 import persistance.model.Student;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.*;
@@ -44,7 +49,16 @@ public class AdminController {
     private HRWorkerService hrWorkerService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private NotificationService notificationService;
+
+    @Autowired
+    private GroupService groupService;
+
+    @Autowired
+    private UserFormValidator userFormValidator;
 
     private List<List<String>> tableData;
 
@@ -82,17 +96,22 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public String createUser(@ModelAttribute("newUser") UserUnit newUser, ModelMap modelMap){
-        if(newUser.getRole().toString().equals("Student"))
-            studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
-        if(newUser.getRole().toString().equals("Feedbacker"))
-            feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-        if(newUser.getRole().toString().equals("Admin"))
-            administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-        if(tableData == null)
-            return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+    public String createUser( ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser,BindingResult result){
+        userFormValidator.validate(newUser, result);
+        if (result.hasErrors())
+            return "create";
+        else {
+            if (newUser.getRole().toString().equals("Student"))
+                studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
+            if (newUser.getRole().toString().equals("Feedbacker"))
+                feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
+            if (newUser.getRole().toString().equals("Admin"))
+                administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
+            if (tableData == null)
+                return "redirect:/admin";
+            modelMap.addAttribute("tableData", tableData);
+            return "adminTable";
+        }
     }
 
 
@@ -305,21 +324,54 @@ public class AdminController {
 
     @RequestMapping("/sendNotif")
     public String sendNotif(@ModelAttribute("createNotifUnit")CreateNotifUnit createNotifUnit){
+        MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com");
         String title = createNotifUnit.getTitle();
         String text = createNotifUnit.getText();
         String current = UserService.getCurrentUserLogin();
         if(createNotifUnit.isForStudents())
             for(String student:createNotifUnit.getStudents()){
                 notificationService.add(current, student,title, text);
+                mailService.send(title, text, userService.getByLogin(student).getEmail());
             }
         if(createNotifUnit.isForFeedbackers())
             for(String feed:createNotifUnit.getFeedbackers()){
                 notificationService.add(current, feed,title, text);
+                mailService.send(title, text, userService.getByLogin(feed).getEmail());
             }
         if(createNotifUnit.isForWorkers())
             for(String worker:createNotifUnit.getWorkers()){
                 notificationService.add(current, worker,title, text);
+                mailService.send(title, text, userService.getByLogin(worker).getEmail());
             }
         return "redirect:/admin";
+    }
+
+    @RequestMapping("studentPage/{student}/notif")
+    public String studentNotif(@PathVariable("student")String student, ModelMap modelMap){
+        List<Notification> notifications = userService.getAllNotifications(student);
+        modelMap.addAttribute("notifs", notifications);
+        return "notificationList";
+    }
+
+    @RequestMapping("/showAddField")
+    public String showAddField(ModelMap modelMap){
+        modelMap.addAttribute("addFieldUnit", new AddFieldUnit());
+        modelMap.addAttribute("groups",groupService.getAllGroups() );
+        return "addField";
+    }
+
+    @RequestMapping(value = "/addField", method = RequestMethod.POST)
+    public String addField(@ModelAttribute("addFieldUnit")AddFieldUnit addFieldUnit, ModelMap modelMap){
+        if(addFieldUnit.isExistingGroup()){
+            attributeService.addAttribute(addFieldUnit.getGroupNameExist(), addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues());
+        }
+        else{
+            groupService.addGroup(addFieldUnit.getGroupNameNew(), addFieldUnit.getForStatus());
+            attributeService.addAttribute(addFieldUnit.getGroupNameNew(), addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues());
+        }
+        if(tableData == null)
+            return "redirect:/admin";
+        modelMap.addAttribute("tableData", tableData);
+        return "adminTable";
     }
 }

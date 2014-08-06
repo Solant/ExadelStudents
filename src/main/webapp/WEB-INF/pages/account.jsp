@@ -65,8 +65,8 @@
 <form:form commandName="accountUnit" class="loginAndCreateForm" method="post" action="/changePassword">
 
     <h1>Account Form</h1>
-    <p>
-        ${message}
+    <p class="errorText">
+        <form:errors path="*" />
     </p>
 
     <p>

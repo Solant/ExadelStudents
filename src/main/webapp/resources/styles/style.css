@@ -356,6 +356,10 @@ button.gray, a.gray, input[type=submit].gray {
     color: #ffffff ;
 }
 
+.errorText{
+    color:red;
+}
+
 /*end of common props*/
 
 /*login props*/
@@ -473,7 +477,7 @@ button.gray, a.gray, input[type=submit].gray {
     margin-left: 2%;
     height: 40px;
 }
-.group input, .group select{
+.group input, .group select, .group textarea{
     float:right;
     margin-right: 2%;
     width: 40%;
@@ -501,7 +505,7 @@ button.gray, a.gray, input[type=submit].gray {
 }
 .group{
     white-space: nowrap;
-    height: 45px;
+    /*height: 45px;*/
     overflow: auto;
 }
 

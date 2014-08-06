@@ -1,14 +1,12 @@
 package persistance.model;
 
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table (name = "Reviews")
@@ -59,8 +57,15 @@ public class Review
 
     @OneToMany(mappedBy = "review")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-    private Set<Rating> ratings = new HashSet<Rating>();
+    private List<Rating> ratings = new ArrayList<Rating>();
 
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
 
     public Review() {
     }
@@ -171,13 +176,5 @@ public class Review
 
     public void setFeedbacker(Feedbacker feedbacker) {
         this.feedbacker = feedbacker;
-    }
-
-    public Set<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(Set<Rating> ratings) {
-        this.ratings = ratings;
     }
 }
