@@ -128,14 +128,6 @@
     <div class="tab-pane active" id="technology">
 
         <div class="spoilers">
-            <%--<div class="linkingL">
-                <label for="existingTech">Existing:</label><br/>
-                <select id="existingTech" multiple readonly>
-                    <option value="html">HTML</option>
-                    <option value="css">CSS</option>
-                    <option value="hibernate">Hibernate</option>
-                </select>
-            </div>--%>
             <div class="alignCenter">
                 <label for="newTech">New technology:</label>
                 <input type="text" id="newTech"/>
@@ -151,31 +143,8 @@
     </div>
 
     <div class="tab-pane" id="field">
-
+<!-- kljfsdjklf -->
         <div class="spoilers">
-/*asdfsdfsdf*/
-           <%-- <div class="floatLeft addTech">
-                <input type="radio" id="cg" name="group"/>
-                <label for="cg">Existing group:</label><br/>
-                <select name="curGrup" class="addTechField">
-                    <option value="common">Common</option>
-                    <option value="work">Work</option>
-                    <option value="project">Project</option>
-                </select>
-
-            </div>
-
-            <div class="floatRight addTech">
-                <input type="radio" id="newg" name="group" />
-                <label for="newg">New Group</label><br/>
-                <input type="text" class="addTechField"/><br/>
-
-                <label for="status">For Status</label>
-                <select name="status" id="status"  class="addTechField">
-                    <option value="working">Working</option>
-                    <option value="studying">Studying</option>
-                </select>
-            </div>--%>
 
             <div class="alignCenter">
                 <input type="radio" id="cg" name="group" onclick="groupVisual()" checked/>
