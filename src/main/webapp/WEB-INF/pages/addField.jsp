@@ -15,6 +15,9 @@
 </head>
 <body>
 
+
+
+
 <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -126,94 +129,82 @@
     </li>
 </ul>
 
-<div class="spoilers marginTop" style="margin-top: 60px">
-    <form:form commandName="addFieldUnit" action="/admin/addField" method="post">
 
-    <div class="floatLeft addTech">
-        <form:radiobutton path="existingGroup" value="yes" id="cg" name="group"/>
-        <label for="cg">Existing group:</label><br/>
-        <form:select path="groupNameExist" name="curGrup" class="addTechField">
-            <c:forEach items="${groups}" var="group">
-                <form:option value="${group}">${group}</form:option>
-            </c:forEach>
-        </form:select>
-    </div>
 
 
 <div class="tab-content">
 
     <div class="tab-pane active" id="technology">
-
+<form action="/admin/addTechnology" method="post">
         <div class="spoilers">
             <div class="alignCenter">
                 <label for="newTech">New technology:</label>
-                <input type="text" id="newTech"/>
+                <input type="text" name="newTech" id="newTech"/>
             </div>
 
-            <div class="button">
-                    <button  class="button">Link</button>
-                    <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
+
+            <div class="alignCenter">
+                <button  type="submit" onclick="history.back();return false;" class="gray">Cancel</button>
+                <button  type="submit" class="blue">Save</button>
             </div>
 
         </div>
-
+</form>
     </div>
 
     <div class="tab-pane" id="field">
-<!-- kljfsdjklf -->
         <div class="spoilers">
 
+            <form:form commandName="addFieldUnit" action="/admin/addField" method="post">
             <div class="alignCenter">
-                <input type="radio" id="cg" name="group" onclick="groupVisual()" checked/>
+                <form:radiobutton path="existingGroup" id="cg" value="yes"  onclick="groupVisual()" checked="true"/>
                 <label for="cg">Existing group</label>
-                <input type="radio" id="newg" name="group" onclick="groupVisual()"/>
+                <form:radiobutton path="existingGroup" id="newg" value="no" onclick="groupVisual()"/>
                 <label for="newg">New Group</label>
             </div>
 
             <div class="alignCenter" id="existingGroup">
-                <select name="curGrup" class="addTechField">
-                    <option value="common">Common</option>
-                    <option value="work">Work</option>
-                    <option value="project">Project</option>
-                </select>
+                <form:select path="groupNameExist" name="curGrup" class="addTechField">
+                    <c:forEach items="${groups}" var="group">
+                        <form:option value="${group}">${group}</form:option>
+                    </c:forEach>
+                </form:select>
             </div>
 
             <div class="alignCenter" id="newGroup">
-                <input type="text" class="addTechField"/><br/>
+                <form:input path="groupNameNew" type="text" class="addTechField"/><br/>
 
                 <label for="status">For Status</label>
-                <select name="status" id="status"  class="addTechField">
-                    <option value="working">Working</option>
-                    <option value="studying">Studying</option>
-                </select>
+                <form:select path="forStatus"  id="status"  class="addTechField">
+                    <form:option value="WORKING">Working</form:option>
+                    <form:option value="STUDYING">Studying</form:option>
+                    <form:option value="for_everybody">For everybody</form:option>
+                </form:select>
             </div>
 
             <div class="alignCenter paddingTop borderBottom">
                 <label for="fieldname">Field name:</label>
-                <input type="text" id="fieldname"  class="addTechField"/>
+                <form:input path="fieldName" type="text" id="fieldname"  class="addTechField"/>
             </div>
 
             <div class="alignCenter ">
-                <input type="radio" id="string" name="type" value="string" onclick="visual();"/>
+                <form:radiobutton path="type" id="string" name="type" value="text" onclick="visual();"/>
                 <label for="string">String</label>
-                <input type="radio" id="text" name="type" value="text" onclick="visual();"/>
+                <form:radiobutton path="type" id="text" name="type" value="textarea" onclick="visual();"/>
                 <label for="text">Text</label>
             </div>
             <div class="alignCenter">
-                <input type="radio" id="select" name="type" onclick="visual();"/>
+                <form:radiobutton path="type" id="select" value="select" name="type" onclick="visual();"/>
                 <label for="select">Select</label>
                 <br/>
                 <div id="needOption">
                     <label for="value">Possible values (via ;)</label><br/>
-                    <textarea name="value" id="value" cols="30" rows="10"
-                              class="textOther addTechField"></textarea>
+                    <form:textarea path="possibleValues" name="value" id="value" cols="30" rows="10"
+                              class="textOther addTechField"/>
                 </div>
             </div>
 
-            <div class="alignCenter">
-                <button  type="submit" class="loginAndCreateButton">Save</button>
-                <button  type="submit" class="loginAndCreateButton">Cancel</button>
-            </div>
+
         <div class="alignCenter">
             <button  type="submit" onclick="history.back();return false;" class="gray">Cancel</button>
             <form:button  type="submit" class="blue">Save</form:button>
@@ -221,6 +212,7 @@
         </form:form>
 
     </div>
+        </div>
 
 </div>
 
@@ -242,7 +234,7 @@
     function groupVisual(){
         var existingGroup=$('#existingGroup');
         var newGroup=$('#newGroup')
-        if (document.getElementsByName('group')[1].checked){
+        if (document.getElementsByName('existingGroup')[1].checked){
             existingGroup.css(remove);
             newGroup.css(show);
             return;

@@ -58,6 +58,9 @@ public class AdminController {
     private GroupService groupService;
 
     @Autowired
+    private TechnologyService technologyService;
+
+    @Autowired
     private UserFormValidator userFormValidator;
 
     private List<List<String>> tableData;
@@ -378,6 +381,14 @@ public class AdminController {
         return "adminTable";
     }
 
+    @RequestMapping(value = "/addTechnology", method = RequestMethod.POST)
+    public String addTechnology(ModelMap modelMap, @ModelAttribute("newTech")String newTech){
+        technologyService.add(newTech);
+        if(tableData == null)
+            return "redirect:/admin";
+        modelMap.addAttribute("tableData", tableData);
+        return "adminTable";
+    }
     @RequestMapping("/{student}/disable")
     public String disableStudent(@PathVariable("student")Integer index, ModelMap modelMap){
         studentService.disable(tableData.get(index).get(1));
