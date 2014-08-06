@@ -478,7 +478,6 @@ button.gray, a.gray, input[type=submit].gray {
     margin-right: 2%;
     width: 40%;
     padding: 3px;
-    border-radius: 3px;
     border: 1px solid;
 }
 .spoilers{
