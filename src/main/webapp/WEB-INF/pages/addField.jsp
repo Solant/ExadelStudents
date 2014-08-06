@@ -153,7 +153,7 @@
     <div class="tab-pane" id="field">
 
         <div class="spoilers">
-
+/*asdfsdfsdf*/
            <%-- <div class="floatLeft addTech">
                 <input type="radio" id="cg" name="group"/>
                 <label for="cg">Existing group:</label><br/>
