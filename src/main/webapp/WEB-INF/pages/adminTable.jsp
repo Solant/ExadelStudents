@@ -15,10 +15,10 @@
 
 
         <script type="text/javascript" class="init">
-            $.extend( $.fn.dataTable.defaults, {
+            /*$.extend( $.fn.dataTable.defaults, {
                 "searching": false,
                 "ordering": false
-            } );
+            } );*/
             $(document).ready(function() {
                 $('#example').dataTable();
             } );
@@ -138,7 +138,7 @@
             <img src="/resources/images/pdf.jpg" alt="pdf" title="pdf"/>
         </a>
         <a href="/admin/exportExcel">
-            <img src="/resources/images/exel.jpg" alt="exel" title="exel"/>
+            <img src="/resources/images/excel.jpg" alt="excel" title="excel"/>
         </a>
     </div>
 
