@@ -41,13 +41,48 @@
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
 
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Students
+                            <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <span>Enabled</span>
+                                </button>
+                            </li>
+
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <span>Studying</span>
+                                </button>
+                            </li>
+
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <span>Working</span>
+                                </button>
+                            </li>
+
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <span>Disabled</span>
+                                </button>
+                            </li>
+
+                        </ul>
+
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions
                             <span class="caret"></span></a>
 
                         <ul class="dropdown-menu" role="menu">
                     
-                    <li <%--class="dr"--%> class="dropdown-submenu">
+                    <li class="dropdown-submenu">
                         <button formaction="#" class="btn">
                             <img src="/resources/images/add.png" class="adminMenuImages">
                             <span>Add</span>
@@ -75,15 +110,10 @@
                             </li>
                         </ul>
                     </li>
-                            <%--<li>
-                                <button formaction="/admin/showDisabled" class="btn">
-                                    <img src="/resources/images/fired.png" class="adminMenuImages">
-                                    <span>Disabled Students</span>
-                                </button>
-                            </li>--%>
 
                             <li class="dropdown-submenu">
                                 <button formaction="#" class="btn">
+                                    <img src="/resources/images/wrench.png" class="adminMenuImages">
                                     <span>Change</span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -150,7 +180,7 @@
 
                         </ul>
                     </li>
-                    
+
                     <li>
                         <a href="/notif">
                             <div class="message">
