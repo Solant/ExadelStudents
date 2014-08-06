@@ -184,7 +184,7 @@
 </div>
         <%pageContext.setAttribute("isActive", "");%>
 </c:forEach>
-        <form:button type="submit" >Form table</form:button>
+        <form:button type="submit" class="blue">Form table</form:button>
         </form:form>
 </div>
 
