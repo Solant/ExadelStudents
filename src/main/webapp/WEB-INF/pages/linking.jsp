@@ -153,8 +153,8 @@
     </div>
 
     <div class="button">
-            <button  class="button">Link</button>
-            <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
+            <button class="gray" onclick="history.back(); return false;">Cancel</button>
+            <button  class="blue">Link</button>
     </div>
 
     <script>
