@@ -488,7 +488,6 @@ button.gray, a.gray, input[type=submit].gray {
     border:3px solid;
     border-radius: 20px;
     font-size: 14px;
-    text-align: left;
     color: #808080;
     margin: 0 auto;
 }
