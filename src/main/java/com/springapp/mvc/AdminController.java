@@ -2,6 +2,7 @@ package com.springapp.mvc;
 
 
 import com.forView.*;
+import com.forView.validators.AccountFormValidator;
 import com.forView.validators.UserFormValidator;
 import com.services.*;
 import com.services.mail.MailService;
@@ -51,6 +52,9 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AccountFormValidator accountFormValidator;
 
     @Autowired
     private NotificationService notificationService;
@@ -292,9 +296,11 @@ public class AdminController {
     @RequestMapping("/{student}/changeCommon")
     public String studentChangeCommon(@PathVariable("student")String student,
                                       ModelMap modelMap,
-                                      @ModelAttribute("accountUnit")AccountUnit accountUnit,
-                                      @ModelAttribute("status")String status){
-        User user = userService.getByLogin(student);
+                                      @ModelAttribute("status")String status,
+                                      @Valid @ModelAttribute("accountUnit")AccountUnit accountUnit,
+                                      BindingResult result){
+        accountFormValidator.validate(accountUnit, result);
+            User user = userService.getByLogin(student);
         user.setEmail(accountUnit.getEmail());
         user.setSkype(accountUnit.getSkype());
         user.setTelephone(accountUnit.getTelephone());

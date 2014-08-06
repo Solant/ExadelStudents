@@ -62,7 +62,8 @@
 </nav>
 
 
-<form:form commandName="accountUnit" class="loginAndCreateForm"  >
+<form:form commandName="accountUnit" class="loginAndCreateForm"  action="/admin/${accountUnit.login}/changeCommon"
+           method="post">
 
     <h1>Account Form</h1>
     <p class="errorText">
@@ -102,7 +103,7 @@
     </p>
         <div class="alignCenter">
             <a href="/admin/studentPage/${accountUnit.login}" class="gray">Cancel</a>
-            <button type="submit" formaction="/admin/${accountUnit.login}/changeCommon" formmethod="post" class="blue">Change</button>
+            <button type="submit"  class="blue">Change</button>
         </div>
 </form:form>
 </body>
