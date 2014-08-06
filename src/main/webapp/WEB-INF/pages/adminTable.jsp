@@ -148,14 +148,23 @@
                     <td>
                     ${item}</td>
 				</c:forEach>
+                <c:if test="${enable == 'enable'}"><td>Disable</td></c:if>
+                <c:if test="${enable == 'disable'}"><td>Enable</td></c:if>
 			</thead>
                 <tbody>
-                <c:forEach items="${tableData}" var="student" begin="1">
+                <c:forEach items="${tableData}" var="student" begin="1" varStatus="index">
                         <tr>
-                            <c:forEach items="${student}" var="item">
+                            <c:forEach items="${student}" var="item" >
                                 <td>
-                                    <a href="/admin/studentPage/${student.get(1)}">${item}</a></td>
+                                    <c:if test="${enable == 'enable'}"><a href="/admin/studentPage/${student.get(1)}"></c:if>
+                                    ${item}
+                                    </a>
+                                </td>
                             </c:forEach>
+
+                                <c:if test="${enable == 'enable'}"><td><a href="/admin/${index.count}/disable"><img src="/resources/images/fired.png"></a></td></c:if>
+                                <c:if test="${enable == 'disable'}"><td><a href="/admin/${index.count}/enable"><img src="/resources/images/add.png"></a></td></c:if>
+
                         </tr>
                 </c:forEach>
                 </tbody>

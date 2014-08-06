@@ -156,12 +156,14 @@ public class AdminController {
 
 
     @RequestMapping(value = "/formTable", method = RequestMethod.POST)
-    public String formTable(ModelMap modelMap, @ModelAttribute("groupedValues")GroupedValues groupedValues){
+    public String formTable(ModelMap modelMap,
+                            @ModelAttribute("groupedValues")GroupedValues groupedValues){
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
         for(Group group:groupedValues.getValuesArray())
             values.addAll(group.getGavs());
         tableData = studentService.find(values);
         modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "enable");
         return "/adminTable";
     }
 
@@ -309,6 +311,7 @@ public class AdminController {
             tableData.get(i++).add(student.getEmail());
         }
         modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "disable");
         return "adminTable";
     }
 
@@ -372,6 +375,24 @@ public class AdminController {
         if(tableData == null)
             return "redirect:/admin";
         modelMap.addAttribute("tableData", tableData);
+        return "adminTable";
+    }
+
+    @RequestMapping("/{student}/disable")
+    public String disableStudent(@PathVariable("student")Integer index, ModelMap modelMap){
+        studentService.disable(tableData.get(index).get(1));
+        tableData.remove((int)index);
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "enable");
+        return "adminTable";
+    }
+
+    @RequestMapping("/{student}/enable")
+    public String enableStudent(@PathVariable("student")Integer index, ModelMap modelMap){
+        studentService.enable(tableData.get(index).get(1));
+        tableData.remove((int)index);
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "disable");
         return "adminTable";
     }
 }
