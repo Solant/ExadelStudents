@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,9 @@
 	</div>
 	<form method="post" action="/j_spring_security_check" class="loginAndCreateForm" >
 		<h1>Login Form </h1>
+        <p class="errorText">
+            <c:out value="${error}"></c:out>
+        </p>
 		<p>
             <label for="login">Login:</label>
 			<input type="text" name="j_username" class="field" id="login" value="admin">

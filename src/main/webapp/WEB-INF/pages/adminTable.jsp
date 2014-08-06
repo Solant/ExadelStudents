@@ -17,14 +17,7 @@
 
         <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
-
-
-
         <script type="text/javascript" class="init">
-            $.extend( $.fn.dataTable.defaults, {
-                "searching": false,
-                "ordering": false
-            } );
             $(document).ready(function() {
                 $('#example').dataTable();
             } );
@@ -150,19 +143,28 @@
 
         <div id="searchTable">
             <table id="example" class="display">
-			<%--<thead>
+			<thead>
 				<c:forEach items="${tableData.get(0)}" var="item">
                     <td>
                     ${item}</td>
 				</c:forEach>
-			</thead>--%><%--
+                <c:if test="${enable == 'enable'}"><td>Disable</td></c:if>
+                <c:if test="${enable == 'disable'}"><td>Enable</td></c:if>
+			</thead>
                 <tbody>
-                <c:forEach items="${tableData}" var="student" begin="1">
+                <c:forEach items="${tableData}" var="student" begin="1" varStatus="index">
                         <tr>
-                            <c:forEach items="${student}" var="item">
+                            <c:forEach items="${student}" var="item" >
                                 <td>
-                                    <a href="/admin/studentPage/${student.get(1)}">${item}</a></td>
+                                    <c:if test="${enable == 'enable'}"><a href="/admin/studentPage/${student.get(1)}"></c:if>
+                                    ${item}
+                                    </a>
+                                </td>
                             </c:forEach>
+
+                                <c:if test="${enable == 'enable'}"><td><a href="/admin/${index.count}/disable"><img src="/resources/images/fired.png"></a></td></c:if>
+                                <c:if test="${enable == 'disable'}"><td><a href="/admin/${index.count}/enable"><img src="/resources/images/add.png"></a></td></c:if>
+
                         </tr>
                 </c:forEach>
                 </tbody>
@@ -170,16 +172,8 @@
     </div>
 
     </body>
-    </html>--%>
-
-                <thead>
-                <tr>
-                    <th>Ivanov Ivan</th>
-                    <th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th>
-
-                </tr>
-                </thead>
-                <tbody>
+    </html>
+                <%--<tbody>
                 <tr>
                     <td>Ivanov Ivan</td>
                     <td>22.07.2014</td>
@@ -328,9 +322,4 @@
 
                 <td> Technology </td>
                 <td> English </td>
-            </tfoot>
-            </table>
-        </div>
-
-    </body>
-</html>
+            </tfoot>--%>

@@ -128,7 +128,7 @@
 
 <div id="searchResult" class="list-group"></div>
 
-<div class="spoilers marginTop">
+<div class="spoilers marginTop" style="margin-top: 60px">
         <form:form commandName="addFieldUnit" action="/admin/addField" method="post">
         
         <div class="floatLeft addTech">

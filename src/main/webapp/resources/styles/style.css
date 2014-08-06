@@ -9,7 +9,7 @@ body {
 .navbar-blue{
     background-color: RGB(0,156,203);
     margin-bottom: 0;
-    z-index: 0;
+    z-index: 1;
 }
 
 .navbar-blue .navbar-toggle {
