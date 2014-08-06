@@ -44,39 +44,70 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions
                             <span class="caret"></span></a>
+
                         <ul class="dropdown-menu" role="menu">
                     
-                    <li>
-                        <button formaction="/admin/returnCreate" class="btn">
+                    <li <%--class="dr"--%> class="dropdown-submenu">
+                        <button formaction="#" class="btn">
                             <img src="/resources/images/add.png" class="adminMenuImages">
-                            <span>Add User</span>
+                            <span>Add</span>
                         </button>
-                    </li>
-                    <li>
-                        <button formaction="/admin/showLinkStudent" class="btn">
-                            <img src="/resources/images/yellow-link.png" class="adminMenuImages">
-                            <span>Link Student</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button formaction="/admin/showDisabled" class="btn">
-                            <img src="/resources/images/fired.png" class="adminMenuImages">
-                            <span>Disabled Students</span>
-                        </button>
-                    </li>
-                            <li class="divider"></li>
-                    <li>
-                        <button formaction="/admin/createNotif" class="btn">
-                            <img src="/resources/images/message1.png" class="adminMenuImages">
-                            <span>Create notification</span>
-                        </button>
-                    </li>
+                        <ul class="dropdown-menu">
                             <li>
-                                <button formaction="/admin/" class="btn">
-                                    <img src="/resources/images/add.png" class="adminMenuImages">
-                                    <span>Add new Field</span>
+                                <button formaction="/admin/returnCreate" class="btn">
+                                    <span>User</span>
                                 </button>
                             </li>
+                            <li>
+                                <button formaction="/admin/" class="btn">
+                                    <span>Field</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button formaction="/admin/" class="btn">
+                                    <span>Technology</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button formaction="/admin/createNotif" class="btn">
+                                    <span>Notification</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+                            <%--<li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <img src="/resources/images/fired.png" class="adminMenuImages">
+                                    <span>Disabled Students</span>
+                                </button>
+                            </li>--%>
+
+                            <li class="dropdown-submenu">
+                                <button formaction="#" class="btn">
+                                    <span>Change</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <button formaction="" class="btn">
+                                            <span>Field</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button formaction="" class="btn">
+                                            <span>Group</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <button formaction="/admin/showLinkStudent" class="btn">
+                                    <img src="/resources/images/yellow-link.png" class="adminMenuImages">
+                                    <span>Link Student</span>
+                                </button>
+                            </li>
+
+
                             <li class="divider"></li>
                     <li>
                         <button formaction="/admin/" class="btn">
@@ -84,6 +115,39 @@
                             <span>Filtration</span>
                         </button>
                     </li>
+
+<%--
+
+/////////////////////////////////////////////////////////////////////
+                            <li class="dropdown-submenu"> <a href="#">More..</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Level 3</a>
+                                    </li>
+                                    <li><a href="#">Level 3</a>
+                                    </li>
+                                    <li class="dropdown-submenu"> <a href="#">More..</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Level 4</a>
+                                            </li>
+                                            <li><a href="#">Level 4</a>
+                                            </li>
+                                            <li class="dropdown-submenu"> <a href="#">More..</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#">Level 5</a>
+                                                    </li>
+                                                    <li><a href="#">Level 5</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </li>
+//////////////////////////////////////////////////////////////////
+--%>
+
                         </ul>
                     </li>
                     
