@@ -11,9 +11,11 @@
         <intercept-url pattern="/worker/**" access="ROLE_WORKER" />
         <intercept-url pattern="/curator/**" access="ROLE_CURATOR" />
         <intercept-url pattern="/student/**" access="ROLE_STUDENT" />
-        <form-login login-page="/login"/>
+        <form-login login-page="/login" authentication-failure-handler-ref="authenticationFailureHandler"/>
         <logout logout-success-url="/" />
     </http>
+
+    <beans:bean id="authenticationFailureHandler" class="com.springsecurity.CustomAuthenticationFailureHandler"/>
 
     <authentication-manager>
         <authentication-provider user-service-ref="myUserDetailsService" >
