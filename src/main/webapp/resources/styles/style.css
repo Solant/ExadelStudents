@@ -478,7 +478,6 @@ button.gray, a.gray, input[type=submit].gray {
     height: 40px;
 }
 
-
 .group input, .group select, .group textarea{
     float:right;
     margin-right: 2%;
@@ -510,7 +509,6 @@ button.gray, a.gray, input[type=submit].gray {
 }
 .group{
     white-space: nowrap;
-    /*height: 45px;*/
     overflow: auto;
 }
 
