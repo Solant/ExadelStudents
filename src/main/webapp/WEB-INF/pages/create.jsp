@@ -172,8 +172,8 @@
 		</p>
 
             <div class="alignCenter">
-                <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
-			    <button type="submit" class="loginAndCreateButton">Create</button>
+                <button class="gray" onclick="history.back(); return false;">Cancel</button>
+			    <button type="submit" class="blue">Create</button>
 		     </div>
 		
 	</form:form>
