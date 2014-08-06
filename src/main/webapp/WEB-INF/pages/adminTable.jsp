@@ -137,7 +137,7 @@
             <img src="/resources/images/pdf.jpg" alt="pdf" title="pdf"/>
         </a>
         <a href="/admin/exportExcel">
-            <img src="/resources/images/exel.jpg" alt="exel" title="exel"/>
+            <img src="/resources/images/exel.jpg" alt="excel" title="excel"/>
         </a>
     </div>
 
