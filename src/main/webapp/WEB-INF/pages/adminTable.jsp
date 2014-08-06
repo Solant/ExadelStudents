@@ -3,7 +3,13 @@
 <!DOCTYPE html>
 <html>
 <title>Admin | Table</title>
-	<head>
+    <head lang="en">
+        <meta charset="UTF-8">
+
+        <script src="/resources/styles/bootstrap/js/jquery.js"></script>
+        <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
+
+
 
         <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
 		<link rel="stylesheet" href="/resources/styles/style.css">
@@ -30,16 +36,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
+                <a class="navbar-brand" href="/"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-left" role="search">
+                <div class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search Student">
+                        <input type="text" class="form-control" placeholder="Search Student" id="search">
                     </div>
-                </form>
+                </div>
                 <form method="get">
                     <ul class="nav navbar-nav navbar-right">
 
@@ -74,9 +80,9 @@
                                     </button>
                                 </li>
                                 <li>
-                                    <button formaction="/admin/" class="btn">
+                                    <button formaction="/admin/showAddField" class="btn">
                                         <img src="/resources/images/add.png" class="adminMenuImages">
-                                        <span>Add new Field</span>
+                                        <span>Add field</span>
                                     </button>
                                 </li>
                                 <li class="divider"></li>
@@ -89,12 +95,6 @@
                             </ul>
                         </li>
 
-                        <li>
-                            <button formaction="/admin/createNotif" class="btn">
-                                <img src="/resources/images/message1.png" class="adminMenuImages">
-                                <span>Create notification</span>
-                            </button>
-                        </li>
                         <li>
                             <a href="/notif">
                                 <div class="message">
@@ -126,7 +126,7 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-
+    <div id="searchResult" class="list-group"></div>
 
     <div class="saveTable">
         Save as: <br/>

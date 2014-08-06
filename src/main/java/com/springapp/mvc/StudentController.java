@@ -51,7 +51,7 @@ public class StudentController {
         }
         modelMap.addAttribute("groups", groups);
         modelMap.addAttribute("groupedValues", groupedValues);
-        return "/student.jsp";
+        return "student";
     }
 
     @RequestMapping(value = "/saveChanges", method = RequestMethod.POST)
