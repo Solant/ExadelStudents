@@ -106,9 +106,9 @@
 
     <%pageContext.setAttribute("isActive", "active");%>
 
-    <c:forEach items="${groups}" var="groupNameExist">
+    <c:forEach items="${groups}" var="groupNameExist" varStatus="index">
         <li class="${isActive}">
-            <a href="#${groupNameExist}" role="tab" data-toggle="tab">${groupNameExist}</a>
+            <a href="#${index.count}" role="tab" data-toggle="tab">${groupNameExist}</a>
         </li>
         <%pageContext.setAttribute("isActive", "");%>
     </c:forEach>
@@ -122,7 +122,7 @@
 
     <%pageContext.setAttribute("isActive", "active");%>
 <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
-<div class="tab-pane ${isActive}" id="${groupedValues.valuesArray[index1.count-1].gavs[0].getGroup()}">
+<div class="tab-pane ${isActive}" id="${index1.count}">
     <!-- Petya -->
 
         <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
