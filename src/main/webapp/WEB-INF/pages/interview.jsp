@@ -81,27 +81,16 @@
 
     <p>
         <label for="lastname">Lastname:</label>
-        <input class="field" type="text" id="lastname" value="Ivanov" readonly>
+        <input class="field" type="text" id="lastname" value="${review.student.secondName}" readonly>
     </p>
 
     <p>
         <label for="firstname">Firstname:</label>
-        <input class="field" type="text" id="firstname" value="Ivan" readonly>
+        <input class="field" type="text" id="firstname" value="${review.student.firstName}" readonly>
     </p>
 
-    <div>
-        <label value="English">English:</label>
-            <form:input path="ratings[0].technology.technologyName" value="English" hidden="true"/>
 
-        <div class="starRating">
-            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="1"/>
-            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="2"/>
-            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="3"/>
-            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="4"/>
-            <form:radiobutton path="ratings[0].rating" name="valueEnglish" class="star" value="5"/>
-        </div>
-    </div>
-    <c:forEach begin="1" end="4" var="i">
+    <c:forEach begin="0" end="4" var="i">
 
     <div class="interviewGroup">
         <form:select path="ratings[${i}].technology.technologyName" name="criteria2">

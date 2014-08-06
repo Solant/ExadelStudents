@@ -136,9 +136,12 @@
 
     <div align="center">
     <div class="profile">
-        <a href="<c:url value="/admin/${currentUser.login}/account"/> "><img src="/resources/images/account.png">
+        <a href="<c:url value="/admin/${currentUser.login}/account"/> "><img src="/resources/images/account.png"></a>
         <c:out value="${currentUser.firstname}"></c:out>
         <c:out value="${currentUser.lastname}"></c:out>
+        <a href="/admin/${currentUser.login}/allFeedbacks">
+            All feedbacks
+        </a>
     </div>
     <a href="/admin/studentPage/${currentUser.login}/notif">
         <div class="message">

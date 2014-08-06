@@ -2,6 +2,7 @@ package com.springapp.mvc;
 
 
 import com.forView.*;
+import com.forView.Group;
 import com.forView.validators.AccountFormValidator;
 import com.forView.validators.UserFormValidator;
 import com.services.*;
@@ -18,10 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import persistance.model.Feedbacker;
-import persistance.model.Notification;
-import persistance.model.Student;
-import persistance.model.User;
+import persistance.model.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -67,6 +65,9 @@ public class AdminController {
 
     @Autowired
     private UserFormValidator userFormValidator;
+
+    @Autowired
+    private ReviewService reviewService;
 
     private List<List<String>> tableData;
 
@@ -446,5 +447,25 @@ public class AdminController {
         modelMap.addAttribute("tableData", tableData);
         modelMap.addAttribute("enable", "disable");
         return "adminTable";
+    }
+
+    @RequestMapping("/{student}/allFeedbacks")
+    public String allStudentFeedbacks(@PathVariable("student")String student, ModelMap modelMap){
+        modelMap.addAttribute("reviews", studentService.getReviews(student));
+        return "studentFeedbacks";
+    }
+
+    @RequestMapping("/showFeedback/{student}/{revId}")
+    public String showStudentFeedback(@PathVariable("student")String student,
+                                      @PathVariable("revId")Long revId,
+                                      ModelMap modelMap){
+        Review review = reviewService.getReviewById(revId);
+        modelMap.addAttribute("review", review);
+        if(review.getRatings() == null || review.getRatings().size() == 0)
+            return "review"; List<Technology> techs = new ArrayList<Technology>();
+        techs.add(null);
+        techs.addAll(technologyService.getAllTechnologies());
+        modelMap.addAttribute("techologies", techs);
+        return "interview";
     }
 }

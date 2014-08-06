@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import persistance.model.Rating;
 import persistance.model.Review;
 import persistance.model.Student;
 import persistance.model.Technology;
@@ -104,10 +105,14 @@ public class CuratorController {
             review.setFromInterview(true);
         }
         if (studentService.getStatus(studentLogin).equals("STUDYING")) {
-            System.out.println(review.getRatings().size());
             List<Technology> techs = new ArrayList<Technology>();
             techs.add(null);
             techs.addAll(technologyService.getAllTechnologies());
+            Technology technology = new Technology();
+            technology.setTechnologyName("English");
+            Rating eng = new Rating();
+            eng.setTechnology(technology);
+            review.getRatings().add(eng);
             modelMap.addAttribute("review", review);
             modelMap.addAttribute("techologies", techs);
             return "interview";
