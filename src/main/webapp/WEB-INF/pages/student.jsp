@@ -144,7 +144,7 @@
                     <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
                 </div>
             </c:forEach>
-            <form:button type="submit" >Save</form:button>
+            <form:button type="submit" class="blue">Save</form:button>
         </form:form>
 
     </div>

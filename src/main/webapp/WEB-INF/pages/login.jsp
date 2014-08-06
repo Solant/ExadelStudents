@@ -3,20 +3,25 @@
 <html>
 <head>
   <title>Login</title>
-  <!--[if lt IE 9]>
-  <script
-  src="html5shiv.js">
-  </script>
-  <![endif]-->
 
   <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
 </head>
 <body>
-    
-	<div class="hat">
-		<img src="/resources/images/exadel-logo.png" class="exadel_logo">
-	</div>
+    <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
 	<form method="post" action="/j_spring_security_check" class="loginAndCreateForm" >
 		<h1>Login Form </h1>
 		<p>
