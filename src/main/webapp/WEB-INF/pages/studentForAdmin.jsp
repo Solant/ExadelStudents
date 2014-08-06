@@ -9,13 +9,6 @@
     <title>Student's page</title>
 
 
-    <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <!DOCTYPE html>
-    <html>
-    <title>Admin | Table</title>
-    <head lang="en">
-        <meta charset="UTF-8">
 
         <script src="/resources/styles/bootstrap/js/jquery.js"></script>
         <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
@@ -143,7 +136,7 @@
 
     <div align="center">
     <div class="profile">
-        <img src="/resources/images/account.png">
+        <a href="<c:url value="/admin/${currentUser.login}/account"/> "><img src="/resources/images/account.png">
         <c:out value="${currentUser.firstname}"></c:out>
         <c:out value="${currentUser.lastname}"></c:out>
     </div>
@@ -195,11 +188,11 @@
                 <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
             </div>
             </c:forEach>
-                <button formmethod="post" formaction="/admin/studentPage/${currentUser.login}/saveChanges" type="submit" >Save</button>
-
         </div>
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
+        <button formmethod="post" formaction="/admin/studentPage/${currentUser.login}/saveChanges" type="submit" >Save</button>
+
         <button formaction="/admin/studentPage/${currentUser.login}/formTable" type="submit" >Form table</button>
                 </div>
                 </form:form>

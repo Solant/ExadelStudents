@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import persistance.model.Feedbacker;
 import persistance.model.Notification;
 import persistance.model.Student;
+import persistance.model.User;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -244,6 +245,7 @@ public class AdminController {
         System.out.println(gav.size());
         GroupedValues groupedValues = new GroupedValues();
 
+
         List<GAVPresentation> internal;
         ArrayList<String> groups = new ArrayList<String>();
         for(int j = 0; gav.size() > 0; j++){
@@ -269,6 +271,39 @@ public class AdminController {
         modelMap.addAttribute("groupedValues", groupedValues);
         modelMap.addAttribute("currentUser", currentUser);
         return "studentForAdmin";
+    }
+
+    @RequestMapping("/{student}/account")
+    public String studentAccount(@PathVariable("student")String student, ModelMap modelMap){
+        User user = userService.getByLogin(student);
+        AccountUnit accountUnit = new AccountUnit();
+        accountUnit.setFirstName(user.getFirstName());
+        accountUnit.setLogin(student);
+        accountUnit.setSecondName(user.getSecondName());
+        accountUnit.setEmail(user.getEmail());
+        accountUnit.setSkype(user.getSkype());
+        accountUnit.setTelephone(user.getTelephone());
+        accountUnit.setPassword(user.getPassword());
+        modelMap.addAttribute("status", studentService.getStatus(student));
+        modelMap.addAttribute("accountUnit", accountUnit);
+        return "studentAccount";
+    }
+
+    @RequestMapping("/{student}/changeCommon")
+    public String studentChangeCommon(@PathVariable("student")String student,
+                                      ModelMap modelMap,
+                                      @ModelAttribute("accountUnit")AccountUnit accountUnit,
+                                      @ModelAttribute("status")String status){
+        User user = userService.getByLogin(student);
+        user.setEmail(accountUnit.getEmail());
+        user.setSkype(accountUnit.getSkype());
+        user.setTelephone(accountUnit.getTelephone());
+        studentService.setStatus(student, status);
+        userService.update(user);
+        accountUnit.setLogin(student);
+        modelMap.addAttribute("accountUnit", accountUnit);
+        modelMap.addAttribute("status", status);
+        return "studentAccount";
     }
 
     @RequestMapping(value = "/studentPage/{student}/saveChanges", method = RequestMethod.POST)
