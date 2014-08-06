@@ -154,7 +154,7 @@
 
         <div class="spoilers">
 
-            <div class="floatLeft addTech">
+           <%-- <div class="floatLeft addTech">
                 <input type="radio" id="cg" name="group"/>
                 <label for="cg">Existing group:</label><br/>
                 <select name="curGrup" class="addTechField">
@@ -168,6 +168,31 @@
             <div class="floatRight addTech">
                 <input type="radio" id="newg" name="group" />
                 <label for="newg">New Group</label><br/>
+                <input type="text" class="addTechField"/><br/>
+
+                <label for="status">For Status</label>
+                <select name="status" id="status"  class="addTechField">
+                    <option value="working">Working</option>
+                    <option value="studying">Studying</option>
+                </select>
+            </div>--%>
+
+            <div class="alignCenter">
+                <input type="radio" id="cg" name="group" onclick="groupVisual()" checked/>
+                <label for="cg">Existing group</label>
+                <input type="radio" id="newg" name="group" onclick="groupVisual()"/>
+                <label for="newg">New Group</label>
+            </div>
+
+            <div class="alignCenter" id="existingGroup">
+                <select name="curGrup" class="addTechField">
+                    <option value="common">Common</option>
+                    <option value="work">Work</option>
+                    <option value="project">Project</option>
+                </select>
+            </div>
+
+            <div class="alignCenter" id="newGroup">
                 <input type="text" class="addTechField"/><br/>
 
                 <label for="status">For Status</label>
@@ -192,7 +217,7 @@
                 <input type="radio" id="select" name="type" onclick="visual();"/>
                 <label for="select">Select</label>
                 <br/>
-                <div id="needOption" style="display: none">
+                <div id="needOption">
                     <label for="value">Possible values (via ;)</label><br/>
                     <textarea name="value" id="value" cols="30" rows="10"
                               class="textOther addTechField"></textarea>
@@ -210,15 +235,31 @@
 </div>
 
 <script type="text/javascript">
+    var remove={display: "none"}
+    var show={display: "block"}
+
     function visual(){
-        var values=document.getElementById("needOption");
+        var values=$('#needOption');
 
         if (document.getElementsByName('type')[2].checked){
-            values.style.display="block";
+            values.css(show);
         }
         else {
-            values.style.display="none";
+            values.css(remove);
         }
+    }
+
+    function groupVisual(){
+        var existingGroup=$('#existingGroup');
+        var newGroup=$('#newGroup')
+        if (document.getElementsByName('group')[1].checked){
+            existingGroup.css(remove);
+            newGroup.css(show);
+            return;
+        }
+
+        existingGroup.css(show);
+        newGroup.css(remove);
     }
 </script>
 

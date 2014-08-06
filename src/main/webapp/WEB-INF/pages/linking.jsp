@@ -190,16 +190,6 @@
               selectbox.remove(i);
           }
       }
-
-     /*  {
-          var txt = '{"feedbackers":[' +
-                  '{"firstName":"John","lastName":"Doe","login":"jd","technology":"html" },' +
-                  '{ "firstName":"Anna", "lastName":"Smith","login":"as","technology":"hibernate" },' +
-                  '{ "firstName":"Peter", "lastName":"Jones","login":"pj","technology": "css" }]}';
-
-      // http:www.json-generator.com/api/json/get/cpviMdcaZK?indent=2
-
-      }*/
     </script>
 
 </form>

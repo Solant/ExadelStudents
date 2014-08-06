@@ -118,7 +118,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<div id="searchResult" style="display: none;"></div>
+<div id="searchResult" class="list-group"></div>
 
 <div align="center">
 <div class="profile">
@@ -192,45 +192,34 @@
     $(document).ready(function(){
        $('#search').keyup(
                function(){
-                   /*var url="controller?name="+this.value;
-                   $.get( url , function( data ){
-                       var result=document.getElementById("result")
-                   })*/
+                   var remove={display: "none"}
+                   var show={display: "block"}
 
-
-                   var remove={
-                       display: "none"
-                   }
-
-                   var length=$('#search').val().length;
-
-                   if(length==0){
-                       $('#searchResult').css(remove);
+                   var searchResult=$('#searchResult');
+                   var searchRequest=$('#search').val();
+                   if(searchRequest.length==0){
+                       searchResult.empty();
+                       searchResult.css(remove);
                        return;
                    }
-                   var show={
-                       backgroundColor: "yellow",
-                       width: "400px",
-                       display: "block",
-                      /* position:"absolute",*/
-                       zIndex:"-1"
-                   }
-                   $('#searchResult').css(show);
+/*
+                   var url="http://www.json-generator.com/api/json/get/cgcYsvfMKq?indent=2";*/
 
-                   var buttonStyle={
-                       width:"100%"
-                   }
+                   var url="controller?initials="+searchRequest;
+                   $.get( url , function( data ) {
+                       searchResult.empty();
+                       searchResult.css(show);
 
-                   for(var i=0;i<5;i++){
-                       var $input=$('<input type="button" value="new button"/>')
-                       /*$input.value=i;
-                       $input.appendTo($("searchResult"));*/
-                       $input.css(buttonStyle);
-                       $("#searchResult").append($input);
-                   }
+                       var obj= data;
 
-                 /*  $('#searchResult').css(show);*/
-
+                       $.each(data["humans"], function(index, human){
+                           var anchor=$('<a/>');
+                           anchor.attr("href",human.id);
+                           anchor.text(human.lastName+" "+human.firstName);
+                           anchor.addClass('list-group-item');
+                           searchResult.append(anchor);
+                       })
+                   });
                }
        )
     });
