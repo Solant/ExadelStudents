@@ -1,4 +1,4 @@
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="/resources/styles/style.css" />
     <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
+
     <title>Admin</title>
 </head>
 <body>
@@ -28,8 +33,19 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search Student" id="search">
+                </div>
+            </div>
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                    
                     <li>
                         <button formaction="/admin/returnCreate" class="btn">
                             <img src="/resources/images/add.png" class="adminMenuImages">
@@ -48,12 +64,29 @@
                             <span>Disabled Students</span>
                         </button>
                     </li>
+                            <li class="divider"></li>
                     <li>
                         <button formaction="/admin/createNotif" class="btn">
                             <img src="/resources/images/message1.png" class="adminMenuImages">
                             <span>Create notification</span>
                         </button>
                     </li>
+                            <li>
+                                <button formaction="/admin/" class="btn">
+                                    <img src="/resources/images/add.png" class="adminMenuImages">
+                                    <span>Add new Field</span>
+                                </button>
+                            </li>
+                            <li class="divider"></li>
+                    <li>
+                        <button formaction="/admin/" class="btn">
+                            <img src="/resources/images/loupe.png" class="adminMenuImages">
+                            <span>Filtration</span>
+                        </button>
+                    </li>
+                        </ul>
+                    </li>
+                    
                     <li>
                         <button formaction="/admin/showAddField" class="btn">
                             <img src="/resources/images/add.png" class="adminMenuImages">
@@ -74,11 +107,7 @@
                     <li>
                         <span class="currUserName"><c:out value="${account}"></c:out></span>
                     </li>
-                    <li>
-                        <a href="<c:url value="/admin"/> ">
-                            <img src="/resources/images/loupe.png" class="account_logo">
-                        </a>
-                    </li>
+
                     <li>
                         <a href="<c:url value="j_spring_security_logout" />">
                             <img src="/resources/images/exit.png" class="exit_logo">
@@ -94,6 +123,8 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+<div id="searchResult" class="list-group"></div>
 
 <div align="center">
     <div class="profile">
@@ -160,6 +191,49 @@
 </c:forEach>
         <form:button type="submit" >Form table</form:button>
         </form:form>
+</div>
+
+<script>
+    $(document).ready(function(){
+       $('#search').keyup(
+               function(){
+                   var remove={display: "none"}
+                   var show={display: "block"}
+
+                   var searchResult=$('#searchResult');
+                   var searchRequest=$('#search').val();
+                   if(searchRequest.length==0){
+                       searchResult.empty();
+                       searchResult.css(remove);
+                       return;
+                   }
+/*
+                   var url="http://www.json-generator.com/api/json/get/cgcYsvfMKq?indent=2";*/
+
+                   var url="controller?initials="+searchRequest;
+                   $.get( url , function( data ) {
+                       searchResult.empty();
+                       searchResult.css(show);
+
+                       var obj= data;
+
+                       $.each(data["humans"], function(index, human){
+                           var anchor=$('<a/>');
+                           anchor.attr("href",human.id);
+                           anchor.text(human.lastName+" "+human.firstName);
+                           anchor.addClass('list-group-item');
+                           searchResult.append(anchor);
+                       })
+                   });
+               }
+       )
+    });
+</script>
+<%--<script type="text/javascript" class="init">
+    $(document).ready(function() {
+        $('#searchResult').dataTable();
+    } );
+</script>--%>
 </body>
 </html>
 
@@ -265,9 +339,9 @@
         </div>
 
         <div class="adminGroup">
-            <label for="gavs">Group:</label>
+            <label for="group">Group:</label>
             <input type="checkbox"/>
-            <input type="text" id="gavs">
+            <input type="text" id="group">
         </div>
 
         <div class="adminGroup">

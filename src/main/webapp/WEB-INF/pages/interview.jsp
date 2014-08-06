@@ -1,4 +1,4 @@
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -17,8 +17,6 @@
 
 </head>
 <body>
-
-
 
 <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -67,8 +65,6 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
-
 
 </div>
 <form:form commandName="review" action="/curator/${account}/addRatingReview" method="post" class="reviewForm" >

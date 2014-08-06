@@ -1,5 +1,6 @@
 package com.springsecurity;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +23,7 @@ public class MyUserDetailsService implements UserDetailsService{
     private UserDao userDao;
 
     @Override
-    @Transactional//АБИЗАТИЛЬНА БЛЯТЬ
+    @Transactional
     public UserDetails loadUserByUsername(String username) {
         System.out.println("[CALL]MyUserDetailsService.loadUserByName()");
         System.out.println("[DEBUG]MyUserDetailsService.loadUserByName() username = " + username);

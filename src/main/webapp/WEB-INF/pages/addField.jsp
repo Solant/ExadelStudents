@@ -29,28 +29,87 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <div class="message">
-            <span>
-                1
-            </span>
-                    </div>
-                </li>
-                <li>
-                    <span class="currUserName"><c:out value="${account}"></c:out></span>
-                </li>
-                <li>
-                    <a href="<c:url value="j_spring_security_logout" />">
-                        <img src="/resources/images/exit.png" class="exit_logo">
-                    </a>
-                </li>
-                <li>
-                    <a href="<c:url value="/account"/> ">
-                        <img src="/resources/images/account.png" class="account_logo">
-                    </a>
-                </li>
-            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search Student">
+                </div>
+            </form>
+            <form method="get">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li>
+                                <button formaction="/admin/returnCreate" class="btn">
+                                    <img src="/resources/images/add.png" class="adminMenuImages">
+                                    <span>Add User</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button formaction="/admin/showLinkStudent" class="btn">
+                                    <img src="/resources/images/yellow-link.png" class="adminMenuImages">
+                                    <span>Link Student</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <img src="/resources/images/fired.png" class="adminMenuImages">
+                                    <span>Disabled Students</span>
+                                </button>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <button formaction="/admin/createNotif" class="btn">
+                                    <img src="/resources/images/message1.png" class="adminMenuImages">
+                                    <span>Create notification</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button formaction="/admin/" class="btn">
+                                    <img src="/resources/images/add.png" class="adminMenuImages">
+                                    <span>Add new Field</span>
+                                </button>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <button formaction="/admin/" class="btn">
+                                    <img src="/resources/images/loupe.png" class="adminMenuImages">
+                                    <span>Filtration</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="/notif">
+                            <div class="message">
+                                <c:if test="${notifNumber > 0}">
+                                <span>
+                                        ${notifNumber}
+                                </span>
+                                </c:if>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <span class="currUserName"><c:out value="${account}"></c:out></span>
+                    </li>
+
+                    <li>
+                        <a href="<c:url value="j_spring_security_logout" />">
+                            <img src="/resources/images/exit.png" class="exit_logo">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/account"/> ">
+                            <img src="/resources/images/account.png" class="account_logo">
+                        </a>
+                    </li>
+                </ul>
+            </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
@@ -74,16 +133,15 @@
         <form:input path="groupNameNew" type="text" class="addTechField"/><br/>
 
             <label for="status">For Status</label>
-            <form:select path="forStatus" name="status" id="status"  class="addTechField">
-                <form:option value="WORKING">Working</form:option>
-                <form:option value="STUDYING">Studying</form:option>
-                <form:option value="for_everybody">For everybody</form:option>
-            </form:select>
+            <select name="status" id="status"  class="addTechField">
+                <option value="working">Working</option>
+                <option value="studying">Studying</option>
+            </select>
         </div>
 
         <div class="alignCenter paddingTop borderBottom">
             <label for="fieldname">Field name:</label>
-            <form:input path="fieldName" type="text" id="fieldname"  class="addTechField"/>
+            <input type="text" id="fieldname"  class="addTechField"/>
         </div>
 
         <div class="alignCenter ">
@@ -108,20 +166,37 @@
             <button  type="submit" onclick="history.back();return false;" class="loginAndCreateButton">Cancel</button>
         </div>
         </form:form>
+
     </div>
 
 
 
 <script type="text/javascript">
+    var remove={display: "none"}
+    var show={display: "block"}
+
     function visual(){
-        values=document.getElementById("needOption");
+        var values=$('#needOption');
 
         if (document.getElementsByName('type')[2].checked){
-            values.style.display="block";
+            values.css(show);
         }
         else {
-            values.style.display="none";
+            values.css(remove);
         }
+    }
+
+    function groupVisual(){
+        var existingGroup=$('#existingGroup');
+        var newGroup=$('#newGroup')
+        if (document.getElementsByName('group')[1].checked){
+            existingGroup.css(remove);
+            newGroup.css(show);
+            return;
+        }
+
+        existingGroup.css(show);
+        newGroup.css(remove);
     }
 </script>
 

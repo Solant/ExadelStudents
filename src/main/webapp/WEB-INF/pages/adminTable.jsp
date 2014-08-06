@@ -35,26 +35,60 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search Student">
+                    </div>
+                </form>
                 <form method="get">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <button formaction="/admin/returnCreate" class="btn">
-                                <img src="/resources/images/add.png" class="adminMenuImages">
-                                <span>Add User</span>
-                            </button>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li>
+                                    <button formaction="/admin/returnCreate" class="btn">
+                                        <img src="/resources/images/add.png" class="adminMenuImages">
+                                        <span>Add User</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button formaction="/admin/showLinkStudent" class="btn">
+                                        <img src="/resources/images/yellow-link.png" class="adminMenuImages">
+                                        <span>Link Student</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button formaction="/admin/showDisabled" class="btn">
+                                        <img src="/resources/images/fired.png" class="adminMenuImages">
+                                        <span>Disabled Students</span>
+                                    </button>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <button formaction="/admin/createNotif" class="btn">
+                                        <img src="/resources/images/message1.png" class="adminMenuImages">
+                                        <span>Create notification</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button formaction="/admin/" class="btn">
+                                        <img src="/resources/images/add.png" class="adminMenuImages">
+                                        <span>Add new Field</span>
+                                    </button>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <button formaction="/admin/" class="btn">
+                                        <img src="/resources/images/loupe.png" class="adminMenuImages">
+                                        <span>Filtration</span>
+                                    </button>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <button formaction="/admin/showLinkStudent" class="btn">
-                                <img src="/resources/images/yellow-link.png" class="adminMenuImages">
-                                <span>Link Student</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button formaction="/admin/showDisabled" class="btn">
-                                <img src="/resources/images/fired.png" class="adminMenuImages">
-                                <span>Disabled Students</span>
-                            </button>
-                        </li>
+
                         <li>
                             <button formaction="/admin/createNotif" class="btn">
                                 <img src="/resources/images/message1.png" class="adminMenuImages">
@@ -75,11 +109,7 @@
                         <li>
                             <span class="currUserName"><c:out value="${account}"></c:out></span>
                         </li>
-                        <li>
-                            <a href="<c:url value="/admin"/> ">
-                                <img src="/resources/images/loupe.png" class="account_logo">
-                            </a>
-                        </li>
+
                         <li>
                             <a href="<c:url value="j_spring_security_logout" />">
                                 <img src="/resources/images/exit.png" class="exit_logo">
@@ -95,6 +125,7 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
 
 
     <div class="saveTable">
