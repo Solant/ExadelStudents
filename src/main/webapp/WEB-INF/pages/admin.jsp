@@ -1,4 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
+            <a class="navbar-brand" href="/"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -72,9 +72,9 @@
                         </button>
                     </li>
                             <li>
-                                <button formaction="/admin/" class="btn">
+                                <button formaction="/admin/showAddField" class="btn">
                                     <img src="/resources/images/add.png" class="adminMenuImages">
-                                    <span>Add new Field</span>
+                                    <span>Add field</span>
                                 </button>
                             </li>
                             <li class="divider"></li>
@@ -86,13 +86,7 @@
                     </li>
                         </ul>
                     </li>
-                    
-                    <li>
-                        <button formaction="/admin/showAddField" class="btn">
-                            <img src="/resources/images/add.png" class="adminMenuImages">
-                            <span>Add field</span>
-                        </button>
-                    </li>
+
                     <li>
                         <a href="/notif">
                             <div class="message">
@@ -189,7 +183,7 @@
 </div>
         <%pageContext.setAttribute("isActive", "");%>
 </c:forEach>
-        <form:button type="submit" class="blue">Form table</form:button>
+        <form:button type="submit" >Form table</form:button>
         </form:form>
 </div>
 

@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
+            <a class="navbar-brand" href="/"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,13 +53,11 @@
                             <img src="/resources/images/account.png" class="account_logo">
                         </a>
                     </li>
-
                 </ul>
             </form>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
-
 <form:form commandName="review" class="reviewForm" action="/curator/${account}/addFeedback" method="post">
 <form:input hidden="true" path="student.login" />
     <form:input hidden="true" path="fromInterview" />
