@@ -18,6 +18,8 @@
 </head>
 <body>
 
+
+
 <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -65,6 +67,8 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+
 
 </div>
 <form:form commandName="review" action="/curator/${account}/addRatingReview" method="post" class="reviewForm" >
