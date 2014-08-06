@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/resources/styles/style.css" />
     <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="/resources/js/ajaxFunc.js"></script>
 
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search Student" id="search">
+                    <input type="text" class="form-control" placeholder="Search Student" id="search" autocomplete="off">
                 </div>
             </div>
             <form method="get">
@@ -165,6 +165,7 @@
                 <c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'textarea'}">
                     <form:textarea path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
                 </c:if>
+
                     <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'select'}">
                         <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
                         <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
@@ -188,47 +189,6 @@
         </form:form>
 </div>
 
-<script>
-    $(document).ready(function(){
-       $('#search').keyup(
-               function(){
-                   var remove={display: "none"}
-                   var show={display: "block"}
-
-                   var searchResult=$('#searchResult');
-                   var searchRequest=$('#search').val();
-                   if(searchRequest.length==0){
-                       searchResult.empty();
-                       searchResult.css(remove);
-                       return;
-                   }
-/*
-                   var url="http://www.json-generator.com/api/json/get/cgcYsvfMKq?indent=2";*/
-
-                   var url="controller?initials="+searchRequest;
-                   $.get( url , function( data ) {
-                       searchResult.empty();
-                       searchResult.css(show);
-
-                       var obj= data;
-
-                       $.each(data["humans"], function(index, human){
-                           var anchor=$('<a/>');
-                           anchor.attr("href",human.id);
-                           anchor.text(human.lastName+" "+human.firstName);
-                           anchor.addClass('list-group-item');
-                           searchResult.append(anchor);
-                       })
-                   });
-               }
-       )
-    });
-</script>
-<%--<script type="text/javascript" class="init">
-    $(document).ready(function() {
-        $('#searchResult').dataTable();
-    } );
-</script>--%>
 </body>
 </html>
 

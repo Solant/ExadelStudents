@@ -11,7 +11,14 @@
 
         <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
+
+
+
         <script type="text/javascript" class="init">
+            $.extend( $.fn.dataTable.defaults, {
+                "searching": false,
+                "ordering": false
+            } );
             $(document).ready(function() {
                 $('#example').dataTable();
             } );
@@ -137,12 +144,12 @@
 
         <div id="searchTable">
             <table id="example" class="display">
-			<thead>
+			<%--<thead>
 				<c:forEach items="${tableData.get(0)}" var="item">
                     <td>
                     ${item}</td>
 				</c:forEach>
-			</thead>
+			</thead>--%><%--
                 <tbody>
                 <c:forEach items="${tableData}" var="student" begin="1">
                         <tr>
@@ -157,8 +164,16 @@
     </div>
 
     </body>
-    </html>
-                <%--<tbody>
+    </html>--%>
+
+                <thead>
+                <tr>
+                    <th>Ivanov Ivan</th>
+                    <th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th><th>Ivanov Ivan</th>
+
+                </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>Ivanov Ivan</td>
                     <td>22.07.2014</td>
@@ -307,4 +322,9 @@
 
                 <td> Technology </td>
                 <td> English </td>
-            </tfoot>--%>
+            </tfoot>
+            </table>
+        </div>
+
+    </body>
+</html>

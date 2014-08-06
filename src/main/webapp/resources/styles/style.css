@@ -9,6 +9,7 @@ body {
 .navbar-blue{
     background-color: RGB(0,156,203);
     margin-bottom: 0;
+    z-index: 0;
 }
 
 .navbar-blue .navbar-toggle {
@@ -497,12 +498,14 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
 }
 
 #searchResult{
-    position: absolute;
-    max-height: 400px;
-    top: 50px;
-    left: 160px;
+    position: fixed;
+    max-height: 210px;
+    top: 41px;
+    left: 161px;
     display: none;
+    z-index: 1;
 }
+
 
 #searchResult > .list-group-item{
     width: 177px;

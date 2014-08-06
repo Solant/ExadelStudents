@@ -92,7 +92,7 @@ public class AdminController {
         if(tableData == null)
             return "redirect:/admin";
         modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "/adminTable.jsp";
     }
 
 
@@ -132,7 +132,7 @@ public class AdminController {
         if(tableData == null)
             return "redirect:/admin";
         modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "/adminTable.jsp";
     }
 
 
@@ -143,7 +143,7 @@ public class AdminController {
             values.addAll(group.getGavs());
         tableData = studentService.find(values);
         modelMap.addAttribute("tableData", tableData);
-        return "/adminTable";
+        return "/adminTable.jsp";
     }
 
     @RequestMapping(value = "/exportWord", method = RequestMethod.GET)
@@ -268,7 +268,7 @@ public class AdminController {
         tableData = studentService.getStudentValuesInTable(values, current);
         modelMap.addAttribute("tableData", tableData);
 
-        return "adminTable";
+        return "/adminTable.jsp";
     }
     @RequestMapping(value = "/showDisabled", method = RequestMethod.GET)
     public String showDisabled(ModelMap modelMap){
@@ -290,7 +290,7 @@ public class AdminController {
             tableData.get(i++).add(student.getEmail());
         }
         modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "/adminTable.jsp";
     }
 
     @RequestMapping("/createNotif")
