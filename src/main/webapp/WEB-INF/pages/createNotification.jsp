@@ -50,8 +50,8 @@
     </div>
 
     <div class="alignCenter">
-        <form:button type="submit" class="loginAndCreateButton">Send</form:button>
-        <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
+        <button class="gray" onclick="history.back(); return false;">Cancel</button>
+        <form:button type="submit" class="blue">Send</form:button>
     </div>
 </form:form>
 </body>

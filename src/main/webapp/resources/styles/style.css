@@ -734,7 +734,8 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 .letterText textarea{
-    width:100%
+    width:100%;
+    resize: none;
 }
 
 /*end of create notification props*/
