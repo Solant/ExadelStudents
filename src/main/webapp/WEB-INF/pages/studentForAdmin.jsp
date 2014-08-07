@@ -43,6 +43,10 @@
 
     <form:form commandName="groupedValues" class="spoilers">
 
+    <p class="errorText">
+        <form:errors path="*" />
+    </p>
+
     <div class="tab-content">
 
         <%pageContext.setAttribute("isActive", "active");%>
@@ -72,6 +76,10 @@
                         </c:if>
                         <form:input hidden="true"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
+                        <form:input hidden="true"
+                                    path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].type"/>
+                        <form:input hidden="true"
+                                    path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].group"/>
                     </div>
                 </c:forEach>
             </div>
