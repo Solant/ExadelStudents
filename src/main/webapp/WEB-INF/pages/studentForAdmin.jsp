@@ -13,14 +13,6 @@
 <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
 
 <div align="center">
-    <div class="profile">
-        <a href="<c:url value="/admin/${currentUser.login}/account"/> "><img src="/resources/images/account.png"></a>
-        <c:out value="${currentUser.firstname}"></c:out>
-        <c:out value="${currentUser.lastname}"></c:out>
-        <a href="/admin/${currentUser.login}/allFeedbacks">
-            All feedbacks
-        </a>
-    </div>
     <a href="/admin/studentPage/${currentUser.login}/notif">
         <div class="message">
         </div>
@@ -36,7 +28,16 @@
             </li>
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
-
+            <li>
+                <a href="/admin/studentPage/${currentUser.login}/notif">
+                    Notifications
+                </a>
+            </li>
+            <li>
+                <a href="/admin/${currentUser.login}/allFeedbacks">
+                    Feedbacks
+                </a>
+            </li>
 
     </ul>
 
