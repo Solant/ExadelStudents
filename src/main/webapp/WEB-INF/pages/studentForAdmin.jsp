@@ -178,7 +178,6 @@
             <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
             <div class="group">
                 <label >${attr.attribute} </label>
-                <form:checkbox  path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" value="yes" cssStyle="width: 20px"/>
                 <c:if test="${attr.type == 'text'}">
                     <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
                 </c:if>
@@ -192,15 +191,15 @@
                         </c:forEach>
                     </form:select>
                 </c:if>
-                <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
+                <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
+                <div style="display: table-cell; vertical-align: middle;"><form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" value="yes" cssStyle="width: 20px"/></div>
             </div>
             </c:forEach>
-                <button formmethod="post" formaction="/admin/studentPage/${currentUser.login}/saveChanges" type="submit" >Save</button>
-
         </div>
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
-        <button formaction="/admin/studentPage/${currentUser.login}/formTable" type="submit" >Form table</button>
+        <button class="gray" formaction="/admin/studentPage/${currentUser.login}/formTable" type="submit" >Form table</button>
+        <button class="blue" formmethod="post" formaction="/admin/studentPage/${currentUser.login}/saveChanges" type="submit" >Save</button>
                 </div>
                 </form:form>
     </body>
