@@ -6,11 +6,12 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <http access-denied-page="/access_deny">
-        <intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
+    <http use-expressions="true" access-denied-page="/access_deny">
+        <intercept-url pattern="/admin/studentPage/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/*" access="ROLE_ADMIN"/>
         <intercept-url pattern="/worker/**" access="ROLE_WORKER" />
         <intercept-url pattern="/curator/**" access="ROLE_CURATOR" />
-        <intercept-url pattern="/student/**" access="ROLE_STUDENT" />
+        <intercept-url pattern="/student/*" access="ROLE_STUDENT" />
         <form-login login-page="/login" authentication-failure-handler-ref="authenticationFailureHandler"/>
         <logout logout-success-url="/" />
     </http>
