@@ -11,7 +11,6 @@
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
     <script src="/resources/js/ajaxFunc.js"></script>
 
-
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" language="javascript"
             src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
@@ -44,11 +43,53 @@
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
 
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Students
+                            <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <span>Enabled</span>
+                                </button>
+                            </li>
+
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <span>Studying</span>
+                                </button>
+                            </li>
+
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <span>Working</span>
+                                </button>
+                            </li>
+
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <span>Disabled</span>
+                                </button>
+                            </li>
+
+                        </ul>
+
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
 
+                    
+                    <li class="dropdown-submenu">
+                        <button formaction="#" class="btn">
+                            <img src="/resources/images/add.png" class="adminMenuImages">
+                            <span>Add</span>
+                        </button>
+                        <ul class="dropdown-menu">
                             <li>
                                 <button formaction="/admin/returnCreate" class="btn">
                                     <img src="/resources/images/add.png" class="adminMenuImages">
@@ -74,6 +115,26 @@
                                     <span>Create notification</span>
                                 </button>
                             </li>
+                        </ul>
+                    </li>
+
+                            <li class="dropdown-submenu">
+                                <button formaction="#" class="btn">
+                                    <img src="/resources/images/wrench.png" class="adminMenuImages">
+                                    <span>Change</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <button formaction="" class="btn">
+                                            <span>Field</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button formaction="" class="btn">
+                                            <span>Group</span>
+                                        </button>
+                                    </li>
+                                </ul>
                             <li>
                                 <button formaction="/admin/showAddField" class="btn">
                                     <img src="/resources/images/add.png" class="adminMenuImages">
@@ -144,11 +205,11 @@
         </c:forEach>
 
 
-    </ul>
+</ul>
 
 
     <form:form commandName="groupedValues" class="spoilers" method="post" action="/admin/formTable">
-    <div class="tab-content">
+<div class="tab-content">
 
         <%pageContext.setAttribute("isActive", "active");%>
         <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
