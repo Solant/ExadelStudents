@@ -13,10 +13,6 @@
 <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
 
 <div align="center">
-    <a href="/admin/studentPage/${currentUser.login}/notif">
-        <div class="message">
-        </div>
-    </a>
 
     <ul class="nav nav-tabs" role="tablist">
 
@@ -29,12 +25,12 @@
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
             <li>
-                <a href="/admin/studentPage/${currentUser.login}/notif">
+                <a href="/admin/studentPage/${currentUser.login}/notif" class="aToPropsTable">
                     Notifications
                 </a>
             </li>
             <li>
-                <a href="/admin/${currentUser.login}/allFeedbacks">
+                <a href="/admin/${currentUser.login}/allFeedbacks" class="aToPropsTable">
                     Feedbacks
                 </a>
             </li>
