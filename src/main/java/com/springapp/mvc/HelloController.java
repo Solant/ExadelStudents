@@ -53,6 +53,7 @@ public class HelloController {
             session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
             session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
             session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
+            session.setAttribute("role", "STUDENT");
             return "redirect:student/" + us.getCurrentUserLogin();
         }
         if (SecurityService.hasRole("ROLE_CURATOR")) {
@@ -60,13 +61,23 @@ public class HelloController {
             session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
             session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
             session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
+            session.setAttribute("role", "CURATOR");
             return "redirect:curator/" + us.getCurrentUserLogin();
+        }
+        if (SecurityService.hasRole("ROLE_WORKER")) {
+            session.setAttribute("account", us.getCurrentUserLogin());
+            session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
+            session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
+            session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
+            session.setAttribute("role", "WORKER");
+            return "redirect:worker/" + us.getCurrentUserLogin();
         }
         if (SecurityService.hasRole("ROLE_ADMIN")) {
             session.setAttribute("account", us.getCurrentUserLogin());
             session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
             session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
             session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
+            session.setAttribute("role", "ADMIN");
             return "redirect:admin";
         }
 

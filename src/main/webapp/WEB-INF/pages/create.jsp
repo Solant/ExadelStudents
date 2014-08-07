@@ -36,6 +36,7 @@
 				<form:select path="role" id="person" class="field">
                     <form:option value="Student">Student</form:option>
                     <form:option value="Feedbacker">Feedbacker</form:option>
+                    <form:option value="HRWorker">HR worker</form:option>
                     <form:option value="Admin">Admin</form:option>
                 </form:select>
 			</p>

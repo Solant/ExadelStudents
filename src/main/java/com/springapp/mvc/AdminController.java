@@ -115,6 +115,8 @@ public class AdminController {
                 studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
             if (newUser.getRole().toString().equals("Feedbacker"))
                 feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
+            if (newUser.getRole().toString().equals("HRWorker"))
+                hrWorkerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
             if (newUser.getRole().toString().equals("Admin"))
                 administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
             if (tableData == null)
