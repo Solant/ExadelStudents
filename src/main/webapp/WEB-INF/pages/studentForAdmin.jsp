@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/${currentUser.login}/allFeedbacks">
+                <a href="/admin/studentPage/${currentUser.login}/allFeedbacks">
                     Feedbacks
                 </a>
             </li>
@@ -76,8 +76,6 @@
                 <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
                     <div class="group">
                         <label>${attr.attribute} </label>
-                        <form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" value="yes"
-                                       cssStyle="width: 20px"/>
                         <c:if test="${attr.type == 'text'}">
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"/>
                         </c:if>
@@ -94,11 +92,11 @@
                         <c:if test="${attr.type == 'date'}">
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" type="date" />
                         </c:if>
-                        <form:input hidden="true"
+                        <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
-                        <form:input hidden="true"
+                        <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].type"/>
-                        <form:input hidden="true"
+                        <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].group"/>
                         <div class="checkboxAligning"><form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" value="yes" cssStyle="width: 20px; margin-left: 5px;"/></div>
                         <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>

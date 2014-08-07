@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -193,8 +194,9 @@ public class AdminController {
                 wts.addNewCell(item);
         }
         wts.addDateAsString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
 
-        response.setHeader("Content-Disposition", "attachment;filename=table.doc");
+        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".doc");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -216,7 +218,8 @@ public class AdminController {
         }
         ets.addDateAsString();
 
-        response.setHeader("Content-Disposition", "attachment;filename=table.xls");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
+        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".xls");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -230,7 +233,8 @@ public class AdminController {
     @RequestMapping(value = "/worker/exportPDF", method = RequestMethod.GET)
     public String exportPDF(HttpServletResponse response) {
 
-        response.setHeader("Content-Disposition", "attachment;filename=table.pdf");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
+        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".pdf");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
