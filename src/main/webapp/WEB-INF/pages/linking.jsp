@@ -52,7 +52,7 @@
         </select>
     </div>
 
-    <div class="button">
+    <div class="buttons">
             <button class="gray" onclick="history.back(); return false;">Cancel</button>
             <button  class="blue">Link</button>
     </div>

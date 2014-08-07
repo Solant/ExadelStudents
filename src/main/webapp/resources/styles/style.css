@@ -500,7 +500,10 @@ button.gray, a.gray, input[type=submit].gray {
     width: 250px;
 }
 
-
+.checkboxAligning{
+    display: table-cell;
+    vertical-align: middle;
+}
 
 .spoilers{
     margin-top: 10px;
@@ -850,4 +853,9 @@ button.gray, a.gray, input[type=submit].gray {
     -webkit-border-radius:6px 0 6px 6px;
     -moz-border-radius:6px 0 6px 6px;
     border-radius:6px 0 6px 6px;
+}
+
+.buttons{
+    padding-top: 100px;
+    text-align: center;
 }
