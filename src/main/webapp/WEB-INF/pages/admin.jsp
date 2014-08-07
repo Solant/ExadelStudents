@@ -1,19 +1,20 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
 
     <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/styles/style.css" />
+    <link rel="stylesheet" href="/resources/styles/style.css"/>
     <script src="/resources/styles/bootstrap/js/jquery.js"></script>
     <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
     <script src="/resources/js/ajaxFunc.js"></script>
 
 
     <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
 
     <title>Admin</title>
 </head>
@@ -23,7 +24,8 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -46,32 +48,32 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                    
-                    <li>
-                        <button formaction="/admin/returnCreate" class="btn">
-                            <img src="/resources/images/add.png" class="adminMenuImages">
-                            <span>Add User</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button formaction="/admin/showLinkStudent" class="btn">
-                            <img src="/resources/images/yellow-link.png" class="adminMenuImages">
-                            <span>Link Student</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button formaction="/admin/showDisabled" class="btn">
-                            <img src="/resources/images/fired.png" class="adminMenuImages">
-                            <span>Disabled Students</span>
-                        </button>
-                    </li>
+
+                            <li>
+                                <button formaction="/admin/returnCreate" class="btn">
+                                    <img src="/resources/images/add.png" class="adminMenuImages">
+                                    <span>Add User</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button formaction="/admin/showLinkStudent" class="btn">
+                                    <img src="/resources/images/yellow-link.png" class="adminMenuImages">
+                                    <span>Link Student</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button formaction="/admin/showDisabled" class="btn">
+                                    <img src="/resources/images/fired.png" class="adminMenuImages">
+                                    <span>Disabled Students</span>
+                                </button>
+                            </li>
                             <li class="divider"></li>
-                    <li>
-                        <button formaction="/admin/createNotif" class="btn">
-                            <img src="/resources/images/message1.png" class="adminMenuImages">
-                            <span>Create notification</span>
-                        </button>
-                    </li>
+                            <li>
+                                <button formaction="/admin/createNotif" class="btn">
+                                    <img src="/resources/images/message1.png" class="adminMenuImages">
+                                    <span>Create notification</span>
+                                </button>
+                            </li>
                             <li>
                                 <button formaction="/admin/showAddField" class="btn">
                                     <img src="/resources/images/add.png" class="adminMenuImages">
@@ -79,12 +81,12 @@
                                 </button>
                             </li>
                             <li class="divider"></li>
-                    <li>
-                        <button formaction="/admin/" class="btn">
-                            <img src="/resources/images/loupe.png" class="adminMenuImages">
-                            <span>Filtration</span>
-                        </button>
-                    </li>
+                            <li>
+                                <button formaction="/admin/" class="btn">
+                                    <img src="/resources/images/loupe.png" class="adminMenuImages">
+                                    <span>Filtration</span>
+                                </button>
+                            </li>
                         </ul>
                     </li>
 
@@ -115,8 +117,10 @@
                     </li>
                 </ul>
             </form>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
 </nav>
 
 <div id="searchResult" class="list-group"></div>
@@ -128,65 +132,71 @@
         <c:out value="${firstName}"></c:out>
     </div>
 
-<ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs" role="tablist">
 
-    <%pageContext.setAttribute("isActive", "active");%>
+        <%pageContext.setAttribute("isActive", "active");%>
 
-    <c:forEach items="${groups}" var="groupNameExist" varStatus="index">
-        <li class="${isActive}">
-            <a href="#${index.count}" role="tab" data-toggle="tab">${groupNameExist}</a>
-        </li>
-        <%pageContext.setAttribute("isActive", "");%>
-    </c:forEach>
+        <c:forEach items="${groups}" var="groupNameExist" varStatus="index">
+            <li class="${isActive}">
+                <a href="#${index.count}" role="tab" data-toggle="tab">${groupNameExist}</a>
+            </li>
+            <%pageContext.setAttribute("isActive", "");%>
+        </c:forEach>
 
 
-</ul>
+    </ul>
 
 
     <form:form commandName="groupedValues" class="spoilers" method="post" action="/admin/formTable">
-<div class="tab-content">
+    <div class="tab-content">
 
-    <%pageContext.setAttribute("isActive", "active");%>
-<c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
-<div class="tab-pane ${isActive}" id="${index1.count}">
-    <!-- Petya -->
+        <%pageContext.setAttribute("isActive", "active");%>
+        <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
+            <div class="tab-pane ${isActive}" id="${index1.count}">
+                <!-- Petya -->
 
-        <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
-            <div class="group">
+                <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
+                    <div class="group">
 
-                <label >${attr.attribute}</label>
-                <form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" cssStyle="width: 20px"/>
-                <c:if test="${attr.type == 'text'}">
-                    <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
-                </c:if>
-                <c:if test="${attr.type == 'textarea'}">
-                    <div class="alignCenter">
-                    <form:textarea cssClass="textOther" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" />
+                        <label>${attr.attribute}</label>
+                        <form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show"
+                                       cssStyle="width: 20px"/>
+                        <c:if test="${attr.type == 'text'}">
+                            <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"/>
+                        </c:if>
+                        <c:if test="${attr.type == 'textarea'}">
+                            <div class="alignCenter">
+                                <form:textarea cssClass="textOther"
+                                               path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"/>
+                            </div>
+                        </c:if>
+                        <c:if test="${attr.type == 'select'}">
+                            <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value">
+                                <c:forEach items="${attr.possibleValues}" var="token">
+                                    <form:option value="${token}">${token}</form:option>
+                                </c:forEach>
+                            </form:select>
+                        </c:if>
+                        <c:if test="${attr.type == 'date'}">
+                            <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" type="date" />
+                        </c:if>
+                            <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'radiobutton'}">
+                                <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
+                                    <form:radiobutton path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
+                                                      value="${token == groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].value}"/>
+                                </c:forTokens>
+                            </c:if>--%>
+                        <form:input hidden="true"
+                                    path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>
-                </c:if>
-                <c:if test="${attr.type == 'select'}">
-                    <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" >
-                        <c:forEach items="${attr.possibleValues}"  var="token">
-                            <form:option value="${token}">${token}</form:option>
-                        </c:forEach>
-                    </form:select>
-                </c:if>
-                    <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'radiobutton'}">
-                        <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
-                            <form:radiobutton path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
-                                              value="${token == groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].value}"/>
-                        </c:forTokens>
-                    </c:if>--%>
-                <form:input hidden="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute" />
-            </div>
-        </c:forEach>
+                </c:forEach>
 
-</div>
-        <%pageContext.setAttribute("isActive", "");%>
-</c:forEach>
+            </div>
+            <%pageContext.setAttribute("isActive", "");%>
+        </c:forEach>
         <form:button type="submit" class="blue">Form table</form:button>
         </form:form>
-</div>
+    </div>
 
 </body>
 </html>

@@ -126,7 +126,7 @@
 
         <div class="leftList">
             <form:checkbox path="forStudents" id="students"/>
-            <label for="students">Students: </label><br/>
+            <label for="students">All students: </label><br/>
                 <form:select path="students" name="students" multiple="true">
                     <c:forEach items="${students}" var="student">
                         <form:option value="${student.login}">${student.firstName} ${student.secondName}</form:option>
@@ -136,7 +136,7 @@
 
         <div class="centerList">
             <form:checkbox path="forFeedbackers" id="feedbackers"/>
-            <label for="feedbackers">Feedbackers: </label><br/>
+            <label for="feedbackers">All feedbackers: </label><br/>
             <form:select path="feedbackers" name="feedbackers" multiple="true">
                 <c:forEach items="${feedbackers}" var="feedbacker">
                     <form:option value="${feedbacker.login}">${feedbacker.firstName} ${feedbacker.secondName}</form:option>
@@ -146,7 +146,7 @@
 
         <div class="rightList">
             <form:checkbox path="forWorkers" id="workers"/>
-            <label for="workers">Workers: </label><br/>
+            <label for="workers">All workers: </label><br/>
             <form:select path="workers" name="workers" multiple="true">
                 <c:forEach items="${workers}" var="worker">
                     <form:option value="${worker.login}">${worker.firstName} ${worker.secondName}</form:option>
