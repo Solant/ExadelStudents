@@ -110,12 +110,12 @@
                 <div class="alignCenter paddingTop borderTop">
                     <h3>Restrictions</h3>
                     <label for="valueType">Type of value:</label>
-                    <select name="valueType" id="valueType">
-                        <option value="any">Any</option>
-                        <option value="number">Number</option>
-                        <option value="fullName">Full name</option>
-                        <option value="symbolsOnly">Symbols only</option>
-                    </select>
+                    <form:select path="valueType" name="valueType" id="valueType">
+                        <form:option value="any">Any</form:option>
+                        <form:option value="number">Number</form:option>
+                        <form:option value="fullName">Full name</form:option>
+                        <form:option value="symbolsOnly">Symbols only</form:option>
+                    </form:select>
                 </div>
 
 
@@ -145,7 +145,9 @@
         }
 
         var valueTypeSelect = document.getElementById("valueType")
-        if (document.getElementsByName('type')[2].checked) {
+        if (document.getElementsByName('type')[2].checked||
+                document.getElementsByName('type')[3].checked||
+                document.getElementsByName('type')[4].checked) {
             valueTypeSelect.disabled = true;
             valueTypeSelect.options[0].selected = true;
         }

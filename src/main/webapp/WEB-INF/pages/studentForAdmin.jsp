@@ -44,7 +44,7 @@
     <form:form commandName="groupedValues" class="spoilers">
 
     <p class="errorText">
-        <form:errors path="*" />
+        <form:errors path="*"/>
     </p>
 
     <div class="tab-content">
@@ -70,7 +70,8 @@
                             </form:select>
                         </c:if>
                         <c:if test="${attr.type == 'date'}">
-                            <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" type="date" />
+                            <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
+                                        type="date"/>
                         </c:if>
                         <form:input hidden="true"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>

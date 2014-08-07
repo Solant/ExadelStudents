@@ -539,7 +539,9 @@ public class AdminController {
 
     @RequestMapping("/showAddField/{isField}")
     public String showAddField(ModelMap modelMap, @PathVariable("isField")boolean isField) {
-        modelMap.addAttribute("addFieldUnit", new AddFieldUnit());
+        AddFieldUnit addFieldUnit = new AddFieldUnit();
+        addFieldUnit.setExistingGroup(true);
+        modelMap.addAttribute("addFieldUnit", addFieldUnit);
         modelMap.addAttribute("groups", groupService.getAllGroups());
         modelMap.addAttribute("isField", isField);
         return "addField";
@@ -547,12 +549,33 @@ public class AdminController {
 
     @RequestMapping(value = "/addField", method = RequestMethod.POST)
     public String addField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
+        String groupName;
         if (addFieldUnit.isExistingGroup()) {
-            attributeService.addAttribute(addFieldUnit.getGroupNameExist(), addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues());
+            groupName = addFieldUnit.getGroupNameExist();
         } else {
             groupService.addGroup(addFieldUnit.getGroupNameNew(), addFieldUnit.getForStatus());
-            attributeService.addAttribute(addFieldUnit.getGroupNameNew(), addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues());
+            groupName = addFieldUnit.getGroupNameNew();
         }
+
+        String pattern = null;
+        String errorMessage = null;
+        if(addFieldUnit.getValueType().equals("number")){
+            pattern = "^[0-9]*$";
+            errorMessage = addFieldUnit.getFieldName() + " must be a number";
+        }
+
+        if(addFieldUnit.getValueType().equals("fullName")){
+            pattern = "^[A-Za-z//s//-//.]*$";
+            errorMessage = addFieldUnit.getFieldName() + " must be a full name";
+        }
+
+        if(addFieldUnit.getValueType().equals("symbolsOnly")){
+            pattern = "^[A-Za-z//s]*$";
+            errorMessage = addFieldUnit.getFieldName() + " must contain only latin symbols and space";
+        }
+
+        attributeService.addAttribute(groupName, addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
+
         if (tableData == null)
             return "redirect:/admin";
         modelMap.addAttribute("tableData", tableData);
