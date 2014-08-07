@@ -78,6 +78,7 @@
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
         <button formaction="/admin/studentPage/${currentUser.login}/formTable" type="submit">Form table</button>
+        <button formmethod="post" formaction="/admin/studentPage/${currentUser.login}/saveChanges" type="submit">Save</button>
     </div>
     </form:form>
 </body>
