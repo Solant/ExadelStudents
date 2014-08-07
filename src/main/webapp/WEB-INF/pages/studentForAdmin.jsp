@@ -48,9 +48,7 @@
     </p>
 
     <div class="tab-content">
-
         <%pageContext.setAttribute("isActive", "active");%>
-
         <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
             <div class="tab-pane ${isActive}" id="${index1.count}">
                 <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
