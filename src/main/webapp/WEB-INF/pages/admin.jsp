@@ -30,31 +30,25 @@
         </c:forEach>
 
 
-</ul>
+    </ul>
 
 
     <form:form commandName="groupedValues" class="spoilers" method="post" action="/admin/formTable">
-<div class="tab-content">
+    <div class="tab-content">
 
         <%pageContext.setAttribute("isActive", "active");%>
         <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
             <div class="tab-pane ${isActive}" id="${index1.count}">
-                <!-- Petya -->
 
                 <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
                     <div class="group">
 
                         <label>${attr.attribute}</label>
-                        <form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show"
-                                       cssStyle="width: 20px"/>
                         <c:if test="${attr.type == 'text'}">
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"/>
                         </c:if>
                         <c:if test="${attr.type == 'textarea'}">
-                            <div class="alignCenter">
-                                <form:textarea cssClass="textOther"
-                                               path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"/>
-                            </div>
+                            <form:textarea cssClass="textOther" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"/>
                         </c:if>
                         <c:if test="${attr.type == 'select'}">
                             <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value">
@@ -66,14 +60,14 @@
                         <c:if test="${attr.type == 'date'}">
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" type="date" />
                         </c:if>
+                        <div class="checkboxAligning"><form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" cssStyle="width: 20px; margin-left: 5px;"/></div>
                             <%--<c:if test="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].type == 'radiobutton'}">
                                 <c:forTokens items="${groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].possible" delims=";" var="token">
                                     <form:radiobutton path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
                                                       value="${token == groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].value}"/>
                                 </c:forTokens>
                             </c:if>--%>
-                        <form:input hidden="true"
-                                    path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
+                        <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>
                 </c:forEach>
 

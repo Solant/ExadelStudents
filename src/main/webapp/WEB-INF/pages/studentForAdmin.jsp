@@ -25,10 +25,10 @@
 
 <div align="center">
     <div class="profile">
-        <a href="<c:url value="/admin/studentPage/${currentUser.login}/account"/> "><img src="/resources/images/account.png"></a>
+        <a href="<c:url value="/admin/${currentUser.login}/account"/> "><img src="/resources/images/account.png"></a>
         <c:out value="${currentUser.firstname}"></c:out>
         <c:out value="${currentUser.lastname}"></c:out>
-        <a href="/admin/studentPage/${currentUser.login}/allFeedbacks">
+        <a href="/admin/${currentUser.login}/allFeedbacks">
             All feedbacks
         </a>
     </div>
@@ -47,7 +47,16 @@
             </li>
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
-
+            <li>
+                <a href="/admin/studentPage/${currentUser.login}/notif">
+                    Notifications
+                </a>
+            </li>
+            <li>
+                <a href="/admin/${currentUser.login}/allFeedbacks">
+                    Feedbacks
+                </a>
+            </li>
 
     </ul>
 
@@ -91,15 +100,15 @@
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].type"/>
                         <form:input hidden="true"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].group"/>
+                        <div class="checkboxAligning"><form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" value="yes" cssStyle="width: 20px; margin-left: 5px;"/></div>
+                        <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>
                 </c:forEach>
             </div>
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
-        <button formmethod="post" formaction="/admin/studentPage/${currentUser.login}/saveChanges" type="submit">Save
-        </button>
-
-        <button formaction="/admin/studentPage/${currentUser.login}/formTable" type="submit">Form table</button>
+        <button class="gray" formaction="/admin/studentPage/${currentUser.login}/formTable" type="submit">Form table</button>
+        <button class="blue" formmethod="post" formaction="/admin/studentPage/${currentUser.login}/saveChanges" type="submit">Save</button>
     </div>
     </form:form>
 </body>
