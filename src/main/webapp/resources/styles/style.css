@@ -472,22 +472,36 @@ button.gray, a.gray, input[type=submit].gray {
     color: gray;
 }
 
+
+
 .group label{
-    float:left;
-    margin-left: 2%;
-    height: 40px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+    width: 400px;
 }
 
-.group input, .group select, .group textarea{
-    float:right;
-    margin-right: 2%;
-    width: 40%;
-    padding: 3px;
-    border: 1px solid;
-    margin-bottom: 2px;
-    margin-top: 2px;
-    resize: none;
+.group input{
+    display: table-cell;
+    width: 250px;
 }
+
+.group select{
+    display: table-cell;
+}
+
+.hidden{
+    display: none;
+}
+
+.group textarea{
+    resize: none;
+    display: table-cell;
+    width: 250px;
+}
+
+
+
 .spoilers{
     margin-top: 10px;
     padding: 10px ;
@@ -508,8 +522,9 @@ button.gray, a.gray, input[type=submit].gray {
     height: 0;
 }
 .group{
-    white-space: nowrap;
     overflow: auto;
+    display: table;
+    margin-bottom: 5px;
 }
 
 /*end of student page*/
