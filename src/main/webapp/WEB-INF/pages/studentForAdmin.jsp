@@ -70,16 +70,13 @@
                         <c:if test="${attr.type == 'date'}">
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" type="date" />
                         </c:if>
-                        <form:input hidden="true"
+                        <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>
                 </c:forEach>
             </div>
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
-        <button formmethod="post" formaction="/admin/studentPage/${currentUser.login}/saveChanges" type="submit">Save
-        </button>
-
         <button formaction="/admin/studentPage/${currentUser.login}/formTable" type="submit">Form table</button>
     </div>
     </form:form>

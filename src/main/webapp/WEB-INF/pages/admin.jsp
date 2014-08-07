@@ -72,7 +72,7 @@
                                                       value="${token == groupedValues.valuesArray[index1.count-1].gavs[index2.count-1].value}"/>
                                 </c:forTokens>
                             </c:if>--%>
-                        <form:input hidden="true"
+                        <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>
                 </c:forEach>
