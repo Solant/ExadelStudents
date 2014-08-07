@@ -9,5 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/worker/{current}")
 public class WorkerController {
+    @RequestMapping("")
+    public String workerPage(){
+        return "HRworker";
+    }
 
 }

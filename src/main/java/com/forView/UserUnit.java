@@ -29,16 +29,17 @@ public class UserUnit {
             " Possible symbols are latin symbols and space")
     private String firstname;
 
-    private Role role;
-   // private Status status;
+    private String role;
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
+    // private Status status;
+
 
    /* public Status getStatus() {
         return status;
@@ -48,9 +49,6 @@ public class UserUnit {
         this.status = status;
     }
 */
-    public enum Role{
-        Student, Feedbacker, Admin
-    }
 
     /*public enum Status{
         WORKING, STUDYING

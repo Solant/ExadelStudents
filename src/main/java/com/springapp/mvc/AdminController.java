@@ -120,6 +120,8 @@ public class AdminController {
                 studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
             if (newUser.getRole().toString().equals("Feedbacker"))
                 feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
+            if (newUser.getRole().toString().equals("HRWorker"))
+                hrWorkerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
             if (newUser.getRole().toString().equals("Admin"))
                 administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
             if (tableData == null)
@@ -385,6 +387,94 @@ public class AdminController {
         return "adminTable";
     }
 
+
+    @RequestMapping(value = "/showStudying", method = RequestMethod.GET)
+    public String showStudying(ModelMap modelMap) {
+        List<GAVPresentation> values = new ArrayList<GAVPresentation>();
+        GAVPresentation e = new GAVPresentation();
+        e.setGroup("service");
+        e.setValue("STUDYING");
+        e.setAttribute("status");
+        e.setShow(false);
+
+        values.add(e);
+        tableData = studentService.find(values);
+        tableData.get(0).add("Phone");
+        tableData.get(0).add("Skype");
+        tableData.get(0).add("Email");
+
+        User user;
+
+        for(List<String> item:tableData){
+            user = userService.getByLogin(item.get(1));
+            if(user != null) {
+                item.add(user.getTelephone());
+                item.add(user.getSkype());
+                item.add(user.getEmail());
+            }
+        }
+
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "enable");
+        return "adminTable";
+    }
+
+    @RequestMapping(value = "/showWorking", method = RequestMethod.GET)
+    public String showWorking(ModelMap modelMap) {
+        List<GAVPresentation> values = new ArrayList<GAVPresentation>();
+        GAVPresentation e = new GAVPresentation();
+        e.setGroup("service");
+        e.setValue("WORKING");
+        e.setAttribute("status");
+        e.setShow(false);
+
+        values.add(e);
+        tableData = studentService.find(values);
+        tableData.get(0).add("Phone");
+        tableData.get(0).add("Skype");
+        tableData.get(0).add("Email");
+
+        User user;
+
+        for(List<String> item:tableData){
+            user = userService.getByLogin(item.get(1));
+            if(user != null) {
+                item.add(user.getTelephone());
+                item.add(user.getSkype());
+                item.add(user.getEmail());
+            }
+        }
+
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "enable");
+        return "adminTable";
+    }
+
+    @RequestMapping(value = "/showEnabled", method = RequestMethod.GET)
+    public String showEnabled(ModelMap modelMap) {
+        List<Student> listEnabled = studentService.getAllEnabledStudents();
+        tableData = new ArrayList<List<String>>();
+        tableData.add(new ArrayList<String>());
+        tableData.get(0).add("Name");
+        tableData.get(0).add("Login");
+        tableData.get(0).add("Phone");
+        tableData.get(0).add("Skype");
+        tableData.get(0).add("Email");
+        int i = 1;
+        for (Student student : listEnabled) {
+            tableData.add(new ArrayList<String>());
+            tableData.get(i).add(student.getFirstName() + " " + student.getSecondName());
+            tableData.get(i).add(student.getLogin());
+            tableData.get(i).add(student.getTelephone());
+            tableData.get(i).add(student.getSkype());
+            tableData.get(i++).add(student.getEmail());
+        }
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "enable");
+        return "adminTable";
+    }
+
+
     @RequestMapping("/createNotif")
     public String createNotif(ModelMap modelMap) {
         CreateNotifUnit createNotifUnit = new CreateNotifUnit();
@@ -447,10 +537,11 @@ public class AdminController {
         return "notificationList";
     }
 
-    @RequestMapping("/showAddField")
-    public String showAddField(ModelMap modelMap) {
+    @RequestMapping("/showAddField/{isField}")
+    public String showAddField(ModelMap modelMap, @PathVariable("isField")boolean isField) {
         modelMap.addAttribute("addFieldUnit", new AddFieldUnit());
         modelMap.addAttribute("groups", groupService.getAllGroups());
+        modelMap.addAttribute("isField", isField);
         return "addField";
     }
 
