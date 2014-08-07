@@ -361,6 +361,15 @@ button.gray, a.gray, input[type=submit].gray {
     color:red;
 }
 
+.studentStatusImage{
+    width: 25px;
+    height: 25px;
+}
+
+.withImage{
+    width: 30px;
+}
+
 /*end of common props*/
 
 /*login props*/
