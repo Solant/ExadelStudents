@@ -758,6 +758,14 @@ button.gray, a.gray, input[type=submit].gray {
 
 /*add field and technology props*/
 
+.paddingBottom {
+    padding-bottom: 10px;
+}
+
+.borderTop{
+    border-top: 1px solid #808080;
+}
+
 .addTech{
     text-align: center;
     margin-top: 20px;
