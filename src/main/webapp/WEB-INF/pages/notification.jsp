@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/StudentHat.jspStudentHat.jsp" %>
+<%@include file="/WEB-INF/pages/StudentHat.jsp" %>
 
 <div class="notifPadding">
     <div class="notification">

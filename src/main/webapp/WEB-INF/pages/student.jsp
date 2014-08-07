@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/StudentHat.jspStudentHat.jsp" %>
+<%@include file="/WEB-INF/pages/StudentHat.jsp" %>
 
 <div align="center">
     <div class="profile">

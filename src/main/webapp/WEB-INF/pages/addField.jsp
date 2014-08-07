@@ -5,11 +5,11 @@
 <head lang="en">
     <title>Add field</title>
 
-    <%@include file="/WEB-INF/pages/allIncluded.jspllIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/AdminHat.jsps/AdminHat.jsp" %>
+<%@include file="/WEB-INF/pages/AdminHat.jsp" %>
 
 <ul class="nav nav-tabs" role="tablist">
     <li <c:if test="${!isField}">class="active" </c:if>>

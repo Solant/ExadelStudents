@@ -5,7 +5,7 @@
 	<head>
 
         <title>Admin | Table</title>
-        <%@include file="/WEB-INF/pages/allIncluded.jspllIncluded.jsp" %>
+        <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
 
     </head>
 	<body>

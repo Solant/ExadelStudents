@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
+            <a class="navbar-brand" href="/"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -31,19 +31,19 @@
                         <ul class="dropdown-menu" role="menu">
 
                             <li>
-                                <button formaction="/admin/showDisabled" class="btn">
+                                <button formaction="/admin/showEnabled" class="btn">
                                     <span>Enabled</span>
                                 </button>
                             </li>
 
                             <li>
-                                <button formaction="/admin/showDisabled" class="btn">
+                                <button formaction="/admin/showStudying" class="btn">
                                     <span>Studying</span>
                                 </button>
                             </li>
 
                             <li>
-                                <button formaction="/admin/showDisabled" class="btn">
+                                <button formaction="/admin/showWorking" class="btn">
                                     <span>Working</span>
                                 </button>
                             </li>
@@ -75,12 +75,12 @@
                                         </button>
                                     </li>
                                     <li>
-                                        <button formaction="/admin/" class="btn">
+                                        <button formaction="/admin/showAddField/true" class="btn">
                                             <span>Field</span>
                                         </button>
                                     </li>
                                     <li>
-                                        <button formaction="/admin/" class="btn">
+                                        <button formaction="/admin/showAddField/false" class="btn">
                                             <span>Technology</span>
                                         </button>
                                     </li>

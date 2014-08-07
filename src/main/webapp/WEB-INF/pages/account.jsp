@@ -8,12 +8,12 @@
 <head>
     <title>Account</title>
 
-    <%@include file="/WEB-INF/pages/allIncluded.jspllIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
 
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/AdminHat.jsps/AdminHat.jsp" %>
+<%@include file="/WEB-INF/pages/AdminHat.jsp" %>
 
 <form:form commandName="accountUnit" class="loginAndCreateForm" method="post" action="/changePassword">
 
