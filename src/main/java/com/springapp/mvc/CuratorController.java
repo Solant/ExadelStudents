@@ -62,7 +62,7 @@ public class CuratorController {
         }
         model.addAttribute("studentList", studentsNames);
         model.addAttribute("feedbackerRole", "asCurator");
-        return "fblist";
+        return "/fblist.jsp";
     }
 
     @RequestMapping(value = "/interview", method = RequestMethod.GET)
@@ -86,7 +86,7 @@ public class CuratorController {
         }
         model.addAttribute("studentList", studentsNames);
         model.addAttribute("feedbackerRole", "asInterviewer");
-        return "fblist";
+        return "/fblist.jsp";
     }
 
     @RequestMapping(value = "/showFeedback/{studentLogin}/{feedbackerRole}", method = RequestMethod.GET)
@@ -103,7 +103,7 @@ public class CuratorController {
             review.setFromInterview(true);
         }
         model.addAttribute("review", review);
-        return "review";
+        return "/review.jsp";
     }
 
     @RequestMapping(value = "/addFeedback", method = RequestMethod.POST)

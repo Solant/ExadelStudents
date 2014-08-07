@@ -3,20 +3,12 @@
 <html>
 <head>
   <title>Login</title>
-  <!--[if lt IE 9]>
-  <script
-  src="html5shiv.js">
-  </script>
-  <![endif]-->
-
-  <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
+  <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
 </head>
 <body>
-    
-	<div class="hat">
-		<img src="/resources/images/exadel-logo.png" class="exadel_logo">
-	</div>
+
+<%@include file="/WEB-INF/pages/EmptyHat.jsp" %>
+
 	<form method="post" action="/j_spring_security_check" class="loginAndCreateForm" >
 		<h1>Login Form </h1>
 		<p>

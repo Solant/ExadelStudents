@@ -50,7 +50,7 @@ public class HelloController {
         if (SecurityService.hasRole("ROLE_ADMIN"))
             return "redirect:admin";
 
-        return "login";
+        return "/login.jsp";
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
@@ -65,7 +65,7 @@ public class HelloController {
         accountUnit.setSkype(user.getSkype());
         accountUnit.setTelephone(user.getTelephone());
         modelMap.addAttribute("accountUnit", accountUnit);
-        return "account";
+        return "/account.jsp";
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
@@ -94,14 +94,14 @@ public class HelloController {
         accountUnit.setConfirmedPassword("");
         modelMap.addAttribute("message", message);
         modelMap.addAttribute("accountUnit", accountUnit);
-        return "account";
+        return "/account.jsp";
     }
 
     @RequestMapping(value = "/notif", method = RequestMethod.GET)
     public String showNotifs(ModelMap modelMap){
         List<Notification> notifications = us.getAllNotifications(UserService.getCurrentUserLogin());
         modelMap.addAttribute("notifs", notifications);
-        return "notificationList";
+        return "/notificationList.jsp";
     }
 
     @RequestMapping(value = "/notif/{notifId}", method = RequestMethod.GET)
@@ -109,7 +109,7 @@ public class HelloController {
         Notification notification = notificationService.getNotificationById(id);
         notificationService.setRead(id);
         modelMap.addAttribute("notif", notification);
-        return "notification";
+        return "/notification.jsp";
     }
 
     @Autowired
