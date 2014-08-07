@@ -8,7 +8,18 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/FBhat.jsp" %>
+<c:if test="${role == 'STUDENT'}">
+    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+</c:if>
+<c:if test="${role == 'CURATOR'}">
+    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+</c:if>
+<c:if test="${role == 'WORKER'}">
+    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+</c:if>
+<c:if test="${role == 'ADMIN'}">
+    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+</c:if>
 
 <form class="linkingForm" >
 <div class="radio">
@@ -52,7 +63,7 @@
         </select>
     </div>
 
-    <div class="button">
+    <div class="buttons">
             <button class="gray" onclick="history.back(); return false;">Cancel</button>
             <button  class="blue">Link</button>
     </div>

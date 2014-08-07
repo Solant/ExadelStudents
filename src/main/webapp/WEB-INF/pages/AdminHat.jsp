@@ -31,25 +31,25 @@
                         <ul class="dropdown-menu" role="menu">
 
                             <li>
-                                <button formaction="/admin/showEnabled" class="btn">
+                                <button formaction="/admin/worker/showEnabled" class="btn">
                                     <span>Enabled</span>
                                 </button>
                             </li>
 
                             <li>
-                                <button formaction="/admin/showStudying" class="btn">
+                                <button formaction="/admin/worker/showStudying" class="btn">
                                     <span>Studying</span>
                                 </button>
                             </li>
 
                             <li>
-                                <button formaction="/admin/showWorking" class="btn">
+                                <button formaction="/admin/worker/showWorking" class="btn">
                                     <span>Working</span>
                                 </button>
                             </li>
 
                             <li>
-                                <button formaction="/admin/showDisabled" class="btn">
+                                <button formaction="/admin/worker/showDisabled" class="btn">
                                     <span>Disabled</span>
                                 </button>
                             </li>
@@ -70,7 +70,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <button formaction="/admin/returnCreate" class="btn">
+                                        <button formaction="/admin/worker/returnCreate" class="btn">
                                             <span>User</span>
                                         </button>
                                     </li>
@@ -112,7 +112,7 @@
                             </li>
 
                             <li>
-                                <button formaction="/admin/showLinkStudent" class="btn">
+                                <button formaction="/admin/worker/showLinkStudent" class="btn">
                                     <img src="/resources/images/yellow-link.png" class="adminMenuImages">
                                     <span>Link Student</span>
                                 </button>
