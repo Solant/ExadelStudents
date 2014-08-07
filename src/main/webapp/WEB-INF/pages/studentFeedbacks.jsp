@@ -49,7 +49,7 @@
 <tbody>
 <c:forEach items="${reviews}" var="review">
     <tr>
-        <td><a href="/admin/showFeedback/${review.student.login}/${review.id}">${review.date.time}</a></td>
+        <td><a href="/admin/studentPage/${review.student.login}/showFeedback/${review.id}">${review.date.time}</a></td>
         <td>${review.feedbacker.firstName}</td>
     </tr>
 </c:forEach>

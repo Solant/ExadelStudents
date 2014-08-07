@@ -70,7 +70,7 @@ public class HelloController {
             session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
             session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
             session.setAttribute("role", "WORKER");
-            return "redirect:worker/" + us.getCurrentUserLogin();
+            return "HRworker";
         }
         if (SecurityService.hasRole("ROLE_ADMIN")) {
             session.setAttribute("account", us.getCurrentUserLogin());
