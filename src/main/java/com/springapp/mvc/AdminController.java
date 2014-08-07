@@ -514,10 +514,10 @@ public class AdminController {
                     mailService.send(title, text, userService.getByLogin(feed).getEmail());
                 }
         }
-        /*if (createNotifUnit.isForWorkers()){
-            for (HRWorker worker : HRWorkerService.getAll) {
-                notificationService.add(current, worker, title, text);
-                mailService.send(title, text, userService.getByLogin(worker).getEmail());
+        if (createNotifUnit.isForWorkers()){
+            for (HRWorker worker : hrWorkerService.getAllHRWorkers()) {
+                notificationService.add(current, worker.getLogin(), title, text);
+                mailService.send(title, text, userService.getByLogin(worker.getLogin()).getEmail());
             }
         }
         else {
@@ -525,7 +525,7 @@ public class AdminController {
                 notificationService.add(current, worker, title, text);
                 mailService.send(title, text, userService.getByLogin(worker).getEmail());
             }
-        }*/
+        }
         return "redirect:/admin";
     }
 
