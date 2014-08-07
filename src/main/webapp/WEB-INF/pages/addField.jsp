@@ -121,10 +121,10 @@
 <div id="searchResult" class="list-group"></div>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li class="active">
-        <a href="#technology" role="tab" data-toggle="tab">Technology</a>
+    <li <c:if test="${!isField}">class="active" </c:if>>
+        <a href="#technology"  role="tab" data-toggle="tab">Technology</a>
     </li>
-    <li >
+    <li <c:if test="${isField}">class="active" </c:if> >
         <a href="#field" role="tab" data-toggle="tab">Field</a>
     </li>
 </ul>
@@ -134,7 +134,7 @@
 
 <div class="tab-content">
 
-    <div class="tab-pane active" id="technology">
+    <div class="tab-pane <c:if test="${!isField}">active</c:if>" id="technology">
 <form action="/admin/addTechnology" method="post">
         <div class="spoilers">
             <div class="alignCenter">
@@ -152,7 +152,7 @@
 </form>
     </div>
 
-    <div class="tab-pane" id="field">
+    <div class="tab-pane <c:if test="${isField}">active</c:if>" id="field">
         <div class="spoilers">
 
             <form:form commandName="addFieldUnit" action="/admin/addField" method="post">

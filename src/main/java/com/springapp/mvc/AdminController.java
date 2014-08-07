@@ -424,10 +424,11 @@ public class AdminController {
         return "notificationList";
     }
 
-    @RequestMapping("/showAddField")
-    public String showAddField(ModelMap modelMap) {
+    @RequestMapping("/showAddField/{isField}")
+    public String showAddField(ModelMap modelMap, @PathVariable("isField")boolean isField) {
         modelMap.addAttribute("addFieldUnit", new AddFieldUnit());
         modelMap.addAttribute("groups", groupService.getAllGroups());
+        modelMap.addAttribute("isField", isField);
         return "addField";
     }
 
