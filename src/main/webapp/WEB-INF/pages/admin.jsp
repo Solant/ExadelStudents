@@ -30,11 +30,11 @@
         </c:forEach>
 
 
-</ul>
+    </ul>
 
 
     <form:form commandName="groupedValues" class="spoilers" method="post" action="/admin/formTable">
-<div class="tab-content">
+    <div class="tab-content">
 
         <%pageContext.setAttribute("isActive", "active");%>
         <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">

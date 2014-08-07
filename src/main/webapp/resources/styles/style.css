@@ -188,6 +188,7 @@ table thead th, table thead td, table tfoot td, table tfoot tr{
     border: solid #ffffff;
     float: right;
     font:20px/40px Helvetica;
+    display: none;
 }
 
 .profile img{
@@ -433,6 +434,11 @@ button.gray, a.gray, input[type=submit].gray {
 .technology{
     text-align: center;
     margin-top: 218px;
+}
+
+.buttons{
+    padding-top: 100px;
+    text-align: center;
 }
 
 /*end of linking form*/
@@ -855,8 +861,16 @@ button.gray, a.gray, input[type=submit].gray {
     -moz-border-radius:6px 0 6px 6px;
     border-radius:6px 0 6px 6px;
 }
+/*
 
-.buttons{
-    padding-top: 100px;
-    text-align: center;
+*/
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+    zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs, .nav-pills {
+    text-align:center;
 }
