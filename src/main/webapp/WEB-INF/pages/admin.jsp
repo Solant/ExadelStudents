@@ -51,7 +51,7 @@
                         <ul class="dropdown-menu" role="menu">
 
                             <li>
-                                <button formaction="/admin/showDisabled" class="btn">
+                                <button formaction="/admin/showEnabled" class="btn">
                                     <span>Enabled</span>
                                 </button>
                             </li>

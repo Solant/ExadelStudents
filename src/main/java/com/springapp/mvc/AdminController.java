@@ -362,6 +362,31 @@ public class AdminController {
         return "adminTable";
     }
 
+    @RequestMapping(value = "/showEnabled", method = RequestMethod.GET)
+    public String showEnabled(ModelMap modelMap) {
+        List<Student> listEnabled = studentService.getAllEnabledStudents();
+        tableData = new ArrayList<List<String>>();
+        tableData.add(new ArrayList<String>());
+        tableData.get(0).add("Name");
+        tableData.get(0).add("Login");
+        tableData.get(0).add("Phone");
+        tableData.get(0).add("Skype");
+        tableData.get(0).add("Email");
+        int i = 1;
+        for (Student student : listEnabled) {
+            tableData.add(new ArrayList<String>());
+            tableData.get(i).add(student.getFirstName() + " " + student.getSecondName());
+            tableData.get(i).add(student.getLogin());
+            tableData.get(i).add(student.getTelephone());
+            tableData.get(i).add(student.getSkype());
+            tableData.get(i++).add(student.getEmail());
+        }
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "enable");
+        return "adminTable";
+    }
+
+
     @RequestMapping("/createNotif")
     public String createNotif(ModelMap modelMap) {
         CreateNotifUnit createNotifUnit = new CreateNotifUnit();
