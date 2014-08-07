@@ -362,6 +362,69 @@ public class AdminController {
         return "adminTable";
     }
 
+
+    @RequestMapping(value = "/showStudying", method = RequestMethod.GET)
+    public String showStudying(ModelMap modelMap) {
+        List<GAVPresentation> values = new ArrayList<GAVPresentation>();
+        GAVPresentation e = new GAVPresentation();
+        e.setGroup("service");
+        e.setValue("STUDYING");
+        e.setAttribute("status");
+        e.setShow(false);
+
+        values.add(e);
+        tableData = studentService.find(values);
+        tableData.get(0).add("Phone");
+        tableData.get(0).add("Skype");
+        tableData.get(0).add("Email");
+
+        User user;
+
+        for(List<String> item:tableData){
+            user = userService.getByLogin(item.get(1));
+            if(user != null) {
+                item.add(user.getTelephone());
+                item.add(user.getSkype());
+                item.add(user.getEmail());
+            }
+        }
+
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "enable");
+        return "adminTable";
+    }
+
+    @RequestMapping(value = "/showWorking", method = RequestMethod.GET)
+    public String showWorking(ModelMap modelMap) {
+        List<GAVPresentation> values = new ArrayList<GAVPresentation>();
+        GAVPresentation e = new GAVPresentation();
+        e.setGroup("service");
+        e.setValue("WORKING");
+        e.setAttribute("status");
+        e.setShow(false);
+
+        values.add(e);
+        tableData = studentService.find(values);
+        tableData.get(0).add("Phone");
+        tableData.get(0).add("Skype");
+        tableData.get(0).add("Email");
+
+        User user;
+
+        for(List<String> item:tableData){
+            user = userService.getByLogin(item.get(1));
+            if(user != null) {
+                item.add(user.getTelephone());
+                item.add(user.getSkype());
+                item.add(user.getEmail());
+            }
+        }
+
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", "enable");
+        return "adminTable";
+    }
+
     @RequestMapping(value = "/showEnabled", method = RequestMethod.GET)
     public String showEnabled(ModelMap modelMap) {
         List<Student> listEnabled = studentService.getAllEnabledStudents();

@@ -57,13 +57,13 @@
                             </li>
 
                             <li>
-                                <button formaction="/admin/showDisabled" class="btn">
+                                <button formaction="/admin/showStudying" class="btn">
                                     <span>Studying</span>
                                 </button>
                             </li>
 
                             <li>
-                                <button formaction="/admin/showDisabled" class="btn">
+                                <button formaction="/admin/showWorking" class="btn">
                                     <span>Working</span>
                                 </button>
                             </li>
