@@ -96,13 +96,13 @@ public class AdminController {
         }
         modelMap.addAttribute("groups", groups);
         modelMap.addAttribute("groupedValues", groupedValues);
-        return "admin";
+        return "/admin.jsp";
     }
 
     @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
     public String returnCreate(ModelMap model) {
         model.addAttribute("newUser", new UserUnit());
-        return "create";
+        return "/create.jsp";
     }
 
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
@@ -139,7 +139,7 @@ public class AdminController {
         modelMap.addAttribute("feedbackerMap", feedbackerMap);
         modelMap.addAttribute("technologies", technologies);
         modelMap.addAttribute("linkUnit", linkUnit);
-        return "linking";
+        return "/linking.jsp";
     }
 
     @RequestMapping(value = "/linkStudent", method = RequestMethod.POST)
@@ -276,7 +276,7 @@ public class AdminController {
         modelMap.addAttribute("groups", groups);
         modelMap.addAttribute("groupedValues", groupedValues);
         modelMap.addAttribute("currentUser", currentUser);
-        return "studentForAdmin";
+        return "/studentForAdmin.jsp";
     }
 
     @RequestMapping("/{student}/account")
@@ -457,7 +457,7 @@ public class AdminController {
         modelMap.addAttribute("students", studentService.getAllEnabledStudents());
         modelMap.addAttribute("feedbackers", feedbackerService.getAllFeedbackers());
         modelMap.addAttribute("workers", hrWorkerService.getAllHRWorkers());
-        return "createNotification";
+        return "/createNotification.jsp";
     }
 
     @RequestMapping("/sendNotif")
