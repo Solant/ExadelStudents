@@ -4,6 +4,7 @@ package com.springapp.mvc;
 import com.forView.*;
 import com.forView.Group;
 import com.forView.validators.AccountFormValidator;
+import com.forView.validators.AttributeFormValidator;
 import com.forView.validators.UserFormValidator;
 import com.services.*;
 import com.services.mail.MailService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import persistance.model.*;
 
+import javax.persistence.ManyToOne;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -66,6 +68,9 @@ public class AdminController {
 
     @Autowired
     private UserFormValidator userFormValidator;
+
+    @Autowired
+    private AttributeFormValidator attributeFormValidator;
 
     @Autowired
     private ReviewService reviewService;
@@ -248,7 +253,6 @@ public class AdminController {
     @RequestMapping("/studentPage/{student}")
     public String studentPage(@PathVariable("student") String current, ModelMap modelMap) {
         ArrayList<GAVPresentation> gav = (ArrayList<GAVPresentation>) studentService.getValues(current);
-        System.out.println(gav.size());
         GroupedValues groupedValues = new GroupedValues();
 
 
@@ -315,13 +319,32 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/studentPage/{student}/saveChanges", method = RequestMethod.POST)
-    public String saveChanges(@ModelAttribute("groupedValues") GroupedValues groupedValues,
+    public String saveChanges(@Valid @ModelAttribute("groupedValues") GroupedValues groupedValues,
                               @PathVariable("student") String current,
-                              ModelMap modelMap) {
+                              ModelMap modelMap,
+                              BindingResult result) {
+        attributeFormValidator.validate(groupedValues, result);
+        if (result.hasErrors()) {
+            ArrayList<String> groups = new ArrayList<String>();
+            for(Group group : groupedValues.getValuesArray()){
+                groups.add(group.getGavs().get(0).getGroup());
+            }
+
+            modelMap.addAttribute("groups", groups);
+            modelMap.addAttribute("groupedValues", groupedValues);
+
+            UserUnit currentUser = new UserUnit();
+            currentUser.setLogin(current);
+            currentUser.setFirstname(studentService.getFirstName(current));
+            currentUser.setLastname(studentService.getSecondName(current));
+            modelMap.addAttribute("currentUser", currentUser);
+            return "studentForAdmin";
+        }
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
         for (Group group : groupedValues.getValuesArray())
             values.addAll(group.getGavs());
         studentService.setValues(current, values);
+
         return "redirect:/admin/studentPage/" + current;
     }
 
