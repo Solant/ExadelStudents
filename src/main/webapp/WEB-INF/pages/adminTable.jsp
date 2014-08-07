@@ -25,13 +25,13 @@
 
     <div class="saveTable">
         Save as: <br/>
-        <a href="/admin/exportWord">
+        <a href="/admin/worker/exportWord">
             <img src="/resources/images/word.jpg" alt="word" title="word"/>
         </a>
-        <a href="/admin/exportPDF">
+        <a href="/admin/worker/exportPDF">
             <img src="/resources/images/pdf.jpg" alt="pdf" title="pdf"/>
         </a>
-        <a href="/admin/exportExcel">
+        <a href="/admin/worker/exportExcel">
             <img src="/resources/images/excel.jpg" alt="excel" title="excel"/>
         </a>
     </div>

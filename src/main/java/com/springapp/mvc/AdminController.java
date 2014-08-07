@@ -183,7 +183,7 @@ public class AdminController {
         return "/adminTable";
     }
 
-    @RequestMapping(value = "/exportWord", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/exportWord", method = RequestMethod.GET)
     public String exportWord(HttpServletResponse response) {
         WordTableService wts = new WordTableService("Students' table");
 
@@ -205,7 +205,7 @@ public class AdminController {
         return "";
     }
 
-    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/exportExcel", method = RequestMethod.GET)
     public String exportExcel(HttpServletResponse response) {
         ExcelTableService ets = new ExcelTableService();
 
@@ -227,7 +227,7 @@ public class AdminController {
         return "";
     }
 
-    @RequestMapping(value = "/exportPDF", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/exportPDF", method = RequestMethod.GET)
     public String exportPDF(HttpServletResponse response) {
 
         response.setHeader("Content-Disposition", "attachment;filename=table.pdf");
