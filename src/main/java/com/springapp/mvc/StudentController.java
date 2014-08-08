@@ -2,17 +2,21 @@ package com.springapp.mvc;
 
 import com.forView.Group;
 import com.forView.GroupedValues;
+import com.forView.UserUnit;
+import com.forView.validators.AttributeFormValidator;
 import com.services.StudentService;
 import com.services.UserService;
 import com.services.presentation.GAVPresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,11 @@ public class StudentController {
 
     @Autowired
     private UserService userService;
+
+
+    @Autowired
+    private AttributeFormValidator attributeFormValidator;
+
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String studentPage(ModelMap modelMap, @PathVariable("current") String current) {
@@ -55,7 +64,25 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/saveChanges", method = RequestMethod.POST)
-    public String saveChanges(@ModelAttribute("groupedValues") GroupedValues groupedValues, @PathVariable("current") String current){
+    public String saveChanges(@Valid @ModelAttribute("groupedValues") GroupedValues groupedValues, @PathVariable("current") String current, ModelMap modelMap, BindingResult result){
+
+        attributeFormValidator.validate(groupedValues, result);
+        if (result.hasErrors()) {
+            ArrayList<String> groups = new ArrayList<String>();
+            for(Group group : groupedValues.getValuesArray()){
+                groups.add(group.getGavs().get(0).getGroup());
+            }
+
+            modelMap.addAttribute("groups", groups);
+            modelMap.addAttribute("groupedValues", groupedValues);
+
+            UserUnit currentUser = new UserUnit();
+            currentUser.setLogin(current);
+            currentUser.setFirstname(studentService.getFirstName(current));
+            currentUser.setLastname(studentService.getSecondName(current));
+            modelMap.addAttribute("currentUser", currentUser);
+            return "student";
+        }
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
         for(Group group:groupedValues.getValuesArray())
             values.addAll(group.getGavs());

@@ -1,5 +1,4 @@
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -7,66 +6,30 @@
 <html>
 <head>
     <title>Account</title>
-    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
+
+    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+
 </head>
 <body>
-
-<nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="/resources/images/exadel-logo.png" class="exadel_logo"></a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-
-
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/notif">
-                        <div class="message">
-                            <c:if test="${notifNumber > 0}">
-                                <span>
-                                        ${notifNumber}
-                                </span>
-                            </c:if>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <span class="currUserName"><c:out value="${account}"></c:out></span>
-                </li>
-                <li>
-                    <a href="<c:url value="j_spring_security_logout" />">
-                        <img src="/resources/images/exit.png" class="exit_logo">
-                    </a>
-                </li>
-                <li>
-                    <a href="<c:url value="/account"/> ">
-                        <img src="/resources/images/account.png" class="account_logo">
-                    </a>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-
+<c:if test="${role == 'STUDENT'}">
+    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+</c:if>
+<c:if test="${role == 'CURATOR'}">
+    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+</c:if>
+<c:if test="${role == 'WORKER'}">
+    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+</c:if>
+<c:if test="${role == 'ADMIN'}">
+    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+</c:if>
 
 <form:form commandName="accountUnit" class="loginAndCreateForm" method="post" action="/changePassword">
 
     <h1>Account Form</h1>
+
     <p class="errorText">
-        <form:errors path="*" />
+        <form:errors path="*"/>
     </p>
 
     <p>
@@ -81,7 +44,7 @@
 
     <p>
         <label for="skype">Skype:</label>
-        <form:input path="skype" class="field" type="text" id="skype" />
+        <form:input path="skype" class="field" type="text" id="skype"/>
     </p>
 
     <p>
@@ -91,29 +54,29 @@
 
     <p>
         <label for="telephone">telephone:</label>
-        <form:input path="telephone" class="field" type="text" id="telephone" />
+        <form:input path="telephone" class="field" type="text" id="telephone"/>
     </p>
 
 
-        <p>
-            <label for="oldPassword">Password:</label>
-            <form:input path="password" type="password" id="oldPassword" class="field"/>
-        </p>
+    <p>
+        <label for="oldPassword">Password:</label>
+        <form:input path="password" type="password" id="oldPassword" class="field"/>
+    </p>
 
-        <p>
-            <label for="newPassword">New Password:</label>
-            <form:input path="newPassword" type="password" id="newPassword" class="field"/>
-        </p>
+    <p>
+        <label for="newPassword">New Password:</label>
+        <form:input path="newPassword" type="password" id="newPassword" class="field"/>
+    </p>
 
-        <p>
-            <label for="confirmPassword">Confirm Password:</label>
-            <form:input path="confirmedPassword" type="password" id="confirmPassword" class="field"/>
-        </p>
+    <p>
+        <label for="confirmPassword">Confirm Password:</label>
+        <form:input path="confirmedPassword" type="password" id="confirmPassword" class="field"/>
+    </p>
 
-        <div class="alignCenter">
-            <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
-            <button type="submit"  class="loginAndCreateButton">Change</button>
-        </div>
+    <div class="alignCenter">
+        <button class="gray" onclick="history.back(); return false;">Cancel</button>
+        <button type="submit" class="blue">Change</button>
+    </div>
 </form:form>
 </body>
 

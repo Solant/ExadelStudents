@@ -14,6 +14,8 @@ public class ReviewService {
 
     @Transactional
     public Review getReviewById(long id){
-        return reviewDao.findById(id);
+        Review review = reviewDao.findById(id);
+        review.getRatings().size();
+        return review;
     }
 }

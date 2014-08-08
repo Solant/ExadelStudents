@@ -11,6 +11,7 @@ public class AddFieldUnit {
     private String possibleValues;
     private boolean existingGroup;
     private String forStatus;
+    private String valueType;
 
 
     public String getGroupNameNew() {
@@ -68,5 +69,13 @@ public class AddFieldUnit {
 
     public void setPossibleValues(String possibleValues) {
         this.possibleValues = possibleValues;
+    }
+
+    public String getValueType() {
+        return valueType;
+    }
+
+    public void setValueType(String valueType) {
+        this.valueType = valueType;
     }
 }

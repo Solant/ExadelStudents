@@ -16,6 +16,7 @@ import persistance.model.User;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -52,6 +53,7 @@ public class HelloController {
             session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
             session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
             session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
+            session.setAttribute("role", "STUDENT");
             return "redirect:student/" + us.getCurrentUserLogin();
         }
         if (SecurityService.hasRole("ROLE_CURATOR")) {
@@ -59,13 +61,23 @@ public class HelloController {
             session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
             session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
             session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
+            session.setAttribute("role", "CURATOR");
             return "redirect:curator/" + us.getCurrentUserLogin();
+        }
+        if (SecurityService.hasRole("ROLE_WORKER")) {
+            session.setAttribute("account", us.getCurrentUserLogin());
+            session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
+            session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
+            session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
+            session.setAttribute("role", "WORKER");
+            return "redirect:worker/" + us.getCurrentUserLogin();
         }
         if (SecurityService.hasRole("ROLE_ADMIN")) {
             session.setAttribute("account", us.getCurrentUserLogin());
             session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
             session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
             session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
+            session.setAttribute("role", "ADMIN");
             return "redirect:admin";
         }
 
@@ -175,8 +187,65 @@ public class HelloController {
 //       feedbackerService.addTechnology("curator", "java");
        // return "notificationList";
 
-        notificationService.add("system", "student", "wtestNotif", "some text here");
+       // notificationService.add("system", "student", "wtestNotif", "some text here");
 
+      /* groupService.addGroup("Institution", "for_everybody");
+        attributeService.addAttribute("Institution", "Institution", "select", "BSU;BSUIR;BNTU;MIU;GRSU;VITGTK");
+        attributeService.addAttribute("Institution", "Specialty", "text", null);*/
+//        attributeService.addAttribute("Institution", "Faculty", "text", null);
+//        attributeService.addAttribute("Institution", "Course", "select", "1;2;3;4;5");
+//        attributeService.addAttribute("Institution", "Group", "text", null);
+        /*attributeService.addAttribute("Institution", "Graduating year", "select", "2014;2015;2016;2017;2018;2019;2020");
+
+        groupService.addGroup("Project", "WORKING");
+        attributeService.addAttribute("Project", "Current project", "text", null);
+        attributeService.addAttribute("Project", "Role on current project", "select", "junior;developer;tester");
+        attributeService.addAttribute("Project", "Team Lead on current project", "text", null);
+        attributeService.addAttribute("Project", "Project Manager on current project", "text", null);
+        attributeService.addAttribute("Project", "Curator", "text", null);
+        attributeService.addAttribute("Project", "Technologies on current project", "select", "Java;CSS;HTML");
+        attributeService.addAttribute("Project", "Desire to change project", "select", "Yes;No");
+
+        groupService.addGroup("Probation", "STUDYING");
+        attributeService.addAttribute("Probation", "Invitation to work", "select", "Yes;No");
+        attributeService.addAttribute("Probation", "Practice/Probation", "select", "Practice;Probation");
+        attributeService.addAttribute("Probation", "Date of practice start", "date", null);
+        attributeService.addAttribute("Probation", "Date of practice finish", "date", null);
+        attributeService.addAttribute("Probation", "Curator in Exadel", "text", null);
+
+        groupService.addGroup("Skills", "for_everybody");
+        attributeService.addAttribute("Skills", "Certificates", "textarea", null);
+        attributeService.addAttribute("Skills", "Current Technologies", "select", "Java;CSS;HTML");
+        attributeService.addAttribute("Skills", "English Level", "select", "Beginner;Elementary;Pre-Intermediate;Intermediate;Upper-Intermediate;Advanced");
+        attributeService.addAttribute("Skills", "Desired technologies to work with", "select", "Java;CSS;HTML");
+
+        groupService.addGroup("Work", "WORKING");
+        attributeService.addAttribute("Work", "Hire date", "date", null);
+        attributeService.addAttribute("Work", "Course when was employed", "select", "1;2;3;4;5");
+        attributeService.addAttribute("Work", "Number of hours you're working now(week)", "select", "10;15;20;25;30;35;40");
+        attributeService.addAttribute("Work", "Pre-empoloyment training in Exadel","select","Yes;No");
+        attributeService.addAttribute("Work", "Number of hours you want to work(week)", "select", "10;15;20;25;30;35;40");
+        attributeService.addAttribute("Work", "Last projects", "textarea", null);
+        attributeService.addAttribute("Work", "Billable", "select", "Yes;No");
+        attributeService.addAttribute("Work", "Another vacation(type, date)", "textarea", null);
+        attributeService.addAttribute("Work", "Trainings in Exadel (which - when)", "textarea", null);*/
+
+        List<ArrayList<String>> listListov = new ArrayList<ArrayList<String>>();
+        ArrayList<String> temp1 = new ArrayList<String>();
+        temp1.add("temp1");
+        ArrayList<String> temp2 = new ArrayList<String>();
+        temp2.add("temp2");
+
+        listListov.add(temp1);
+        listListov.add(temp2);
+
+
+        System.out.println(listListov.size());
+        System.out.println(listListov.get(1).get(0));
+
+        System.out.println(listListov.remove(1).get(0));
+
+        System.out.println(listListov.size());
 
     }
 }

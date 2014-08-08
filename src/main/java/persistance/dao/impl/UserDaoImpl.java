@@ -20,7 +20,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
         this.sessionFactory = sessionFactory;
     }
 
-    //@Autowired
+   // @Autowired
     private SessionFactory sessionFactory;
 
     @SuppressWarnings("unchecked")

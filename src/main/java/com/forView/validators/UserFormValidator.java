@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 public class UserFormValidator implements Validator {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Override
     public boolean supports(Class c) {
