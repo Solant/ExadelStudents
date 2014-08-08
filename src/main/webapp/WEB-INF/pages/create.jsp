@@ -26,7 +26,7 @@
 </c:if>
 
 
-<form:form commandName="newUser" cssClass="loginAndCreateForm" action="/admin/createUser" method="post">
+<form:form commandName="newUser" cssClass="loginAndCreateForm"  action="/admin/worker/createUser" method="post">
 		<h1>Adding user Form </h1>
         <p class="errorText">
             <form:errors path="*" />
@@ -35,7 +35,7 @@
 				<label for="login">Login:</label>
 				<form:input path="login" type="text" name="login" id="login" class="field" />
 			</p>
-			
+
 			<p>
 				<label for="password">Password:</label>
 				<form:input path="password" type="password" id="password" class="field" />
@@ -48,7 +48,7 @@
                     <form:option value="Student">Student</form:option>
                     <form:option value="Feedbacker">Feedbacker</form:option>
                     <form:option value="HRWorker">HR worker</form:option>
-                    <form:option value="Admin">Admin</form:option>
+                    <c:if test="${role == 'ADMIN'}"><form:option value="Admin">Admin</form:option></c:if>
                 </form:select>
 			</p>
       <%--  <p>
@@ -63,7 +63,7 @@
             <label for="lastname">Lastname:</label>
             <form:input path="lastname" type="text" id="lastname" class="field" />
         </p>
-		
+
 		<p>
 			<label for="firstname">Firstname:</label>
 			<form:input path="firstname" type="text" id="firstname" class="field" />
@@ -73,7 +73,7 @@
                 <button class="gray" onclick="history.back(); return false;">Cancel</button>
 			    <button type="submit" class="blue">Create</button>
 		     </div>
-		
+
 	</form:form>
 </body>
 

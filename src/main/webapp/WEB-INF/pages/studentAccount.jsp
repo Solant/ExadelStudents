@@ -24,7 +24,7 @@
     <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
 </c:if>
 
-<form:form commandName="accountUnit" class="loginAndCreateForm" action="/admin/${accountUnit.login}/changeCommon"
+<form:form commandName="accountUnit" class="loginAndCreateForm" action="/admin/studentPage/${accountUnit.login}/changeCommon"
            method="post">
 
     <h1>Account Form</h1>

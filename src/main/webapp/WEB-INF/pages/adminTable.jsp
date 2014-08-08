@@ -25,13 +25,13 @@
 
     <div class="saveTable">
         Save as: <br/>
-        <a href="/admin/exportWord">
+        <a href="/admin/worker/exportWord">
             <img src="/resources/images/word.jpg" alt="word" title="word"/>
         </a>
-        <a href="/admin/exportPDF">
+        <a href="/admin/worker/exportPDF">
             <img src="/resources/images/pdf.jpg" alt="pdf" title="pdf"/>
         </a>
-        <a href="/admin/exportExcel">
+        <a href="/admin/worker/exportExcel">
             <img src="/resources/images/excel.jpg" alt="excel" title="excel"/>
         </a>
     </div>
@@ -43,8 +43,15 @@
                     <td>
                     ${item}</td>
 				</c:forEach>
-                <c:if test="${enable == 'enable'}"><td>Disable</td></c:if>
-                <c:if test="${enable == 'disable'}"><td>Enable</td></c:if>
+
+                <td class="withImage">
+                    <c:if test="${enable == 'enable'}">
+                        Disable
+                    </c:if>
+                    <c:if test="${enable == 'disable'}">
+                        Enable
+                    </c:if>
+                </td>
 			</thead>
                 <tbody>
                 <c:forEach items="${tableData}" var="student" begin="1" varStatus="index">
@@ -57,9 +64,18 @@
                                 </td>
                             </c:forEach>
 
-                                <c:if test="${enable == 'enable'}"><td><a href="/admin/${index.count}/disable"><img src="/resources/images/fired.png"></a></td></c:if>
-                                <c:if test="${enable == 'disable'}"><td><a href="/admin/${index.count}/enable"><img src="/resources/images/add.png"></a></td></c:if>
-
+                                <td class="withImage">
+                                    <c:if test="${enable == 'enable'}">
+                                        <a href="/admin/${index.count}/disable">
+                                            <img src="/resources/images/fired.png" class="studentStatusImage">
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${enable == 'disable'}">
+                                        <a href="/admin/${index.count}/enable">
+                                            <img src="/resources/images/add.png" class="studentStatusImage">
+                                        </a>
+                                    </c:if>
+                                </td>
                         </tr>
                 </c:forEach>
                 </tbody>

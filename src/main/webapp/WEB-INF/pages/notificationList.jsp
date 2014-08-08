@@ -9,18 +9,7 @@
 </head>
 <body>
 
-<c:if test="${role == 'STUDENT'}">
-    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
-</c:if>
-<c:if test="${role == 'CURATOR'}">
-    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
-</c:if>
-<c:if test="${role == 'WORKER'}">
-    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
-</c:if>
-<c:if test="${role == 'ADMIN'}">
-    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
-</c:if>
+<%@include file="/WEB-INF/pages/StudentHat.jsp" %>
 
 <div align="center" id="table">
 
@@ -28,7 +17,12 @@
         <thead>
         <td>Subject</td>
         <td>Sender</td>
-        <td class="sorting_desc">Date</td>
+        <td class="sorting_desc">Date when sent</td>
+        <c:if test="${role == 'ADMIN' || role=='WORKER'}">
+            <td>
+                Date when read
+            </td>
+        </c:if>
 
         </thead>
         <tbody>
@@ -43,6 +37,12 @@
                 <td>
                     ${notif.timeWhenSent.time}
                 </td>
+
+                <c:if test="${role == 'ADMIN'|| role=='WORKER'}">
+                    <td>
+                            ${notif.timeWhenRead.time}
+                    </td>
+                </c:if>
             </tr>
         </c:forEach>
 

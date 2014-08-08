@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import persistance.model.*;
 
-import javax.persistence.ManyToOne;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -104,13 +104,13 @@ public class AdminController {
         return "admin";
     }
 
-    @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/returnCreate", method = RequestMethod.GET)
     public String returnCreate(ModelMap model) {
         model.addAttribute("newUser", new UserUnit());
         return "create";
     }
 
-    @RequestMapping(value = "/createUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/worker/createUser", method = RequestMethod.POST)
     public String createUser(ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser, BindingResult result) {
         userFormValidator.validate(newUser, result);
         if (result.hasErrors())
@@ -132,7 +132,7 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/showLinkStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showLinkStudent", method = RequestMethod.GET)
     public String showLinkStudent(ModelMap modelMap) {
         LinkUnit linkUnit = new LinkUnit();
         modelMap.addAttribute("students", studentService.getAllEnabledStudents());
@@ -149,7 +149,7 @@ public class AdminController {
         return "linking";
     }
 
-    @RequestMapping(value = "/linkStudent", method = RequestMethod.POST)
+    @RequestMapping(value = "/worker/linkStudent", method = RequestMethod.POST)
     public String linkStudentCurator(@ModelAttribute("linkUnit") LinkUnit linkUnit, ModelMap modelMap) {
         if (linkUnit.isCurator()) {
             for (String student : linkUnit.getStudents()) {
@@ -184,7 +184,7 @@ public class AdminController {
         return "/adminTable";
     }
 
-    @RequestMapping(value = "/exportWord", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/exportWord", method = RequestMethod.GET)
     public String exportWord(HttpServletResponse response) {
         WordTableService wts = new WordTableService("Students' table");
 
@@ -194,8 +194,9 @@ public class AdminController {
                 wts.addNewCell(item);
         }
         wts.addDateAsString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
 
-        response.setHeader("Content-Disposition", "attachment;filename=table.doc");
+        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".doc");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -206,7 +207,7 @@ public class AdminController {
         return "";
     }
 
-    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/exportExcel", method = RequestMethod.GET)
     public String exportExcel(HttpServletResponse response) {
         ExcelTableService ets = new ExcelTableService();
 
@@ -217,7 +218,8 @@ public class AdminController {
         }
         ets.addDateAsString();
 
-        response.setHeader("Content-Disposition", "attachment;filename=table.xls");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
+        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".xls");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -228,10 +230,11 @@ public class AdminController {
         return "";
     }
 
-    @RequestMapping(value = "/exportPDF", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/exportPDF", method = RequestMethod.GET)
     public String exportPDF(HttpServletResponse response) {
 
-        response.setHeader("Content-Disposition", "attachment;filename=table.pdf");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
+        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".pdf");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -285,7 +288,7 @@ public class AdminController {
         return "studentForAdmin";
     }
 
-    @RequestMapping("/{student}/account")
+    @RequestMapping("/studentPage/{student}/account")
     public String studentAccount(@PathVariable("student") String student, ModelMap modelMap) {
         User user = userService.getByLogin(student);
         AccountUnit accountUnit = new AccountUnit();
@@ -301,7 +304,7 @@ public class AdminController {
         return "studentAccount";
     }
 
-    @RequestMapping("/{student}/changeCommon")
+    @RequestMapping("/studentPage/{student}/changeCommon")
     public String studentChangeCommon(@PathVariable("student") String student,
                                       ModelMap modelMap,
                                       @ModelAttribute("status") String status,
@@ -363,7 +366,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping(value = "/showDisabled", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showDisabled", method = RequestMethod.GET)
     public String showDisabled(ModelMap modelMap) {
         List<Student> listDisabled = studentService.getAllDisabledStudents();
         tableData = new ArrayList<List<String>>();
@@ -388,7 +391,7 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/showStudying", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showStudying", method = RequestMethod.GET)
     public String showStudying(ModelMap modelMap) {
         List<GAVPresentation> values = new ArrayList<GAVPresentation>();
         GAVPresentation e = new GAVPresentation();
@@ -419,7 +422,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping(value = "/showWorking", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showWorking", method = RequestMethod.GET)
     public String showWorking(ModelMap modelMap) {
         List<GAVPresentation> values = new ArrayList<GAVPresentation>();
         GAVPresentation e = new GAVPresentation();
@@ -450,7 +453,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping(value = "/showEnabled", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showEnabled", method = RequestMethod.GET)
     public String showEnabled(ModelMap modelMap) {
         List<Student> listEnabled = studentService.getAllEnabledStudents();
         tableData = new ArrayList<List<String>>();
@@ -515,10 +518,10 @@ public class AdminController {
                     mailService.send(title, text, userService.getByLogin(feed).getEmail());
                 }
         }
-        /*if (createNotifUnit.isForWorkers()){
-            for (HRWorker worker : HRWorkerService.getAll) {
-                notificationService.add(current, worker, title, text);
-                mailService.send(title, text, userService.getByLogin(worker).getEmail());
+        if (createNotifUnit.isForWorkers()){
+            for (HRWorker worker : hrWorkerService.getAllHRWorkers()) {
+                notificationService.add(current, worker.getLogin(), title, text);
+                mailService.send(title, text, userService.getByLogin(worker.getLogin()).getEmail());
             }
         }
         else {
@@ -526,7 +529,7 @@ public class AdminController {
                 notificationService.add(current, worker, title, text);
                 mailService.send(title, text, userService.getByLogin(worker).getEmail());
             }
-        }*/
+        }
         return "redirect:/admin";
     }
 
@@ -568,7 +571,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping("/{student}/disable")
+    @RequestMapping("/worker/{student}/disable")
     public String disableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
         studentService.disable(tableData.get(index).get(1));
         tableData.remove((int) index);
@@ -577,7 +580,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping("/{student}/enable")
+    @RequestMapping("/worker/{student}/enable")
     public String enableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
         studentService.enable(tableData.get(index).get(1));
         tableData.remove((int) index);
@@ -586,13 +589,13 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping("/{student}/allFeedbacks")
+    @RequestMapping("/studentPage/{student}/allFeedbacks")
     public String allStudentFeedbacks(@PathVariable("student") String student, ModelMap modelMap) {
         modelMap.addAttribute("reviews", studentService.getReviews(student));
         return "studentFeedbacks";
     }
 
-    @RequestMapping("/showFeedback/{student}/{revId}")
+    @RequestMapping("/studentPage/{student}/showFeedback/{revId}")
     public String showStudentFeedback(@PathVariable("student") String student,
                                       @PathVariable("revId") Long revId,
                                       ModelMap modelMap) {
