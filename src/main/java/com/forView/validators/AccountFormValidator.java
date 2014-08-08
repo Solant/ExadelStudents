@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 public class AccountFormValidator implements Validator {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Override
     public boolean supports(Class c) {
@@ -20,17 +20,18 @@ public class AccountFormValidator implements Validator {
 
     @Override
     public void validate(Object command, Errors errors) {
+
         AccountUnit accUnit = (AccountUnit) command;
         if(accUnit.getNewPassword()==null)
             return;
         if (!accUnit.getNewPassword().equals(accUnit.getConfirmedPassword()))
             errors.rejectValue("confirmedPassword", "password.notmatch", "Password and retype password do not match");
-        System.out.println("New password" + accUnit.getNewPassword() + accUnit.getNewPassword().equalsIgnoreCase(""));
         if (!UserService.stringToSha256(accUnit.getPassword()).equals
                 (userService.getByLogin(accUnit.getLogin()).getPassword()) &&
                 !accUnit.getNewPassword().equalsIgnoreCase("") &&
                 accUnit.getNewPassword() != null)
-            errors.rejectValue("password", "oldpassword.wrong", "Old password is wrong.");
+            errors.reject(/*"password",*/ "oldpassword.wrong", "Old password is wrong.");
+
     }
 
 }

@@ -9,9 +9,20 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
+<c:if test="${role == 'STUDENT'}">
+    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+</c:if>
+<c:if test="${role == 'CURATOR'}">
+    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+</c:if>
+<c:if test="${role == 'WORKER'}">
+    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+</c:if>
+<c:if test="${role == 'ADMIN'}">
+    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+</c:if>
 
-<form:form commandName="accountUnit" class="loginAndCreateForm" action="/admin/${accountUnit.login}/changeCommon"
+<form:form commandName="accountUnit" class="loginAndCreateForm" action="/admin/studentPage/${accountUnit.login}/changeCommon"
            method="post">
 
     <h1>Account Form</h1>

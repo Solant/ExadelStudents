@@ -4,6 +4,7 @@ package com.springapp.mvc;
 import com.forView.*;
 import com.forView.Group;
 import com.forView.validators.AccountFormValidator;
+import com.forView.validators.AttributeFormValidator;
 import com.forView.validators.UserFormValidator;
 import com.services.*;
 import com.services.mail.MailService;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -68,6 +70,9 @@ public class AdminController {
     private UserFormValidator userFormValidator;
 
     @Autowired
+    private AttributeFormValidator attributeFormValidator;
+
+    @Autowired
     private ReviewService reviewService;
 
     private List<List<String>> tableData;
@@ -99,13 +104,13 @@ public class AdminController {
         return "admin";
     }
 
-    @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/returnCreate", method = RequestMethod.GET)
     public String returnCreate(ModelMap model) {
         model.addAttribute("newUser", new UserUnit());
         return "create";
     }
 
-    @RequestMapping(value = "/createUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/worker/createUser", method = RequestMethod.POST)
     public String createUser(ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser, BindingResult result) {
         userFormValidator.validate(newUser, result);
         if (result.hasErrors())
@@ -115,6 +120,8 @@ public class AdminController {
                 studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
             if (newUser.getRole().toString().equals("Feedbacker"))
                 feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
+            if (newUser.getRole().toString().equals("HRWorker"))
+                hrWorkerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
             if (newUser.getRole().toString().equals("Admin"))
                 administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
             if (tableData == null)
@@ -125,7 +132,7 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/showLinkStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showLinkStudent", method = RequestMethod.GET)
     public String showLinkStudent(ModelMap modelMap) {
         LinkUnit linkUnit = new LinkUnit();
         modelMap.addAttribute("students", studentService.getAllEnabledStudents());
@@ -142,7 +149,7 @@ public class AdminController {
         return "linking";
     }
 
-    @RequestMapping(value = "/linkStudent", method = RequestMethod.POST)
+    @RequestMapping(value = "/worker/linkStudent", method = RequestMethod.POST)
     public String linkStudentCurator(@ModelAttribute("linkUnit") LinkUnit linkUnit, ModelMap modelMap) {
         if (linkUnit.isCurator()) {
             for (String student : linkUnit.getStudents()) {
@@ -177,7 +184,7 @@ public class AdminController {
         return "/adminTable";
     }
 
-    @RequestMapping(value = "/exportWord", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/exportWord", method = RequestMethod.GET)
     public String exportWord(HttpServletResponse response) {
         WordTableService wts = new WordTableService("Students' table");
 
@@ -187,8 +194,9 @@ public class AdminController {
                 wts.addNewCell(item);
         }
         wts.addDateAsString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
 
-        response.setHeader("Content-Disposition", "attachment;filename=table.doc");
+        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".doc");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -199,7 +207,7 @@ public class AdminController {
         return "";
     }
 
-    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/exportExcel", method = RequestMethod.GET)
     public String exportExcel(HttpServletResponse response) {
         ExcelTableService ets = new ExcelTableService();
 
@@ -210,7 +218,8 @@ public class AdminController {
         }
         ets.addDateAsString();
 
-        response.setHeader("Content-Disposition", "attachment;filename=table.xls");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
+        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".xls");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -221,10 +230,11 @@ public class AdminController {
         return "";
     }
 
-    @RequestMapping(value = "/exportPDF", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/exportPDF", method = RequestMethod.GET)
     public String exportPDF(HttpServletResponse response) {
 
-        response.setHeader("Content-Disposition", "attachment;filename=table.pdf");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
+        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".pdf");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -248,7 +258,6 @@ public class AdminController {
     @RequestMapping("/studentPage/{student}")
     public String studentPage(@PathVariable("student") String current, ModelMap modelMap) {
         ArrayList<GAVPresentation> gav = (ArrayList<GAVPresentation>) studentService.getValues(current);
-        System.out.println(gav.size());
         GroupedValues groupedValues = new GroupedValues();
 
 
@@ -279,7 +288,7 @@ public class AdminController {
         return "studentForAdmin";
     }
 
-    @RequestMapping("/{student}/account")
+    @RequestMapping("/studentPage/{student}/account")
     public String studentAccount(@PathVariable("student") String student, ModelMap modelMap) {
         User user = userService.getByLogin(student);
         AccountUnit accountUnit = new AccountUnit();
@@ -295,7 +304,7 @@ public class AdminController {
         return "studentAccount";
     }
 
-    @RequestMapping("/{student}/changeCommon")
+    @RequestMapping("/studentPage/{student}/changeCommon")
     public String studentChangeCommon(@PathVariable("student") String student,
                                       ModelMap modelMap,
                                       @ModelAttribute("status") String status,
@@ -315,13 +324,32 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/studentPage/{student}/saveChanges", method = RequestMethod.POST)
-    public String saveChanges(@ModelAttribute("groupedValues") GroupedValues groupedValues,
+    public String saveChanges(@Valid @ModelAttribute("groupedValues") GroupedValues groupedValues,
                               @PathVariable("student") String current,
-                              ModelMap modelMap) {
+                              ModelMap modelMap,
+                              BindingResult result) {
+        attributeFormValidator.validate(groupedValues, result);
+        if (result.hasErrors()) {
+            ArrayList<String> groups = new ArrayList<String>();
+            for(Group group : groupedValues.getValuesArray()){
+                groups.add(group.getGavs().get(0).getGroup());
+            }
+
+            modelMap.addAttribute("groups", groups);
+            modelMap.addAttribute("groupedValues", groupedValues);
+
+            UserUnit currentUser = new UserUnit();
+            currentUser.setLogin(current);
+            currentUser.setFirstname(studentService.getFirstName(current));
+            currentUser.setLastname(studentService.getSecondName(current));
+            modelMap.addAttribute("currentUser", currentUser);
+            return "studentForAdmin";
+        }
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
         for (Group group : groupedValues.getValuesArray())
             values.addAll(group.getGavs());
         studentService.setValues(current, values);
+
         return "redirect:/admin/studentPage/" + current;
     }
 
@@ -338,7 +366,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping(value = "/showDisabled", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showDisabled", method = RequestMethod.GET)
     public String showDisabled(ModelMap modelMap) {
         List<Student> listDisabled = studentService.getAllDisabledStudents();
         tableData = new ArrayList<List<String>>();
@@ -363,7 +391,7 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/showStudying", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showStudying", method = RequestMethod.GET)
     public String showStudying(ModelMap modelMap) {
         List<GAVPresentation> values = new ArrayList<GAVPresentation>();
         GAVPresentation e = new GAVPresentation();
@@ -394,7 +422,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping(value = "/showWorking", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showWorking", method = RequestMethod.GET)
     public String showWorking(ModelMap modelMap) {
         List<GAVPresentation> values = new ArrayList<GAVPresentation>();
         GAVPresentation e = new GAVPresentation();
@@ -425,7 +453,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping(value = "/showEnabled", method = RequestMethod.GET)
+    @RequestMapping(value = "/worker/showEnabled", method = RequestMethod.GET)
     public String showEnabled(ModelMap modelMap) {
         List<Student> listEnabled = studentService.getAllEnabledStudents();
         tableData = new ArrayList<List<String>>();
@@ -490,10 +518,10 @@ public class AdminController {
                     mailService.send(title, text, userService.getByLogin(feed).getEmail());
                 }
         }
-        /*if (createNotifUnit.isForWorkers()){
-            for (HRWorker worker : HRWorkerService.getAll) {
-                notificationService.add(current, worker, title, text);
-                mailService.send(title, text, userService.getByLogin(worker).getEmail());
+        if (createNotifUnit.isForWorkers()){
+            for (HRWorker worker : hrWorkerService.getAllHRWorkers()) {
+                notificationService.add(current, worker.getLogin(), title, text);
+                mailService.send(title, text, userService.getByLogin(worker.getLogin()).getEmail());
             }
         }
         else {
@@ -501,7 +529,7 @@ public class AdminController {
                 notificationService.add(current, worker, title, text);
                 mailService.send(title, text, userService.getByLogin(worker).getEmail());
             }
-        }*/
+        }
         return "redirect:/admin";
     }
 
@@ -543,7 +571,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping("/{student}/disable")
+    @RequestMapping("/worker/{student}/disable")
     public String disableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
         studentService.disable(tableData.get(index).get(1));
         tableData.remove((int) index);
@@ -552,7 +580,7 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping("/{student}/enable")
+    @RequestMapping("/worker/{student}/enable")
     public String enableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
         studentService.enable(tableData.get(index).get(1));
         tableData.remove((int) index);
@@ -561,13 +589,13 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping("/{student}/allFeedbacks")
+    @RequestMapping("/studentPage/{student}/allFeedbacks")
     public String allStudentFeedbacks(@PathVariable("student") String student, ModelMap modelMap) {
         modelMap.addAttribute("reviews", studentService.getReviews(student));
         return "studentFeedbacks";
     }
 
-    @RequestMapping("/showFeedback/{student}/{revId}")
+    @RequestMapping("/studentPage/{student}/showFeedback/{revId}")
     public String showStudentFeedback(@PathVariable("student") String student,
                                       @PathVariable("revId") Long revId,
                                       ModelMap modelMap) {

@@ -26,6 +26,12 @@ public class Attribute {
     @Column(name = "possible_values")
     private String possibleValues;
 
+    @Column(name = "pattern")
+    private String pattern;
+
+    @Column(name = "error_message")
+    private String errorMessage;
+
     @OneToMany(mappedBy = "attribute")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
     private Set<Value> values;
@@ -85,5 +91,19 @@ public class Attribute {
         this.possibleValues = possibleValues;
     }
 
+    public String getPattern() {
+        return pattern;
+    }
 
+    public void setPattern(String pattern) {
+        this.pattern = pattern;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 }

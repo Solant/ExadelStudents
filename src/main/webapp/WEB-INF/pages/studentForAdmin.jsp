@@ -10,7 +10,18 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
+<c:if test="${role == 'STUDENT'}">
+    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+</c:if>
+<c:if test="${role == 'CURATOR'}">
+    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+</c:if>
+<c:if test="${role == 'WORKER'}">
+    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+</c:if>
+<c:if test="${role == 'ADMIN'}">
+    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+</c:if>
 
 <div align="center">
 
@@ -30,7 +41,7 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/${currentUser.login}/allFeedbacks" class="aToPropsTable">
+                <a href="/admin/studentPage/${currentUser.login}/allFeedbacks">
                     Feedbacks
                 </a>
             </li>
@@ -40,10 +51,12 @@
 
     <form:form commandName="groupedValues" class="spoilers">
 
+    <p class="errorText">
+        <form:errors path="*" />
+    </p>
+
     <div class="tab-content">
-
         <%pageContext.setAttribute("isActive", "active");%>
-
         <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
             <div class="tab-pane ${isActive}" id="${index1.count}">
                 <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
@@ -65,6 +78,12 @@
                         <c:if test="${attr.type == 'date'}">
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" type="date" />
                         </c:if>
+                        <form:input class="hidden"
+                                    path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
+                        <form:input class="hidden"
+                                    path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].type"/>
+                        <form:input class="hidden"
+                                    path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].group"/>
                         <div class="checkboxAligning"><form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" value="yes" cssStyle="width: 20px; margin-left: 5px;"/></div>
                         <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>

@@ -21,11 +21,11 @@
         </p>
 		<p>
             <label for="login">Login:</label>
-			<input type="text" name="j_username" class="field" id="login" value="admin" placeholder="Login">
+			<input type="text" name="j_username" class="field" id="login" value="worker" placeholder="Login">
 		</p>
 		<p>
             <label for="password">Password:</label>
-			<input type="password"  name= "j_password" class="field" id="password" value="123" placeholder="Password">
+			<input type="password"  name= "j_password" class="field" id="password" value="123456" placeholder="Password">
 		</p>
         <p>
             <label for="remember">Remember Me</label>

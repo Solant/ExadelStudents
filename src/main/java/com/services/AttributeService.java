@@ -63,4 +63,9 @@ public class AttributeService {
     public boolean isAttributeAvailable(String attribute){
         return attributeDao.findByName(attribute) == null;
     }
+
+    @Transactional
+    public Attribute getByName(String name){
+        return attributeDao.findByName(name);
+    }
 }

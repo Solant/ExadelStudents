@@ -17,7 +17,12 @@
         <thead>
         <td>Subject</td>
         <td>Sender</td>
-        <td class="sorting_desc">Date</td>
+        <td class="sorting_desc">Date when sent</td>
+        <c:if test="${role == 'ADMIN' || role=='WORKER'}">
+            <td>
+                Date when read
+            </td>
+        </c:if>
 
         </thead>
         <tbody>
@@ -32,6 +37,12 @@
                 <td>
                     ${notif.timeWhenSent.time}
                 </td>
+
+                <c:if test="${role == 'ADMIN'|| role=='WORKER'}">
+                    <td>
+                            ${notif.timeWhenRead.time}
+                    </td>
+                </c:if>
             </tr>
         </c:forEach>
 

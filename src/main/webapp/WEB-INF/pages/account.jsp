@@ -1,6 +1,6 @@
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -14,6 +14,19 @@
 <body>
 
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
+
+<c:if test="${role == 'STUDENT'}">
+    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+</c:if>
+<c:if test="${role == 'CURATOR'}">
+    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+</c:if>
+<c:if test="${role == 'WORKER'}">
+    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+</c:if>
+<c:if test="${role == 'ADMIN'}">
+    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+</c:if>
 
 <form:form commandName="accountUnit" class="loginAndCreateForm" method="post" action="/changePassword">
 
