@@ -98,7 +98,6 @@
                         <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].group"/>
                         <div class="checkboxAligning"><form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" value="yes" cssStyle="width: 20px; margin-left: 5px;"/></div>
-                        <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>
                 </c:forEach>
             </div>

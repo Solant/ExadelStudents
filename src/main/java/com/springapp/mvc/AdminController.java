@@ -525,9 +525,12 @@ public class AdminController {
             }
         }
         else {
-            for (String worker : createNotifUnit.getWorkers()) {
-                notificationService.add(current, worker, title, text);
-                mailService.send(title, text, userService.getByLogin(worker).getEmail());
+
+            if (createNotifUnit.getFeedbackers() != null) {
+                for (String worker : createNotifUnit.getWorkers()) {
+                    notificationService.add(current, worker, title, text);
+                    mailService.send(title, text, userService.getByLogin(worker).getEmail());
+                }
             }
         }
         return "redirect:/admin";

@@ -320,30 +320,34 @@ public class StudentService {
         List<Student> students1 = new ArrayList<Student>();
         for (GAVPresentation gavPresentation : gavPresentationList) {
 
-            students1.clear();
-            students1.addAll(students);
-            students.clear();
-            for (Student student : students1) {
+            boolean isAttrEmpty = false;
+            if (gavPresentation.getValue() == null)
+                isAttrEmpty = true;
+            else if (gavPresentation.getValue().equals(""))
+                isAttrEmpty = true;
+            if (!isAttrEmpty) {
 
-                boolean isSuitable = false;
-                if (gavPresentation.getValue() == null)
-                    isSuitable = true;
-                else if (gavPresentation.getValue().equals(""))
-                    isSuitable = true;
-                Set<Value> valueSet = student.getValues();
-                for (Value value : valueSet) {
-                    if (value != null) {
-                        if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) &&
-                                value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
-                            isSuitable = true;
-                            break;
+                students1.clear();
+                students1.addAll(students);
+                students.clear();
+                for (Student student : students1) {
+
+                    boolean isSuitable = false;
+                    Set<Value> valueSet = student.getValues();
+                    for (Value value : valueSet) {
+                        if (value != null) {
+                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) &&
+                                    value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
+                                isSuitable = true;
+                                break;
+                            }
                         }
+                        if (isSuitable)
+                            break;
                     }
                     if (isSuitable)
-                        break;
+                        students.add(student);
                 }
-                if (isSuitable)
-                    students.add(student);
             }
         }
         for (Student student : students) {

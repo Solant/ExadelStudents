@@ -70,11 +70,11 @@
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
                                         type="date"/>
                         </c:if>
-                        <form:input hidden="true"
+                        <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
-                        <form:input hidden="true"
+                        <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].type"/>
-                        <form:input hidden="true"
+                        <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].group"/>
                     </div>
                 </c:forEach>
