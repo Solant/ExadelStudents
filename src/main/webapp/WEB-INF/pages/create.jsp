@@ -8,25 +8,25 @@
 <head>
   <title>Create</title>
 
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
 <c:if test="${role == 'STUDENT'}">
-    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
 </c:if>
 <c:if test="${role == 'CURATOR'}">
-    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
 </c:if>
 <c:if test="${role == 'WORKER'}">
-    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
 </c:if>
 <c:if test="${role == 'ADMIN'}">
-    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </c:if>
 
 
-<form:form commandName="newUser" cssClass="loginAndCreateForm"  action="/admin/worker/createUser" method="post">
+<form:form commandName="newUser" cssClass="loginAndCreateForm" action="/admin/createUser" method="post">
 		<h1>Adding user Form </h1>
         <p class="errorText">
             <form:errors path="*" />
@@ -35,7 +35,7 @@
 				<label for="login">Login:</label>
 				<form:input path="login" type="text" name="login" id="login" class="field" />
 			</p>
-
+			
 			<p>
 				<label for="password">Password:</label>
 				<form:input path="password" type="password" id="password" class="field" />
@@ -63,7 +63,7 @@
             <label for="lastname">Lastname:</label>
             <form:input path="lastname" type="text" id="lastname" class="field" />
         </p>
-
+		
 		<p>
 			<label for="firstname">Firstname:</label>
 			<form:input path="firstname" type="text" id="firstname" class="field" />
@@ -73,7 +73,7 @@
                 <button class="gray" onclick="history.back(); return false;">Cancel</button>
 			    <button type="submit" class="blue">Create</button>
 		     </div>
-
+		
 	</form:form>
 </body>
 

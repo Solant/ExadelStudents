@@ -8,6 +8,7 @@
 <script src="/resources/styles/bootstrap/js/jquery.js"></script>
 <script src="/resources/styles/bootstrap/js/bootstrap.min.js"></script>
 <script src="/resources/js/ajaxFunc.js"></script>
+<script src="/resources/js/trAnchors.js"></script>
 
 
 <script type="text/javascript" src="/resources/js/jquery.js"></script>
@@ -46,5 +47,11 @@
 <script type="text/javascript" class="init">
     $(document).ready(function() {
         $('#reviewsTable').dataTable();
+    } );
+</script>
+
+<script type="text/javascript" class="init">
+    $(document).ready(function() {
+        $('#fblist').dataTable();
     } );
 </script>

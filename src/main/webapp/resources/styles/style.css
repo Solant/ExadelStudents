@@ -176,6 +176,10 @@ table td{
     border-color: grey;
 }
 
+table tr:not(.notLinking):hover{
+    cursor:pointer;
+}
+
 table thead th, table thead td, table tfoot td, table tfoot tr{
     border: 1px solid #111111;
 }
@@ -879,9 +883,6 @@ button.gray, a.gray, input[type=submit].gray {
     -moz-border-radius:6px 0 6px 6px;
     border-radius:6px 0 6px 6px;
 }
-/*
-
-*/
 .nav-tabs > li, .nav-pills > li {
     float:none;
     display:inline-block;
@@ -892,3 +893,13 @@ button.gray, a.gray, input[type=submit].gray {
 .nav-tabs, .nav-pills {
     text-align:center;
 }
+/*end of bootstrap style*/
+
+/*props of studentForAdmin page*/
+
+.aToPropsTable{
+    background: #428bca;
+    color: white;
+}
+
+/*end props of studentForAdmin*/

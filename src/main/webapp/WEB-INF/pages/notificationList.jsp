@@ -5,11 +5,22 @@
 <html>
 <head lang="en">
     <title>Notification list</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+<c:if test="${role == 'STUDENT'}">
+    <%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
+</c:if>
+<c:if test="${role == 'CURATOR'}">
+    <%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
+</c:if>
+<c:if test="${role == 'WORKER'}">
+    <%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
+</c:if>
+<c:if test="${role == 'ADMIN'}">
+    <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
+</c:if>
 
 <div align="center" id="table">
 

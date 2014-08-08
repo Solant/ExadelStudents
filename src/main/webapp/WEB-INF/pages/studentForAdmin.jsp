@@ -6,36 +6,24 @@
 <html>
 <head lang="en">
     <title>Student's page</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
 <c:if test="${role == 'STUDENT'}">
-    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
 </c:if>
 <c:if test="${role == 'CURATOR'}">
-    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
 </c:if>
 <c:if test="${role == 'WORKER'}">
-    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
 </c:if>
 <c:if test="${role == 'ADMIN'}">
-    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </c:if>
 
 <div align="center">
-    <div class="profile">
-        <a href="<c:url value="/admin/${currentUser.login}/account"/> "><img src="/resources/images/account.png"></a>
-        <c:out value="${currentUser.firstname}"></c:out>
-        <c:out value="${currentUser.lastname}"></c:out>
-        <a href="/admin/${currentUser.login}/allFeedbacks">
-            All feedbacks
-        </a>
-    </div>
-    <a href="/admin/studentPage/${currentUser.login}/notif">
-        <div class="message">
-        </div>
-    </a>
 
     <ul class="nav nav-tabs" role="tablist">
 
@@ -48,12 +36,12 @@
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
             <li>
-                <a href="/admin/studentPage/${currentUser.login}/notif">
+                <a href="/admin/studentPage/${currentUser.login}/notif" class="aToPropsTable">
                     Notifications
                 </a>
             </li>
             <li>
-                <a href="/admin/studentPage/${currentUser.login}/allFeedbacks">
+                <a href="/admin/studentPage/${currentUser.login}/allFeedbacks" class="aToPropsTable">
                     Feedbacks
                 </a>
             </li>
