@@ -32,9 +32,15 @@
 
     </ul>
 
-
+    <div id="hatSelect">
+        <div class="hsFloatLeft">Field name</div>
+        <div class="inTable">In<br/>table</div>
+        <div class="hsFloatRight">Filter parameters</div>
+    </div>
     <form:form commandName="groupedValues" class="spoilers" method="post" action="/admin/formTable">
     <div class="tab-content">
+
+
 
         <%pageContext.setAttribute("isActive", "active");%>
         <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">

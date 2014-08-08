@@ -23,8 +23,10 @@
         <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
     </c:if>
 
+
+
     <div class="saveTable">
-        Save as: <br/>
+        <h2>Resulting lookup table</h2>
         <a href="/admin/exportWord">
             <img src="/resources/images/word.jpg" alt="word" title="word"/>
         </a>

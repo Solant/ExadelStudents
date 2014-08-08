@@ -49,11 +49,13 @@
     </ul>
 
 
+    <h2>Page of ${currentUser.firstname} ${currentUser.lastname}</h2>
     <form:form commandName="groupedValues" class="spoilers">
 
     <p class="errorText">
         <form:errors path="*" />
     </p>
+
 
     <div class="tab-content">
         <%pageContext.setAttribute("isActive", "active");%>

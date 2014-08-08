@@ -685,7 +685,7 @@ button.gray, a.gray, input[type=submit].gray {
     text-align: left;
 }
 
-.notification h2{
+ h2, h3{
     text-align: center;
     margin-bottom: 20px;
 }

@@ -24,6 +24,8 @@
 
 <div align="center" id="table">
 
+    <h2>Notifications of ${currentUser.firstname} ${currentUser.lastname}</h2>
+
     <table id="messageTable" class="display">
         <thead>
         <td>Subject</td>
