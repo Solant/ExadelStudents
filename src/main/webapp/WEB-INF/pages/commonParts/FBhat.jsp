@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -16,12 +18,12 @@
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <button formaction="/curator/${account}/myStudents" type="submit" class="btn <c:if test="${feedbackerRole=='asCurator'}">btnActive</c:if>">
+                        <button formaction="/curator/<sec:authentication property="principal.username" />/myStudents" type="submit" class="btn <c:if test="${feedbackerRole=='asCurator'}">btnActive</c:if>">
                         <span>My Students</span>
                         </button>
                     </li>
                     <li>
-                        <button formaction="/curator/${account}/interview" type="submit" class="btn <c:if test="${feedbackerRole=='asInterviewer'}">btnActive</c:if>">
+                        <button formaction="/curator/<sec:authentication property="principal.username" />/interview" type="submit" class="btn <c:if test="${feedbackerRole=='asInterviewer'}">btnActive</c:if>">
                         <span>Interviews</span>
                         </button>
                     </li>
@@ -37,7 +39,7 @@
                         </a>
                     </li>
                     <li>
-                        <span class="currUserName"><c:out value="${account}"></c:out></span>
+                        <span class="currUserName"><sec:authentication property="principal.username" /></span>
                     </li>
                     <li>
                         <a href="<c:url value="j_spring_security_logout" />">
