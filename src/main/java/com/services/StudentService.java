@@ -1,6 +1,8 @@
 package com.services;
 
+import com.forView.JSONStudent;
 import com.services.presentation.GAVPresentation;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -428,36 +430,24 @@ public class StudentService {
      * @return null if none, List<Student> if found
      */
     @Transactional
-    public List<Student> liveSearch(String line, int status, int numberOfResults) {
-        JSONObject json = new JSONObject();
-        List<Student> search = new ArrayList<Student>();
-        List<Student> students = null;
-        switch (status) {
-            case DISABLED:
-                students = getAllDisabledStudents();
-                break;
-            case ENABLED:
-                students = getAllEnabledStudents();
-                break;
-            case ALL:
-                students = getAllEnabledStudents();
-                students.addAll(getAllDisabledStudents());
-                break;
-            default:
-                break;
-        }
+    public JSONObject liveSearch(String line, int numberOfResults) {
+        List<Student> students = getAllEnabledStudents();
         if (students == null)
             return null;
 
+        List<JSONStudent> jsonStudents = new ArrayList ();
         String[] initials = line.split("[ ,\\.:;]+");
         for (Student student : students) {
-            if (search.size() == numberOfResults)
+            if (jsonStudents.size() == numberOfResults)
                 break;
             switch (initials.length) {
                 case 1:
                     if (student.getFirstName().startsWith(initials[0])
                             || student.getSecondName().startsWith(initials[0])) {
-                        search.add(student);
+                        JSONStudent jsonStudent = new JSONStudent();
+                        jsonStudent.setLogin(student.getLogin());
+                        jsonStudent.setFirstName(student.getFirstName());
+                        jsonStudent.setSecondName(student.getSecondName());
                     }
                     break;
                 case 2:
@@ -465,7 +455,6 @@ public class StudentService {
                             && student.getSecondName().startsWith(initials[1])
                             || student.getFirstName().startsWith(initials[1])
                             && student.getSecondName().startsWith(initials[0])) {
-                        search.add(student);
                     }
                     break;
                 default:
@@ -473,6 +462,12 @@ public class StudentService {
             }
         }
 
-        return search;
+        JSONArray array = new JSONArray();
+        JSONObject resultJson = new JSONObject();
+        resultJson.put("humans", array);
+        System.out.println(resultJson);
+
+
+        return resultJson;
     }
 }

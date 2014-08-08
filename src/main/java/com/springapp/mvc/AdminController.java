@@ -12,6 +12,7 @@ import com.services.presentation.GAVPresentation;
 import com.services.tables.ExcelTableService;
 import com.services.tables.PDFTableService;
 import com.services.tables.WordTableService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -634,5 +635,10 @@ public class AdminController {
         techs.addAll(technologyService.getAllTechnologies());
         modelMap.addAttribute("techologies", techs);
         return "interview";
+    }
+    @RequestMapping(value = "/liveSearch", method = RequestMethod.GET)
+    public JSONObject liveSearch(ModelAndView modelAndView){
+        return studentService.liveSearch((String)modelAndView.getModel().get("initials"), 5);
+
     }
 }
