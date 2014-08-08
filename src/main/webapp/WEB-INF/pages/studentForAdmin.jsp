@@ -53,7 +53,7 @@
     <form:form commandName="groupedValues" class="spoilers">
 
     <p class="errorText">
-        <form:errors path="*" />
+        <form:errors path="*"/>
     </p>
 
 
@@ -78,7 +78,8 @@
                             </form:select>
                         </c:if>
                         <c:if test="${attr.type == 'date'}">
-                            <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" type="date" />
+                            <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
+                                        type="date"/>
                         </c:if>
                         <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
@@ -87,7 +88,6 @@
                         <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].group"/>
                         <div class="checkboxAligning"><form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" value="yes" cssStyle="width: 20px; margin-left: 5px;"/></div>
-                        <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>
                 </c:forEach>
             </div>

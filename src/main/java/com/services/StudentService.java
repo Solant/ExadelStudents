@@ -1,6 +1,8 @@
 package com.services;
 
+import com.forView.JSONStudent;
 import com.services.presentation.GAVPresentation;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -320,30 +322,34 @@ public class StudentService {
         List<Student> students1 = new ArrayList<Student>();
         for (GAVPresentation gavPresentation : gavPresentationList) {
 
-            students1.clear();
-            students1.addAll(students);
-            students.clear();
-            for (Student student : students1) {
+            boolean isAttrEmpty = false;
+            if (gavPresentation.getValue() == null)
+                isAttrEmpty = true;
+            else if (gavPresentation.getValue().equals(""))
+                isAttrEmpty = true;
+            if (!isAttrEmpty) {
 
-                boolean isSuitable = false;
-                if (gavPresentation.getValue() == null)
-                    isSuitable = true;
-                else if (gavPresentation.getValue().equals(""))
-                    isSuitable = true;
-                Set<Value> valueSet = student.getValues();
-                for (Value value : valueSet) {
-                    if (value != null) {
-                        if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) &&
-                                value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
-                            isSuitable = true;
-                            break;
+                students1.clear();
+                students1.addAll(students);
+                students.clear();
+                for (Student student : students1) {
+
+                    boolean isSuitable = false;
+                    Set<Value> valueSet = student.getValues();
+                    for (Value value : valueSet) {
+                        if (value != null) {
+                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) &&
+                                    value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
+                                isSuitable = true;
+                                break;
+                            }
                         }
+                        if (isSuitable)
+                            break;
                     }
                     if (isSuitable)
-                        break;
+                        students.add(student);
                 }
-                if (isSuitable)
-                    students.add(student);
             }
         }
         for (Student student : students) {
@@ -419,49 +425,41 @@ public class StudentService {
      * Live search method
      *
      * @param line            Search line
-     * @param status          0 for disabled 1 for enabled 2 for all
      * @param numberOfResults number of results to return
      * @return null if none, List<Student> if found
      */
     @Transactional
-    public List<Student> liveSearch(String line, int status, int numberOfResults) {
-        JSONObject json = new JSONObject();
-        List<Student> search = new ArrayList<Student>();
-        List<Student> students = null;
-        switch (status) {
-            case DISABLED:
-                students = getAllDisabledStudents();
-                break;
-            case ENABLED:
-                students = getAllEnabledStudents();
-                break;
-            case ALL:
-                students = getAllEnabledStudents();
-                students.addAll(getAllDisabledStudents());
-                break;
-            default:
-                break;
-        }
+    public List<JSONStudent> liveSearch(String line, int numberOfResults) {
+        List<Student> students = getAllEnabledStudents();
         if (students == null)
             return null;
 
+        List<JSONStudent> jsonStudents = new ArrayList ();
         String[] initials = line.split("[ ,\\.:;]+");
         for (Student student : students) {
-            if (search.size() == numberOfResults)
+            if (jsonStudents.size() == numberOfResults)
                 break;
             switch (initials.length) {
                 case 1:
-                    if (student.getFirstName().startsWith(initials[0])
-                            || student.getSecondName().startsWith(initials[0])) {
-                        search.add(student);
+                    if (student.getFirstName().toLowerCase().startsWith(initials[0].toLowerCase())
+                            || student.getSecondName().toLowerCase().startsWith(initials[0].toLowerCase())) {
+                        JSONStudent jsonStudent = new JSONStudent();
+                        jsonStudent.setLogin(student.getLogin());
+                        jsonStudent.setFirstName(student.getFirstName());
+                        jsonStudent.setSecondName(student.getSecondName());
+                        jsonStudents.add(jsonStudent);
                     }
                     break;
                 case 2:
-                    if (student.getFirstName().startsWith(initials[0])
-                            && student.getSecondName().startsWith(initials[1])
-                            || student.getFirstName().startsWith(initials[1])
-                            && student.getSecondName().startsWith(initials[0])) {
-                        search.add(student);
+                    if (student.getFirstName().toLowerCase().startsWith(initials[0].toLowerCase())
+                            && student.getSecondName().toLowerCase().startsWith(initials[1].toLowerCase())
+                            || student.getFirstName().toLowerCase().startsWith(initials[1].toLowerCase())
+                            && student.getSecondName().toLowerCase().startsWith(initials[0].toLowerCase())) {
+                        JSONStudent jsonStudent = new JSONStudent();
+                        jsonStudent.setLogin(student.getLogin());
+                        jsonStudent.setFirstName(student.getFirstName());
+                        jsonStudent.setSecondName(student.getSecondName());
+                        jsonStudents.add(jsonStudent);
                     }
                     break;
                 default:
@@ -469,6 +467,6 @@ public class StudentService {
             }
         }
 
-        return search;
+        return jsonStudents;
     }
 }

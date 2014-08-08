@@ -12,17 +12,16 @@ import com.services.presentation.GAVPresentation;
 import com.services.tables.ExcelTableService;
 import com.services.tables.PDFTableService;
 import com.services.tables.WordTableService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import persistance.model.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -525,9 +524,12 @@ public class AdminController {
             }
         }
         else {
-            for (String worker : createNotifUnit.getWorkers()) {
-                notificationService.add(current, worker, title, text);
-                mailService.send(title, text, userService.getByLogin(worker).getEmail());
+
+            if (createNotifUnit.getFeedbackers() != null) {
+                for (String worker : createNotifUnit.getWorkers()) {
+                    notificationService.add(current, worker, title, text);
+                    mailService.send(title, text, userService.getByLogin(worker).getEmail());
+                }
             }
         }
         return "redirect:/admin";
@@ -542,7 +544,9 @@ public class AdminController {
 
     @RequestMapping("/showAddField/{isField}")
     public String showAddField(ModelMap modelMap, @PathVariable("isField")boolean isField) {
-        modelMap.addAttribute("addFieldUnit", new AddFieldUnit());
+        AddFieldUnit addFieldUnit = new AddFieldUnit();
+        addFieldUnit.setExistingGroup(true);
+        modelMap.addAttribute("addFieldUnit", addFieldUnit);
         modelMap.addAttribute("groups", groupService.getAllGroups());
         modelMap.addAttribute("isField", isField);
         return "addField";
@@ -550,12 +554,33 @@ public class AdminController {
 
     @RequestMapping(value = "/addField", method = RequestMethod.POST)
     public String addField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
+        String groupName;
         if (addFieldUnit.isExistingGroup()) {
-            attributeService.addAttribute(addFieldUnit.getGroupNameExist(), addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues());
+            groupName = addFieldUnit.getGroupNameExist();
         } else {
             groupService.addGroup(addFieldUnit.getGroupNameNew(), addFieldUnit.getForStatus());
-            attributeService.addAttribute(addFieldUnit.getGroupNameNew(), addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues());
+            groupName = addFieldUnit.getGroupNameNew();
         }
+
+        String pattern = null;
+        String errorMessage = null;
+        if(addFieldUnit.getValueType().equals("number")){
+            pattern = "^[0-9]*$";
+            errorMessage = addFieldUnit.getFieldName() + " must be a number";
+        }
+
+        if(addFieldUnit.getValueType().equals("fullName")){
+            pattern = "^[A-Za-z//s//-//.]*$";
+            errorMessage = addFieldUnit.getFieldName() + " must be a full name";
+        }
+
+        if(addFieldUnit.getValueType().equals("symbolsOnly")){
+            pattern = "^[A-Za-z//s]*$";
+            errorMessage = addFieldUnit.getFieldName() + " must contain only latin symbols and space";
+        }
+
+        attributeService.addAttribute(groupName, addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
+
         if (tableData == null)
             return "redirect:/admin";
         modelMap.addAttribute("tableData", tableData);
@@ -608,5 +633,10 @@ public class AdminController {
         techs.addAll(technologyService.getAllTechnologies());
         modelMap.addAttribute("techologies", techs);
         return "interview";
+    }
+    @RequestMapping(value = "liveSearch", method = RequestMethod.GET)
+    public @ResponseBody List<JSONStudent> liveSearch(@ModelAttribute("initials") String initials){
+        System.out.println(initials);
+        return studentService.liveSearch(initials, 5);
     }
 }

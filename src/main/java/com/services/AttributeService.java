@@ -25,12 +25,15 @@ public class AttributeService {
     private GroupDao groupDao;
 
     @Transactional
-    public void addAttribute(String groupName, String attributeName, String valueType, String possibleValues){
+    public void addAttribute(String groupName, String attributeName, String valueType, String possibleValues,
+                             String pattern, String errorMessage){
         Attribute attribute = new Attribute();
         attribute.setGroup(groupDao.findByName(groupName));
         attribute.setType(valueType);
         attribute.setAttributeName(attributeName);
         attribute.setPossibleValues(possibleValues);
+        attribute.setPattern(pattern);
+        attribute.setErrorMessage(errorMessage);
         attributeDao.save(attribute);
     }
 
