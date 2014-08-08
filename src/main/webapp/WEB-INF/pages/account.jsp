@@ -12,9 +12,11 @@
 
 </head>
 <body>
+
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <h1>ADMIN MOTHAFUKA</h1>
 </sec:authorize>
+
 <c:if test="${role == 'STUDENT'}">
     <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
 </c:if>
