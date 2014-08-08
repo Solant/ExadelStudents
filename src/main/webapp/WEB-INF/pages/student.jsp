@@ -8,11 +8,11 @@
 <html>
 <head lang="en">
     <title>Student's page</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
 
 <div align="center">
     <div class="profile">

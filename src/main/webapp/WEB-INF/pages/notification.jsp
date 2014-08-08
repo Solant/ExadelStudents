@@ -5,11 +5,11 @@
 <html>
 <head lang="en">
     <title>Notification</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
 
 <div class="notifPadding">
     <div class="notification">

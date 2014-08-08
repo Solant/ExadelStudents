@@ -6,11 +6,11 @@
 <html>
 <head>
     <title>Review</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/FBhat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
 
 <form:form commandName="review" class="reviewForm" action="/curator/${account}/addFeedback" method="post">
 <form:input hidden="true" path="student.login" />

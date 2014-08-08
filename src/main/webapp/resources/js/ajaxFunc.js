@@ -38,11 +38,9 @@ function liveSearch(){
     searchResult.empty();
     searchResult.css(show);
 
-    var obj= data;
-
     $.each(data["humans"], function(index, human){
     var anchor=$('<a/>');
-    anchor.attr("href",human.id);
+    anchor.attr("href",human.login);
     anchor.text(human.lastName+" "+human.firstName);
     anchor.addClass('list-group-item');
     searchResult.append(anchor);

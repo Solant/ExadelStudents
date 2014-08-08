@@ -6,11 +6,11 @@
 <html>
 <head lang="en">
     <title>Create Letter</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %></head>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %></head>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
 <form:form commandName="createNotifUnit" action="/admin/sendNotif" method="post" class="createNotificationForm">
 

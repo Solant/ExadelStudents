@@ -49,3 +49,9 @@
         $('#reviewsTable').dataTable();
     } );
 </script>
+
+<script type="text/javascript" class="init">
+    $(document).ready(function() {
+        $('#fblist').dataTable();
+    } );
+</script>

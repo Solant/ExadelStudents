@@ -5,12 +5,12 @@
 	<head>
 
         <title>Admin | Table</title>
-        <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+        <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 
     </head>
 	<body>
 
-    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
     <div class="saveTable">
         Save as: <br/>

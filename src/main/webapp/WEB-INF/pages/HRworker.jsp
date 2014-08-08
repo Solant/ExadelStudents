@@ -4,11 +4,11 @@
 <html>
 <title>HR worker</title>
 <head>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
 
 </body>
 </html>

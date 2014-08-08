@@ -4,11 +4,11 @@
 <html>
 <head>
     <title>Linking</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/FBhat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
 
 <form class="linkingForm" >
 <div class="radio">

@@ -6,11 +6,11 @@
 <html>
 <head lang="en">
     <title>Student's page</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
 <div align="center">
 
