@@ -6,39 +6,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student's account</title>
-    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/resources/styles/style.css" />
-    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/styles/style.css">
-    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.1/css/jquery.dataTables.css">
-
-    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" class="init">
-        $(document).ready(function() {
-            $('#fblist').dataTable();
-        } );
-    </script>
+    <title>Admin | Student's account</title>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
 <c:if test="${role == 'STUDENT'}">
-    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
 </c:if>
 <c:if test="${role == 'CURATOR'}">
-    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
 </c:if>
 <c:if test="${role == 'WORKER'}">
-    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
 </c:if>
 <c:if test="${role == 'ADMIN'}">
-    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </c:if>
 
 
 </div>
 <div id="table">
+    <h2>Feedbacks of ${review.student.firstname} ${review.student.lastname}</h2>
 <table id="fblist" class="display">
 <thead>
 <tr>
@@ -49,7 +38,7 @@
 <tbody>
 <c:forEach items="${reviews}" var="review">
     <tr>
-        <td><a href="/admin/studentPage/${review.student.login}/showFeedback/${review.id}">${review.date.time}</a></td>
+        <td><a href="/admin/showFeedback/${review.student.login}/${review.id}">${review.date.time}</a></td>
         <td>${review.feedbacker.firstName}</td>
     </tr>
 </c:forEach>

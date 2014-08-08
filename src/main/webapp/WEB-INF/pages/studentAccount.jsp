@@ -1,27 +1,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student's account</title>
-    <link href="/resources/styles/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/resources/styles/style.css"/>
+    <title>Admin | Student's account</title>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
 <c:if test="${role == 'STUDENT'}">
-    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
 </c:if>
 <c:if test="${role == 'CURATOR'}">
-    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
 </c:if>
 <c:if test="${role == 'WORKER'}">
-    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
 </c:if>
 <c:if test="${role == 'ADMIN'}">
-    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </c:if>
 
 <form:form commandName="accountUnit" class="loginAndCreateForm" action="/admin/studentPage/${accountUnit.login}/changeCommon"

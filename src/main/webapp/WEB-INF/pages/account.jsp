@@ -8,34 +8,31 @@
 <head>
     <title>Account</title>
 
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 
 </head>
 <body>
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-    <h1>ADMIN MOTHAFUKA</h1>
-</sec:authorize>
+<%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
 <c:if test="${role == 'STUDENT'}">
-    <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
 </c:if>
 <c:if test="${role == 'CURATOR'}">
-    <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
 </c:if>
 <c:if test="${role == 'WORKER'}">
-    <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
 </c:if>
 <c:if test="${role == 'ADMIN'}">
-    <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </c:if>
 
 <form:form commandName="accountUnit" class="loginAndCreateForm" method="post" action="/changePassword">
 
     <h1>Account Form</h1>
-
     <p class="errorText">
-        <form:errors path="*"/>
+        <form:errors path="*" />
     </p>
 
     <p>
@@ -50,7 +47,7 @@
 
     <p>
         <label for="skype">Skype:</label>
-        <form:input path="skype" class="field" type="text" id="skype"/>
+        <form:input path="skype" class="field" type="text" id="skype" />
     </p>
 
     <p>
@@ -60,29 +57,29 @@
 
     <p>
         <label for="telephone">telephone:</label>
-        <form:input path="telephone" class="field" type="text" id="telephone"/>
+        <form:input path="telephone" class="field" type="text" id="telephone" />
     </p>
 
 
-    <p>
-        <label for="oldPassword">Password:</label>
-        <form:input path="password" type="password" id="oldPassword" class="field"/>
-    </p>
+        <p>
+            <label for="oldPassword">Password:</label>
+            <form:input path="password" type="password" id="oldPassword" class="field"/>
+        </p>
 
-    <p>
-        <label for="newPassword">New Password:</label>
-        <form:input path="newPassword" type="password" id="newPassword" class="field"/>
-    </p>
+        <p>
+            <label for="newPassword">New Password:</label>
+            <form:input path="newPassword" type="password" id="newPassword" class="field"/>
+        </p>
 
-    <p>
-        <label for="confirmPassword">Confirm Password:</label>
-        <form:input path="confirmedPassword" type="password" id="confirmPassword" class="field"/>
-    </p>
+        <p>
+            <label for="confirmPassword">Confirm Password:</label>
+            <form:input path="confirmedPassword" type="password" id="confirmPassword" class="field"/>
+        </p>
 
-    <div class="alignCenter">
-        <button class="gray" onclick="history.back(); return false;">Cancel</button>
-        <button type="submit" class="blue">Change</button>
-    </div>
+        <div class="alignCenter">
+            <button class="gray" onclick="history.back(); return false;">Cancel</button>
+            <button type="submit"  class="blue">Change</button>
+        </div>
 </form:form>
 </body>
 

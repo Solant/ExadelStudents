@@ -31,18 +31,16 @@ function liveSearch(){
     return;
     }
 
-    var url="http://www.json-generator.com/api/json/get/cqQcvGyfTm?indent=2";
+    /*var url="http://www.json-generator.com/api/json/get/cqQcvGyfTm?indent=2";*/
 
-    /* var url="controller?initials="+searchRequest;*/
+     var url="admin/liveSearch?initials="+searchRequest;
     $.get( url , function( data ) {
     searchResult.empty();
     searchResult.css(show);
 
-    var obj= data;
-
     $.each(data["humans"], function(index, human){
     var anchor=$('<a/>');
-    anchor.attr("href",human.id);
+    anchor.attr("href",human.login);
     anchor.text(human.lastName+" "+human.firstName);
     anchor.addClass('list-group-item');
     searchResult.append(anchor);

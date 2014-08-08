@@ -4,12 +4,12 @@
 <html>
 <head lang="en">
     <title>Admin</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
 <div align="center">
     <div class="profile">
@@ -32,9 +32,15 @@
 
     </ul>
 
-
+    <div id="hatSelect">
+        <div class="hsFloatLeft">Field name</div>
+        <div class="inTable">In<br/>table</div>
+        <div class="hsFloatRight">Filter parameters</div>
+    </div>
     <form:form commandName="groupedValues" class="spoilers" method="post" action="/admin/formTable">
     <div class="tab-content">
+
+
 
         <%pageContext.setAttribute("isActive", "active");%>
         <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">

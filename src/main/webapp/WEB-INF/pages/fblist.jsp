@@ -4,13 +4,12 @@
 <html>
 <head>
     <title>List</title>
-    <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/FBhat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
 
-</div>
 <div id="table">
     <table id="fblist" class="display">
         <thead>

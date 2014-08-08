@@ -4,11 +4,11 @@
 <html>
 <head>
   <title>Login</title>
-  <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+  <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
 
-<%@include file="/WEB-INF/pages/EmptyHat.jsp" %>
+<%@include file="/WEB-INF/pages/commonParts/EmptyHat.jsp" %>
 
 	<form method="post" action="/j_spring_security_check" class="loginAndCreateForm" >
 

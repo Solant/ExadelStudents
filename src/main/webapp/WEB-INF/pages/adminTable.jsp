@@ -4,34 +4,36 @@
 <html>
 	<head>
 
-        <title>Table</title>
-        <%@include file="/WEB-INF/pages/allIncluded.jsp" %>
+        <title>Admin | Table</title>
+        <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 
     </head>
 	<body>
 
     <c:if test="${role == 'STUDENT'}">
-        <%@include file="/WEB-INF/pages/StudentHat.jsp" %>
+        <%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
     </c:if>
     <c:if test="${role == 'CURATOR'}">
-        <%@include file="/WEB-INF/pages/FBhat.jsp" %>
+        <%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
     </c:if>
     <c:if test="${role == 'WORKER'}">
-        <%@include file="/WEB-INF/pages/HRWhat.jsp" %>
+        <%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
     </c:if>
     <c:if test="${role == 'ADMIN'}">
-        <%@include file="/WEB-INF/pages/AdminHat.jsp" %>
+        <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
     </c:if>
 
+
+
     <div class="saveTable">
-        Save as: <br/>
-        <a href="/admin/worker/exportWord">
+        <h2>Resulting lookup table</h2>
+        <a href="/admin/exportWord">
             <img src="/resources/images/word.jpg" alt="word" title="word"/>
         </a>
-        <a href="/admin/worker/exportPDF">
+        <a href="/admin/exportPDF">
             <img src="/resources/images/pdf.jpg" alt="pdf" title="pdf"/>
         </a>
-        <a href="/admin/worker/exportExcel">
+        <a href="/admin/exportExcel">
             <img src="/resources/images/excel.jpg" alt="excel" title="excel"/>
         </a>
     </div>
@@ -55,10 +57,12 @@
 			</thead>
                 <tbody>
                 <c:forEach items="${tableData}" var="student" begin="1" varStatus="index">
-                        <tr>
+                        <tr<c:if test="${enable != 'enable'}"> class="notLinking" </c:if>>
                             <c:forEach items="${student}" var="item" >
                                 <td>
-                                    <c:if test="${enable == 'enable'}"><a href="/admin/studentPage/${student.get(1)}"></c:if>
+                                    <c:if test="${enable == 'enable'}">
+                                        <a href="/admin/studentPage/${student.get(1)}">
+                                    </c:if>
                                     ${item}
                                     </a>
                                 </td>
