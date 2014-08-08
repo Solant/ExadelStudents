@@ -17,13 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import persistance.model.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -636,9 +634,9 @@ public class AdminController {
         modelMap.addAttribute("techologies", techs);
         return "interview";
     }
-    @RequestMapping(value = "/liveSearch", method = RequestMethod.GET)
-    public JSONObject liveSearch(ModelAndView modelAndView){
-        return studentService.liveSearch((String)modelAndView.getModel().get("initials"), 5);
-
+    @RequestMapping(value = "liveSearch", method = RequestMethod.GET)
+    public @ResponseBody List<JSONStudent> liveSearch(@ModelAttribute("initials") String initials){
+        System.out.println(initials);
+        return studentService.liveSearch(initials, 5);
     }
 }

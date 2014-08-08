@@ -425,12 +425,11 @@ public class StudentService {
      * Live search method
      *
      * @param line            Search line
-     * @param status          0 for disabled 1 for enabled 2 for all
      * @param numberOfResults number of results to return
      * @return null if none, List<Student> if found
      */
     @Transactional
-    public JSONObject liveSearch(String line, int numberOfResults) {
+    public List<JSONStudent> liveSearch(String line, int numberOfResults) {
         List<Student> students = getAllEnabledStudents();
         if (students == null)
             return null;
@@ -442,19 +441,25 @@ public class StudentService {
                 break;
             switch (initials.length) {
                 case 1:
-                    if (student.getFirstName().startsWith(initials[0])
-                            || student.getSecondName().startsWith(initials[0])) {
+                    if (student.getFirstName().toLowerCase().startsWith(initials[0].toLowerCase())
+                            || student.getSecondName().toLowerCase().startsWith(initials[0].toLowerCase())) {
                         JSONStudent jsonStudent = new JSONStudent();
                         jsonStudent.setLogin(student.getLogin());
                         jsonStudent.setFirstName(student.getFirstName());
                         jsonStudent.setSecondName(student.getSecondName());
+                        jsonStudents.add(jsonStudent);
                     }
                     break;
                 case 2:
-                    if (student.getFirstName().startsWith(initials[0])
-                            && student.getSecondName().startsWith(initials[1])
-                            || student.getFirstName().startsWith(initials[1])
-                            && student.getSecondName().startsWith(initials[0])) {
+                    if (student.getFirstName().toLowerCase().startsWith(initials[0].toLowerCase())
+                            && student.getSecondName().toLowerCase().startsWith(initials[1].toLowerCase())
+                            || student.getFirstName().toLowerCase().startsWith(initials[1].toLowerCase())
+                            && student.getSecondName().toLowerCase().startsWith(initials[0].toLowerCase())) {
+                        JSONStudent jsonStudent = new JSONStudent();
+                        jsonStudent.setLogin(student.getLogin());
+                        jsonStudent.setFirstName(student.getFirstName());
+                        jsonStudent.setSecondName(student.getSecondName());
+                        jsonStudents.add(jsonStudent);
                     }
                     break;
                 default:
@@ -462,12 +467,6 @@ public class StudentService {
             }
         }
 
-        JSONArray array = new JSONArray();
-        JSONObject resultJson = new JSONObject();
-        resultJson.put("humans", array);
-        System.out.println(resultJson);
-
-
-        return resultJson;
+        return jsonStudents;
     }
 }
