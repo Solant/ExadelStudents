@@ -8,16 +8,32 @@
 
     <http use-expressions="true" access-denied-page="/access_deny">
         <intercept-url pattern="/admin/studentPage/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/returnCreate" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/createUser" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/showLinkStudent" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/linkStudent" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/exportWord" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/returnPDF" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/returnExcel" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/showDisabled" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/showEnabled" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/showStudying" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/*/disable" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/*/enable" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+
         <intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/worker/**" access="hasRole('ROLE_WORKER')" />
         <intercept-url pattern="/curator/**" access="hasRole('ROLE_CURATOR')" />
         <intercept-url pattern="/student/*" access="hasRole('ROLE_STUDENT')" />
+
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/worker" access="hasRole('ROLE_WORKER')" />
         <intercept-url pattern="/student" access="hasRole('ROLE_STUDENT')" />
         <intercept-url pattern="/curator" access="hasRole('ROLE_CURATOR')" />
+
         <intercept-url pattern="/notif" access="hasAnyRole('ROLE_STUDENT', 'ROLE_CURATOR', 'ROLE_WORKER', 'ROLE_ADMIN')" />
         <intercept-url pattern="/account" access="hasAnyRole('ROLE_STUDENT', 'ROLE_CURATOR', 'ROLE_WORKER', 'ROLE_ADMIN')" />
+
         <form-login login-page="/login" authentication-failure-handler-ref="authenticationFailureHandler"/>
         <logout logout-success-url="/" />
     </http>

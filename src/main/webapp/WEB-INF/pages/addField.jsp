@@ -21,7 +21,7 @@
     </li>
 </ul>
 
-<div class="tab-content">
+<div class="tab-content" align="center">
 
     <div class="tab-pane <c:if test="${!isField}">active</c:if>" id="technology">
         <form action="/admin/addTechnology" method="post">

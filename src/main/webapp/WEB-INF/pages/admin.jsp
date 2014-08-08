@@ -34,7 +34,11 @@
 
     <div id="hatSelect">
         <div class="hsFloatLeft">Field name</div>
-        <div class="inTable">In<br/>table</div>
+        <div class="inTable">
+            <span class="dropt">?
+                <span>Show this column in generated table</span>
+            </span>
+        </div>
         <div class="hsFloatRight">Filter parameters</div>
     </div>
     <form:form commandName="groupedValues" class="spoilers" method="post" action="/admin/formTable">
