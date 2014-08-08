@@ -176,6 +176,10 @@ table td{
     border-color: grey;
 }
 
+table tr:not(.notLinking):hover{
+    cursor:pointer;
+}
+
 table thead th, table thead td, table tfoot td, table tfoot tr{
     border: 1px solid #111111;
 }

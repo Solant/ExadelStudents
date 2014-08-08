@@ -44,10 +44,12 @@
 			</thead>
                 <tbody>
                 <c:forEach items="${tableData}" var="student" begin="1" varStatus="index">
-                        <tr>
+                        <tr<c:if test="${enable != 'enable'}"> class="notLinking" </c:if>>
                             <c:forEach items="${student}" var="item" >
                                 <td>
-                                    <c:if test="${enable == 'enable'}"><a href="/admin/studentPage/${student.get(1)}"></c:if>
+                                    <c:if test="${enable == 'enable'}">
+                                        <a href="/admin/studentPage/${student.get(1)}">
+                                    </c:if>
                                     ${item}
                                     </a>
                                 </td>
@@ -72,6 +74,8 @@
     </div>
 
     </body>
+
+
     </html>
                 <%--<tbody>
                 <tr>
