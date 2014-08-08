@@ -37,6 +37,9 @@ public class StudentController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String studentPage(ModelMap modelMap, @PathVariable("current") String current) {
+        if (!current.equalsIgnoreCase(UserService.getCurrentUserLogin()))
+            return "redirect:/student/"+UserService.getCurrentUserLogin();
+
         ArrayList<GAVPresentation> gav = (ArrayList<GAVPresentation>)studentService.getValues(current);
         System.out.println(gav.size());
         GroupedValues groupedValues = new GroupedValues();
