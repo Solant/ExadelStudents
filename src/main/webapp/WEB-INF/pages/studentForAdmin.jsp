@@ -50,6 +50,15 @@
 
 
     <h2>Page of ${currentUser.firstname} ${currentUser.lastname}</h2>
+    <div id="hatSelect">
+        <div class="hsFloatLeft">Field name</div>
+        <div class="inTable">
+            <span class="dropt">?
+                <span>Show this column in generated table</span>
+            </span>
+        </div>
+        <div class="hsFloatRight">Filter parameters</div>
+    </div>
     <form:form commandName="groupedValues" class="spoilers">
 
     <p class="errorText">

@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -92,7 +93,7 @@
                         </a>
                     </li>
                     <li>
-                        <span class="currUserName"><c:out value="${account}"></c:out></span>
+                        <span class="currUserName"><sec:authentication property="principal.username" /></span>
                     </li>
 
                     <li>

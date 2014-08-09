@@ -32,6 +32,8 @@
 
     </ul>
 
+    <h2>Filtering options</h2>
+
     <div id="hatSelect">
         <div class="hsFloatLeft">Field name</div>
         <div class="inTable">

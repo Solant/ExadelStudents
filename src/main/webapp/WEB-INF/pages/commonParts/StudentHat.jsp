@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <nav class="navbar navbar-blue navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,7 +28,7 @@
                     </a>
                 </li>
                 <li>
-                    <span class="currUserName"><c:out value="${account}"></c:out></span>
+                    <span class="currUserName"><sec:authentication property="principal.username" /></span>
                 </li>
                 <li>
                     <a href="<c:url value="j_spring_security_logout" />">
