@@ -1,6 +1,6 @@
-<%@ page import="com.services.UserService" %>
-<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -9,18 +9,18 @@
 </head>
 <body>
 
-<c:if test="${role == 'STUDENT'}">
+<sec:authorize access="hasRole('ROLE_STUDENT')">
     <%@include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
-</c:if>
-<c:if test="${role == 'CURATOR'}">
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_CURATOR')">
     <%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
-</c:if>
-<c:if test="${role == 'WORKER'}">
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_WORKER')">
     <%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
-</c:if>
-<c:if test="${role == 'ADMIN'}">
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
     <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
-</c:if>
+</sec:authorize>
 
 <div class="notifPadding">
     <div class="notification">

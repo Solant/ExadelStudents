@@ -19,11 +19,8 @@
                 <li>
                     <a href="/notif">
                         <div class="message">
-                            <c:if test="${notifNumber > 0}">
-                                <span>
-                                    ${notifNumber}
-                                </span>
-                            </c:if>
+                            <span id="numberOfNotifications">
+                            </span>
                         </div>
                     </a>
                 </li>

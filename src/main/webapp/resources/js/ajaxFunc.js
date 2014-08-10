@@ -20,8 +20,8 @@ $(document).ready(function () {
     });
 });
 function liveSearch() {
-    var remove = {display: "none"}
-    var show = {display: "block"}
+    var remove = {display: "none"};
+    var show = {display: "block"};
 
     var searchResult = $('#searchResult');
     var searchRequest = $('#search').val();
@@ -33,7 +33,7 @@ function liveSearch() {
 
     /*var url="http://www.json-generator.com/api/json/get/cqQcvGyfTm?indent=2";*/
 
-    var url = "admin/liveSearch?initials=" + searchRequest;
+    var url = "/admin/liveSearch?initials=" + searchRequest;
     $.get(url, function (data) {
         searchResult.empty();
         searchResult.css(show);
@@ -78,3 +78,23 @@ $(document).ready(function () {
         }
     )
 });
+
+
+$(document).ready(function () {
+    getNumberOfNotifications();
+})
+
+function getNumberOfNotifications(){
+    var numberOfNotifications = $('#numberOfNotifications');
+    var remove = {display: "none"};
+    var src = "/notif/update";
+
+    $.get(src, function (data) {
+        if (data == 0){
+            numberOfNotifications.css(remove);
+        }
+        else{
+            numberOfNotifications.append(data.toString());
+        }
+    });
+}
