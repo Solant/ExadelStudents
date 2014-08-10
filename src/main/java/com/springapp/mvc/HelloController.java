@@ -1,16 +1,15 @@
 package com.springapp.mvc;
 
 import com.forView.AccountUnit;
+import com.forView.JSONStudent;
 import com.forView.validators.AccountFormValidator;
 import com.services.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import persistance.model.Notification;
 import persistance.model.User;
 
@@ -247,5 +246,14 @@ public class HelloController {
 
         System.out.println(listListov.size());
 
+    }
+
+    @RequestMapping(value = "/notif/update", method = RequestMethod.GET)
+    public @ResponseBody
+    int getNumberOfUnreadNotifications(@ModelAttribute("initials") String initials){
+        if (us.getAllUnreadNotifications(UserService.getCurrentUserLogin()) == null)
+            return 0;
+        else
+            return us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size();
     }
 }
