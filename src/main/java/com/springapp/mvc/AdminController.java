@@ -691,37 +691,45 @@ public class AdminController {
                 return "adminTable";
             }
 
-            if (addFieldUnit.getFieldName() != null) {
-                String groupName;
-                if (addFieldUnit.isExistingGroup()) {
-                    groupName = addFieldUnit.getGroupNameExist();
-                } else {
-                    groupService.addGroup(addFieldUnit.getGroupNameNew(), addFieldUnit.getForStatus());
-                    groupName = addFieldUnit.getGroupNameNew();
-                }
-
-                String pattern = null;
-                String errorMessage = null;
-
-                if (addFieldUnit.getValueType() != null) {
-                    if (addFieldUnit.getValueType().equals("number")) {
-                        pattern = "^[0-9]*$";
-                        errorMessage = addFieldUnit.getFieldName() + " must be a number";
-                    }
-
-                    if (addFieldUnit.getValueType().equals("fullName")) {
-                        pattern = "^[A-Za-z//s//-//.]*$";
-                        errorMessage = addFieldUnit.getFieldName() + " must be a full name";
-                    }
-
-                    if (addFieldUnit.getValueType().equals("symbolsOnly")) {
-                        pattern = "^[A-Za-z//s]*$";
-                        errorMessage = addFieldUnit.getFieldName() + " must contain only latin symbols and space";
-                    }
-                }
-                attributeService.updateAttribute(addFieldUnit.getOldFieldName(), groupName, addFieldUnit.getFieldName(),
-                        addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
+            String newFieldName = addFieldUnit.getFieldName();
+            if (newFieldName == null)
+                newFieldName = addFieldUnit.getOldFieldName();
+            else{
+                if(newFieldName.trim().equals(""))
+                    newFieldName = addFieldUnit.getOldFieldName();
             }
+
+
+            String groupName;
+            if (addFieldUnit.isExistingGroup()) {
+                groupName = addFieldUnit.getGroupNameExist();
+            } else {
+                groupService.addGroup(addFieldUnit.getGroupNameNew(), addFieldUnit.getForStatus());
+                groupName = addFieldUnit.getGroupNameNew();
+            }
+
+            String pattern = null;
+            String errorMessage = null;
+
+            if (addFieldUnit.getValueType() != null) {
+                if (addFieldUnit.getValueType().equals("number")) {
+                    pattern = "^[0-9]*$";
+                    errorMessage = addFieldUnit.getFieldName() + " must be a number";
+                }
+
+                if (addFieldUnit.getValueType().equals("fullName")) {
+                    pattern = "^[A-Za-z//s//-//.]*$";
+                    errorMessage = addFieldUnit.getFieldName() + " must be a full name";
+                }
+
+                if (addFieldUnit.getValueType().equals("symbolsOnly")) {
+                    pattern = "^[A-Za-z//s]*$";
+                    errorMessage = addFieldUnit.getFieldName() + " must contain only latin symbols and space";
+                }
+            }
+            attributeService.updateAttribute(addFieldUnit.getOldFieldName(), groupName, newFieldName,
+                    addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
+
         }
         if (tableData == null)
             return "redirect:/admin";
@@ -730,9 +738,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/changeGroup", method = RequestMethod.POST)
-    public String changeGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit, ModelMap modelMap){
-        if(changeGroupUnit.getOldGroupName()!= null){
-            if(changeGroupUnit.isDelete()) {
+    public String changeGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit, ModelMap modelMap) {
+        if (changeGroupUnit.getOldGroupName() != null) {
+            if (changeGroupUnit.isDelete()) {
                 groupService.deleteGroup(changeGroupUnit.getOldGroupName());
 
                 if (tableData == null)
@@ -741,10 +749,17 @@ public class AdminController {
                 return "adminTable";
             }
 
-            if(changeGroupUnit.getNewGroupName()!=null){
-                groupService.updateGroup(changeGroupUnit.getOldGroupName(),
-                        changeGroupUnit.getNewGroupName(), changeGroupUnit.getStatus());
+            String newGroupName = changeGroupUnit.getNewGroupName();
+            if (newGroupName == null)
+                newGroupName = changeGroupUnit.getOldGroupName();
+            else{
+                if(newGroupName.trim().equals(""))
+                    newGroupName = changeGroupUnit.getOldGroupName();
             }
+
+            groupService.updateGroup(changeGroupUnit.getOldGroupName(),
+                    newGroupName, changeGroupUnit.getStatus());
+
         }
 
         if (tableData == null)
