@@ -13,12 +13,6 @@
     <%@ include file="/WEB-INF/pages/commonParts/StudentHat.jsp" %>
 
     <div align="center">
-        <%--<div class="profile">                         Unnescessary
-            <img src="/resources/images/account.png">
-            <c:out value="${secondName}"></c:out>
-            <c:out value="${firstName}"></c:out>
-        </div>--%>
-
         <ul class="nav nav-tabs" role="tablist">
             <%pageContext.setAttribute("isActive", "active");%>
             <c:forEach items="${groups}" var="groupName" varStatus="index">

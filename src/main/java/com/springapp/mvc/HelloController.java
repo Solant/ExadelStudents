@@ -1,10 +1,8 @@
 package com.springapp.mvc;
 
 import com.forView.AccountUnit;
-import com.forView.JSONStudent;
 import com.forView.validators.AccountFormValidator;
 import com.services.*;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,14 +19,9 @@ import java.util.List;
 @Controller
 
 public class HelloController {
-    @Autowired
-    private UserService us;
 
     @Autowired
-    private AdministratorService administratorService;
-
-    @Autowired
-    private StudentService studentService;
+    private UserService userService;
 
     @Autowired
     private AccountFormValidator accountFormValidator;
@@ -36,49 +29,19 @@ public class HelloController {
     @Autowired
     private NotificationService notificationService;
 
-   /* @RequestMapping(value = {"*/
-
-    /**
-     * "}, method = RequestMethod.GET)
-     * public void start(HttpSession session) {
-     * session.setAttribute("account", us.getCurrentUserLogin());
-     * }
-     */
-
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String welcomePage(ModelMap model, HttpSession session) {
-        if (SecurityService.hasRole("ROLE_STUDENT")) {
-            session.setAttribute("account", us.getCurrentUserLogin());
-            session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
-            session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
-            session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
-            session.setAttribute("role", "STUDENT");
-            return "redirect:student/" + us.getCurrentUserLogin();
-        }
-        if (SecurityService.hasRole("ROLE_CURATOR")) {
-            session.setAttribute("account", us.getCurrentUserLogin());
-            session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
-            session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
-            session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
-            session.setAttribute("role", "CURATOR");
-            return "redirect:curator/" + us.getCurrentUserLogin();
-        }
-        if (SecurityService.hasRole("ROLE_WORKER")) {
-            session.setAttribute("account", us.getCurrentUserLogin());
-            session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
-            session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
-            session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
-            session.setAttribute("role", "WORKER");
+        if (SecurityService.hasRole("ROLE_STUDENT"))
+            return "redirect:student/" + UserService.getCurrentUserLogin();
+
+        if (SecurityService.hasRole("ROLE_CURATOR"))
+            return "redirect:curator/" + UserService.getCurrentUserLogin();
+
+        if (SecurityService.hasRole("ROLE_WORKER"))
             return "HRworker";
-        }
-        if (SecurityService.hasRole("ROLE_ADMIN")) {
-            session.setAttribute("account", us.getCurrentUserLogin());
-            session.setAttribute("notifNumber", us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size());
-            session.setAttribute("firstName", us.getFirstName(UserService.getCurrentUserLogin()));
-            session.setAttribute("secondName", us.getSecondName(UserService.getCurrentUserLogin()));
-            session.setAttribute("role", "ADMIN");
+
+        if (SecurityService.hasRole("ROLE_ADMIN"))
             return "redirect:admin";
-        }
 
         return "login";
     }
@@ -86,7 +49,7 @@ public class HelloController {
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(ModelMap modelMap) {
         String login = UserService.getCurrentUserLogin();
-        User user = us.getByLogin(login);
+        User user = userService.getByLogin(login);
         AccountUnit accountUnit = new AccountUnit();
         accountUnit.setFirstName(user.getFirstName());
         accountUnit.setLogin(login);
@@ -105,13 +68,13 @@ public class HelloController {
         if (!result.hasErrors()) {
             if(!accountUnit.getNewPassword().equals("") &&
                     accountUnit.getNewPassword()!=null) {
-                us.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
+                userService.setPassword(UserService.getCurrentUserLogin() ,accountUnit.getNewPassword());
             }
-            User user = us.getByLogin(UserService.getCurrentUserLogin());
+            User user = userService.getByLogin(UserService.getCurrentUserLogin());
             user.setEmail(accountUnit.getEmail());
             user.setSkype(accountUnit.getSkype());
             user.setTelephone(accountUnit.getTelephone());
-            us.update(user);
+            userService.update(user);
 
             modelMap.addAttribute("accountUnit", accountUnit);
         }
@@ -120,7 +83,7 @@ public class HelloController {
 
     @RequestMapping(value = "/notif", method = RequestMethod.GET)
     public String showNotifs(ModelMap modelMap){
-        List<Notification> notifications = us.getAllNotifications(UserService.getCurrentUserLogin());
+        List<Notification> notifications = userService.getAllNotifications(UserService.getCurrentUserLogin());
         modelMap.addAttribute("notifs", notifications);
         return "notificationList";
     }
@@ -132,19 +95,6 @@ public class HelloController {
         modelMap.addAttribute("notif", notification);
         return "notification";
     }
-
-    @Autowired
-    private AttributeService attributeService;
-
-    @Autowired
-    private GroupService groupService;
-
-    @Autowired
-    private TechnologyService technologyService;
-
-    @Autowired
-    private FeedbackerService feedbackerService;
-
 
     @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
     public void welcomePage() {/*
@@ -251,9 +201,9 @@ public class HelloController {
     @RequestMapping(value = "/notif/update", method = RequestMethod.GET)
     public @ResponseBody
     int getNumberOfUnreadNotifications(@ModelAttribute("initials") String initials){
-        if (us.getAllUnreadNotifications(UserService.getCurrentUserLogin()) == null)
+        if (userService.getAllUnreadNotifications(UserService.getCurrentUserLogin()) == null)
             return 0;
         else
-            return us.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size();
+            return userService.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size();
     }
 }

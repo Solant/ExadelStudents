@@ -12,12 +12,6 @@
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
 <div align="center">
-    <div class="profile">
-        <img src="/resources/images/account.png">
-        <c:out value="${secondName}"></c:out>
-        <c:out value="${firstName}"></c:out>
-    </div>
-
     <ul class="nav nav-tabs" role="tablist">
 
         <%pageContext.setAttribute("isActive", "active");%>
