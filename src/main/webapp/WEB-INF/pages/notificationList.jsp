@@ -24,7 +24,7 @@
 
 <div align="center" id="table">
 
-    <h2>Notifications of ${currentUser.firstname} ${currentUser.lastname}</h2>
+    <h2>Notifications of ${notifs[0].user.firstName} ${notifs[0].user.secondName}</h2>
 
     <table id="messageTable" class="display">
         <thead>
@@ -67,51 +67,3 @@
 
 </body>
 </html>
-
-
-
-<%--<tr>
-                <td><a href="">Session</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Alert</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>Admin</td>
-                <td>30.07.2014</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Alert</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>Admin</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Alert</a></td>
-                <td>System</td>
-                <td>30.07.2014</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>
-            <tr>
-                <td><a href="">Session</a></td>
-                <td>System</td>
-                <td>30.07.2013</td>
-            </tr>--%>

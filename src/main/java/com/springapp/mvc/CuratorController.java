@@ -17,17 +17,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import persistance.model.Rating;
-import persistance.model.Review;
-import persistance.model.Student;
-import persistance.model.Technology;
+import persistance.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/curator/{current}")
+@RequestMapping("/curator")
 public class CuratorController {
 
     @Autowired
@@ -43,12 +40,15 @@ public class CuratorController {
     private TechnologyService technologyService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String curatorPage(@PathVariable("current") String current) {
-        return "redirect:/curator/" + current + "/myStudents";
+    public String curatorPage() {
+        String current = UserService.getCurrentUserLogin();
+        return "redirect:/curator/myStudents";
     }
 
     @RequestMapping(value = "/myStudents", method = RequestMethod.GET)
-    public String myStudents(ModelMap model, @PathVariable("current") String current) {
+    public String myStudents(ModelMap model) {
+
+        String current = UserService.getCurrentUserLogin();
         Set<Student> students = feedbackerService.getSupervisedStudents(current);
         List<FeedbackingUnit> studentsNames = new ArrayList<FeedbackingUnit>();
         for (Student student : students) {
@@ -71,7 +71,9 @@ public class CuratorController {
     }
 
     @RequestMapping(value = "/interview", method = RequestMethod.GET)
-    public String interview(ModelMap model, @PathVariable("current") String current) {
+    public String interview(ModelMap model) {
+
+        String current = UserService.getCurrentUserLogin();
         Set<Student> students = feedbackerService.getInterviewedStudents(current);
         List<FeedbackingUnit> studentsNames = new ArrayList<FeedbackingUnit>();
         for (Student student : students) {
@@ -95,7 +97,8 @@ public class CuratorController {
 
     @RequestMapping(value = "/showFeedback/{studentLogin}/{feedbackerRole}", method = RequestMethod.GET)
     public String showCuratorFeedback(@PathVariable("studentLogin") String studentLogin, ModelMap modelMap,
-                                      @PathVariable("feedbackerRole") String feedbackerRole, @PathVariable("current") String current) {
+                                      @PathVariable("feedbackerRole") String feedbackerRole) {
+
         Review review = new Review();
         Student student = studentService.getStudentByLogin(studentLogin);
         review.setStudent(student);
@@ -124,14 +127,13 @@ public class CuratorController {
     @RequestMapping(value = "/addFeedback", method = RequestMethod.POST)
     public String addFeedback(@ModelAttribute("review") Review review) {
         studentService.addWorkingReview(review.getStudent().getLogin(), UserService.getCurrentUserLogin(), review);
-        return "redirect:/curator/" + UserService.getCurrentUserLogin();
+        return "redirect:/curator";
     }
 
 
     @RequestMapping(value = "/addRatingReview", method = RequestMethod.POST)
-    public String addRatingFeedback(ModelMap modelMap,
-                                    @PathVariable("current") String current,
-                                    @ModelAttribute("review") Review review) {
+    public String addRatingFeedback(ModelMap modelMap,@ModelAttribute("review") Review review) {
+
         int size = 5;
         for (int i = 0; i < size; i++) {
             if (review.getRatings().get(i).getTechnology().getTechnologyName().equals("")) {
@@ -141,7 +143,7 @@ public class CuratorController {
         }
         studentService.addStudyingReview(review.getStudent().getLogin(), UserService.getCurrentUserLogin(), review);
 
-        return "redirect:/curator/" + current;
+        return "redirect:/curator";
     }
 
 }

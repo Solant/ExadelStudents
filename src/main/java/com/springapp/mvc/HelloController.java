@@ -32,10 +32,10 @@ public class HelloController {
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String welcomePage(ModelMap model, HttpSession session) {
         if (SecurityService.hasRole("ROLE_STUDENT"))
-            return "redirect:student/" + UserService.getCurrentUserLogin();
+            return "redirect:student";
 
         if (SecurityService.hasRole("ROLE_CURATOR"))
-            return "redirect:curator/" + UserService.getCurrentUserLogin();
+            return "redirect:curator";
 
         if (SecurityService.hasRole("ROLE_WORKER"))
             return "HRworker";

@@ -26,67 +26,12 @@
         <c:forEach items="${studentList}" var="name">
             <tr>
                 <td>
-                    <a href="/curator/${account}/showFeedback/${name.studentLogin}/${feedbackerRole}">${name.studentName}</a>
+                    <a href="/curator/showFeedback/${name.studentLogin}/${feedbackerRole}">${name.studentName}</a>
                 </td>
                 <td>${name.date}</td>
                 <td>${name.feedbackerName}</td>
             </tr>
         </c:forEach>
-        <%--<tr>
-            <td><a href="/curator/${account}/addFeedback/${feedbackerRole}">Ivanov Ivan</a></td>
-            <td>23.07.2013</td>
-            <td>Curator</td>
-        </tr>
-        <tr>
-            <td><a href="/curator/${account}/addFeedback/${feedbackerRole}">Ivanov Alex</a></td>
-            <td>23.07.2014</td>
-            <td>Interviewer</td>
-        </tr>--%>
-        <%--<tr>
-            <td><a href="review.jsp">Ivanov Ivan</a></td>
-            <td>23.07.2014</td>
-            <td>Curator</td>
-        </tr>
-        <tr>
-            <td><a href="review.jsp">Ivanov Alex</a></td>
-            <td>23.07.2013</td>
-            <td>Feedbacker</td>
-        </tr>
-        <tr>
-            <td><a href="review.jsp">Ivanov Ivan</a></td>
-            <td>23.07.2014</td>
-            <td>Curator</td>
-        </tr>
-        <tr>
-            <td><a href="review.jsp">Ivanov Ivan</a></td>
-            <td>23.07.2013</td>
-            <td>Feedbacker</td>
-        </tr>
-        <tr>
-            <td><a href="review.jsp">Ivanov Ivan</a></td>
-            <td>23.07.2014</td>
-            <td>Curator</td>
-        </tr>
-        <tr>
-            <td><a href="review.jsp">Ivanov Alex</a></td>
-            <td>23.07.2013</td>
-            <td>Feedbacker</td>
-        </tr>
-        <tr>
-            <td><a href="review.jsp">Ivanov Ivan</a></td>
-            <td>23.07.2014</td>
-            <td>Curator</td>
-        </tr>
-        <tr>
-            <td><a href="review.jsp">Ivanov Ivan</a></td>
-            <td>23.07.2014</td>
-            <td>Feedbacker</td>
-        </tr>
-        <tr>
-            <td><a href="review.jsp">Ivanov Alex</a></td>
-            <td>23.07.2013</td>
-            <td>Curator</td>
-        </tr>--%>
         </tbody>
     </table>
 </div>

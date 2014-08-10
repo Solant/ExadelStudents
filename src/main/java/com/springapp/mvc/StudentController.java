@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/student/{current}")
+@RequestMapping("/student")
 public class StudentController {
 
     @Autowired
@@ -36,9 +36,8 @@ public class StudentController {
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String studentPage(ModelMap modelMap, @PathVariable("current") String current) {
-        if (!current.equalsIgnoreCase(UserService.getCurrentUserLogin()))
-            return "redirect:/student/"+UserService.getCurrentUserLogin();
+    public String studentPage(ModelMap modelMap) {
+        String current = UserService.getCurrentUserLogin();
 
         ArrayList<GAVPresentation> gav = (ArrayList<GAVPresentation>)studentService.getValues(current);
         System.out.println(gav.size());
@@ -67,8 +66,9 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/saveChanges", method = RequestMethod.POST)
-    public String saveChanges(@Valid @ModelAttribute("groupedValues") GroupedValues groupedValues, @PathVariable("current") String current, ModelMap modelMap, BindingResult result){
+    public String saveChanges(@Valid @ModelAttribute("groupedValues") GroupedValues groupedValues, ModelMap modelMap, BindingResult result){
 
+        String current = UserService.getCurrentUserLogin();
         attributeFormValidator.validate(groupedValues, result);
         if (result.hasErrors()) {
             ArrayList<String> groups = new ArrayList<String>();
@@ -90,7 +90,7 @@ public class StudentController {
         for(Group group:groupedValues.getValuesArray())
             values.addAll(group.getGavs());
         studentService.setValues(current, values);
-        return "redirect:/student/"+current;
+        return "redirect:/student";
     }
 
 

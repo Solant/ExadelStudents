@@ -24,7 +24,7 @@
     <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </sec:authorize>
 
-<form:form commandName="review" class="reviewForm" action="/curator/${account}/addFeedback" method="post">
+<form:form commandName="review" class="reviewForm" action="/curator/addFeedback" method="post">
 <form:input hidden="true" path="student.login" />
     <form:input hidden="true" path="fromInterview" />
         <div class="alignCenter">

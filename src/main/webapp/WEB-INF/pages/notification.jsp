@@ -26,7 +26,7 @@
     <div class="notification">
 
         <h2>${notif.title}</h2>
-        <h3>Dear ${currentUser.firstname} ${currentUser.lastname}</h3>
+        <h3>Dear ${notif.user.firstName} ${notif.user.secondName}</h3>
 
         <div class="text">
             <p>

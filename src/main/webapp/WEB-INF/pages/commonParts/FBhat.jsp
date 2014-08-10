@@ -18,12 +18,12 @@
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <button formaction="/curator/<sec:authentication property="principal.username" />/myStudents" type="submit" class="btn <c:if test="${feedbackerRole=='asCurator'}">btnActive</c:if>">
+                        <button formaction="/curator/myStudents" type="submit" class="btn <c:if test="${feedbackerRole=='asCurator'}">btnActive</c:if>">
                         <span>My Students</span>
                         </button>
                     </li>
                     <li>
-                        <button formaction="/curator/<sec:authentication property="principal.username" />/interview" type="submit" class="btn <c:if test="${feedbackerRole=='asInterviewer'}">btnActive</c:if>">
+                        <button formaction="/curator/interview" type="submit" class="btn <c:if test="${feedbackerRole=='asInterviewer'}">btnActive</c:if>">
                         <span>Interviews</span>
                         </button>
                     </li>

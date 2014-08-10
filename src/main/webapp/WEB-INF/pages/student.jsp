@@ -23,7 +23,7 @@
             </c:forEach>
         </ul>
 
-        <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/${account}/saveChanges">
+        <form:form commandName="groupedValues" class="spoilers" method="post" action="/student/saveChanges">
 
             <div class="tab-content">
             <p class="errorText">
