@@ -33,7 +33,7 @@ function liveSearch() {
 
     /*var url="http://www.json-generator.com/api/json/get/cqQcvGyfTm?indent=2";*/
 
-    var url = "admin/liveSearch?initials=" + searchRequest;
+    var url = "/admin/liveSearch?initials=" + searchRequest;
     $.get(url, function (data) {
         searchResult.empty();
         searchResult.css(show);
