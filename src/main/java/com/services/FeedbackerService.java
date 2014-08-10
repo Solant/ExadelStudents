@@ -1,5 +1,6 @@
 package com.services;
 
+import com.forView.JSONFeedbacker;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import persistance.model.Student;
 import persistance.model.Technology;
 import persistance.model.UserRole;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -97,5 +99,28 @@ public class FeedbackerService {
     @Transactional
     public Set<Feedbacker> getFeedbackersByTechnology(String technologyName){
         return new HashSet<Feedbacker>(technologyDao.findByName(technologyName).getFeedbackers());
+    }
+
+    @Transactional
+    public List<JSONFeedbacker> filterFeedbackers(String technologyName){
+        List<JSONFeedbacker> jsonFeedbackers = new ArrayList();
+        if(technologyName.equals("Any")){
+            for(Feedbacker f : getAllFeedbackers()) {
+                JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
+                jsonFeedbacker.setSecondName(f.getSecondName());
+                jsonFeedbacker.setLogin(f.getLogin());
+                jsonFeedbackers.add(jsonFeedbacker);
+            }
+        }
+        else{
+                for(Feedbacker f : getFeedbackersByTechnology(technologyName)) {
+                    JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
+                    jsonFeedbacker.setSecondName(f.getSecondName());
+                    jsonFeedbacker.setLogin(f.getLogin());
+                    jsonFeedbackers.add(jsonFeedbacker);
+                }
+        }
+        return jsonFeedbackers;
+
     }
 }

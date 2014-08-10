@@ -7,6 +7,11 @@ import java.util.List;
  */
 public class LinkUnit {
 
+    private List<String> students;
+    private List<String> feedbackers;
+    private boolean curator;//or Interviewer
+    private String technology;
+
     public List<String> getStudents() {
         return students;
     }
@@ -31,9 +36,15 @@ public class LinkUnit {
         this.curator = curator;
     }
 
-    private List<String> students;
-    private List<String> feedbackers;
-    private boolean curator;//or Interviewer
+
+    public String getTechnology() {
+        return technology;
+    }
+
+    public void setTechnology(String technology) {
+        this.technology = technology;
+    }
+
 
 
 

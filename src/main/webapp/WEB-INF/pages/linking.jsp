@@ -1,5 +1,5 @@
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,51 +21,50 @@
     <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </c:if>
 
-<form class="linkingForm" >
-<div class="radio">
-    <input type="radio" name="feedbacking" value="Interview" id="Interview"><label for="Interview">Interview</label>
-
-    <input type="radio" name="feedbacking" value="Curating" id="Curating"><label for="Curating">Curating</label>
-</div>
+<form class="linkingForm">
+    <div class="radio">
+        <form:radiobutton path="linkUnit.curator" name="feedbacking" value="true" id="suitable"/>
+        <label for="suitable">Curating</label>
+        <form:radiobutton path="linkUnit.curator" name="feedbacking" value="false" id="unsuitable"/>
+        <label for="unsuitable">Interview</label>
+    </div>
     <div class="linkingL">
         <label for="students">Students</label><br/>
-            <select multiple id="students">
-                <option value="A">A</option>
-                <option value="A">B</option>
-                <option value="A">C</option>
-                <option value="A">D</option>
-                <option value="A">E</option>
-                <option value="A">F</option>
-                <option value="A">G</option>
-                <option value="A">H</option>
-                <option value="A">K</option>
-                <option value="A">L</option>
-                <option value="A">M</option>
-                <option value="A">N</option>
-            </select>
+
+        <form:select path="linkUnit.students" id="students" multiple="true">
+            <c:forEach items="${students}" varStatus="index">
+                <form:option value="${studentLogins[index.count-1]}">${students[index.count-1]}</form:option>
+            </c:forEach>
+        </form:select>
     </div>
 
-    <div  class="linkingR">
+    <div class="linkingR">
         <label for="feedbackers">Feedbackers</label><br/>
-            <select multiple id="feedbackers">
+        <form:select multiple="true" id="feedbackers" path="linkUnit.feedbackers">
 
-            </select>
+        </form:select>
     </div>
 
     <div class="technology">
         <label for="techList">Technology:</label><br/>
-        <select name="technology" id="techList">
-            <option value="none">None</option>
-            <option value="all">All</option>
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="hibernate">hibernate</option>
-        </select>
+        <%--<select name="technology" id="techList">--%>
+        <%--<option value="none">None</option>--%>
+        <%--<option value="all">All</option>--%>
+        <%--<option value="html">HTML</option>--%>
+        <%--<option value="css">CSS</option>--%>
+        <%--<option value="hibernate">hibernate</option>--%>
+        <%--</select>--%>
+        <form:select name="technology" id="techList" path="linkUnit.technology">
+            <form:option value="Any"></form:option>
+            <c:forEach items="${technologies}" var="token">
+                <form:option value="${token}">${token}</form:option>
+            </c:forEach>
+        </form:select>
     </div>
 
     <div class="buttons">
-            <button class="gray" onclick="history.back(); return false;">Cancel</button>
-            <button  class="blue">Link</button>
+        <button class="gray" onclick="history.back(); return false;">Cancel</button>
+        <button class="blue" formmethod="post" formaction="/admin/linkStudent">Link</button>
     </div>
 
 </form>

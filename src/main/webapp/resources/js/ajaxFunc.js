@@ -61,16 +61,16 @@ function removeOptions(selectbox) {
 $(document).ready(function () {
     $('#techList').change(
         function () {
-            var url = "controller?tech=" + document.getElementById("techList").value;
+            var url = "feedbackersForTechnology?technology=" + document.getElementById("techList").value;
             $.get(url, function (data) {
                 var select = document.getElementById("feedbackers");
                 removeOptions(select);
 
                 var obj = data;
 
-                $.each(data["feedbackers"], function (index, feedbacker) {
+                $.each(data, function (index, feedbacker) {
                     var option = document.createElement("option");
-                    option.text = feedbacker.lastName;
+                    option.text = feedbacker.secondName;
                     option.value = feedbacker.login;
                     select.add(option);
                 })
