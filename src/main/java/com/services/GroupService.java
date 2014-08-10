@@ -21,7 +21,6 @@ public class GroupService {
         Group group = new Group();
         group.setName(groupName);
         group.setStatus(status);
-        System.out.println("CALL");
         groupDao.save(group);
     }
 
@@ -50,5 +49,13 @@ public class GroupService {
     @Transactional
     public boolean isAvailable(String group){
         return groupDao.findByName(group) == null;
+    }
+
+    @Transactional
+    public void updateGroup(String oldGroupName, String groupName, String status){
+        Group group = groupDao.findByName(oldGroupName);
+        group.setName(groupName);
+        group.setStatus(status);
+        groupDao.update(group);
     }
 }

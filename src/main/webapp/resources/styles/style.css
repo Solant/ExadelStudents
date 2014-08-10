@@ -375,6 +375,12 @@ button.gray, a.gray, input[type=submit].gray {
     width: 30px;
 }
 
+.foxLogo{
+    width:150px;
+    margin-left:100px;
+
+}
+
 /*end of common props*/
 
 /*login props*/

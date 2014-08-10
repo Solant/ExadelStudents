@@ -12,6 +12,8 @@ public class AddFieldUnit {
     private boolean existingGroup;
     private String forStatus;
     private String valueType;
+    private String oldFieldName;
+    private boolean delete;
 
 
     public String getGroupNameNew() {
@@ -21,7 +23,6 @@ public class AddFieldUnit {
     public void setGroupNameNew(String groupNameNew) {
         this.groupNameNew = groupNameNew;
     }
-
 
     public String getForStatus() {
         return forStatus;
@@ -77,5 +78,21 @@ public class AddFieldUnit {
 
     public void setValueType(String valueType) {
         this.valueType = valueType;
+    }
+
+    public String getOldFieldName() {
+        return oldFieldName;
+    }
+
+    public void setOldFieldName(String oldFieldName) {
+        this.oldFieldName = oldFieldName;
+    }
+
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
     }
 }

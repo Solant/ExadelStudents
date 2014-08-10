@@ -138,15 +138,15 @@ public class AdminController {
 
         List<String> studentNames = new ArrayList();
         List<String> studentLogins = new ArrayList();
-        for(Student s : studentService.getAllEnabledStudents()) {
+        for (Student s : studentService.getAllEnabledStudents()) {
             studentNames.add(s.getSecondName() + " " + s.getFirstName());
             studentLogins.add(s.getLogin());
         }
 
-        modelMap.addAttribute("students",studentNames);
+        modelMap.addAttribute("students", studentNames);
         List<Technology> technologies = technologyService.getAllTechnologies();
         List<String> technologyNames = new ArrayList();
-        for(Technology t : technologies) {
+        for (Technology t : technologies) {
             technologyNames.add(t.getTechnologyName());
 
         }
@@ -204,7 +204,7 @@ public class AdminController {
         wts.addDateAsString();
         SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
 
-        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".doc");
+        response.setHeader("Content-Disposition", "attachment;filename=table_" + sdf.format(Calendar.getInstance().getTime()) + ".doc");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -227,7 +227,7 @@ public class AdminController {
         ets.addDateAsString();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
-        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".xls");
+        response.setHeader("Content-Disposition", "attachment;filename=table_" + sdf.format(Calendar.getInstance().getTime()) + ".xls");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -242,7 +242,7 @@ public class AdminController {
     public String exportPDF(HttpServletResponse response) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy");
-        response.setHeader("Content-Disposition", "attachment;filename=table_"+sdf.format(Calendar.getInstance().getTime())+".pdf");
+        response.setHeader("Content-Disposition", "attachment;filename=table_" + sdf.format(Calendar.getInstance().getTime()) + ".pdf");
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -339,7 +339,7 @@ public class AdminController {
         attributeFormValidator.validate(groupedValues, result);
         if (result.hasErrors()) {
             ArrayList<String> groups = new ArrayList<String>();
-            for(Group group : groupedValues.getValuesArray()){
+            for (Group group : groupedValues.getValuesArray()) {
                 groups.add(group.getGavs().get(0).getGroup());
             }
 
@@ -416,9 +416,9 @@ public class AdminController {
 
         User user;
 
-        for(List<String> item:tableData){
+        for (List<String> item : tableData) {
             user = userService.getByLogin(item.get(1));
-            if(user != null) {
+            if (user != null) {
                 item.add(user.getTelephone());
                 item.add(user.getSkype());
                 item.add(user.getEmail());
@@ -447,9 +447,9 @@ public class AdminController {
 
         User user;
 
-        for(List<String> item:tableData){
+        for (List<String> item : tableData) {
             user = userService.getByLogin(item.get(1));
-            if(user != null) {
+            if (user != null) {
                 item.add(user.getTelephone());
                 item.add(user.getSkype());
                 item.add(user.getEmail());
@@ -526,13 +526,12 @@ public class AdminController {
                     mailService.send(title, text, userService.getByLogin(feed).getEmail());
                 }
         }
-        if (createNotifUnit.isForWorkers()){
+        if (createNotifUnit.isForWorkers()) {
             for (HRWorker worker : hrWorkerService.getAllHRWorkers()) {
                 notificationService.add(current, worker.getLogin(), title, text);
                 mailService.send(title, text, userService.getByLogin(worker.getLogin()).getEmail());
             }
-        }
-        else {
+        } else {
 
             if (createNotifUnit.getFeedbackers() != null) {
                 for (String worker : createNotifUnit.getWorkers()) {
@@ -552,7 +551,7 @@ public class AdminController {
     }
 
     @RequestMapping("/showAddField/{isField}")
-    public String showAddField(ModelMap modelMap, @PathVariable("isField")boolean isField) {
+    public String showAddField(ModelMap modelMap, @PathVariable("isField") boolean isField) {
         AddFieldUnit addFieldUnit = new AddFieldUnit();
         addFieldUnit.setExistingGroup(true);
         modelMap.addAttribute("addFieldUnit", addFieldUnit);
@@ -573,21 +572,23 @@ public class AdminController {
 
         String pattern = null;
         String errorMessage = null;
-        if(addFieldUnit.getValueType().equals("number")){
-            pattern = "^[0-9]*$";
-            errorMessage = addFieldUnit.getFieldName() + " must be a number";
-        }
 
-        if(addFieldUnit.getValueType().equals("fullName")){
-            pattern = "^[A-Za-z//s//-//.]*$";
-            errorMessage = addFieldUnit.getFieldName() + " must be a full name";
-        }
+        if (addFieldUnit.getValueType() != null) {
+            if (addFieldUnit.getValueType().equals("number")) {
+                pattern = "^[0-9]*$";
+                errorMessage = addFieldUnit.getFieldName() + " must be a number";
+            }
 
-        if(addFieldUnit.getValueType().equals("symbolsOnly")){
-            pattern = "^[A-Za-z//s]*$";
-            errorMessage = addFieldUnit.getFieldName() + " must contain only latin symbols and space";
-        }
+            if (addFieldUnit.getValueType().equals("fullName")) {
+                pattern = "^[A-Za-z//s//-//.]*$";
+                errorMessage = addFieldUnit.getFieldName() + " must be a full name";
+            }
 
+            if (addFieldUnit.getValueType().equals("symbolsOnly")) {
+                pattern = "^[A-Za-z//s]*$";
+                errorMessage = addFieldUnit.getFieldName() + " must contain only latin symbols and space";
+            }
+        }
         attributeService.addAttribute(groupName, addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
 
         if (tableData == null)
@@ -643,14 +644,112 @@ public class AdminController {
         modelMap.addAttribute("techologies", techs);
         return "interview";
     }
+
     @RequestMapping(value = "liveSearch", method = RequestMethod.GET)
-    public @ResponseBody List<JSONStudent> liveSearch(@ModelAttribute("initials") String initials){
+    public
+    @ResponseBody
+    List<JSONStudent> liveSearch(@ModelAttribute("initials") String initials) {
         return studentService.liveSearch(initials, 5);
     }
 
     @RequestMapping(value = "/feedbackersForTechnology", method = RequestMethod.GET)
-    public @ResponseBody List<JSONFeedbacker> feedbackersForTechnology(@ModelAttribute("technology") String technologyName){
+    public
+    @ResponseBody
+    List<JSONFeedbacker> feedbackersForTechnology(@ModelAttribute("technology") String technologyName) {
 
         return feedbackerService.filterFeedbackers(technologyName);
+    }
+
+
+    @RequestMapping("/showChangeField/{isField}")
+    public String showChangeField(ModelMap modelMap, @PathVariable("isField") boolean isField) {
+        AddFieldUnit addFieldUnit = new AddFieldUnit();
+        addFieldUnit.setExistingGroup(true);
+        modelMap.addAttribute("changeGroupUnit", new ChangeGroupUnit());
+        modelMap.addAttribute("addFieldUnit", addFieldUnit);
+        modelMap.addAttribute("groups", groupService.getAllGroups());
+
+        List<String> attributes = new ArrayList();
+        for (GAVPresentation gav : attributeService.getAllAttributes()) {
+            attributes.add(gav.getAttribute());
+        }
+        modelMap.addAttribute("attributes", attributes);
+        modelMap.addAttribute("isField", isField);
+        return "changeField";
+    }
+
+    @RequestMapping(value = "/changeField", method = RequestMethod.POST)
+    public String changeField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
+
+        if (addFieldUnit.getOldFieldName() != null) {
+            if (addFieldUnit.isDelete()) {
+                attributeService.removeAttribute(addFieldUnit.getOldFieldName());
+
+                if (tableData == null)
+                    return "redirect:/admin";
+                modelMap.addAttribute("tableData", tableData);
+                return "adminTable";
+            }
+
+            if (addFieldUnit.getFieldName() != null) {
+                String groupName;
+                if (addFieldUnit.isExistingGroup()) {
+                    groupName = addFieldUnit.getGroupNameExist();
+                } else {
+                    groupService.addGroup(addFieldUnit.getGroupNameNew(), addFieldUnit.getForStatus());
+                    groupName = addFieldUnit.getGroupNameNew();
+                }
+
+                String pattern = null;
+                String errorMessage = null;
+
+                if (addFieldUnit.getValueType() != null) {
+                    if (addFieldUnit.getValueType().equals("number")) {
+                        pattern = "^[0-9]*$";
+                        errorMessage = addFieldUnit.getFieldName() + " must be a number";
+                    }
+
+                    if (addFieldUnit.getValueType().equals("fullName")) {
+                        pattern = "^[A-Za-z//s//-//.]*$";
+                        errorMessage = addFieldUnit.getFieldName() + " must be a full name";
+                    }
+
+                    if (addFieldUnit.getValueType().equals("symbolsOnly")) {
+                        pattern = "^[A-Za-z//s]*$";
+                        errorMessage = addFieldUnit.getFieldName() + " must contain only latin symbols and space";
+                    }
+                }
+                attributeService.updateAttribute(addFieldUnit.getOldFieldName(), groupName, addFieldUnit.getFieldName(),
+                        addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
+            }
+        }
+        if (tableData == null)
+            return "redirect:/admin";
+        modelMap.addAttribute("tableData", tableData);
+        return "adminTable";
+    }
+
+    @RequestMapping(value = "/changeGroup", method = RequestMethod.POST)
+    public String changeGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit, ModelMap modelMap){
+        if(changeGroupUnit.getOldGroupName()!= null){
+            if(changeGroupUnit.isDelete()) {
+                groupService.deleteGroup(changeGroupUnit.getOldGroupName());
+
+                if (tableData == null)
+                    return "redirect:/admin";
+                modelMap.addAttribute("tableData", tableData);
+                return "adminTable";
+            }
+
+            if(changeGroupUnit.getNewGroupName()!=null){
+                groupService.updateGroup(changeGroupUnit.getOldGroupName(),
+                        changeGroupUnit.getNewGroupName(), changeGroupUnit.getStatus());
+            }
+        }
+
+        if (tableData == null)
+            return "redirect:/admin";
+        modelMap.addAttribute("tableData", tableData);
+        return "adminTable";
     }
 }

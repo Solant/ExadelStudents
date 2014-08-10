@@ -47,13 +47,6 @@
 
     <div class="technology">
         <label for="techList">Technology:</label><br/>
-        <%--<select name="technology" id="techList">--%>
-        <%--<option value="none">None</option>--%>
-        <%--<option value="all">All</option>--%>
-        <%--<option value="html">HTML</option>--%>
-        <%--<option value="css">CSS</option>--%>
-        <%--<option value="hibernate">hibernate</option>--%>
-        <%--</select>--%>
         <form:select name="technology" id="techList" path="linkUnit.technology">
             <form:option value="Any"></form:option>
             <c:forEach items="${technologies}" var="token">

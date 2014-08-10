@@ -15,6 +15,7 @@
             <p class="errorText">
                 <c:out value="${error}"></c:out>
             </p>
+            <img src="resources/images/middle_blue_fox_shadow.gif" class="foxLogo"/>
             <p>
                 <label for="login">Login:</label>
                 <input type="text" name="j_username" class="field" id="login" value="worker" placeholder="Login">

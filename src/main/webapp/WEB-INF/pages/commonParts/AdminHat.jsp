@@ -100,12 +100,12 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <button formaction="" class="btn">
+                                        <button formaction="/admin/showChangeField/true" class="btn">
                                             <span>Field</span>
                                         </button>
                                     </li>
                                     <li>
-                                        <button formaction="" class="btn">
+                                        <button formaction="/admin/showChangeField/false" class="btn">
                                             <span>Group</span>
                                         </button>
                                     </li>

@@ -71,4 +71,17 @@ public class AttributeService {
     public Attribute getByName(String name){
         return attributeDao.findByName(name);
     }
+
+    @Transactional
+    public void updateAttribute(String oldAttributeName, String groupName, String attributeName, String valueType, String possibleValues,
+                                String pattern, String errorMessage){
+        Attribute attribute = attributeDao.findByName(oldAttributeName);
+        attribute.setGroup(groupDao.findByName(groupName));
+        attribute.setType(valueType);
+        attribute.setAttributeName(attributeName);
+        attribute.setPossibleValues(possibleValues);
+        attribute.setPattern(pattern);
+        attribute.setErrorMessage(errorMessage);
+        attributeDao.update(attribute);
+    }
 }
