@@ -141,7 +141,12 @@ public class StudentService {
             for (Value value : values) {
                 if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
                     edited = true;
-                    value.setValue(gav.getValue());
+                    value.setValue("");
+                    if (gav.getValues() == null)
+                        value.setValue(gav.getValue());
+                    else
+                        for (String v : gav.getValues())
+                            value.setValue(value.getValue() + ";" + v);
                     break;
                 }
             }
@@ -186,10 +191,14 @@ public class StudentService {
                 gav.setType(attribute.getType());
                 gav.setPossibleValues(attribute.getPossibleValues());
                 gav.setValue("");
-                for (Value value : values)
-                    if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin))
-                        gav.setValue(value.getValue());
-
+                for (Value value : values) {
+                    if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
+                        if (value.getAttribute().getType().equalsIgnoreCase("list"))
+                            gav.setValues(value.getValue());
+                        else
+                            gav.setValue(value.getValue());
+                    }
+                }
                 gavs.add(gav);
             }
         }
