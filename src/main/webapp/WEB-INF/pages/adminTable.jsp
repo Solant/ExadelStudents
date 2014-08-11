@@ -47,15 +47,16 @@
                     <td>
                     ${item}</td>
 				</c:forEach>
-
-                <td class="withImage">
                     <c:if test="${enable == 'enable'}">
-                        Disable
+                        <td class="withImage">
+                            Disable
+                        </td>
                     </c:if>
                     <c:if test="${enable == 'disable'}">
-                        Enable
+                        <td class="withImage">
+                            Enable
+                        </td>
                     </c:if>
-                </td>
 			</thead>
                 <tbody>
                 <c:forEach items="${tableData}" var="student" begin="1" varStatus="index">
@@ -70,18 +71,21 @@
                                 </td>
                             </c:forEach>
 
-                                <td class="withImage">
+
                                     <c:if test="${enable == 'enable'}">
-                                        <a href="/admin/${index.count}/disable">
-                                            <img src="/resources/images/fired.png" class="studentStatusImage">
-                                        </a>
+                                        <td class="withImage">
+                                            <a href="/admin/${index.count}/disable">
+                                                <img src="/resources/images/fired.png" class="studentStatusImage">
+                                            </a>
+                                        </td>
                                     </c:if>
                                     <c:if test="${enable == 'disable'}">
-                                        <a href="/admin/${index.count}/enable">
-                                            <img src="/resources/images/add.png" class="studentStatusImage">
-                                        </a>
+                                        <td class="withImage">
+                                            <a href="/admin/${index.count}/enable">
+                                                <img src="/resources/images/add.png" class="studentStatusImage">
+                                            </a>
+                                        </td>
                                     </c:if>
-                                </td>
                         </tr>
                 </c:forEach>
                 </tbody>
