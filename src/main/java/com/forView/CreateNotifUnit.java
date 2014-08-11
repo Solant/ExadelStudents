@@ -14,6 +14,15 @@ public class CreateNotifUnit {
     private boolean forWorkers;
     private String title;
     private String text;
+    private String sender;
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
 
     public String getText() {
         return text;

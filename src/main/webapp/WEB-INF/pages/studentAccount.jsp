@@ -53,8 +53,17 @@
     </p>
 
     <p>
-        <label for="telephone">telephone:</label>
+        <label for="telephone">Telephone:</label>
         <form:input path="telephone" class="field" type="text" id="telephone"/>
+    </p>
+
+    <p>
+        <label for="newPassword">New Password:</label>
+        <form:input path="newPassword" type="password" id="newPassword" class="field"/>
+    </p>
+    <p>
+        <label for="confirmPassword">Confirm Password:</label>
+        <form:input path="confirmedPassword" type="password" id="confirmPassword" class="field"/>
     </p>
 
     <p>

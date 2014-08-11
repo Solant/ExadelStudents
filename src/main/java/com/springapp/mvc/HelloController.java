@@ -84,7 +84,9 @@ public class HelloController {
     @RequestMapping(value = "/notif", method = RequestMethod.GET)
     public String showNotifs(ModelMap modelMap){
         List<Notification> notifications = userService.getAllNotifications(UserService.getCurrentUserLogin());
+        String login = UserService.getCurrentUserLogin();
         modelMap.addAttribute("notifs", notifications);
+        modelMap.addAttribute("name", userService.getFirstName(login)+" "+userService.getSecondName(login));
         return "notificationList";
     }
 
@@ -92,6 +94,8 @@ public class HelloController {
     public String showNotif(ModelMap modelMap, @PathVariable("notifId")Long id){
         Notification notification = notificationService.getNotificationById(id);
         notificationService.setRead(id);
+        notification.setText(notification.getText().replaceAll("\n", "<br>"));
+        System.out.println(notification.getText());
         modelMap.addAttribute("notif", notification);
         return "notification";
     }

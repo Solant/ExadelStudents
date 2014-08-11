@@ -12,7 +12,6 @@ import com.services.presentation.GAVPresentation;
 import com.services.tables.ExcelTableService;
 import com.services.tables.PDFTableService;
 import com.services.tables.WordTableService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,13 +20,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import persistance.model.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Надя on 16.07.2014.
@@ -75,6 +75,7 @@ public class AdminController {
     private ReviewService reviewService;
 
     private List<List<String>> tableData;
+    private String enable;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String workerPage(ModelMap modelMap) {
@@ -143,7 +144,13 @@ public class AdminController {
             studentLogins.add(s.getLogin());
         }
 
-        modelMap.addAttribute("students", studentNames);
+        List<String> feedNames = new ArrayList();
+        List<String> feedLogins = new ArrayList();
+        for (Feedbacker feed : feedbackerService.getAllFeedbackers()) {
+            feedNames.add(feed.getSecondName() + " " + feed.getFirstName());
+            feedLogins.add(feed.getLogin());
+        }
+
         List<Technology> technologies = technologyService.getAllTechnologies();
         List<String> technologyNames = new ArrayList();
         for (Technology t : technologies) {
@@ -151,6 +158,9 @@ public class AdminController {
 
         }
 
+        modelMap.addAttribute("students", studentNames);
+        modelMap.addAttribute("feedbackers", feedNames);
+        modelMap.addAttribute("feedLogins", feedLogins);
         modelMap.addAttribute("studentLogins", studentLogins);
         modelMap.addAttribute("technologies", technologyNames);
         modelMap.addAttribute("linkUnit", linkUnit);
@@ -188,8 +198,16 @@ public class AdminController {
             values.addAll(group.getGavs());
         tableData = studentService.find(values);
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
+        enable = "enable";
+        modelMap.addAttribute("enable", enable);
         return "/adminTable";
+    }
+
+    @RequestMapping("/formedTable")
+    public String formedTable(ModelMap modelMap) {
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", enable);
+        return "adminTable";
     }
 
     @RequestMapping(value = "/exportWord", method = RequestMethod.GET)
@@ -312,7 +330,7 @@ public class AdminController {
         return "studentAccount";
     }
 
-    @RequestMapping("/studentPage/{student}/changeCommon")
+    @RequestMapping(value = "/studentPage/{student}/changeCommon", method = RequestMethod.POST)
     public String studentChangeCommon(@PathVariable("student") String student,
                                       ModelMap modelMap,
                                       @ModelAttribute("status") String status,
@@ -323,12 +341,25 @@ public class AdminController {
         user.setEmail(accountUnit.getEmail());
         user.setSkype(accountUnit.getSkype());
         user.setTelephone(accountUnit.getTelephone());
-        studentService.setStatus(student, status);
+        if (!studentService.getStatus(student).equals(status)) {
+            CreateNotifUnit createNotifUnit = new CreateNotifUnit();
+            createNotifUnit.setSender("System");
+            createNotifUnit.setTitle("Your status was changed");
+            createNotifUnit.setText(studentService.getFirstName(student) + ", your status in Exadel was changed from '"
+                    + studentService.getStatus(student) + "' to '" + status + "'.");
+            List<String> students = new ArrayList<String>();
+            students.add(student);
+            createNotifUnit.setStudents(students);
+            sendNotif(createNotifUnit);
+            studentService.setStatus(student, status);
+        }
+        if (accountUnit.getNewPassword() != null && !accountUnit.getNewPassword().equals(""))
+            user.setPassword(UserService.stringToSha256(accountUnit.getNewPassword()));
         userService.update(user);
         accountUnit.setLogin(student);
         modelMap.addAttribute("accountUnit", accountUnit);
         modelMap.addAttribute("status", status);
-        return "studentAccount";
+        return "redirect:/admin/studentPage/" + student;
     }
 
     @RequestMapping(value = "/studentPage/{student}/saveChanges", method = RequestMethod.POST)
@@ -394,7 +425,8 @@ public class AdminController {
             tableData.get(i++).add(student.getEmail());
         }
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "disable");
+        enable = "disable";
+        modelMap.addAttribute("enable", enable);
         return "adminTable";
     }
 
@@ -426,7 +458,8 @@ public class AdminController {
         }
 
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
+        enable = "enable";
+        modelMap.addAttribute("enable", enable);
         return "adminTable";
     }
 
@@ -457,7 +490,8 @@ public class AdminController {
         }
 
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
+        enable = "enable";
+        modelMap.addAttribute("enable", enable);
         return "adminTable";
     }
 
@@ -481,7 +515,8 @@ public class AdminController {
             tableData.get(i++).add(student.getEmail());
         }
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
+        enable = "enable";
+        modelMap.addAttribute("enable", enable);
         return "adminTable";
     }
 
@@ -501,7 +536,11 @@ public class AdminController {
         MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com");
         String title = createNotifUnit.getTitle();
         String text = createNotifUnit.getText();
-        String current = UserService.getCurrentUserLogin();
+        String current;
+        if (createNotifUnit.getSender() == null)
+            current = UserService.getCurrentUserLogin();
+        else
+            current = createNotifUnit.getSender();
         if (createNotifUnit.isForStudents()) {
             for (Student student : studentService.getAllEnabledStudents()) {
                 notificationService.add(current, student.getLogin(), title, text);
@@ -547,6 +586,7 @@ public class AdminController {
     public String studentNotif(@PathVariable("student") String student, ModelMap modelMap) {
         List<Notification> notifications = userService.getAllNotifications(student);
         modelMap.addAttribute("notifs", notifications);
+        modelMap.addAttribute("name", studentService.getFirstName(student) + " " + studentService.getSecondName(student));
         return "notificationList";
     }
 
@@ -563,8 +603,10 @@ public class AdminController {
     @RequestMapping(value = "/addField", method = RequestMethod.POST)
     public String addField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
         String groupName;
+        CreateNotifUnit createNotifUnit = new CreateNotifUnit();
         if (addFieldUnit.isExistingGroup()) {
             groupName = addFieldUnit.getGroupNameExist();
+            addFieldUnit.setForStatus(groupService.getGroupByName(groupName).getStatus());
         } else {
             groupService.addGroup(addFieldUnit.getGroupNameNew(), addFieldUnit.getForStatus());
             groupName = addFieldUnit.getGroupNameNew();
@@ -591,10 +633,42 @@ public class AdminController {
         }
         attributeService.addAttribute(groupName, addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
 
+        String subject = "Group: " + groupName + "\nField name: " + addFieldUnit.getFieldName() + "\nPlease, fill it.";
+        createNotifUnit.setText(subject);
+        createNotifUnit.setTitle("A new field was added");
+        createNotifUnit.setStudents(new ArrayList<String>());
+        createNotifUnit.setSender("System");
+        if (addFieldUnit.getForStatus().equals("WORKING")) {
+            List<GAVPresentation> values = new ArrayList<GAVPresentation>();
+            GAVPresentation e = new GAVPresentation();
+            e.setValue("WORKING");
+            e.setAttribute("status");
+            values.add(e);
+            List<List<String>> students = studentService.find(values);
+            for (List<String> student : students) {
+                if (!student.get(1).equals("Login"))
+                    createNotifUnit.getStudents().add(student.get(1));
+            }
+        }
+        if (addFieldUnit.getForStatus().equals("STUDYING")) {
+            List<GAVPresentation> values = new ArrayList<GAVPresentation>();
+            GAVPresentation e = new GAVPresentation();
+            e.setValue("STUDYING");
+            e.setAttribute("status");
+            values.add(e);
+            List<List<String>> students = studentService.find(values);
+            for (List<String> student : students) {
+                if (!student.get(1).equals("Login"))
+                    createNotifUnit.getStudents().add(student.get(1));
+            }
+        }
+        if (addFieldUnit.getForStatus().equals("for_everybody")) {
+            createNotifUnit.setForStudents(true);
+        }
+        sendNotif(createNotifUnit);
         if (tableData == null)
             return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
     @RequestMapping(value = "/addTechnology", method = RequestMethod.POST)
@@ -610,27 +684,24 @@ public class AdminController {
     public String disableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
         studentService.disable(tableData.get(index).get(1));
         tableData.remove((int) index);
-        modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
     @RequestMapping("/{student}/enable")
     public String enableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
         studentService.enable(tableData.get(index).get(1));
         tableData.remove((int) index);
-        modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "disable");
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
     @RequestMapping("/studentPage/{student}/allFeedbacks")
     public String allStudentFeedbacks(@PathVariable("student") String student, ModelMap modelMap) {
         modelMap.addAttribute("reviews", studentService.getReviews(student));
+        modelMap.addAttribute("studentName", studentService.getFirstName(student) + " " + studentService.getSecondName(student));
         return "studentFeedbacks";
     }
 
-    @RequestMapping("/studentPage/{student}/showFeedback/{revId}")
+    @RequestMapping("/showFeedback/{student}/{revId}")
     public String showStudentFeedback(@PathVariable("student") String student,
                                       @PathVariable("revId") Long revId,
                                       ModelMap modelMap) {
@@ -687,15 +758,14 @@ public class AdminController {
 
                 if (tableData == null)
                     return "redirect:/admin";
-                modelMap.addAttribute("tableData", tableData);
-                return "adminTable";
+                return "redirect:/admin/formedTable";
             }
 
             String newFieldName = addFieldUnit.getFieldName();
             if (newFieldName == null)
                 newFieldName = addFieldUnit.getOldFieldName();
-            else{
-                if(newFieldName.trim().equals(""))
+            else {
+                if (newFieldName.trim().equals(""))
                     newFieldName = addFieldUnit.getOldFieldName();
             }
 
@@ -733,8 +803,7 @@ public class AdminController {
         }
         if (tableData == null)
             return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
     @RequestMapping(value = "/changeGroup", method = RequestMethod.POST)
@@ -745,15 +814,14 @@ public class AdminController {
 
                 if (tableData == null)
                     return "redirect:/admin";
-                modelMap.addAttribute("tableData", tableData);
-                return "adminTable";
+                return "redirect:/admin/formedTable";
             }
 
             String newGroupName = changeGroupUnit.getNewGroupName();
             if (newGroupName == null)
                 newGroupName = changeGroupUnit.getOldGroupName();
-            else{
-                if(newGroupName.trim().equals(""))
+            else {
+                if (newGroupName.trim().equals(""))
                     newGroupName = changeGroupUnit.getOldGroupName();
             }
 
@@ -764,7 +832,6 @@ public class AdminController {
 
         if (tableData == null)
             return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 }
