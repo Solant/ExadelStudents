@@ -18,6 +18,7 @@
             <div class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search Student" id="search" autocomplete="off">
+                    <ul id="searchResult" class="list-group"></ul>
                 </div>
             </div>
             <form method="get">
@@ -190,5 +191,6 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<%--
 
-<div id="searchResult" class="list-group"></div>
+<div id="searchResult" class="list-group"></div>--%>

@@ -650,18 +650,8 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 #searchResult {
-    position: fixed;
-    max-height: 210px;
-    top: 41px;
-    left: 202px;
-    display: none;
-    z-index: 1;
+    width: 100%;
 }
-
-#searchResult > .list-group-item {
-    width: 177px;
-}
-
 /*end of admin props*/
 
 /*adminTable props*/
