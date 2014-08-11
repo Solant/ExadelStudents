@@ -32,6 +32,13 @@ public class TechnologyService {
     }
 
     @Transactional
+    public void changeTechnology(String oldName, String newName){
+        Technology technology = technologyDao.findByName(oldName);
+        technology.setTechnologyName(newName);
+        technologyDao.save(technology);
+    }
+
+    @Transactional
     public boolean isTechnologyAvailable(String name){
         return technologyDao.findByName(name) == null;
     }
@@ -51,7 +58,7 @@ public class TechnologyService {
         Rating r = new Rating();
         r.setRating(rating);
         if (reviewDao.findById(review.getId()) == null)
-        reviewDao.save(review);
+            reviewDao.save(review);
         r.setReview(review);
         r.setTechnology(technologyDao.findByName(technologyName));
         ratingDao.save(r);
