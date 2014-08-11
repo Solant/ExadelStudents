@@ -54,13 +54,9 @@
             </div>
 
             <div class="alignCenter">
-                <label for="delete">Delete group</label>
-                <form:checkbox path="delete" id="delete"></form:checkbox>
-            </div>
-
-            <div class="alignCenter">
                 <button type="submit" onclick="history.back();return false;" class="gray">Cancel</button>
                 <button type="submit" class="blue">Save</button>
+                <button formaction="/admin/deleteGroup" class="gray">Delete</button>
             </div>
 
         </div>
@@ -161,13 +157,9 @@
                 </div>
 
                 <div class="alignCenter">
-                    <label for="delete">Delete field</label>
-                    <form:checkbox path="delete" id="delete"></form:checkbox>
-                </div>
-
-                <div class="alignCenter">
                     <button type="submit" onclick="history.back();return false;" class="gray">Cancel</button>
                     <form:button type="submit" class="blue">Save</form:button>
+                    <button formaction="/admin/deleteField" class="gray">Delete</button>
                 </div>
             </form:form>
 
@@ -216,6 +208,7 @@
         newGroup.css(remove);
     }
 </script>
+
 
 </body>
 </html>
