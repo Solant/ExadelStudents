@@ -209,11 +209,6 @@
     }
 </script>
 
-<script>
-    var form=document.createElement("form");
-    form.action="/admin/changeField";
-
-</script>
 
 </body>
 </html>
