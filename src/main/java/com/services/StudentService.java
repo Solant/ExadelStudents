@@ -334,9 +334,10 @@ public class StudentService {
             boolean isAttrEmpty = false;
             if (gavPresentation.getValue() == null)
                 isAttrEmpty = true;
-            else
-                if (gavPresentation.getValue().equals("") || gavPresentation.getValues() != null)
-                    isAttrEmpty = true;
+            else if (gavPresentation.getValue().equals("") || gavPresentation.getValues() != null)
+                isAttrEmpty = true;
+            if(gavPresentation.getValues()!= null)
+                isAttrEmpty = false;
             if (!isAttrEmpty) {
 
                 students1.clear();
@@ -348,12 +349,11 @@ public class StudentService {
                     Set<Value> valueSet = student.getValues();
                     for (Value value : valueSet) {
                         if (value != null) {
-                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()))
-                            {
+                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute())) {
                                 if (value.getAttribute().getType().equalsIgnoreCase("list")) {
                                     ArrayList<String> tmp = new ArrayList<String>();
                                     Collections.addAll(tmp, value.getValue().split(";"));
-                                    if(tmp.containsAll(gavPresentation.getValues())){
+                                    if (tmp.containsAll(gavPresentation.getValues())) {
                                         isSuitable = true;
                                         break;
                                     }
@@ -455,7 +455,7 @@ public class StudentService {
         if (students == null)
             return null;
 
-        List<JSONStudent> jsonStudents = new ArrayList ();
+        List<JSONStudent> jsonStudents = new ArrayList();
         String[] initials = line.split("[ ,\\.:;]+");
         for (Student student : students) {
             if (jsonStudents.size() == numberOfResults)
