@@ -618,17 +618,17 @@ public class AdminController {
         if (addFieldUnit.getValueType() != null) {
             if (addFieldUnit.getValueType().equals("number")) {
                 pattern = "^[0-9]*$";
-                errorMessage = addFieldUnit.getFieldName() + " must be a number";
+                errorMessage = "\""+addFieldUnit.getFieldName() + "\" must contain a number";
             }
 
             if (addFieldUnit.getValueType().equals("fullName")) {
                 pattern = "^[A-Za-z//s//-//.]*$";
-                errorMessage = addFieldUnit.getFieldName() + " must be a full name";
+                errorMessage = "\""+addFieldUnit.getFieldName() + "\" must contain a full name";
             }
 
             if (addFieldUnit.getValueType().equals("symbolsOnly")) {
                 pattern = "^[A-Za-z//s]*$";
-                errorMessage = addFieldUnit.getFieldName() + " must contain only latin symbols and space";
+                errorMessage = "\""+addFieldUnit.getFieldName() + "\" must contain only latin symbols and space";
             }
         }
         attributeService.addAttribute(groupName, addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
@@ -844,4 +844,16 @@ public class AdminController {
             return "redirect:/admin";
         return "redirect:/admin/formedTable";
     }
+
+    @RequestMapping(value = "/showField", method = RequestMethod.GET)
+    public @ResponseBody JSONField showField(@ModelAttribute("field") String fieldName) {
+        return attributeService.getJSONField(fieldName);
+    }
+
+
+    @RequestMapping(value = "/showGroup", method = RequestMethod.GET)
+    public @ResponseBody String showGroup(@ModelAttribute("group") String groupName) {
+        return groupService.getGroupByName(groupName).getStatus();
+    }
+
 }

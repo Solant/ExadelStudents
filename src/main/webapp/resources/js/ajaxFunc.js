@@ -23,6 +23,7 @@ $(document).ready(function () {
         }, 300);
     });
 });
+
 function liveSearch() {
 
     var searchResult = $('#searchResult');
@@ -89,7 +90,6 @@ $(document).ready(function () {
     )
 });
 
-
 $(document).ready(function () {
     getNumberOfNotifications();
 })
@@ -107,3 +107,70 @@ function getNumberOfNotifications(){
         }
     });
 }
+
+// Fill field form
+
+function visual() {
+    var values = $('#needOption');
+
+    if (document.getElementsByName('type')[3].checked || document.getElementsByName('type')[4].checked) {
+        values.css(show);
+    }
+    else {
+        values.css(remove);
+    }
+
+    var valueTypeSelect = document.getElementById("valueType")
+    if (document.getElementsByName('type')[2].checked||
+        document.getElementsByName('type')[3].checked||
+        document.getElementsByName('type')[4].checked) {
+        valueTypeSelect.disabled = true;
+        valueTypeSelect.options[0].selected = true;
+    }
+    else {
+        valueTypeSelect.disabled = false;
+    }
+
+}
+
+$(document).ready(function () {
+    $('#oldField').change(
+        function () {
+            var url = "/admin/showField?field=" + document.getElementById("oldField").value;
+            $.get(url, function (data) {
+                var groupSelect = document.getElementById("existingGroups");
+                groupSelect.value = data.groupName;
+
+                var typeRadio = document.getElementById(data.type);
+                typeRadio.checked = true;
+
+                var possibleValuesArea = document.getElementById("value");
+                possibleValuesArea.value = data.possibleValues;
+                visual();
+
+
+                var valueType = document.getElementById("valueType");
+                valueType.value = "any";
+                if(data.valueType!=null){
+                    var valueType = document.getElementById("valueType");
+                    valueType.value = data.valueType;
+                }
+
+            });
+        }
+    )
+});
+
+
+$(document).ready(function () {
+    $('#oldGroup').change(
+        function () {
+            var url = "/admin/showGroup?group=" + document.getElementById("oldGroup").value;
+            $.get(url, function (data) {
+                var groupSelect = document.getElementById("newGroupStatus");
+                groupSelect.value = data;
+        });
+        }
+    )
+});
+
