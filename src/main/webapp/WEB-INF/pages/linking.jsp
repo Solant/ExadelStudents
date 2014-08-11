@@ -43,7 +43,9 @@
     <div class="linkingR">
         <label for="feedbackers">Feedbackers</label><br/>
         <form:select multiple="true" id="feedbackers" path="linkUnit.feedbackers">
-
+            <c:forEach items="${feedbackers}" varStatus="index">
+                <form:option value="${feedLogins[index.count-1]}">${feedLogins[index.count-1]}</form:option>
+            </c:forEach>
         </form:select>
     </div>
 

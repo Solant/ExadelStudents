@@ -45,6 +45,11 @@
                     Feedbacks
                 </a>
             </li>
+        <li>
+            <a href="/admin/studentPage/${currentUser.login}/account" class="aToPropsTable">
+                Common
+            </a>
+        </li>
 
     </ul>
 

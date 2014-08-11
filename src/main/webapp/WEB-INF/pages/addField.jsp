@@ -79,7 +79,7 @@
 
                 <div class="alignCenter paddingTop borderBottom paddingBottom" >
                     <label for="fieldname">Field name:</label>
-                    <form:input path="fieldName" type="text" id="fieldname" class="addTechField"/>
+                    <form:input path="fieldName" required="true" type="text" id="fieldname" class="addTechField"/>
                 </div>
 
                 <div class="alignCenter paddingTop">

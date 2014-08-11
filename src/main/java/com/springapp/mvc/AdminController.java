@@ -75,6 +75,7 @@ public class AdminController {
     private ReviewService reviewService;
 
     private List<List<String>> tableData;
+    private String enable;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String workerPage(ModelMap modelMap) {
@@ -143,7 +144,13 @@ public class AdminController {
             studentLogins.add(s.getLogin());
         }
 
-        modelMap.addAttribute("students", studentNames);
+        List<String> feedNames = new ArrayList();
+        List<String> feedLogins = new ArrayList();
+        for (Feedbacker feed: feedbackerService.getAllFeedbackers()) {
+            feedNames.add(feed.getSecondName() + " " + feed.getFirstName());
+            feedLogins.add(feed.getLogin());
+        }
+
         List<Technology> technologies = technologyService.getAllTechnologies();
         List<String> technologyNames = new ArrayList();
         for (Technology t : technologies) {
@@ -151,6 +158,9 @@ public class AdminController {
 
         }
 
+        modelMap.addAttribute("students", studentNames);
+        modelMap.addAttribute("feedbackers", feedNames);
+        modelMap.addAttribute("feedLogins", feedLogins);
         modelMap.addAttribute("studentLogins", studentLogins);
         modelMap.addAttribute("technologies", technologyNames);
         modelMap.addAttribute("linkUnit", linkUnit);
@@ -188,8 +198,16 @@ public class AdminController {
             values.addAll(group.getGavs());
         tableData = studentService.find(values);
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
+        enable = "enable";
+        modelMap.addAttribute("enable", enable);
         return "/adminTable";
+    }
+
+    @RequestMapping("/formedTable")
+    public String formedTable(ModelMap modelMap){
+        modelMap.addAttribute("tableData", tableData);
+        modelMap.addAttribute("enable", enable);
+        return "adminTable";
     }
 
     @RequestMapping(value = "/exportWord", method = RequestMethod.GET)
@@ -312,7 +330,7 @@ public class AdminController {
         return "studentAccount";
     }
 
-    @RequestMapping("/studentPage/{student}/changeCommon")
+    @RequestMapping(value = "/studentPage/{student}/changeCommon", method = RequestMethod.POST)
     public String studentChangeCommon(@PathVariable("student") String student,
                                       ModelMap modelMap,
                                       @ModelAttribute("status") String status,
@@ -324,11 +342,12 @@ public class AdminController {
         user.setSkype(accountUnit.getSkype());
         user.setTelephone(accountUnit.getTelephone());
         studentService.setStatus(student, status);
+        user.setPassword(UserService.stringToSha256(accountUnit.getNewPassword()));
         userService.update(user);
         accountUnit.setLogin(student);
         modelMap.addAttribute("accountUnit", accountUnit);
         modelMap.addAttribute("status", status);
-        return "studentAccount";
+        return "redirect:/admin/studentPage/"+student;
     }
 
     @RequestMapping(value = "/studentPage/{student}/saveChanges", method = RequestMethod.POST)
@@ -394,7 +413,8 @@ public class AdminController {
             tableData.get(i++).add(student.getEmail());
         }
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "disable");
+        enable = "disable";
+        modelMap.addAttribute("enable", enable);
         return "adminTable";
     }
 
@@ -426,7 +446,8 @@ public class AdminController {
         }
 
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
+        enable = "enable";
+        modelMap.addAttribute("enable", enable);
         return "adminTable";
     }
 
@@ -457,7 +478,8 @@ public class AdminController {
         }
 
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
+        enable = "enable";
+        modelMap.addAttribute("enable", enable);
         return "adminTable";
     }
 
@@ -481,7 +503,8 @@ public class AdminController {
             tableData.get(i++).add(student.getEmail());
         }
         modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
+        enable = "enable";
+        modelMap.addAttribute("enable", enable);
         return "adminTable";
     }
 
@@ -611,18 +634,14 @@ public class AdminController {
     public String disableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
         studentService.disable(tableData.get(index).get(1));
         tableData.remove((int) index);
-        modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "enable");
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
     @RequestMapping("/{student}/enable")
     public String enableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
         studentService.enable(tableData.get(index).get(1));
         tableData.remove((int) index);
-        modelMap.addAttribute("tableData", tableData);
-        modelMap.addAttribute("enable", "disable");
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
     @RequestMapping("/studentPage/{student}/allFeedbacks")
@@ -689,8 +708,7 @@ public class AdminController {
 
                 if (tableData == null)
                     return "redirect:/admin";
-                modelMap.addAttribute("tableData", tableData);
-                return "adminTable";
+                return "redirect:/admin/formedTable";
             }
 
             String newFieldName = addFieldUnit.getFieldName();
@@ -735,8 +753,7 @@ public class AdminController {
         }
         if (tableData == null)
             return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
     @RequestMapping(value = "/changeGroup", method = RequestMethod.POST)
@@ -747,8 +764,7 @@ public class AdminController {
 
                 if (tableData == null)
                     return "redirect:/admin";
-                modelMap.addAttribute("tableData", tableData);
-                return "adminTable";
+                return "redirect:Table";
             }
 
             String newGroupName = changeGroupUnit.getNewGroupName();
@@ -766,7 +782,6 @@ public class AdminController {
 
         if (tableData == null)
             return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 }
