@@ -48,6 +48,11 @@ public class GroupService {
     }
 
     @Transactional
+    public Group getGroupByName(String name){
+        return groupDao.findByName(name);
+    }
+
+    @Transactional
     public boolean isAvailable(String group){
         return groupDao.findByName(group) == null;
     }
