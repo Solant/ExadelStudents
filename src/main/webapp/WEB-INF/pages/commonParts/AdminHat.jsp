@@ -101,18 +101,13 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <button formaction="/admin/showChangeField/field" class="btn">
+                                        <button formaction="/admin/showChangeField/true" class="btn">
                                             <span>Field</span>
                                         </button>
                                     </li>
                                     <li>
-                                        <button formaction="/admin/showChangeField/group" class="btn">
+                                        <button formaction="/admin/showChangeField/false" class="btn">
                                             <span>Group</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button formaction="/admin/showChangeField/tech" class="btn">
-                                            <span>Technology</span>
                                         </button>
                                     </li>
                                 </ul>

@@ -1,5 +1,7 @@
 package com.forView;
 
+import java.util.Date;
+
 /**
  * Created by Надя on 30.07.2014.
  */
@@ -8,16 +10,8 @@ public class FeedbackingUnit {
 
     private String studentLogin;
     private String studentName;
-    private String date;
+    private Date date;
     private String feedbackerName;
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public String getStudentName() {
         return studentName;
@@ -25,6 +19,14 @@ public class FeedbackingUnit {
 
     public void setStudentName(String studentName) {
         this.studentName = studentName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getFeedbackerName() {

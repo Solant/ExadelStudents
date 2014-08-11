@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import persistance.model.*;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -59,8 +58,7 @@ public class CuratorController {
             Review lastReview = studentService.getLastReview(student.getLogin());
             if (lastReview != null) {
                 unit.setFeedbackerName(lastReview.getFeedbacker().getFirstName() + " " + lastReview.getFeedbacker().getSecondName());
-                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-                unit.setDate(sdf.format(lastReview.getDate().getTime()));
+                unit.setDate(lastReview.getDate().getTime());
             } else {
                 unit.setFeedbackerName("There is no feedbacks to this student");
                 unit.setDate(null);
@@ -85,8 +83,7 @@ public class CuratorController {
             Review lastReview = studentService.getLastReview(student.getLogin());
             if (lastReview != null) {
                 unit.setFeedbackerName(lastReview.getFeedbacker().getFirstName() + " " + lastReview.getFeedbacker().getSecondName());
-                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-                unit.setDate(sdf.format(lastReview.getDate().getTime()));
+                unit.setDate(lastReview.getDate().getTime());
             } else {
                 unit.setFeedbackerName("There is no feedbacks to this student");
                 unit.setDate(null);

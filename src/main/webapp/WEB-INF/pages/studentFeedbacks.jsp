@@ -1,4 +1,3 @@
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -25,11 +24,6 @@
     <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </sec:authorize>
 
-<%
-    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-    pageContext.setAttribute("sdf", sdf);
-%>
-
 
 </div>
 <div id="table">
@@ -44,8 +38,8 @@
 <tbody>
 <c:forEach items="${reviews}" var="review">
     <tr>
-        <td><a href="/admin/showFeedback/${review.student.login}/${review.id}">${sdf.format(review.date.time)}</a></td>
-        <td>${review.feedbacker.firstName} ${review.feedbacker.secondName}</td>
+        <td><a href="/admin/showFeedback/${review.student.login}/${review.id}">${review.date.time}</a></td>
+        <td>${review.feedbacker.firstName}</td>
     </tr>
 </c:forEach>
     </tbody>

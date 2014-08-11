@@ -1,4 +1,3 @@
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -22,11 +21,6 @@
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </sec:authorize>
-
-<%
-    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-    pageContext.setAttribute("sdf", sdf);
-%>
 
 <div align="center" id="table">
 
@@ -54,12 +48,12 @@
                     ${notif.sender}
                 </td>
                 <td>
-                    ${sdf.format(notif.timeWhenSent.time)}
+                    ${notif.timeWhenSent.time}
                 </td>
 
                 <c:if test="${role == 'ADMIN'|| role=='WORKER'}">
                     <td>
-                            ${sdf.format(notif.timeWhenRead.time)}
+                            ${notif.timeWhenRead.time}
                     </td>
                 </c:if>
             </tr>

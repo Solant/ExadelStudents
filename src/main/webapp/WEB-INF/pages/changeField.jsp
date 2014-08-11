@@ -12,22 +12,18 @@
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li <c:if test="${isField == 'group'}">class="active" </c:if>>
+    <li <c:if test="${!isField}">class="active" </c:if>>
         <a href="#group" role="tab" data-toggle="tab">Group</a>
     </li>
     <li
-            <c:if test="${isField == 'field'}">class="active" </c:if> >
+            <c:if test="${isField}">class="active" </c:if> >
         <a href="#field" role="tab" data-toggle="tab">Field</a>
-    </li>
-    <li
-            <c:if test="${isField == 'tech'}">class="active" </c:if> >
-        <a href="#tech" role="tab" data-toggle="tab">Technology</a>
     </li>
 </ul>
 
 <div class="tab-content" align="center">
 
-    <div class="tab-pane <c:if test="${isField == 'group'}">active</c:if>" id="group">
+    <div class="tab-pane <c:if test="${!isField}">active</c:if>" id="group">
         <form:form commandName="changeGroupUnit" action="/admin/changeGroup" method="post">
         <div class="spoilers">
 
@@ -67,7 +63,7 @@
         </form:form>
     </div>
 
-    <div class="tab-pane <c:if test="${isField == 'field'}">active</c:if>" id="field">
+    <div class="tab-pane <c:if test="${isField}">active</c:if>" id="field">
         <div class="spoilers">
 
 
@@ -166,39 +162,6 @@
                     <button formaction="/admin/deleteField" class="gray">Delete</button>
                 </div>
             </form:form>
-
-        </div>
-    </div>
-
-
-    <div class="tab-pane <c:if test="${isField == 'tech'}">active</c:if>" id="tech">
-        <div class="spoilers">
-
-
-            <form action="/admin/changeTech" method="post">
-
-
-                    <div class="alignCenter">
-                        <label>Old technology name:</label>
-                        <select class="addTechField" name="oldTechName">
-                            <c:forEach items="${techs}" var="tech">
-                                <option value="${tech.technologyName}"><c:out value="${tech.technologyName}"></c:out> </option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <div class="alignCenter">
-                        <label for="newTech">New technology name:</label>
-                        <input type="text" name="newTechName" id="newTech"/>
-                    </div>
-
-
-                    <div class="alignCenter">
-                        <button type="submit" onclick="history.back();return false;" class="gray">Cancel</button>
-                        <button type="submit" class="blue">Save</button>
-                    </div>
-
-            </form>
-
 
         </div>
     </div>
