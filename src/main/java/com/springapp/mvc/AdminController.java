@@ -739,6 +739,7 @@ public class AdminController {
         modelMap.addAttribute("changeGroupUnit", new ChangeGroupUnit());
         modelMap.addAttribute("addFieldUnit", addFieldUnit);
         modelMap.addAttribute("groups", groupService.getAllGroups());
+        modelMap.addAttribute("techs", technologyService.getAllTechnologies());
 
         List<String> attributes = new ArrayList();
         for (GAVPresentation gav : attributeService.getAllAttributes()) {
@@ -747,6 +748,15 @@ public class AdminController {
         modelMap.addAttribute("attributes", attributes);
         modelMap.addAttribute("isField", isField);
         return "changeField";
+    }
+
+    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
+    public String changeTech(@ModelAttribute("newTechName")String newTechName,
+                             @ModelAttribute("oldTechName")String oldTechName){
+        technologyService.changeTechnology(oldTechName, newTechName);
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
     }
 
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
