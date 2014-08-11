@@ -1,8 +1,8 @@
 ﻿/*common props*/
 
 body {
-    margin: 0; /* Убираем отступы */
-    min-width: 993px;
+    margin: 0; /* Убираем отступы *//*
+    min-width: 993px;*/
 }
 
 .navbar-blue {
@@ -651,6 +651,7 @@ button.gray, a.gray, input[type=submit].gray {
 
 #searchResult {
     width: 100%;
+    margin-bottom: 0;
 }
 /*end of admin props*/
 
