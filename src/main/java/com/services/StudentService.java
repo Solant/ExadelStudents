@@ -334,8 +334,10 @@ public class StudentService {
             boolean isAttrEmpty = false;
             if (gavPresentation.getValue() == null)
                 isAttrEmpty = true;
-            else if (gavPresentation.getValue().equals(""))
+            else if (gavPresentation.getValue().equals("") || gavPresentation.getValues() != null)
                 isAttrEmpty = true;
+            if(gavPresentation.getValues()!= null)
+                isAttrEmpty = false;
             if (!isAttrEmpty) {
 
                 students1.clear();
@@ -347,10 +349,20 @@ public class StudentService {
                     Set<Value> valueSet = student.getValues();
                     for (Value value : valueSet) {
                         if (value != null) {
-                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) &&
-                                    value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
-                                isSuitable = true;
-                                break;
+                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute())) {
+                                if (value.getAttribute().getType().equalsIgnoreCase("list")) {
+                                    ArrayList<String> tmp = new ArrayList<String>();
+                                    Collections.addAll(tmp, value.getValue().split(";"));
+                                    if (tmp.containsAll(gavPresentation.getValues())) {
+                                        isSuitable = true;
+                                        break;
+                                    }
+                                } else {
+                                    if (value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
+                                        isSuitable = true;
+                                        break;
+                                    }
+                                }
                             }
                         }
                         if (isSuitable)
@@ -443,7 +455,7 @@ public class StudentService {
         if (students == null)
             return null;
 
-        List<JSONStudent> jsonStudents = new ArrayList ();
+        List<JSONStudent> jsonStudents = new ArrayList();
         String[] initials = line.split("[ ,\\.:;]+");
         for (Student student : students) {
             if (jsonStudents.size() == numberOfResults)

@@ -20,7 +20,6 @@ public class GAVPresentation implements Comparable<GAVPresentation>{
 
         String[] values = line.split("[,;(, )]+");
         ArrayList<String> valuesList = new ArrayList<String>();
-        valuesList.add("");
         Collections.addAll(valuesList, values);
         return valuesList;
     }
