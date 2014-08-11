@@ -87,8 +87,11 @@ public class StudentController {
             return "student";
         }
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
-        for(Group group:groupedValues.getValuesArray())
+        for(Group group : groupedValues.getValuesArray()) {
             values.addAll(group.getGavs());
+            for(GAVPresentation gav : group.getGavs())
+                System.out.println(gav.getAttribute() + " " + gav.getValue() + " " + gav.getValues());
+        }
         studentService.setValues(current, values);
         return "redirect:/student";
     }

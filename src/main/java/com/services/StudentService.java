@@ -141,7 +141,12 @@ public class StudentService {
             for (Value value : values) {
                 if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
                     edited = true;
-                    value.setValue(gav.getValue());
+                    value.setValue("");
+                    if (gav.getValues() == null)
+                        value.setValue(gav.getValue());
+                    else
+                        for (String v : gav.getValues())
+                            value.setValue(value.getValue() + ";" + v);
                     break;
                 }
             }
@@ -186,10 +191,14 @@ public class StudentService {
                 gav.setType(attribute.getType());
                 gav.setPossibleValues(attribute.getPossibleValues());
                 gav.setValue("");
-                for (Value value : values)
-                    if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin))
-                        gav.setValue(value.getValue());
-
+                for (Value value : values) {
+                    if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
+                        if (value.getAttribute().getType().equalsIgnoreCase("list"))
+                            gav.setValues(value.getValue());
+                        else
+                            gav.setValue(value.getValue());
+                    }
+                }
                 gavs.add(gav);
             }
         }
@@ -325,8 +334,9 @@ public class StudentService {
             boolean isAttrEmpty = false;
             if (gavPresentation.getValue() == null)
                 isAttrEmpty = true;
-            else if (gavPresentation.getValue().equals(""))
-                isAttrEmpty = true;
+            else
+                if (gavPresentation.getValue().equals("") || gavPresentation.getValues() != null)
+                    isAttrEmpty = true;
             if (!isAttrEmpty) {
 
                 students1.clear();
@@ -338,10 +348,21 @@ public class StudentService {
                     Set<Value> valueSet = student.getValues();
                     for (Value value : valueSet) {
                         if (value != null) {
-                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) &&
-                                    value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
-                                isSuitable = true;
-                                break;
+                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()))
+                            {
+                                if (value.getAttribute().getType().equalsIgnoreCase("list")) {
+                                    ArrayList<String> tmp = new ArrayList<String>();
+                                    Collections.addAll(tmp, value.getValue().split(";"));
+                                    if(tmp.containsAll(gavPresentation.getValues())){
+                                        isSuitable = true;
+                                        break;
+                                    }
+                                } else {
+                                    if (value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
+                                        isSuitable = true;
+                                        break;
+                                    }
+                                }
                             }
                         }
                         if (isSuitable)

@@ -95,6 +95,11 @@
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
                                         type="date"/>
                         </c:if>
+                        <c:if test="${attr.type == 'list'}">
+                            <form:select multiple="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].values">
+                                <form:options items="${attr.possibleValues}" />
+                            </form:select>
+                        </c:if>
                         <form:input class="hidden"
                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                         <form:input class="hidden"
