@@ -29,9 +29,9 @@
 
             <h3>Change Group</h3>
 
-            <div class="alignCenter" id="oldGroup">
+            <div class="alignCenter">
                 <label >Old name of group</label>
-                <form:select path="oldGroupName" class="addTechField">
+                <form:select path="oldGroupName"  id="oldGroup" class="addTechField">
                     <c:forEach items="${groups}" var="group">
                         <form:option value="${group}">${group}</form:option>
                     </c:forEach>
@@ -76,9 +76,10 @@
 
                     <h3>Change Field</h3>
 
-                    <div class="alignCenter" id="oldField">
+                    <div class="alignCenter">
                         <label>Old name of field</label>
-                        <form:select path="oldFieldName" class="addTechField">
+                        <form:select path="oldFieldName" class="addTechField" id="oldField">
+                            <option selected="true"></option>
                             <c:forEach items="${attributes}" var="attribute">
                                 <form:option value="${attribute}">${attribute}</form:option>
                             </c:forEach>
@@ -96,7 +97,7 @@
                 <div class="alignCenter" id="existingGroup">
 
                     <label>Group name</label>
-                    <form:select path="groupNameExist" name="curGrup" class="addTechField">
+                    <form:select path="groupNameExist" name="curGrup" class="addTechField" id="existingGroups">
                         <c:forEach items="${groups}" var="group">
                             <form:option value="${group}">${group}</form:option>
                         </c:forEach>
