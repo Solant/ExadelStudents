@@ -45,9 +45,8 @@
                             </c:if>
                             <c:if test="${attr.type == 'select'}">
                                 <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value">
-                                    <c:forEach items="${attr.possibleValues}" var="token">
-                                        <form:option value="${token}">${token}</form:option>
-                                    </c:forEach>
+                                    <form:option value=""></form:option>
+                                    <form:options items="${attr.possibleValues}"></form:options>
                                 </form:select>
                             </c:if>
 
