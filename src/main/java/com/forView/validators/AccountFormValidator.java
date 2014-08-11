@@ -26,11 +26,13 @@ public class AccountFormValidator implements Validator {
             return;
         if (!accUnit.getNewPassword().equals(accUnit.getConfirmedPassword()))
             errors.rejectValue("confirmedPassword", "password.notmatch", "Password and retype password do not match");
-        if (!UserService.stringToSha256(accUnit.getPassword()).equals
-                (userService.getByLogin(accUnit.getLogin()).getPassword()) &&
-                !accUnit.getNewPassword().equalsIgnoreCase("") &&
-                accUnit.getNewPassword() != null)
-            errors.reject(/*"password",*/ "oldpassword.wrong", "Old password is wrong.");
+        if(accUnit.getPassword() != null) {
+            if (!UserService.stringToSha256(accUnit.getPassword()).equals
+                    (userService.getByLogin(accUnit.getLogin()).getPassword()) &&
+                    !accUnit.getNewPassword().equalsIgnoreCase("") &&
+                    accUnit.getNewPassword() != null)
+                errors.reject(/*"password",*/ "oldpassword.wrong", "Old password is wrong.");
+        }
 
     }
 

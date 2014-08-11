@@ -54,7 +54,7 @@
     </p>
 
     <p>
-        <label for="telephone">telephone:</label>
+        <label for="telephone">Telephone:</label>
         <form:input path="telephone" class="field" type="text" id="telephone" />
     </p>
 
