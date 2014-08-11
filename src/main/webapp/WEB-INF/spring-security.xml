@@ -37,7 +37,7 @@
         <intercept-url pattern="/notif" access="hasAnyRole('ROLE_STUDENT', 'ROLE_CURATOR', 'ROLE_WORKER', 'ROLE_ADMIN')" />
         <intercept-url pattern="/account" access="hasAnyRole('ROLE_STUDENT', 'ROLE_CURATOR', 'ROLE_WORKER', 'ROLE_ADMIN')" />
 
-        <form-login login-page="/login" authentication-failure-handler-ref="authenticationFailureHandler"/>
+        <form-login login-page="/" authentication-failure-handler-ref="authenticationFailureHandler"/>
         <logout logout-success-url="/" />
     </http>
 
