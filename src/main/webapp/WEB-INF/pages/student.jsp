@@ -52,15 +52,16 @@
                             </c:if>
 
                             <c:if test="${attr.type == 'date'}">
-                                <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
-                                            type="date"/>
+                                <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"  type="date"/>
                             </c:if>
-                            <form:input class="hidden"
-                                        path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
-                            <form:input class="hidden"
-                                        path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].type"/>
-                            <form:input class="hidden"
-                                        path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].group"/>
+                            <c:if test="${attr.type == 'list'}">
+                                <form:select multiple="true" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].values">
+                                    <form:options items="${attr.possibleValues}" />
+                                </form:select>
+                            </c:if>
+                            <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
+                            <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].type"/>
+                            <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].group"/>
                         </div>
                     </c:forEach>
                     <form:button type="submit" class="blue">Save</form:button>

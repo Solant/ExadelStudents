@@ -66,6 +66,13 @@
                         <c:if test="${attr.type == 'date'}">
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" type="date" />
                         </c:if>
+                        <c:if test="${attr.type == 'list'}">
+                            <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" multiple="multiple">
+                                <c:forEach items="${attr.possibleValues}" var="token">
+                                    <form:option value="${token}">${token}</form:option>
+                                </c:forEach>
+                            </form:select>
+                        </c:if>
                         <div class="checkboxAligning"><form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" cssStyle="width: 20px; margin-left: 5px;"/></div>
                         <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>
