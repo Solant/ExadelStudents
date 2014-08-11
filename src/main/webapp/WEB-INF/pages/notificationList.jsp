@@ -24,7 +24,7 @@
 
 <div align="center" id="table">
 
-    <h2>Notifications of ${notifs[0].user.firstName} ${notifs[0].user.secondName}</h2>
+    <h2>Notifications of ${name}</h2>
 
     <table id="messageTable" class="display">
         <thead>

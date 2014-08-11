@@ -27,7 +27,7 @@
 
 </div>
 <div id="table">
-    <h2>Feedbacks of ${review.student.firstname} ${review.student.lastname}</h2>
+    <h2>Feedbacks of ${studentName} </h2>
 <table id="fblist" class="display">
 <thead>
 <tr>

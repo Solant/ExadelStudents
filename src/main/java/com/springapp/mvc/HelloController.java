@@ -84,7 +84,9 @@ public class HelloController {
     @RequestMapping(value = "/notif", method = RequestMethod.GET)
     public String showNotifs(ModelMap modelMap){
         List<Notification> notifications = userService.getAllNotifications(UserService.getCurrentUserLogin());
+        String login = UserService.getCurrentUserLogin();
         modelMap.addAttribute("notifs", notifications);
+        modelMap.addAttribute("name", userService.getFirstName(login)+" "+userService.getSecondName(login));
         return "notificationList";
     }
 

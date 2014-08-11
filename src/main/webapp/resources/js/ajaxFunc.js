@@ -40,7 +40,7 @@ function liveSearch() {
 
         $.each(data, function (index, human) {
             var anchor = $('<a/>');
-            anchor.attr("href", "admin/studentPage/"+human.login);
+            anchor.attr("href", "/admin/studentPage/"+human.login);
             anchor.text(human.secondName + " " + human.firstName);
             anchor.addClass('list-group-item');
             searchResult.append(anchor);

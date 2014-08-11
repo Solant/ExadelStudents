@@ -12,7 +12,6 @@ import com.services.presentation.GAVPresentation;
 import com.services.tables.ExcelTableService;
 import com.services.tables.PDFTableService;
 import com.services.tables.WordTableService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,13 +20,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import persistance.model.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Надя on 16.07.2014.
@@ -547,6 +547,7 @@ public class AdminController {
     public String studentNotif(@PathVariable("student") String student, ModelMap modelMap) {
         List<Notification> notifications = userService.getAllNotifications(student);
         modelMap.addAttribute("notifs", notifications);
+        modelMap.addAttribute("name", studentService.getFirstName(student)+" "+studentService.getSecondName(student));
         return "notificationList";
     }
 
@@ -627,10 +628,11 @@ public class AdminController {
     @RequestMapping("/studentPage/{student}/allFeedbacks")
     public String allStudentFeedbacks(@PathVariable("student") String student, ModelMap modelMap) {
         modelMap.addAttribute("reviews", studentService.getReviews(student));
+        modelMap.addAttribute("studentName", studentService.getFirstName(student)+" "+studentService.getSecondName(student));
         return "studentFeedbacks";
     }
 
-    @RequestMapping("/studentPage/{student}/showFeedback/{revId}")
+    @RequestMapping("/showFeedback/{student}/{revId}")
     public String showStudentFeedback(@PathVariable("student") String student,
                                       @PathVariable("revId") Long revId,
                                       ModelMap modelMap) {
