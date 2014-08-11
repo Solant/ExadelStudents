@@ -1,6 +1,8 @@
 /**
  * Created by Administrator on 06.08.2014.
  */
+
+
 $(document).ready(function () {
     var keyPressed = false;
     var timeoutInProgress = false;
@@ -14,37 +16,45 @@ $(document).ready(function () {
     })();
 
     $('#search').keyup(function () {
+        $('#search').removeClass('errorBG');
+        $('#search').addClass('normal');
         delay(function () {
             liveSearch();
         }, 300);
     });
 });
 function liveSearch() {
-    var remove = {display: "none"};
-    var show = {display: "block"};
 
     var searchResult = $('#searchResult');
     var searchRequest = $('#search').val();
     if (searchRequest.length == 0) {
         searchResult.empty();
-        searchResult.css(remove);
+        searchResult.addClass('disappear');
         return;
     }
+
 
     /*var url="http://www.json-generator.com/api/json/get/cqQcvGyfTm?indent=2";*/
 
     var url = "/admin/liveSearch?initials=" + searchRequest;
     $.get(url, function (data) {
         searchResult.empty();
-        searchResult.css(show);
+        searchResult.addClass('show');
+
+        var results= false;
 
         $.each(data, function (index, human) {
+            results=true;
             var anchor = $('<a/>');
             anchor.attr("href", "/admin/studentPage/"+human.login);
             anchor.text(human.secondName + " " + human.firstName);
             anchor.addClass('list-group-item');
             searchResult.append(anchor);
         })
+
+        if(results==false){
+            $('#search').addClass('errorBG');
+        }
 
         timePassed = false;
 
@@ -86,12 +96,11 @@ $(document).ready(function () {
 
 function getNumberOfNotifications(){
     var numberOfNotifications = $('#numberOfNotifications');
-    var remove = {display: "none"};
     var src = "/notif/update";
 
     $.get(src, function (data) {
         if (data == 0){
-            numberOfNotifications.css(remove);
+            numberOfNotifications.addClass('disappear');
         }
         else{
             numberOfNotifications.append(data.toString());
