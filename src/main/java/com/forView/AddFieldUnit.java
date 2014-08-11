@@ -13,7 +13,6 @@ public class AddFieldUnit {
     private String forStatus;
     private String valueType;
     private String oldFieldName;
-    private boolean delete;
 
 
     public String getGroupNameNew() {
@@ -88,11 +87,4 @@ public class AddFieldUnit {
         this.oldFieldName = oldFieldName;
     }
 
-    public boolean isDelete() {
-        return delete;
-    }
-
-    public void setDelete(boolean delete) {
-        this.delete = delete;
-    }
 }

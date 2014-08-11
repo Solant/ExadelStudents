@@ -94,6 +94,8 @@ public class HelloController {
     public String showNotif(ModelMap modelMap, @PathVariable("notifId")Long id){
         Notification notification = notificationService.getNotificationById(id);
         notificationService.setRead(id);
+        notification.setText(notification.getText().replaceAll("\n", "<br>"));
+        System.out.println(notification.getText());
         modelMap.addAttribute("notif", notification);
         return "notification";
     }

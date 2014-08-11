@@ -35,11 +35,14 @@
             </li>
             <%pageContext.setAttribute("isActive", "");%>
         </c:forEach>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li>
                 <a href="/admin/studentPage/${currentUser.login}/notif" class="aToPropsTable">
                     Notifications
                 </a>
             </li>
+        </sec:authorize>
+
             <li>
                 <a href="/admin/studentPage/${currentUser.login}/allFeedbacks" class="aToPropsTable">
                     Feedbacks
