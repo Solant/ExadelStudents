@@ -1,5 +1,6 @@
 package com.services;
 
+import com.forView.JSONField;
 import com.services.presentation.GAVPresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,5 +84,25 @@ public class AttributeService {
         attribute.setPattern(pattern);
         attribute.setErrorMessage(errorMessage);
         attributeDao.update(attribute);
+    }
+    @Transactional
+    public JSONField getJSONField(String attributeName){
+        JSONField jsonField = new JSONField();
+        Attribute attribute = attributeDao.findByName(attributeName);
+        jsonField.setType(attribute.getType());
+        jsonField.setGroupName(attribute.getGroup().getName());
+        jsonField.setPossibleValues(attribute.getPossibleValues());
+
+        if(attribute.getPattern()!=null) {
+            if (attribute.getPattern().equals("^[0-9]*$"))
+                jsonField.setValueType("number");
+
+            if (attribute.getPattern().equals("^[A-Za-z//s//-//.]*$"))
+                jsonField.setValueType("fullName");
+
+            if (attribute.getPattern().equals("^[A-Za-z//s]*$"))
+                jsonField.setValueType("symbolsOnly");
+        }
+        return jsonField;
     }
 }

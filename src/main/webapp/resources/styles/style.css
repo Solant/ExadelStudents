@@ -167,7 +167,6 @@ table thead, table tfoot {
     color: white;
     font-weight: bold;
     text-shadow: 1px 1px 0px black;
-    font-family: serif;
 }
 
 table td {
@@ -381,6 +380,21 @@ button.gray, a.gray, input[type=submit].gray {
 
 }
 
+.disappear{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+.errorBG{
+    background: #ff0033;
+}
+
+.normalBG{
+    background: #ffffff;
+}
 /*end of common props*/
 
 /*login props*/
