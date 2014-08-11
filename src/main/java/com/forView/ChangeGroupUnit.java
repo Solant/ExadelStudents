@@ -3,7 +3,6 @@ package com.forView;
 public class ChangeGroupUnit {
     private String oldGroupName;
     private String newGroupName;
-    private boolean delete;
     private String status;
 
     public String getOldGroupName() {
@@ -20,14 +19,6 @@ public class ChangeGroupUnit {
 
     public void setNewGroupName(String newGroupName) {
         this.newGroupName = newGroupName;
-    }
-
-    public boolean isDelete() {
-        return delete;
-    }
-
-    public void setDelete(boolean delete) {
-        this.delete = delete;
     }
 
     public String getStatus() {
