@@ -30,7 +30,7 @@
 
         <div class="text">
             <p>
-               ${notif.text}
+               <c:out escapeXml="false" value =" ${notif.text}"></c:out>
             </p>
         </div>
 
