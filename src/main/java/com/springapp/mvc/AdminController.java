@@ -618,17 +618,17 @@ public class AdminController {
         if (addFieldUnit.getValueType() != null) {
             if (addFieldUnit.getValueType().equals("number")) {
                 pattern = "^[0-9]*$";
-                errorMessage = "\""+addFieldUnit.getFieldName() + "\" must contain a number";
+                errorMessage = "\"" + addFieldUnit.getFieldName() + "\" must contain a number";
             }
 
             if (addFieldUnit.getValueType().equals("fullName")) {
                 pattern = "^[A-Za-z//s//-//.]*$";
-                errorMessage = "\""+addFieldUnit.getFieldName() + "\" must contain a full name";
+                errorMessage = "\"" + addFieldUnit.getFieldName() + "\" must contain a full name";
             }
 
             if (addFieldUnit.getValueType().equals("symbolsOnly")) {
                 pattern = "^[A-Za-z//s]*$";
-                errorMessage = "\""+addFieldUnit.getFieldName() + "\" must contain only latin symbols and space";
+                errorMessage = "\"" + addFieldUnit.getFieldName() + "\" must contain only latin symbols and space";
             }
         }
         attributeService.addAttribute(groupName, addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
@@ -751,8 +751,8 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
-    public String changeTech(@ModelAttribute("newTechName")String newTechName,
-                             @ModelAttribute("oldTechName")String oldTechName){
+    public String changeTech(@ModelAttribute("newTechName") String newTechName,
+                             @ModelAttribute("oldTechName") String oldTechName) {
         technologyService.changeTechnology(oldTechName, newTechName);
         if (tableData == null)
             return "redirect:/admin";
@@ -771,15 +771,11 @@ public class AdminController {
 
     }
 
+
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
     public String changeField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
 
         if (addFieldUnit.getOldFieldName() != null) {
-
-                if (tableData == null)
-                    return "redirect:/admin";
-                return "redirect:/admin/formedTable";
-            }
 
             String newFieldName = addFieldUnit.getFieldName();
             if (newFieldName == null)
@@ -861,13 +857,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
-    public @ResponseBody JSONField showField(@ModelAttribute("field") String fieldName) {
+    public
+    @ResponseBody
+    JSONField showField(@ModelAttribute("field") String fieldName) {
         return attributeService.getJSONField(fieldName);
     }
 
 
     @RequestMapping(value = "/showGroup", method = RequestMethod.GET)
-    public @ResponseBody String showGroup(@ModelAttribute("group") String groupName) {
+    public
+    @ResponseBody
+    String showGroup(@ModelAttribute("group") String groupName) {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
