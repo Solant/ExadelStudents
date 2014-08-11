@@ -759,12 +759,22 @@ public class AdminController {
         return "redirect:/admin/formedTable";
     }
 
+    @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
+    public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
+        if (addFieldUnit.getOldFieldName() != null) {
+            attributeService.removeAttribute(addFieldUnit.getOldFieldName());
+        }
+
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+
+    }
+
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
     public String changeField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
 
         if (addFieldUnit.getOldFieldName() != null) {
-            if (addFieldUnit.isDelete()) {
-                attributeService.removeAttribute(addFieldUnit.getOldFieldName());
 
                 if (tableData == null)
                     return "redirect:/admin";
@@ -816,17 +826,22 @@ public class AdminController {
         return "redirect:/admin/formedTable";
     }
 
+    @RequestMapping(value = "/deleteGroup", method = RequestMethod.POST)
+    public String deleteGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit, ModelMap modelMap) {
+        if (changeGroupUnit.getOldGroupName() != null) {
+            groupService.deleteGroup(changeGroupUnit.getOldGroupName());
+
+        }
+
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+
+    }
+
     @RequestMapping(value = "/changeGroup", method = RequestMethod.POST)
     public String changeGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit, ModelMap modelMap) {
         if (changeGroupUnit.getOldGroupName() != null) {
-            if (changeGroupUnit.isDelete()) {
-                groupService.deleteGroup(changeGroupUnit.getOldGroupName());
-
-                if (tableData == null)
-                    return "redirect:/admin";
-                return "redirect:/admin/formedTable";
-            }
-
             String newGroupName = changeGroupUnit.getNewGroupName();
             if (newGroupName == null)
                 newGroupName = changeGroupUnit.getOldGroupName();
