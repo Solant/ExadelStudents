@@ -2,8 +2,6 @@ package com.services;
 
 import com.forView.JSONStudent;
 import com.services.presentation.GAVPresentation;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,6 +61,15 @@ public class StudentService {
     @Transactional
     public String getStatus(String login) {
         Set<Value> values = attributeDao.findByName("status").getValues();
+        for (Value value : values)
+            if (value.getStudent().getLogin().equalsIgnoreCase(login))
+                return value.getValue();
+        return null;
+    }
+
+    @Transactional
+    public String getValue(String login, String attrName) {
+        Set<Value> values = attributeDao.findByName(attrName).getValues();
         for (Value value : values)
             if (value.getStudent().getLogin().equalsIgnoreCase(login))
                 return value.getValue();

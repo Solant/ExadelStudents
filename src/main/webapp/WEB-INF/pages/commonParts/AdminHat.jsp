@@ -18,7 +18,7 @@
             <div class="navbar-form navbar-left" role="search">
                 <div class="form-group relative">
                     <input type="text" class="form-control" placeholder="Search Student" id="search" autocomplete="off">
-                    <ul id="searchResult" class="list-group"></ul>
+                    <div id="searchResult" class="list-group"></div>
                 </div>
             </div>
             <form method="get">
@@ -100,13 +100,18 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <button formaction="/admin/showChangeField/true" class="btn">
+                                        <button formaction="/admin/showChangeField/field" class="btn">
                                             <span>Field</span>
                                         </button>
                                     </li>
                                     <li>
-                                        <button formaction="/admin/showChangeField/false" class="btn">
+                                        <button formaction="/admin/showChangeField/group" class="btn">
                                             <span>Group</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button formaction="/admin/showChangeField/tech" class="btn">
+                                            <span>Technology</span>
                                         </button>
                                     </li>
                                 </ul>
@@ -177,12 +182,12 @@
 
                     <li>
                         <a href="<c:url value="j_spring_security_logout" />">
-                        <img src="/resources/images/exit.png" class="exit_logo">
+                            <img src="/resources/images/exit.png" class="exit_logo">
                         </a>
                     </li>
                     <li>
                         <a href="<c:url value="/account"/> ">
-                        <img src="/resources/images/account.png" class="account_logo">
+                            <img src="/resources/images/account.png" class="account_logo">
                         </a>
                     </li>
                 </ul>
@@ -190,6 +195,4 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<%--
 
-<div id="searchResult" class="list-group"></div>--%>
