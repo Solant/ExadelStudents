@@ -924,6 +924,20 @@ public class AdminController {
         return feedbackerService.getJSONInterviewersByStudent(student);
     }
 
+    @RequestMapping(value = "/curatedForFeed", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONStudent> curatedForFeed(@ModelAttribute("student") String student) {
+        return feedbackerService.getJSONSupervisedStudents(student);
+    }
+
+    @RequestMapping(value = "/interviewedForFeed", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONStudent> interviewedForFeed(@ModelAttribute("student") String student) {
+        return feedbackerService.getJSONInterviewedStudents(student);
+    }
+
     @RequestMapping(value = "/unlink", method = RequestMethod.POST)
     public String unlink(@ModelAttribute("unlinkUnit")UnlinkUnit unlinkUnit){
         if(unlinkUnit.getCurators() != null)

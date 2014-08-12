@@ -1,6 +1,7 @@
 package com.services;
 
 import com.forView.JSONFeedbacker;
+import com.forView.JSONStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -173,9 +174,43 @@ public class FeedbackerService {
     }
 
     @Transactional
-    public void unlink(String studentLogin, String feedLogin, boolean isCurator){
+    public List<JSONStudent> getJSONSupervisedStudents(String feedbackerLogin) {
+        List<JSONStudent> jsonStudents = new ArrayList<JSONStudent>();
+        for(Student student:getSupervisedStudents(feedbackerLogin)){
+            JSONStudent jsonStudent = new JSONStudent();
+            jsonStudent.setSecondName(student.getSecondName());
+            jsonStudent.setLogin(student.getLogin());
+            jsonStudents.add(jsonStudent);
+        }
+        return jsonStudents;
+    }
+
+    @Transactional
+    public List<JSONStudent> getJSONInterviewedStudents(String feedbackerLogin) {
+        List<JSONStudent> jsonStudents = new ArrayList<JSONStudent>();
+        for(Student student:getInterviewedStudents(feedbackerLogin)){
+            JSONStudent jsonStudent = new JSONStudent();
+            jsonStudent.setSecondName(student.getSecondName());
+            jsonStudent.setLogin(student.getLogin());
+            jsonStudents.add(jsonStudent);
+        }
+        return jsonStudents;
+    }
+
+    @Transactional
+    public void unlink(String login1, String login2, boolean isCurator){
         Set<Student> students = new HashSet<Student>();
-        Feedbacker feedbacker = feedbackerDao.findByLogin(feedLogin);
+        Feedbacker feedbacker;String feedLogin;
+        String studentLogin;
+        if((feedbacker = feedbackerDao.findByLogin(login1)) != null){
+            feedLogin = login1;
+            studentLogin = login2;
+        }
+        else{
+            feedbacker = feedbackerDao.findByLogin(login2);
+            feedLogin = login2;
+            studentLogin = login1;
+        }
         if(isCurator) {
             for(Student student: feedbacker.getMyStudents()){
                 if(!student.getLogin().equals(studentLogin)){

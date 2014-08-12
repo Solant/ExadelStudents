@@ -68,20 +68,20 @@
     <div class="tab-pane " id="feed">
         <form:form commandName="unlinkUnit" cssClass="linkingForm" method="post" action="/admin/unlink">
             <div class="linkingL">
-                <label for="curators">Curators:</label>
-                <form:select path="curators" multiple="true" id="curators"/>
+                <label for="curators">Curated:</label>
+                <form:select path="curators" multiple="true" id="curated"/>
             </div>
             <div class="linkingR">
-                <label for="interviewers">Interviewers:</label>
-                <form:select path="interviewers" multiple="true" id="interviewers"/>
+                <label for="interviewers">Interviewed:</label>
+                <form:select path="interviewers" multiple="true" id="interviewed"/>
             </div>
             <div class="technology">
-                <label for="studentSelect">Student:</label>
-                <form:select path="student" id="studentSelect">
+                <label for="feedSelect">Feedbacker:</label>
+                <form:select path="student" id="feedSelect">
                     <form:option value=""></form:option>
-                    <c:forEach items="${students}" var="student">
+                    <c:forEach items="${feeds}" var="feed">
                         <form:option
-                                value="${student.login}">${student.firstName} ${student.secondName}</form:option>
+                                value="${feed.login}">${feed.firstName} ${feed.secondName}</form:option>
                     </c:forEach>
                 </form:select>
             </div>
@@ -116,6 +116,43 @@
                     var url2 = "interviewersForStudent?student=" + document.getElementById("studentSelect").value;
                     $.get(url2, function (data) {
                         var select = document.getElementById("interviewers");
+                        removeOptions(select);
+
+                        var obj = data;
+
+                        $.each(data, function (index, feedbacker) {
+                            var option = document.createElement("option");
+                            option.text = feedbacker.secondName;
+                            option.value = feedbacker.login;
+                            select.add(option);
+                        })
+                    });
+                }
+        )
+    });
+
+
+    $(document).ready(function () {
+        $('#feedSelect').change(
+                function () {
+                    var url = "curatedForFeed?student=" + document.getElementById("feedSelect").value;
+                    $.get(url, function (data) {
+                        var select = document.getElementById("curated");
+                        removeOptions(select);
+
+                        var obj = data;
+
+                        $.each(data, function (index, feedbacker) {
+                            var option = document.createElement("option");
+                            option.text = feedbacker.secondName;
+                            option.value = feedbacker.login;
+                            select.add(option);
+                        })
+                    });
+
+                    var url2 = "interviewedForFeed?student=" + document.getElementById("feedSelect").value;
+                    $.get(url2, function (data) {
+                        var select = document.getElementById("interviewed");
                         removeOptions(select);
 
                         var obj = data;
