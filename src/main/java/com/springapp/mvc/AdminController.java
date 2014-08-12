@@ -137,33 +137,10 @@ public class AdminController {
         LinkUnit linkUnit = new LinkUnit();
         linkUnit.setCurator(true);
 
-        List<String> studentNames = new ArrayList();
-        List<String> studentLogins = new ArrayList();
-        for (Student s : studentService.getAllEnabledStudents()) {
-            studentNames.add(s.getSecondName() + " " + s.getFirstName());
-            studentLogins.add(s.getLogin());
-        }
-
-        List<String> feedNames = new ArrayList();
-        List<String> feedLogins = new ArrayList();
-        for (Feedbacker feed : feedbackerService.getAllFeedbackers()) {
-            feedNames.add(feed.getSecondName() + " " + feed.getFirstName());
-            feedLogins.add(feed.getLogin());
-        }
-
-        List<Technology> technologies = technologyService.getAllTechnologies();
-        List<String> technologyNames = new ArrayList();
-        for (Technology t : technologies) {
-            technologyNames.add(t.getTechnologyName());
-
-        }
-
-        modelMap.addAttribute("students", studentNames);
-        modelMap.addAttribute("feedbackers", feedNames);
-        modelMap.addAttribute("feedLogins", feedLogins);
-        modelMap.addAttribute("studentLogins", studentLogins);
-        modelMap.addAttribute("technologies", technologyNames);
         modelMap.addAttribute("linkUnit", linkUnit);
+        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
+        modelMap.addAttribute("feedbackers", feedbackerService.getAllFeedbackers());
+        modelMap.addAttribute("technologies", technologyService.getAllTechnologies());
         return "linking";
     }
 

@@ -34,8 +34,8 @@
         <label for="students">Students</label><br/>
 
         <form:select path="linkUnit.students" id="students" multiple="true">
-            <c:forEach items="${students}" varStatus="index">
-                <form:option value="${studentLogins[index.count-1]}">${students[index.count-1]}</form:option>
+            <c:forEach items="${students}" var="student">
+                <form:option value="${student.login}">${student.firstName} ${student.secondName}</form:option>
             </c:forEach>
         </form:select>
     </div>
@@ -43,8 +43,8 @@
     <div class="linkingR">
         <label for="feedbackers">Feedbackers</label><br/>
         <form:select multiple="true" id="feedbackers" path="linkUnit.feedbackers">
-            <c:forEach items="${feedbackers}" varStatus="index">
-                <form:option value="${feedLogins[index.count-1]}">${feedLogins[index.count-1]}</form:option>
+            <c:forEach items="${feedbackers}" var="feed">
+                <form:option value="${feed.login}">${feed.firstName} ${feed.secondName}</form:option>
             </c:forEach>
         </form:select>
     </div>
@@ -53,8 +53,8 @@
         <label for="techList">Technology:</label><br/>
         <form:select name="technology" id="techList" path="linkUnit.technology">
             <form:option value="Any"></form:option>
-            <c:forEach items="${technologies}" var="token">
-                <form:option value="${token}">${token}</form:option>
+            <c:forEach items="${technologies}" var="tech">
+                <form:option value="${tech.technologyName}">${tech.technologyName}</form:option>
             </c:forEach>
         </form:select>
     </div>
