@@ -61,32 +61,33 @@
         <tbody>
         <c:forEach items="${tableData}" var="student" begin="1" varStatus="index">
             <tr<c:if test="${enable != 'enable'}"> class="notLinking" </c:if>>
-            <c:forEach items="${student}" var="item">
-                <td>
-                    <c:if test="${enable == 'enable'}">
-                    <a href="/admin/studentPage/${student.get(1)}">
-                        </c:if>
-                            ${item}
-                    </a>
-                </td>
-            </c:forEach>
+                <c:forEach items="${student}" var="item">
+                    <td>
+                        <c:if test="${enable == 'enable'}">
+                        <a href="/admin/studentPage/${student.get(1)}">
+                            </c:if>
+                                ${item}
+                        </a>
+                    </td>
+                </c:forEach>
 
-            <c:if test="${enable == 'enable'}">
-                <td class="withImage">
-                    <a name="deleteTd" id="${index.count}"
-                       href="#myModal"<%--href="/admin/${index.count}/disable" --%> <%--data-toggle="modal" data-target="#myModal" --%>>
-                        <img src="/resources/images/fired.png" class="studentStatusImage">
-                    </a>
+                <c:if test="${enable == 'enable'}">
+                    <td class="withImage">
+                        <a name="deleteTd" id="${index.count}" href="#myModal">
+                            <div>
+                                <img src="/resources/images/fired.png" class="studentStatusImage">
+                            </div>
+                        </a>
+                    </td>
+                </c:if>
+                <c:if test="${enable == 'disable'}">
+                    <td class="withImage">
+                        <a href="/admin/${index.count}/enable">
+                            <img src="/resources/images/add.png" class="studentStatusImage">
+                        </a>
+                    </td>
+                </c:if>
                 </td>
-            </c:if>
-            <c:if test="${enable == 'disable'}">
-                <td class="withImage">
-                    <a href="/admin/${index.count}/enable">
-                        <img src="/resources/images/add.png" class="studentStatusImage">
-                    </a>
-                </td>
-            </c:if>
-            </td>
             </tr>
         </c:forEach>
         </tbody>
@@ -99,16 +100,18 @@
 
 <div id="modal_form">
     <span id="modal_close">&times;</span>
+
     <div class="alignCenter">
-        <form action="/admin/${index.count}/disable">
-        <h4>Disable student</h4>
-        <label>Reason:</label>
-        <div class="group">
-            <textarea class="textOther" name="reason"></textarea>
-        </div>
-        <input type="hidden" name="studentNumber" id="studentNumber"/>
-        <button type="button" class="gray" id="cancel_button">Cancel</button>
-        <button type="submit" class="blue" id="save_button">Save</button>
+        <form action="/admin/disable">
+            <h4>Disable student</h4>
+            <label>Reason:</label>
+
+            <div class="group" id="reasonArea">
+                <textarea class="textOther" name="reason"></textarea>
+            </div>
+            <input type="hidden" name="studentNumber" id="studentNumber"/>
+            <button type="button" class="gray" id="cancel_button">Cancel</button>
+            <button type="submit" class="blue" id="save_button">Save</button>
         </form>
     </div>
 </div>
@@ -120,7 +123,7 @@
             document.getElementById("studentNumber").value = krestik.id;
             event.preventDefault(); // выключаем стандартную роль элемента
             $('#overlay').fadeIn(400, // сначала плавно показываем темную подложку
-                    function () { // после выполнения предъидущей анимации
+                    function () { // после выполнения предыдущей анимации
                         $('#modal_form')
                                 .css('display', 'block') // убираем у модального окна display: none;
                                 .animate({opacity: 1, top: '50%'}, 200); // плавно прибавляем прозрачность одновременно со съезжанием вниз
