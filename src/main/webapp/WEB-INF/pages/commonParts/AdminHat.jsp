@@ -23,7 +23,13 @@
             </div>
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
+<%--
 
+                    <li>
+                        <input type="text" class="form-control" placeholder="Search Student" id="search" autocomplete="off">
+                        <ul id="searchResult" class="list-group"></ul>
+                    </li>
+--%>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Students
