@@ -16,13 +16,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="navbar-form navbar-left" role="search">
-                <div class="form-group">
+                <div class="form-group relative">
                     <input type="text" class="form-control" placeholder="Search Student" id="search" autocomplete="off">
                 </div>
             </div>
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
-
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Students
