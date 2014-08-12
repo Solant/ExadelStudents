@@ -106,4 +106,9 @@ public class UserService {
                 notificationsRet.add(notification);
         return notificationsRet;
     }
+
+    @Transactional
+    public void delete (String login){
+        userDao.removeById(userDao.findByLogin(login).getId());
+    }
 }

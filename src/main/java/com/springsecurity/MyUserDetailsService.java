@@ -25,22 +25,17 @@ public class MyUserDetailsService implements UserDetailsService{
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) {
-        System.out.println("[CALL]MyUserDetailsService.loadUserByName()");
-        System.out.println("[DEBUG]MyUserDetailsService.loadUserByName() username = " + username);
 
         User user = userDao.findByLogin(username);
-        System.out.println("[DEBUG]MyUserDetailsService.loadUserByName() username = " + user.getLogin());
 
         List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRoles());
 
-        System.out.println("[DEBUG]MyUserDetailsService.loadUserByName() username = " + user.getLogin());
 
         return buildUserForAuthentication(user, authorities);
     }
 
     // Converts user to org.springframework.security.core.userdetails.User
     private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-        System.out.println("[DEBUG]MyUserDetailsService.buildUserForAuthentication() login:" + user.getLogin() + " password: " + user.getPassword());
         return new org.springframework.security.core.userdetails.User(user.getLogin().trim(), user.getPassword().trim(), true/**/, true, true, true, authorities);
     }
 

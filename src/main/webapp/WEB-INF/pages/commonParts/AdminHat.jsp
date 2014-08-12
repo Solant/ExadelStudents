@@ -118,6 +118,13 @@
                             </li>
 
                             <li>
+                                <button formaction="/admin/deleteUser" class="btn">
+                                    <img src="/resources/images/fired.png" class="adminMenuImages">
+                                    <span>Delete User</span>
+                                </button>
+                            </li>
+
+                            <li>
                                 <button formaction="/admin/showLinkStudent" class="btn">
                                     <img src="/resources/images/yellow-link.png" class="adminMenuImages">
                                     <span>Link Student</span>
