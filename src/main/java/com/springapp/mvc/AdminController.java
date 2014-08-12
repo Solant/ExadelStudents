@@ -900,4 +900,42 @@ public class AdminController {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
+    @RequestMapping("/showUnlink")
+    public String showUnlink(ModelMap modelMap){
+        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
+        modelMap.addAttribute("feeds", feedbackerService.getAllFeedbackers());
+        modelMap.addAttribute("unlinkUnit", new UnlinkUnit());
+        return "unlink";
+    }
+
+    @RequestMapping(value = "/curatorsForStudent", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONFeedbacker> feedbackersForStudent(@ModelAttribute("student") String student) {
+
+        return feedbackerService.getJSONCuratorsByStudent(student);
+    }
+
+    @RequestMapping(value = "/interviewersForStudent", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONFeedbacker> interviewersForStudent(@ModelAttribute("student") String student) {
+
+        return feedbackerService.getJSONInterviewersByStudent(student);
+    }
+
+    @RequestMapping(value = "/unlink", method = RequestMethod.POST)
+    public String unlink(@ModelAttribute("unlinkUnit")UnlinkUnit unlinkUnit){
+        if(unlinkUnit.getCurators() != null)
+        for(String feed:unlinkUnit.getCurators()){
+            feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
+        }
+        if(unlinkUnit.getInterviewers() != null)
+        for(String feed:unlinkUnit.getInterviewers()){
+            feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
+        }
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+    }
 }
