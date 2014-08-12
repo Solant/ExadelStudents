@@ -1,3 +1,4 @@
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -9,6 +10,10 @@
 <body>
 
 <%@include file="/WEB-INF/pages/commonParts/FBhat.jsp" %>
+<%
+    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+    pageContext.setAttribute("sdf", sdf);
+%>
 
 <div id="table">
     <table id="fblist" class="display">
@@ -28,7 +33,11 @@
                 <td>
                     <a href="/curator/showFeedback/${name.studentLogin}/${feedbackerRole}">${name.studentName}</a>
                 </td>
-                <td>${name.date}</td>
+                <td>
+                    <c:if test="${name.date != null}">
+                        ${sdf.format(name.date)}<%--sdf.format(name.date)--%>
+                    </c:if>
+                </td>
                 <td>${name.feedbackerName}</td>
             </tr>
         </c:forEach>
