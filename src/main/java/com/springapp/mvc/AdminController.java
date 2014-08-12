@@ -184,8 +184,7 @@ public class AdminController {
         }
         if (tableData == null)
             return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
 
