@@ -103,8 +103,11 @@ function getNumberOfNotifications(){
             numberOfNotifications.addClass('disappear');
         }
         else{
+            numberOfNotifications.addClass('show');
+            numberOfNotifications.empty();
             numberOfNotifications.append(data.toString());
         }
+        setTimeout(getNumberOfNotifications, 5000);
     });
 }
 

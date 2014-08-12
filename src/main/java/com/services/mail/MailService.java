@@ -3,19 +3,26 @@ package com.services.mail;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Calendar;
 import java.util.Properties;
 
-public class MailService {
+public class MailService implements Runnable{
 
     private String username;
     private String password;
     private Properties props;
     private String fromEmail;
+    private String title;
+    private String text;
+    private String toEmail;
 
-    public MailService(String username, String password, String fromEmail) {
+
+    public MailService(String username, String password, String fromEmail, String title, String text) {
         this.username = username;
         this.password = password;
         this.fromEmail = fromEmail;
+        this.title = title;
+        this.text = text;
 
         props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -24,12 +31,13 @@ public class MailService {
         props.put("mail.smtp.port", "587");
     }
 
-    public void send(String title, String text, String toEmail) {
+    private void send() {
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
+        System.out.println("[DEBUG]Email trying to send to " + toEmail + " " + Calendar.getInstance().getTimeInMillis());
         if (toEmail != null && !toEmail.equals("")) {
             try {
                 Message message = new MimeMessage(session);
@@ -43,5 +51,15 @@ public class MailService {
                 throw new RuntimeException(e);
             }
         }
+        System.out.println("[DEBUG]Email sended " + Calendar.getInstance().getTimeInMillis());
+    }
+
+    public void setEmail(String email){
+        this.toEmail = email;
+    }
+
+    @Override
+    public void run() {
+        send();
     }
 }

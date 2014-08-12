@@ -535,7 +535,6 @@ public class AdminController {
 
     @RequestMapping("/sendNotif")
     public String sendNotif(@ModelAttribute("createNotifUnit") CreateNotifUnit createNotifUnit) {
-        MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com");
         String title = createNotifUnit.getTitle();
         String text = createNotifUnit.getText();
         String current;
@@ -546,38 +545,60 @@ public class AdminController {
         if (createNotifUnit.isForStudents()) {
             for (Student student : studentService.getAllEnabledStudents()) {
                 notificationService.add(current, student.getLogin(), title, text);
-                mailService.send(title, text, userService.getByLogin(student.getLogin()).getEmail());
+                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                mailService.setEmail(userService.getByLogin(student.getLogin()).getEmail());
+                Thread t = new Thread(mailService);
+                t.start();
             }
         } else {
             if (createNotifUnit.getStudents() != null)
                 for (String student : createNotifUnit.getStudents()) {
                     notificationService.add(current, student, title, text);
-                    mailService.send(title, text, userService.getByLogin(student).getEmail());
+                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    mailService.setEmail(userService.getByLogin(student).getEmail());
+                    Thread t = new Thread(mailService);
+                    t.start();
                 }
         }
         if (createNotifUnit.isForFeedbackers()) {
             for (Feedbacker feed : feedbackerService.getAllFeedbackers()) {
                 notificationService.add(current, feed.getLogin(), title, text);
-                mailService.send(title, text, userService.getByLogin(feed.getLogin()).getEmail());
+                //mailService.send(title, text, );
+                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                mailService.setEmail(userService.getByLogin(feed.getLogin()).getEmail());
+                Thread t = new Thread(mailService);
+                t.start();
             }
         } else {
             if (createNotifUnit.getFeedbackers() != null)
                 for (String feed : createNotifUnit.getFeedbackers()) {
                     notificationService.add(current, feed, title, text);
-                    mailService.send(title, text, userService.getByLogin(feed).getEmail());
+                    //mailService.send(title, text, );
+                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    mailService.setEmail(userService.getByLogin(feed).getEmail());
+                    Thread t = new Thread(mailService);
+                    t.start();
                 }
         }
         if (createNotifUnit.isForWorkers()) {
             for (HRWorker worker : hrWorkerService.getAllHRWorkers()) {
                 notificationService.add(current, worker.getLogin(), title, text);
-                mailService.send(title, text, userService.getByLogin(worker.getLogin()).getEmail());
+                //mailService.send(title, text, );
+                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                mailService.setEmail(userService.getByLogin(worker.getLogin()).getEmail());
+                Thread t = new Thread(mailService);
+                t.start();
             }
         } else {
 
             if (createNotifUnit.getFeedbackers() != null) {
                 for (String worker : createNotifUnit.getWorkers()) {
                     notificationService.add(current, worker, title, text);
-                    mailService.send(title, text, userService.getByLogin(worker).getEmail());
+                    //mailService.send(title, text, userService.getByLogin(worker).getEmail());
+                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    mailService.setEmail(userService.getByLogin(worker).getEmail());
+                    Thread t = new Thread(mailService);
+                    t.start();
                 }
             }
         }
