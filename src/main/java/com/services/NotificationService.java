@@ -27,6 +27,7 @@ public class NotificationService {
         n.setTitle(title);
         n.setTimeWhenSent(Calendar.getInstance());
         n.setText(text);
+        System.out.println("[DEBUG]Notification sended in db " + Calendar.getInstance().getTimeInMillis());
         notificationDao.save(n);
     }
 
