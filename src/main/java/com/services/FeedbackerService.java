@@ -2,15 +2,11 @@ package com.services;
 
 import com.forView.JSONFeedbacker;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.FeedbackerDao;
 import persistance.dao.TechnologyDao;
-import persistance.model.Feedbacker;
-import persistance.model.Student;
-import persistance.model.Technology;
-import persistance.model.UserRole;
+import persistance.model.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,6 +21,9 @@ public class FeedbackerService {
 
     @Autowired
     private TechnologyDao technologyDao;
+
+    @Autowired
+    private UserService userService;
 
     @Transactional
     public Feedbacker getFeedbackerByLogin(String login){
@@ -68,7 +67,13 @@ public class FeedbackerService {
      */
     @Transactional
     public Set<Student> getSupervisedStudents(String feedbackerLogin){
-        return new HashSet<Student>(feedbackerDao.findByLogin(feedbackerLogin).getMyStudents());
+        Set<Student> studentSet = new HashSet<Student>();
+        for(Student student:(Set<Student>)(feedbackerDao.findByLogin(feedbackerLogin).getMyStudents())){
+            if(userService.getByLogin(student.getLogin()).isEnabled()){
+                studentSet.add(student);
+            }
+        }
+        return studentSet ;
     }
 
     /**
@@ -79,7 +84,13 @@ public class FeedbackerService {
      */
     @Transactional
     public Set<Student> getInterviewedStudents(String feedbackerLogin){
-        return  new HashSet<Student>(feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents());
+        Set<Student> studentSet = new HashSet<Student>();
+        for(Student student:(Set<Student>)(feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents())){
+            if(userService.getByLogin(student.getLogin()).isEnabled()){
+                studentSet.add(student);
+            }
+        }
+        return studentSet;
     }
 
     @Transactional
