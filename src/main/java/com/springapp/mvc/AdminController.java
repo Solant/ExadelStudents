@@ -415,6 +415,7 @@ public class AdminController {
         tableData.get(0).add("Phone");
         tableData.get(0).add("Skype");
         tableData.get(0).add("Email");
+        tableData.get(0).add("Reason why disabled");
         int i = 1;
         for (Student student : listDisabled) {
             tableData.add(new ArrayList<String>());
@@ -422,7 +423,8 @@ public class AdminController {
             tableData.get(i).add(student.getLogin());
             tableData.get(i).add(student.getTelephone());
             tableData.get(i).add(student.getSkype());
-            tableData.get(i++).add(student.getEmail());
+            tableData.get(i).add(student.getEmail());
+            tableData.get(i++).add(studentService.getValue(student.getLogin(), "reasonWhyDeleted"));
         }
         modelMap.addAttribute("tableData", tableData);
         enable = "disable";
@@ -680,8 +682,14 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping("/{student}/disable")
-    public String disableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
+    @RequestMapping("/disable")
+    public String disableStudent(@ModelAttribute("reason") String reason, @ModelAttribute("studentNumber") int index, ModelMap modelMap) {
+        List <GAVPresentation> forReason = new ArrayList<GAVPresentation>();
+        GAVPresentation reasonGAV = new GAVPresentation();
+        reasonGAV.setAttribute("reasonWhyDeleted");
+        reasonGAV.setValue(reason);
+        forReason.add(reasonGAV);
+        studentService.setValues(tableData.get(index).get(1), forReason);
         studentService.disable(tableData.get(index).get(1));
         tableData.remove((int) index);
         return "redirect:/admin/formedTable";
@@ -750,14 +758,6 @@ public class AdminController {
         return "changeField";
     }
 
-    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
-    public String changeTech(@ModelAttribute("newTechName") String newTechName,
-                             @ModelAttribute("oldTechName") String oldTechName) {
-        technologyService.changeTechnology(oldTechName, newTechName);
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
-    }
 
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
     public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
@@ -768,8 +768,9 @@ public class AdminController {
         if (tableData == null)
             return "redirect:/admin";
         return "redirect:/admin/formedTable";
+    }
 
-=======
+
     @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
     public String changeTech(@ModelAttribute("newTechName")String newTechName,
                              @ModelAttribute("oldTechName")String oldTechName){
@@ -777,7 +778,6 @@ public class AdminController {
         if (tableData == null)
             return "redirect:/admin";
         return "redirect:/admin/formedTable";
->>>>>>> Temporary merge branch 2
     }
 
 
