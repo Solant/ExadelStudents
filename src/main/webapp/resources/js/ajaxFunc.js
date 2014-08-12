@@ -50,6 +50,7 @@ function liveSearch() {
             anchor.attr("href", "/admin/studentPage/"+human.login);
             anchor.text(human.secondName + " " + human.firstName);
             anchor.addClass('list-group-item');
+            anchor.addClass('resultingAnchors');
             searchResult.append(anchor);
         })
 
