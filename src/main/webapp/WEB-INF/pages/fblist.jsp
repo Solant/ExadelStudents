@@ -33,7 +33,11 @@
                 <td>
                     <a href="/curator/showFeedback/${name.studentLogin}/${feedbackerRole}">${name.studentName}</a>
                 </td>
-                <td>${sdf.format(name.date)}</td>
+                <td>
+                    <c:if test="${name.date != null}">
+                        ${sdf.format(name.date)}<%--sdf.format(name.date)--%>
+                    </c:if>
+                </td>
                 <td>${name.feedbackerName}</td>
             </tr>
         </c:forEach>
