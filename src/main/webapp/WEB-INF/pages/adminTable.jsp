@@ -107,8 +107,8 @@
             <textarea class="textOther" name="reason"></textarea>
         </div>
         <input type="hidden" name="studentNumber" id="studentNumber"/>
-        <button type="button" class="gray" id="close_button">Close</button>
-        <button type="submit" class="blue">Save</button>
+        <button type="button" class="gray" id="cancel_button">Cancel</button>
+        <button type="submit" class="blue" id="save_button">Save</button>
         </form>
     </div>
 </div>
@@ -127,7 +127,7 @@
 
                     });
             /* Закрытие модального окна, тут делаем то же самое но в обратном порядке */
-            $('#modal_close, #overlay').click(function () { // ловим клик по крестику или подложке
+            $('#modal_close, #overlay, #cancel_button, #save_button').click(function () { // ловим клик по крестику или подложке
                 $('#modal_form')
                         .animate({opacity: 0, top: '45%'}, 200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
                         function () { // после анимации
