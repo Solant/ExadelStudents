@@ -38,48 +38,59 @@
 </ul>
 <div class="tab-content" align="center">
 
-        <div class="tab-pane active" id="student">
-            <form:form commandName="unlinkUnit" method="post" action="/admin/unlink">
-            <div class="spoilers">
-                <div class="alignCenter">
-                    <div class="group">
-                        <label for="studentSelect">Student:</label>
-                        <form:select path="student" id="studentSelect">
-                            <form:option value=""></form:option>
-                            <c:forEach items="${students}" var="student">
-                                <form:option
-                                        value="${student.login}">${student.firstName} ${student.secondName}</form:option>
-                            </c:forEach>
-                        </form:select>
-                    </div>
-                    <div class="group">
-                        <label for="curators">Curators:</label>
-                        <form:select path="curators" multiple="true" id="curators"/>
-                    </div>
-                    <div class="group">
-                        <label for="interviewers">Interviewers:</label>
-                        <form:select path="interviewers" multiple="true" id="interviewers"/>
-                    </div>
-                    <div class="buttons">
-                        <button class="gray" onclick="history.back(); return false;">Cancel</button>
-                        <button class="blue">Unlink</button>
-                    </div>
-                </div>
+    <div class="tab-pane active" id="student">
+        <form:form commandName="unlinkUnit" cssClass="linkingForm" method="post" action="/admin/unlink">
+            <div class="linkingL">
+                <label for="curators">Curators:</label>
+                <form:select path="curators" multiple="true" id="curators"/>
             </div>
-            </form:form>
-        </div>
-
-        <div class="tab-pane " id="feed">
-            <form:form>
-            <div class="spoilers">
-                <select>
-                    <c:forEach items="${feeds}" var="feed">
-                        <option value="${feed.login}">${feed.firstName} ${feed.secondName}</option>
+            <div class="linkingR">
+                <label for="interviewers">Interviewers:</label>
+                <form:select path="interviewers" multiple="true" id="interviewers"/>
+            </div>
+            <div class="technology">
+                <label for="studentSelect">Student:</label>
+                <form:select path="student" id="studentSelect">
+                    <form:option value=""></form:option>
+                    <c:forEach items="${students}" var="student">
+                        <form:option
+                                value="${student.login}">${student.firstName} ${student.secondName}</form:option>
                     </c:forEach>
-                </select>
+                </form:select>
             </div>
-            </form:form>
-        </div>
+            <div class="buttons">
+                <button class="gray" onclick="history.back(); return false;">Cancel</button>
+                <button class="blue">Unlink</button>
+            </div>
+        </form:form>
+    </div>
+
+    <div class="tab-pane " id="feed">
+        <form:form commandName="unlinkUnit" cssClass="linkingForm" method="post" action="/admin/unlink">
+            <div class="linkingL">
+                <label for="curators">Curators:</label>
+                <form:select path="curators" multiple="true" id="curators"/>
+            </div>
+            <div class="linkingR">
+                <label for="interviewers">Interviewers:</label>
+                <form:select path="interviewers" multiple="true" id="interviewers"/>
+            </div>
+            <div class="technology">
+                <label for="studentSelect">Student:</label>
+                <form:select path="student" id="studentSelect">
+                    <form:option value=""></form:option>
+                    <c:forEach items="${students}" var="student">
+                        <form:option
+                                value="${student.login}">${student.firstName} ${student.secondName}</form:option>
+                    </c:forEach>
+                </form:select>
+            </div>
+            <div class="buttons">
+                <button class="gray" onclick="history.back(); return false;">Cancel</button>
+                <button class="blue">Unlink</button>
+            </div>
+        </form:form>
+    </div>
 
 </div>
 <script>
