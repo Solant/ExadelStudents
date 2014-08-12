@@ -107,7 +107,7 @@
 
                         $.each(data, function (index, feedbacker) {
                             var option = document.createElement("option");
-                            option.text = feedbacker.secondName;
+                            option.text = feedbacker.secondName+' '+feedbacker.firstName;
                             option.value = feedbacker.login;
                             select.add(option);
                         })
@@ -122,7 +122,7 @@
 
                         $.each(data, function (index, feedbacker) {
                             var option = document.createElement("option");
-                            option.text = feedbacker.secondName;
+                            option.text = feedbacker.secondName+' '+feedbacker.firstName;
                             option.value = feedbacker.login;
                             select.add(option);
                         })
@@ -144,7 +144,7 @@
 
                         $.each(data, function (index, feedbacker) {
                             var option = document.createElement("option");
-                            option.text = feedbacker.secondName;
+                            option.text = feedbacker.secondName+' '+feedbacker.firstName;
                             option.value = feedbacker.login;
                             select.add(option);
                         })
@@ -159,7 +159,7 @@
 
                         $.each(data, function (index, feedbacker) {
                             var option = document.createElement("option");
-                            option.text = feedbacker.secondName;
+                            option.text = feedbacker.secondName+' '+feedbacker.firstName;
                             option.value = feedbacker.login;
                             select.add(option);
                         })

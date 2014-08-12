@@ -124,6 +124,7 @@ public class FeedbackerService {
             for(Feedbacker f : getAllFeedbackers()) {
                 JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
                 jsonFeedbacker.setSecondName(f.getSecondName());
+                jsonFeedbacker.setFirstName(f.getFirstName());
                 jsonFeedbacker.setLogin(f.getLogin());
                 jsonFeedbackers.add(jsonFeedbacker);
             }
@@ -132,6 +133,7 @@ public class FeedbackerService {
                 for(Feedbacker f : getFeedbackersByTechnology(technologyName)) {
                     JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
                     jsonFeedbacker.setSecondName(f.getSecondName());
+                    jsonFeedbacker.setFirstName(f.getFirstName());
                     jsonFeedbacker.setLogin(f.getLogin());
                     jsonFeedbackers.add(jsonFeedbacker);
                 }
@@ -151,6 +153,7 @@ public class FeedbackerService {
         for(Feedbacker f : getCuratorsByStudent(studentLogin)) {
                 JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
                 jsonFeedbacker.setSecondName(f.getSecondName());
+                jsonFeedbacker.setFirstName(f.getFirstName());
                 jsonFeedbacker.setLogin(f.getLogin());
                 jsonFeedbackers.add(jsonFeedbacker);
             }
@@ -167,6 +170,7 @@ public class FeedbackerService {
         for(Feedbacker f : getInterviewersByStudent(studentLogin)) {
             JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
             jsonFeedbacker.setSecondName(f.getSecondName());
+            jsonFeedbacker.setFirstName(f.getFirstName());
             jsonFeedbacker.setLogin(f.getLogin());
             jsonFeedbackers.add(jsonFeedbacker);
         }
@@ -179,6 +183,7 @@ public class FeedbackerService {
         for(Student student:getSupervisedStudents(feedbackerLogin)){
             JSONStudent jsonStudent = new JSONStudent();
             jsonStudent.setSecondName(student.getSecondName());
+            jsonStudent.setFirstName(student.getFirstName());
             jsonStudent.setLogin(student.getLogin());
             jsonStudents.add(jsonStudent);
         }
@@ -191,6 +196,7 @@ public class FeedbackerService {
         for(Student student:getInterviewedStudents(feedbackerLogin)){
             JSONStudent jsonStudent = new JSONStudent();
             jsonStudent.setSecondName(student.getSecondName());
+            jsonStudent.setFirstName(student.getFirstName());
             jsonStudent.setLogin(student.getLogin());
             jsonStudents.add(jsonStudent);
         }
