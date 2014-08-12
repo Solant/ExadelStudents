@@ -58,7 +58,7 @@ public class TechnologyService {
         Rating r = new Rating();
         r.setRating(rating);
         if (reviewDao.findById(review.getId()) == null)
-        reviewDao.save(review);
+            reviewDao.save(review);
         r.setReview(review);
         r.setTechnology(technologyDao.findByName(technologyName));
         ratingDao.save(r);

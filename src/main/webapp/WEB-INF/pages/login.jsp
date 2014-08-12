@@ -10,7 +10,7 @@
     </head>
     <body>
     <%@include file="/WEB-INF/pages/commonParts/EmptyHat.jsp" %>
-        <form method="post" action="/j_spring_security_check" class="loginAndCreateForm" >
+        <form method="post" action="j_spring_security_check" class="loginAndCreateForm" >
             <h1>Login Form </h1>
             <p class="errorText">
                 <c:out value="${error}"></c:out>

@@ -755,6 +755,14 @@ public class AdminController {
         return "changeField";
     }
 
+    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
+    public String changeTech(@ModelAttribute("newTechName") String newTechName,
+                             @ModelAttribute("oldTechName") String oldTechName) {
+        technologyService.changeTechnology(oldTechName, newTechName);
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+    }
 
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
     public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
@@ -863,18 +871,41 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    JSONField showField(@ModelAttribute("field") String fieldName) {
+    public @ResponseBody JSONField showField(@ModelAttribute("field") String fieldName) {
         return attributeService.getJSONField(fieldName);
     }
 
 
     @RequestMapping(value = "/showGroup", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    String showGroup(@ModelAttribute("group") String groupName) {
+    public @ResponseBody String showGroup(@ModelAttribute("group") String groupName) {
         return groupService.getGroupByName(groupName).getStatus();
+    }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+    public String showDeleteUser(ModelMap modelMap){
+        List<User> users = new ArrayList();
+        users.addAll(studentService.getAllDisabledStudents());
+        users.addAll(studentService.getAllEnabledStudents());
+       /* List<String> userNames = new ArrayList<String>();
+        for(User user: users){
+            userNames.add(user.getSecondName() + " " + user.getSecondName() + " (" + user.getLogin() + ")");
+        }*/
+        modelMap.addAttribute("users", users);
+
+        return "deleteUser";
+    }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String deleteUser(@ModelAttribute("userLogin") String userLogin){
+        System.out.println("[DEBUG] userLogin = "+userLogin);
+        if(userLogin!=null){
+            if(!userLogin.equals("")){
+                userService.delete(userLogin);
+            }
+        }
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
     }
 
     @RequestMapping("/showUnlink")
