@@ -1,8 +1,8 @@
 ﻿/*common props*/
 
 body {
-    margin: 0; /* Убираем отступы */
-    min-width: 924px;
+    margin: 0; /* Убираем отступы *//*
+    min-width: 924px;*/
 }
 
 .navbar-blue {
@@ -19,12 +19,6 @@ body {
     background-color: #888;
 }
 
-@media (min-width: 768px) {
-    .navbar-nav > li > a {
-        padding-top: 0px;
-        padding-bottom: 0px;
-    }
-}
 
 .navbar-nav > li > a {
     padding-top: 0;
@@ -42,7 +36,6 @@ body {
 .navbar-right {
     float: right;
 }
-
 .navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
     text-decoration: none;
     background-color: RGB(0, 156, 203);
@@ -650,8 +643,18 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 #searchResult {
+    position: absolute;
     width: 100%;
     margin-bottom: 0;
+}
+
+.relative{
+    position: relative;
+}
+
+.resultingAnchors{
+    max-width: 177px;
+    z-index: 1;
 }
 /*end of admin props*/
 
