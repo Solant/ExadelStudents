@@ -1,8 +1,3 @@
-/**
- * Created by Administrator on 06.08.2014.
- */
-
-
 $(document).ready(function () {
     var keyPressed = false;
     var timeoutInProgress = false;
@@ -94,6 +89,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     if ($(document).find("title").text() == 'Login')
         return;
+    getNumberOfNotifications();
     setInterval(getNumberOfNotifications, 5000);
 })
 
