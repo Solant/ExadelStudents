@@ -893,7 +893,6 @@ public class AdminController {
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUser(@ModelAttribute("userLogin") String userLogin){
-        System.out.println("[DEBUG] userLogin = "+userLogin);
         if(userLogin!=null){
             if(!userLogin.equals("")){
                 userService.delete(userLogin);
@@ -907,7 +906,6 @@ public class AdminController {
 
     @RequestMapping(value = "/showUsersToDelete", method = RequestMethod.GET)
     public @ResponseBody List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
-        System.out.println("[DEBUG] userRole = "+role);
         return userService.getAllWithRole(role);
     }
 
