@@ -15,7 +15,7 @@
 <script language="javascript" type="text/javascript" src="/resources/js/jquery.MetaData.js"></script>
 <script language="javascript" type="text/javascript" src="/resources/js/jquery.rating.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/styles/jquery.rating.css" />
-<link rel="shortcut icon" href="/resources/images/fox.png" type="image/png"/>
+<link rel="shortcut icon" href="/resources/images/blue_fox_icon.png" type="image/png"/>
 
 <link rel="stylesheet" href="http://cdn.datatables.net/1.10.1/css/jquery.dataTables.css">
 <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
