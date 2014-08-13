@@ -923,4 +923,11 @@ public class AdminController {
         return "redirect:/admin/formedTable";
     }
 
+
+    @RequestMapping(value = "/showUsersToDelete", method = RequestMethod.GET)
+    public @ResponseBody List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
+        System.out.println("[DEBUG] userRole = "+role);
+        return userService.getAllWithRole(role);
+    }
+
 }
