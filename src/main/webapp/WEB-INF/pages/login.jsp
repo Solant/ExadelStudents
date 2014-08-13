@@ -18,7 +18,7 @@
             <img src="resources/images/middle_blue_fox_shadow.gif" class="foxLogo"/>
             <p>
                 <label for="login">Login:</label>
-                <input type="text" name="j_username" class="field" id="login" placeholder="Login">
+                <input type="text" name="j_username" class="field" id="login" placeholder="Login" autofocus>
             </p>
             <p>
                 <label for="password">Password:</label>
