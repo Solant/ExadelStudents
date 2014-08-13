@@ -22,17 +22,16 @@
         <a href="/admin/createNotif" role="tab" data-toggle="tab">Notification</a>
     </li>
 </ul>
-
 <form:form commandName="createNotifUnit" action="/admin/sendNotif" method="post" class="createNotificationForm">
-<h1>Create notification form</h1>
+
     <div class="leftList">
         <form:checkbox path="forStudents" id="students"/>
         <label for="students">All students: </label><br/>
-            <form:select path="students" name="students" multiple="true">
-                <c:forEach items="${students}" var="student">
-                    <form:option value="${student.login}">${student.firstName} ${student.secondName}</form:option>
-                </c:forEach>
-            </form:select>
+        <form:select path="students" name="students" multiple="true">
+            <c:forEach items="${students}" var="student">
+                <form:option value="${student.login}">${student.firstName} ${student.secondName}</form:option>
+            </c:forEach>
+        </form:select>
     </div>
 
     <div class="centerList">
@@ -62,16 +61,16 @@
 
     <div class="alignCenter">
         <button class="gray" onclick="history.back(); return false;">Cancel</button>
-        <form:button type="submit" class="blue">Send</form:button>
+        <button class="blue" id="send">Send</button>
     </div>
-
-    <div id="confirm_password">
+    <div id="modal_form">
         <span id="modal_close">&times;</span>
 
         <div class="alignCenter">
             <h4>Confirm password</h4>
-            <div class="confPassInput">
-                <form:input id="password" type="password" path="password" placeholder="password"/>
+            <div>
+                <label for="password">Password:</label>
+                <form:input id="password" type="password" path="password" />
             </div>
             <button type="button" class="gray" id="cancel_button">Cancel</button>
             <form:button class="blue" id="sendButton">Send</form:button>
@@ -79,5 +78,37 @@
     </div>
 
 </form:form>
+
+<div id="overlay"></div>
+
+<script>
+    document.getElementById("send").onclick = function (event) {
+        event.preventDefault();
+        $('#overlay').fadeIn(400, // сначала плавно показываем темную подложку
+                function () { // после выполнения предыдущей анимации
+                    $('#modal_form')
+                            .css('display', 'block') // убираем у модального окна display: none;
+                            .animate({opacity: 1, top: '50%'}, 200); // плавно прибавляем прозрачность одновременно со съезжанием вниз
+
+                });
+        /* Закрытие модального окна, тут делаем то же самое но в обратном порядке */
+        $('#modal_close, #overlay, #cancel_button, #save_button').click(function () { // ловим клик по крестику или подложке
+            $('#modal_form')
+                    .animate({opacity: 0, top: '45%'}, 200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
+                    function () { // после анимации
+                        $(this).css('display', 'none'); // делаем ему display: none;
+                        $('#overlay').fadeOut(400); // скрываем подложку
+                    }
+            );
+        })
+        event = event || window.event; // Кроссбраузерно получить событие
+        if (event.stopPropagation) { // существует ли метод?
+            // Стандартно:
+            event.stopPropagation();
+        } else {
+            event.cancelBubble = true;
+        }
+    }
+</script>
 </body>
 </html>
