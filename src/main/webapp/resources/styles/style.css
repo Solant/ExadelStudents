@@ -344,8 +344,8 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 .btn:hover, .btnActive {
-    background-color: #ffffff;
-    color: RGB(0, 156, 203);
+    background-color: #ffffff !important;
+    color: RGB(0, 156, 203)!important;
 }
 
 .btn {
@@ -754,6 +754,7 @@ h2, h3 {
 .createNotificationForm {
     width: 650px;
     text-align: center;
+    margin-top: 10px;
 }
 
 .leftList {
@@ -898,6 +899,10 @@ h2, h3 {
 
 #newGroup {
     display: none;
+}
+
+#user form{
+
 }
 
 /*end of add field and technology props*/

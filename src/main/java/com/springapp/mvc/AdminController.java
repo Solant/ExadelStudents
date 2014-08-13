@@ -104,14 +104,15 @@ public class AdminController {
         return "admin";
     }
 
-    @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
-    public String returnCreate(ModelMap model) {
+    @RequestMapping(value = "/showAddUser", method = RequestMethod.GET)
+    public String showAddUser(ModelMap model) {
         model.addAttribute("newUser", new UserUnit());
+        model.addAttribute("isField", "user");
         return "create";
     }
 
-    @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public String createUser(ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser, BindingResult result) {
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public String addUser(ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser, BindingResult result) {
         userFormValidator.validate(newUser, result);
         if (result.hasErrors())
             return "create";
@@ -124,10 +125,7 @@ public class AdminController {
                 hrWorkerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
             if (newUser.getRole().toString().equals("Admin"))
                 administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-            if (tableData == null)
-                return "redirect:/admin";
-            modelMap.addAttribute("tableData", tableData);
-            return "redirect:/";
+            return "redirect:/admin/showAddUser";
         }
     }
 
@@ -574,7 +572,7 @@ public class AdminController {
                 }
             }
         }
-        return "redirect:/admin";
+        return "redirect:/admin/createNotif";
     }
 
     @RequestMapping("studentPage/{student}/notif")
@@ -661,18 +659,13 @@ public class AdminController {
             createNotifUnit.setForStudents(true);
         }
         sendNotif(createNotifUnit);
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showAddField/true";
     }
 
     @RequestMapping(value = "/addTechnology", method = RequestMethod.POST)
     public String addTechnology(ModelMap modelMap, @ModelAttribute("newTech") String newTech) {
         technologyService.add(newTech);
-        if (tableData == null)
-            return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/showAddField/false";
     }
 
     @RequestMapping("/disable")

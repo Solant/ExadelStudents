@@ -12,12 +12,19 @@
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li <c:if test="${!isField}">class="active" </c:if>>
-        <a href="#technology" role="tab" data-toggle="tab">Technology</a>
+    <li >
+        <a href="/admin/showAddUser">User</a>
     </li>
     <li
             <c:if test="${isField}">class="active" </c:if> >
         <a href="#field" role="tab" data-toggle="tab">Field</a>
+    </li>
+    <li
+            <c:if test="${!isField}">class="active" </c:if> >
+        <a href="#technology" role="tab" data-toggle="tab">Technology</a>
+    </li>
+    <li>
+        <a href="/admin/createNotif">Notification</a>
     </li>
 </ul>
 
@@ -26,7 +33,7 @@
     <div class="tab-pane <c:if test="${!isField}">active</c:if>" id="technology">
         <form action="/admin/addTechnology" method="post">
             <div class="spoilers">
-
+<h1>Adding technology form</h1>
                 <div class="alignCenter">
                     <label for="newTech">New technology:</label>
                     <input type="text" name="newTech" id="newTech"/>
@@ -83,7 +90,7 @@
 
                 <div class="alignCenter paddingTop">
 
-                    <h3>Type of input</h3>
+                    <h1>Type of input</h1>
                     <form:radiobutton path="type" id="string" name="type" value="text"
                                       onclick="visual(); "/>
                     <label for="string">String</label>
@@ -109,7 +116,7 @@
                 </div>
 
                 <div class="alignCenter paddingTop borderTop">
-                    <h3>Restrictions</h3>
+                    <h1>Restrictions</h1>
                     <label for="valueType">Type of value:</label>
                     <form:select path="valueType" name="valueType" id="valueType">
                         <form:option value="any">Any</form:option>

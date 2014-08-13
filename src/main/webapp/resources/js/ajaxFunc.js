@@ -181,7 +181,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('input').on('input', function(){
         var edited = $(this);
-        if (edited.attr('id') == 'search' || $('.group') == 'undefined')
+        if (edited.attr('id') == 'search' || $('.group').size() == 0)
             return;
         var submit = edited.closest('form').find(':submit');
         //var attrId = edited.attr('id');

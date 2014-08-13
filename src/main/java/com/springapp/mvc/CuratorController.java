@@ -161,6 +161,7 @@ public class CuratorController {
         }
         modelMap.addAttribute("techs", techs);
         modelMap.addAttribute("chooseTechUnit", chooseTechUnit);
+        modelMap.addAttribute("feedbackerRole", "myTechs");
         return "chooseTech";
     }
 

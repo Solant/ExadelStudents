@@ -8,8 +8,8 @@
 
     <http use-expressions="true" access-denied-page="/access_deny">
         <intercept-url pattern="/admin/studentPage/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
-        <intercept-url pattern="/admin/returnCreate" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
-        <intercept-url pattern="/admin/createUser" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/showAddUser" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/addUser" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/showLinkStudent" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/linkStudent" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/showUnlink" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />

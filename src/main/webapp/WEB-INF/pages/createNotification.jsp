@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <!DOCTYPE html>
-
 <html>
 <head lang="en">
     <title>Create Letter</title>
@@ -10,6 +8,20 @@
 </head>
 <body>
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
+<ul class="nav nav-tabs" role="tablist">
+    <li >
+        <a href="/admin/showAddUser">User</a>
+    </li>
+    <li>
+        <a href="/admin/showAddField/true">Field</a>
+    </li>
+    <li>
+        <a href="/admin/showAddField/false">Technology</a>
+    </li>
+    <li class="active">
+        <a href="/admin/createNotif" role="tab" data-toggle="tab">Notification</a>
+    </li>
+</ul>
 <form:form commandName="createNotifUnit" action="/admin/sendNotif" method="post" class="createNotificationForm">
 
     <div class="leftList">
@@ -51,14 +63,14 @@
         <button class="gray" onclick="history.back(); return false;">Cancel</button>
         <button class="blue" id="send">Send</button>
     </div>
-
-    <div id="confirm_password">
+    <div id="modal_form">
         <span id="modal_close">&times;</span>
 
         <div class="alignCenter">
             <h4>Confirm password</h4>
-            <div class="confPassInput">
-                <form:input id="password" type="password" path="password" placeholder="password"/>
+            <div>
+                <label for="password">Password:</label>
+                <form:input id="password" type="password" path="password" />
             </div>
             <button type="button" class="gray" id="cancel_button">Cancel</button>
             <form:button class="blue" id="sendButton">Send</form:button>
@@ -74,14 +86,14 @@
         event.preventDefault();
         $('#overlay').fadeIn(400, // сначала плавно показываем темную подложку
                 function () { // после выполнения предыдущей анимации
-                    $('#confirm_password')
+                    $('#modal_form')
                             .css('display', 'block') // убираем у модального окна display: none;
                             .animate({opacity: 1, top: '50%'}, 200); // плавно прибавляем прозрачность одновременно со съезжанием вниз
 
                 });
         /* Закрытие модального окна, тут делаем то же самое но в обратном порядке */
         $('#modal_close, #overlay, #cancel_button, #save_button').click(function () { // ловим клик по крестику или подложке
-            $('#confirm_password')
+            $('#modal_form')
                     .animate({opacity: 0, top: '45%'}, 200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
                     function () { // после анимации
                         $(this).css('display', 'none'); // делаем ему display: none;
@@ -99,6 +111,4 @@
     }
 </script>
 </body>
-
-
 </html>
