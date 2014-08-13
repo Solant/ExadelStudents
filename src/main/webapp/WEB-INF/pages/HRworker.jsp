@@ -7,8 +7,6 @@
     <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
-
 <%@include file="/WEB-INF/pages/commonParts/HRWhat.jsp" %>
-
 </body>
 </html>
