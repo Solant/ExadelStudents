@@ -15,6 +15,7 @@ public class CreateNotifUnit {
     private String title;
     private String text;
     private String sender;
+    private String password;
 
     public String getSender() {
         return sender;
@@ -86,5 +87,13 @@ public class CreateNotifUnit {
 
     public void setWorkers(List<String> workers) {
         this.workers = workers;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
