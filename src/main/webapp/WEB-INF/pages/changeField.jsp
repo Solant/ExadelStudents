@@ -39,33 +39,31 @@
             <h3>Change Group</h3>
 
             <div class="alignCenter">
-                <label>Old name of group</label>
-                <form:select path="oldGroupName" id="oldGroup" class="addTechField">
-                    <c:forEach items="${groups}" var="group">
-                        <form:option value="${group}">${group}</form:option>
-                    </c:forEach>
-                </form:select>
-            </div>
-
-            <div class="alignCenter">
-                <label for="newNameForGroup">New name:</label>
-                <form:input path="newGroupName" id="newNameForGroup"/>
-            </div>
-
-
-            <div class="alignCenter">
-                <label for="newGroupStatus">Status (for whom)</label>
-                <form:select path="status" id="newGroupStatus" class="addTechField">
-                    <form:option value="WORKING">For working students</form:option>
-                    <form:option value="STUDYING">For studying students</form:option>
-                    <form:option value="for_everybody">For all students</form:option>
-                </form:select>
-            </div>
-
-            <div class="alignCenter">
-                <button formaction="/admin/deleteGroup" class="gray">Delete</button>
-                <button type="submit" onclick="history.back();return false;" class="gray">Cancel</button>
-                <button type="submit" class="blue">Save</button>
+                <p>
+                    <label id="oldGroup">Old name of group</label>
+                    <form:select path="oldGroupName" id="oldGroup" class="field">
+                        <c:forEach items="${groups}" var="group">
+                            <form:option value="${group}">${group}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </p>
+                <p>
+                    <label for="newNameForGroup">New name:</label>
+                    <form:input path="newGroupName" id="newNameForGroup" class="field"/>
+                </p>
+                <p>
+                    <label for="newGroupStatus">Status (for whom)</label>
+                    <form:select path="status" id="newGroupStatus" class="field">
+                        <form:option value="WORKING">For working students</form:option>
+                        <form:option value="STUDYING">For studying students</form:option>
+                        <form:option value="for_everybody">For all students</form:option>
+                    </form:select>
+                </p>
+                <p>
+                    <button formaction="/admin/deleteGroup" class="gray">Delete</button>
+                    <button type="submit" onclick="history.back();return false;" class="gray">Cancel</button>
+                    <button type="submit" class="blue">Save</button>
+                </p>
             </div>
 
         </div>
@@ -96,7 +94,6 @@
                 <form:radiobutton path="existingGroup" id="cg" value="yes" onclick="groupVisual()" checked="true"/>
                 <label for="cg">Existing group</label>
                 <span id="existingGroup">
-                    <label>Group name</label>
                 <form:select path="groupNameExist" name="curGrup" class="addTechField" id="existingGroups">
                     <c:forEach items="${groups}" var="group">
                         <form:option value="${group}">${group}</form:option>
@@ -180,30 +177,28 @@
 
         <form action="/admin/changeTech" method="post">
 
+            <h3>Change Technology</h3>
 
             <div class="alignCenter">
-                <label>Old technology name:</label>
-                <select class="addTechField" name="oldTechName">
-                    <c:forEach items="${techs}" var="tech">
-                        <option value="${tech.technologyName}"><c:out value="${tech.technologyName}"></c:out></option>
-                    </c:forEach>
-                </select>
+                <p>
+                    <label for="oldTech">Old technology name:</label>
+                    <select class="field" name="oldTechName" id="oldTech">
+                        <c:forEach items="${techs}" var="tech">
+                            <option value="${tech.technologyName}"><c:out value="${tech.technologyName}"></c:out></option>
+                        </c:forEach>
+                    </select>
+                </p>
+                <p>
+                    <label for="newTech">New technology name:</label>
+                    <input type="text" name="newTechName" id="newTech" class="field"/>
+                </p>
+                <p>
+                    <button formaction="/admin/deleteTechnology" class="gray">Delete</button>
+                    <button type="submit" onclick="history.back();return false;" class="gray">Cancel</button>
+                    <button type="submit" class="blue">Save</button>
+                </p>
             </div>
-            <div class="alignCenter">
-                <label for="newTech">New technology name:</label>
-                <input type="text" name="newTechName" id="newTech"/>
-            </div>
-
-
-            <div class="alignCenter">
-                <button formaction="/admin/deleteTechnology" class="gray">Delete</button>
-                <button type="submit" onclick="history.back();return false;" class="gray">Cancel</button>
-                <button type="submit" class="blue">Save</button>
-            </div>
-
         </form>
-
-
     </div>
 </div>
 
@@ -214,51 +209,41 @@
             <h3>Change user</h3>
 
             <div class="alignCenter">
-                <label>User role</label>
-                <select id="role" class="addTechField">
-                    <option></option>
-                    <option value="ROLE_STUDENT">Student</option>
-                    <option value="ROLE_CURATOR">Feedbacker</option>
-                    <option value="ROLE_WORKER">HRWorker</option>
-                    <option value="ROLE_ADMIN">Admin</option>
-                </select>
-            </div>
-
-            <div class="alignCenter" style="margin-top: 5px">
-                <label>Full name</label>
-                <select name="userLogin" id="userLogin">
-                    <option selected="true" value=""></option>
-                    <c:forEach items="${users}" var="user">
-                        <option value="${user.login}">${user.secondName} ${user.firstName}</option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div class="alignCenter" style="margin-top: 5px">
-                <label>Login</label>
-                <form:input path="login" id="newUserLogin"></form:input>
-            </div>
-
-
-            <div class="alignCenter" style="margin-top: 5px">
-                <label>First name</label>
-                <form:input path="firstName" id="userFirstName"></form:input>
-            </div>
-
-
-            <div class="alignCenter" style="margin-top: 5px">
-                <label>Second name</label>
-                <form:input path="secondName" id="userSecondName"></form:input>
-            </div>
-
-            <div class="alignCenter" style="margin-top: 5px">
-                <label>New password</label>
-                <form:input path="password"  id="userPassword"/>
-            </div>
-
-            <br>
-
-            <div class="alignCenter">
-
+                <p>
+                    <label for="role">User role</label>
+                    <select id="role" class="field">
+                        <option></option>
+                        <option value="ROLE_STUDENT">Student</option>
+                        <option value="ROLE_CURATOR">Feedbacker</option>
+                        <option value="ROLE_WORKER">HRWorker</option>
+                        <option value="ROLE_ADMIN">Admin</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="userLogin">Full name</label>
+                    <select name="userLogin" id="userLogin" class="field">
+                        <option selected="true" value=""></option>
+                        <c:forEach items="${users}" var="user">
+                            <option value="${user.login}">${user.secondName} ${user.firstName}</option>
+                        </c:forEach>
+                    </select>
+                </p>
+                <p>
+                    <label for="newUserLogin">Login</label>
+                    <form:input path="login" id="newUserLogin" class="field"></form:input>
+                </p>
+                <p>
+                    <label for="userFirstName">First name</label>
+                    <form:input path="firstName" id="userFirstName" class="field"></form:input>
+                </p>
+                <p>
+                    <label for="userSecondName">Second name</label>
+                    <form:input path="secondName" id="userSecondName" class="field"></form:input>
+                </p>
+                <p>
+                    <label for="userPassword">New password</label>
+                    <form:input path="password"  id="userPassword" class="field"/>
+                </p>
                 <button formaction="/admin/deleteUser" class="gray">Delete</button>
                 <button type="button" onclick="history.back();return false;" class="gray">Cancel</button>
                 <button type="submit" class="blue">Save</button>
