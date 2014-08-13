@@ -345,8 +345,8 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 .btn:hover, .btnActive {
-    background-color: #ffffff;
-    color: RGB(0, 156, 203);
+    background-color: #ffffff !important;
+    color: RGB(0, 156, 203)!important;
 }
 
 .btn {
