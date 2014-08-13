@@ -522,6 +522,7 @@ button.gray, a.gray, input[type=submit].gray {
 .group input {
     display: table-cell;
     width: 250px;
+    padding-left: 5px;
 }
 
 .group select {
@@ -637,6 +638,7 @@ button.gray, a.gray, input[type=submit].gray {
     padding: 2px;
     border-radius: 3px;
     border: 1px solid;
+    padding-left: 5px;
 }
 
 .adminGroup input:not([type="checkbox"]), .adminGroup select {
@@ -780,6 +782,7 @@ h2, h3 {
 .createNotificationForm select {
     width: 200px;
     height: 150px;
+    padding-left: 5px;
 }
 
 .subject {
@@ -789,6 +792,7 @@ h2, h3 {
 
 .subject input {
     width: 100%;
+    padding-left: 5px;
 }
 
 .letterText textarea {
@@ -840,6 +844,7 @@ h2, h3 {
 .spoilers > div > input:not([type="radio"]) {
     height: 20px;
     margin-bottom: 5px;
+    padding-left: 5px;
 }
 
 .borderBottom {
@@ -1046,4 +1051,8 @@ span.dropt:hover span {
 
 .group select[multiple]{
     height: 50px;
+}
+
+select{
+    padding-left: 5px;
 }
