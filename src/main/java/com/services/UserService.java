@@ -112,7 +112,8 @@ public class UserService {
 
     @Transactional
     public void delete (String login){
-        userDao.removeById(userDao.findByLogin(login).getId());
+        if(userDao.findByLogin(login)!=null)
+            userDao.removeById(userDao.findByLogin(login).getId());
     }
 
     @Transactional
