@@ -743,6 +743,8 @@ public class AdminController {
         modelMap.addAttribute("addFieldUnit", addFieldUnit);
         modelMap.addAttribute("groups", groupService.getAllGroups());
         modelMap.addAttribute("techs", technologyService.getAllTechnologies());
+        AccountUnit accountUnit = new AccountUnit();
+        modelMap.addAttribute(accountUnit);
 
         List<String> attributes = new ArrayList();
         for (GAVPresentation gav : attributeService.getAllAttributes()) {
@@ -868,18 +870,21 @@ public class AdminController {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
-    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
-    public String showDeleteUser(ModelMap modelMap){
-        List<User> users = new ArrayList();
-        users.addAll(studentService.getAllDisabledStudents());
-        users.addAll(studentService.getAllEnabledStudents());
-       /* List<String> userNames = new ArrayList<String>();
-        for(User user: users){
-            userNames.add(user.getSecondName() + " " + user.getSecondName() + " (" + user.getLogin() + ")");
-        }*/
-        modelMap.addAttribute("users", users);
-
-        return "deleteUser";
+    @RequestMapping(value = "/changeUser", method = RequestMethod.POST)
+    public String changeUser(@ModelAttribute("accountUnit") AccountUnit accountUnit, @ModelAttribute("userLogin") String login){
+        if(accountUnit.getLogin()!=null){
+            if(!accountUnit.getLogin().trim().equals("")){
+                User user = userService.getByLogin(login);
+                user.setLogin(accountUnit.getLogin());
+                user.setFirstName(accountUnit.getFirstName());
+                user.setSecondName(accountUnit.getSecondName());
+                if(accountUnit.getPassword()!=null)
+                    if(!accountUnit.getPassword().trim().equals(""))
+                        user.setPassword(UserService.stringToSha256(accountUnit.getPassword()));
+                userService.update(user);
+            }
+        }
+        return "redirect:/admin/showChangeField/user";
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
@@ -889,15 +894,23 @@ public class AdminController {
                 userService.delete(userLogin);
             }
         }
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/user";
     }
 
 
-    @RequestMapping(value = "/showUsersToDelete", method = RequestMethod.GET)
+    @RequestMapping(value = "/showUsersToChange", method = RequestMethod.GET)
     public @ResponseBody List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
         return userService.getAllWithRole(role);
+    }
+
+    @RequestMapping(value = "/showChosenUser", method = RequestMethod.GET)
+    public @ResponseBody JSONUser showChosenUser(@ModelAttribute("login") String login) {
+        User user = userService.getByLogin(login);
+        JSONUser jsonUser = new JSONUser();
+        jsonUser.setFirstName(user.getFirstName());
+        jsonUser.setSecondName(user.getSecondName());
+        jsonUser.setLogin(user.getLogin());
+        return jsonUser;
     }
 
     @RequestMapping("/showUnlink")
@@ -916,7 +929,7 @@ public class AdminController {
         return feedbackerService.getJSONCuratorsByStudent(student);
     }
 
-    @RequestMapping(value = "/interviewersForStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/unlink/interviewersForStudent", method = RequestMethod.GET)
     public
     @ResponseBody
     List<JSONFeedbacker> interviewersForStudent(@ModelAttribute("student") String student) {
@@ -949,5 +962,19 @@ public class AdminController {
             feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
         }
         return "redirect:/admin/showUnlink";
+    }
+
+
+    @RequestMapping(value = "/deleteTechnology", method = RequestMethod.POST)
+    public String deleteTechnology(@ModelAttribute("oldTechName") String oldTechName, ModelMap modelMap) {
+        if (oldTechName != null) {
+            if(!oldTechName.equals(""))
+                technologyService.remove(oldTechName);
+        }
+
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+
     }
 }

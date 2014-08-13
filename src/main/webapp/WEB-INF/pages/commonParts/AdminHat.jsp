@@ -114,14 +114,13 @@
                                             <span>Technology</span>
                                         </button>
                                     </li>
-                                </ul>
-                            </li>
 
-                            <li>
-                                <button formaction="/admin/deleteUser" class="btn">
-                                    <img src="/resources/images/fired.png" class="adminMenuImages">
-                                    <span>Delete User</span>
-                                </button>
+                                    <li>
+                                        <button formaction="/admin/showChangeField/user" class="btn">
+                                            <span>User</span>
+                                        </button>
+                                    </li>
+                                </ul>
                             </li>
 
                             <li>
