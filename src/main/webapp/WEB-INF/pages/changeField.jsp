@@ -79,7 +79,7 @@
                     <div class="alignCenter">
                         <label>Old name of field</label>
                         <form:select path="oldFieldName" class="addTechField" id="oldField">
-                            <option selected="true"></option>
+                            <form:option value=""></form:option>
                             <c:forEach items="${attributes}" var="attribute">
                                 <form:option value="${attribute}">${attribute}</form:option>
                             </c:forEach>

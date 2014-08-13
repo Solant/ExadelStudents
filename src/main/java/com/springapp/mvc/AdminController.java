@@ -137,10 +137,33 @@ public class AdminController {
         LinkUnit linkUnit = new LinkUnit();
         linkUnit.setCurator(true);
 
+        List<String> studentNames = new ArrayList();
+        List<String> studentLogins = new ArrayList();
+        for (Student s : studentService.getAllEnabledStudents()) {
+            studentNames.add(s.getSecondName() + " " + s.getFirstName());
+            studentLogins.add(s.getLogin());
+        }
+
+        List<String> feedNames = new ArrayList();
+        List<String> feedLogins = new ArrayList();
+        for (Feedbacker feed : feedbackerService.getAllFeedbackers()) {
+            feedNames.add(feed.getSecondName() + " " + feed.getFirstName());
+            feedLogins.add(feed.getLogin());
+        }
+
+        List<Technology> technologies = technologyService.getAllTechnologies();
+        List<String> technologyNames = new ArrayList();
+        for (Technology t : technologies) {
+            technologyNames.add(t.getTechnologyName());
+
+        }
+
+        modelMap.addAttribute("students", studentNames);
+        modelMap.addAttribute("feedbackers", feedNames);
+        modelMap.addAttribute("feedLogins", feedLogins);
+        modelMap.addAttribute("studentLogins", studentLogins);
+        modelMap.addAttribute("technologies", technologyNames);
         modelMap.addAttribute("linkUnit", linkUnit);
-        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
-        modelMap.addAttribute("feedbackers", feedbackerService.getAllFeedbackers());
-        modelMap.addAttribute("technologies", technologyService.getAllTechnologies());
         return "linking";
     }
 
@@ -161,7 +184,8 @@ public class AdminController {
         }
         if (tableData == null)
             return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        modelMap.addAttribute("tableData", tableData);
+        return "adminTable";
     }
 
 
@@ -755,6 +779,14 @@ public class AdminController {
         return "changeField";
     }
 
+    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
+    public String changeTech(@ModelAttribute("newTechName") String newTechName,
+                             @ModelAttribute("oldTechName") String oldTechName) {
+        technologyService.changeTechnology(oldTechName, newTechName);
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+    }
 
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
     public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
@@ -765,16 +797,7 @@ public class AdminController {
         if (tableData == null)
             return "redirect:/admin";
         return "redirect:/admin/formedTable";
-    }
 
-
-    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
-    public String changeTech(@ModelAttribute("newTechName")String newTechName,
-                             @ModelAttribute("oldTechName")String oldTechName){
-        technologyService.changeTechnology(oldTechName, newTechName);
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
     }
 
 
@@ -863,70 +886,48 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    JSONField showField(@ModelAttribute("field") String fieldName) {
+    public @ResponseBody JSONField showField(@ModelAttribute("field") String fieldName) {
         return attributeService.getJSONField(fieldName);
     }
 
 
     @RequestMapping(value = "/showGroup", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    String showGroup(@ModelAttribute("group") String groupName) {
+    public @ResponseBody String showGroup(@ModelAttribute("group") String groupName) {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
-    @RequestMapping("/showUnlink")
-    public String showUnlink(ModelMap modelMap){
-        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
-        modelMap.addAttribute("feeds", feedbackerService.getAllFeedbackers());
-        modelMap.addAttribute("unlinkUnit", new UnlinkUnit());
-        return "unlink";
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+    public String showDeleteUser(ModelMap modelMap){
+        List<User> users = new ArrayList();
+        users.addAll(studentService.getAllDisabledStudents());
+        users.addAll(studentService.getAllEnabledStudents());
+       /* List<String> userNames = new ArrayList<String>();
+        for(User user: users){
+            userNames.add(user.getSecondName() + " " + user.getSecondName() + " (" + user.getLogin() + ")");
+        }*/
+        modelMap.addAttribute("users", users);
+
+        return "deleteUser";
     }
 
-    @RequestMapping(value = "/curatorsForStudent", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<JSONFeedbacker> feedbackersForStudent(@ModelAttribute("student") String student) {
-
-        return feedbackerService.getJSONCuratorsByStudent(student);
-    }
-
-    @RequestMapping(value = "/interviewersForStudent", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<JSONFeedbacker> interviewersForStudent(@ModelAttribute("student") String student) {
-
-        return feedbackerService.getJSONInterviewersByStudent(student);
-    }
-
-    @RequestMapping(value = "/curatedForFeed", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<JSONStudent> curatedForFeed(@ModelAttribute("student") String student) {
-        return feedbackerService.getJSONSupervisedStudents(student);
-    }
-
-    @RequestMapping(value = "/interviewedForFeed", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<JSONStudent> interviewedForFeed(@ModelAttribute("student") String student) {
-        return feedbackerService.getJSONInterviewedStudents(student);
-    }
-
-    @RequestMapping(value = "/unlink", method = RequestMethod.POST)
-    public String unlink(@ModelAttribute("unlinkUnit")UnlinkUnit unlinkUnit){
-        if(unlinkUnit.getCurators() != null)
-        for(String feed:unlinkUnit.getCurators()){
-            feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
-        }
-        if(unlinkUnit.getInterviewers() != null)
-        for(String feed:unlinkUnit.getInterviewers()){
-            feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public String deleteUser(@ModelAttribute("userLogin") String userLogin){
+        System.out.println("[DEBUG] userLogin = "+userLogin);
+        if(userLogin!=null){
+            if(!userLogin.equals("")){
+                userService.delete(userLogin);
+            }
         }
         if (tableData == null)
             return "redirect:/admin";
         return "redirect:/admin/formedTable";
     }
+
+
+    @RequestMapping(value = "/showUsersToDelete", method = RequestMethod.GET)
+    public @ResponseBody List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
+        System.out.println("[DEBUG] userRole = "+role);
+        return userService.getAllWithRole(role);
+    }
+
 }
