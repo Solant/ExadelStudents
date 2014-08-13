@@ -28,6 +28,11 @@
                         </button>
                     </li>
                     <li>
+                        <button formaction="/curator/showChooseTech" type="submit" class="btn <c:if test="${feedbackerRole=='asInterviewer'}">btnActive</c:if>">
+                            <span>My technologies</span>
+                        </button>
+                    </li>
+                    <li>
                         <a href="/notif">
                             <div class="message">
                             <span id="numberOfNotifications" class="disappear">

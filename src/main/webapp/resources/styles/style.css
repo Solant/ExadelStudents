@@ -575,6 +575,16 @@ button.gray, a.gray, input[type=submit].gray {
 /*fblist props*/
 
 /*all props are common*/
+.largeSelect{
+    margin-bottom: 10px;
+}
+.largeSelect select{
+    height: 200px;
+    width: 200px;
+}
+.largeSelect label{
+    display: block;
+}
 
 /*end of fblist props*/
 

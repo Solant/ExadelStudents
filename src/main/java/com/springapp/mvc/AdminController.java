@@ -776,14 +776,6 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
-    public String changeTech(@ModelAttribute("newTechName")String newTechName,
-                             @ModelAttribute("oldTechName")String oldTechName){
-        technologyService.changeTechnology(oldTechName, newTechName);
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
-    }
 
 
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
