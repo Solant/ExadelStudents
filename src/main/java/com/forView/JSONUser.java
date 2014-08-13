@@ -31,4 +31,5 @@ public class JSONUser {
     public void setLogin(String login) {
         this.login = login;
     }
+
 }
