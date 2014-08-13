@@ -47,8 +47,8 @@ public class MailService implements Runnable{
                 message.setText(text);
 
                 Transport.send(message);
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
+            } catch (MessagingException ignored) {
+
             }
         }
         System.out.println("[DEBUG]Email sended " + Calendar.getInstance().getTimeInMillis());

@@ -1,6 +1,5 @@
 package com.springapp.mvc;
 
-
 import com.forView.*;
 import com.forView.Group;
 import com.forView.validators.AccountFormValidator;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import persistance.model.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,9 +27,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by Надя on 16.07.2014.
- */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -84,7 +79,7 @@ public class AdminController {
 
         List<GAVPresentation> internal;
         ArrayList<String> groups = new ArrayList<String>();
-        for (int j = 0; gav.size() > 0; j++) {
+        for (; gav.size() > 0; ) {
             internal = new ArrayList<GAVPresentation>();
             GAVPresentation temp = gav.remove(0);
             internal.add(temp);
@@ -116,13 +111,13 @@ public class AdminController {
         if (result.hasErrors())
             return "create";
         else {
-            if (newUser.getRole().toString().equals("Student"))
+            if (newUser.getRole().equals("Student"))
                 studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
-            if (newUser.getRole().toString().equals("Feedbacker"))
+            if (newUser.getRole().equals("Feedbacker"))
                 feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-            if (newUser.getRole().toString().equals("HRWorker"))
+            if (newUser.getRole().equals("HRWorker"))
                 hrWorkerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-            if (newUser.getRole().toString().equals("Admin"))
+            if (newUser.getRole().equals("Admin"))
                 administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
             if (tableData == null)
                 return "redirect:/admin";
@@ -145,7 +140,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/linkStudent", method = RequestMethod.POST)
-    public String linkStudentCurator(@ModelAttribute("linkUnit") LinkUnit linkUnit, ModelMap modelMap) {
+    public String linkStudentCurator(@ModelAttribute("linkUnit") LinkUnit linkUnit/*, ModelMap modelMap*/) {
         if (linkUnit.isCurator()) {
             for (String student : linkUnit.getStudents()) {
                 for (String feed : linkUnit.getFeedbackers()) {
@@ -164,9 +159,7 @@ public class AdminController {
 
 
     @RequestMapping(value = "/formTable", method = RequestMethod.POST)
-    public String formTable(ModelMap modelMap,
-                            ModelAndView modelAndView,
-                            @ModelAttribute("groupedValues") GroupedValues groupedValues) {
+    public String formTable(ModelMap modelMap, @ModelAttribute("groupedValues") GroupedValues groupedValues) {
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
         for (Group group : groupedValues.getValuesArray())
             values.addAll(group.getGavs());
@@ -263,7 +256,7 @@ public class AdminController {
 
         List<GAVPresentation> internal;
         ArrayList<String> groups = new ArrayList<String>();
-        for (int j = 0; gav.size() > 0; j++) {
+        for (; gav.size() > 0; ) {
             internal = new ArrayList<GAVPresentation>();
             GAVPresentation temp = gav.remove(0);
             internal.add(temp);
@@ -596,7 +589,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/addField", method = RequestMethod.POST)
-    public String addField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
+    public String addField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit) {
         String groupName;
         CreateNotifUnit createNotifUnit = new CreateNotifUnit();
         if (addFieldUnit.isExistingGroup()) {
@@ -676,20 +669,20 @@ public class AdminController {
     }
 
     @RequestMapping("/disable")
-    public String disableStudent(@ModelAttribute("reason") String reason, @ModelAttribute("studentNumber") int index, ModelMap modelMap) {
-        List <GAVPresentation> forReason = new ArrayList<GAVPresentation>();
+    public String disableStudent(@ModelAttribute("reason") String reason, @ModelAttribute("studentNumber") int index) {
+        List<GAVPresentation> forReason = new ArrayList<GAVPresentation>();
         GAVPresentation reasonGAV = new GAVPresentation();
         reasonGAV.setAttribute("reasonWhyDeleted");
         reasonGAV.setValue(reason);
         forReason.add(reasonGAV);
         studentService.setValues(tableData.get(index).get(1), forReason);
         studentService.disable(tableData.get(index).get(1));
-        tableData.remove((int) index);
+        tableData.remove(index);
         return "redirect:/admin/formedTable";
     }
 
     @RequestMapping("/{student}/enable")
-    public String enableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
+    public String enableStudent(@PathVariable("student") Integer index) {
         studentService.enable(tableData.get(index).get(1));
         tableData.remove((int) index);
         return "redirect:/admin/formedTable";
@@ -703,9 +696,7 @@ public class AdminController {
     }
 
     @RequestMapping("/showFeedback/{student}/{revId}")
-    public String showStudentFeedback(@PathVariable("student") String student,
-                                      @PathVariable("revId") Long revId,
-                                      ModelMap modelMap) {
+    public String showStudentFeedback(@PathVariable("revId") Long revId, ModelMap modelMap) {
         Review review = reviewService.getReviewById(revId);
         modelMap.addAttribute("review", review);
         if (review.getRatings() == null || review.getRatings().size() == 0)
@@ -742,7 +733,7 @@ public class AdminController {
         modelMap.addAttribute("groups", groupService.getAllGroups());
         modelMap.addAttribute("techs", technologyService.getAllTechnologies());
 
-        List<String> attributes = new ArrayList();
+        List<String> attributes = new ArrayList<String>();
         for (GAVPresentation gav : attributeService.getAllAttributes()) {
             attributes.add(gav.getAttribute());
         }
@@ -761,7 +752,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
-    public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
+    public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit) {
         if (addFieldUnit.getOldFieldName() != null) {
             attributeService.removeAttribute(addFieldUnit.getOldFieldName());
         }
@@ -772,7 +763,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
-    public String changeField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
+    public String changeField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit) {
 
         if (addFieldUnit.getOldFieldName() != null) {
 
@@ -822,7 +813,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/deleteGroup", method = RequestMethod.POST)
-    public String deleteGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit, ModelMap modelMap) {
+    public String deleteGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit) {
         if (changeGroupUnit.getOldGroupName() != null) {
             groupService.deleteGroup(changeGroupUnit.getOldGroupName());
 
@@ -835,7 +826,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/changeGroup", method = RequestMethod.POST)
-    public String changeGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit, ModelMap modelMap) {
+    public String changeGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit) {
         if (changeGroupUnit.getOldGroupName() != null) {
             String newGroupName = changeGroupUnit.getNewGroupName();
             if (newGroupName == null)
@@ -856,19 +847,23 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
-    public @ResponseBody JSONField showField(@ModelAttribute("field") String fieldName) {
+    public
+    @ResponseBody
+    JSONField showField(@ModelAttribute("field") String fieldName) {
         return attributeService.getJSONField(fieldName);
     }
 
 
     @RequestMapping(value = "/showGroup", method = RequestMethod.GET)
-    public @ResponseBody String showGroup(@ModelAttribute("group") String groupName) {
+    public
+    @ResponseBody
+    String showGroup(@ModelAttribute("group") String groupName) {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
-    public String showDeleteUser(ModelMap modelMap){
-        List<User> users = new ArrayList();
+    public String showDeleteUser(ModelMap modelMap) {
+        List<User> users = new ArrayList<User>();
         users.addAll(studentService.getAllDisabledStudents());
         users.addAll(studentService.getAllEnabledStudents());
        /* List<String> userNames = new ArrayList<String>();
@@ -881,9 +876,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public String deleteUser(@ModelAttribute("userLogin") String userLogin){
-        if(userLogin!=null){
-            if(!userLogin.equals("")){
+    public String deleteUser(@ModelAttribute("userLogin") String userLogin) {
+        if (userLogin != null) {
+            if (!userLogin.equals("")) {
                 userService.delete(userLogin);
             }
         }
@@ -894,12 +889,14 @@ public class AdminController {
 
 
     @RequestMapping(value = "/showUsersToDelete", method = RequestMethod.GET)
-    public @ResponseBody List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
+    public
+    @ResponseBody
+    List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
         return userService.getAllWithRole(role);
     }
 
     @RequestMapping("/showUnlink")
-    public String showUnlink(ModelMap modelMap){
+    public String showUnlink(ModelMap modelMap) {
         modelMap.addAttribute("students", studentService.getAllEnabledStudents());
         modelMap.addAttribute("feeds", feedbackerService.getAllFeedbackers());
         modelMap.addAttribute("unlinkUnit", new UnlinkUnit());
@@ -937,15 +934,15 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/unlink", method = RequestMethod.POST)
-    public String unlink(@ModelAttribute("unlinkUnit")UnlinkUnit unlinkUnit){
-        if(unlinkUnit.getCurators() != null)
-        for(String feed:unlinkUnit.getCurators()){
-            feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
-        }
-        if(unlinkUnit.getInterviewers() != null)
-        for(String feed:unlinkUnit.getInterviewers()){
-            feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
-        }
+    public String unlink(@ModelAttribute("unlinkUnit") UnlinkUnit unlinkUnit) {
+        if (unlinkUnit.getCurators() != null)
+            for (String feed : unlinkUnit.getCurators()) {
+                feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
+            }
+        if (unlinkUnit.getInterviewers() != null)
+            for (String feed : unlinkUnit.getInterviewers()) {
+                feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
+            }
         return "redirect:/admin/showUnlink";
     }
 }

@@ -88,7 +88,7 @@
                         $('#overlay').fadeOut(400); // скрываем подложку
                     }
             );
-        })
+        });
         event = event || window.event; // Кроссбраузерно получить событие
         if (event.stopPropagation) { // существует ли метод?
             // Стандартно:

@@ -2,9 +2,6 @@ package com.forView;
 
 import java.util.List;
 
-/**
- * Created by Надя on 04.08.2014.
- */
 public class CreateNotifUnit {
     private List<String> feedbackers;
     private List<String> students;
