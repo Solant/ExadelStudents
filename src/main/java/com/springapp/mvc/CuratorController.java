@@ -5,6 +5,7 @@ package com.springapp.mvc;
  */
 
 
+import com.forView.ChooseTechUnit;
 import com.forView.FeedbackingUnit;
 import com.services.FeedbackerService;
 import com.services.StudentService;
@@ -143,6 +144,32 @@ public class CuratorController {
         }
         studentService.addStudyingReview(review.getStudent().getLogin(), UserService.getCurrentUserLogin(), review);
 
+        return "redirect:/curator";
+    }
+
+    @RequestMapping("/showChooseTech")
+    public String showChooseTech(ModelMap modelMap){
+        ChooseTechUnit chooseTechUnit = new ChooseTechUnit();
+        chooseTechUnit.setMyTechs(new ArrayList<String>());
+        Feedbacker feedbacker = feedbackerService.getFeedbackerByLoginWithTechs(UserService.getCurrentUserLogin());
+        for(Technology technology: feedbacker.getMyTechnologies()){
+            chooseTechUnit.getMyTechs().add(technology.getTechnologyName());
+        }
+        List<String> techs = new ArrayList<String>();
+        for(Technology technology:technologyService.getAllTechnologies()){
+            techs.add(technology.getTechnologyName());
+        }
+        modelMap.addAttribute("techs", techs);
+        modelMap.addAttribute("chooseTechUnit", chooseTechUnit);
+        return "chooseTech";
+    }
+
+    @RequestMapping("/chooseTech")
+    public String chooseTech(@ModelAttribute("chooseTechUnit")ChooseTechUnit chooseTechUnit){
+        for(String tech:chooseTechUnit.getMyTechs()){
+            System.out.println(tech);
+            feedbackerService.addTechnology(UserService.getCurrentUserLogin(), tech);
+        }
         return "redirect:/curator";
     }
 

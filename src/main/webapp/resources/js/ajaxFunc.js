@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     $('#search').keyup(function () {
         $('#search').removeClass('errorBG');
-        $('#search').addClass('normal');
+        $('#search').addClass('normalBG');
         delay(function () {
             liveSearch();
         }, 300);

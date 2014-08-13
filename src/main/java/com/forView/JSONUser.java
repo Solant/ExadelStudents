@@ -3,9 +3,9 @@ package com.forView;
 /**
  * Created by user on 08.08.2014.
  */
-public class JSONFeedbacker {
-    private String secondName;
+public class JSONUser {
     private String firstName;
+    private String secondName;
     private String login;
 
     public String getFirstName() {
