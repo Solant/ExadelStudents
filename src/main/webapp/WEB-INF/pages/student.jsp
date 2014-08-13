@@ -73,5 +73,31 @@
         </form:form>
 
     </body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('input').on('input', function(){
+                var edited = $(this);
+                var submit = edited.closest('form').find(':submit');
+                //var attrId = edited.attr('id');
+                attrId = edited.attr('id').replace('\.value', '.attribute');
+                var attrName = document.getElementById(attrId).value;
+                var url = "/getRegexpByAttrName?attr=" + attrName;
+                $.get(url, function (data) {
+                    var regexp = new RegExp(data, 'g');
+                    if (!regexp.test(edited.val())) {
+                        edited.css('border-color', 'red');
+                        submit.attr('disabled', 'disabled');
+                        submit.css('opacity', '0.5');
+                    }
+                    else {
+                        edited.css('border-color', '');
+                        submit.removeAttr('disabled');
+                        submit.css('opacity', '1');
+                    }
+                });
+            });
+        });
+    </script>
 </html>
 
