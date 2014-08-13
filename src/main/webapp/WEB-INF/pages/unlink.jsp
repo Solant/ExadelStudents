@@ -98,7 +98,7 @@
     $(document).ready(function () {
         $('#studentSelect').change(
                 function () {
-                    var url = "curatorsForStudent?student=" + document.getElementById("studentSelect").value;
+                    var url = "/admin/unlink/curatorsForStudent?student=" + document.getElementById("studentSelect").value;
                     $.get(url, function (data) {
                         var select = document.getElementById("curators");
                         removeOptions(select);
@@ -113,7 +113,7 @@
                         })
                     });
 
-                    var url2 = "interviewersForStudent?student=" + document.getElementById("studentSelect").value;
+                    var url2 = "/admin/unlink/interviewersForStudent?student=" + document.getElementById("studentSelect").value;
                     $.get(url2, function (data) {
                         var select = document.getElementById("interviewers");
                         removeOptions(select);
@@ -135,7 +135,7 @@
     $(document).ready(function () {
         $('#feedSelect').change(
                 function () {
-                    var url = "curatedForFeed?student=" + document.getElementById("feedSelect").value;
+                    var url = "/admin/unlink/curatedForFeed?student=" + document.getElementById("feedSelect").value;
                     $.get(url, function (data) {
                         var select = document.getElementById("curated");
                         removeOptions(select);
@@ -150,7 +150,7 @@
                         })
                     });
 
-                    var url2 = "interviewedForFeed?student=" + document.getElementById("feedSelect").value;
+                    var url2 = "/admin/unlink/interviewedForFeed?student=" + document.getElementById("feedSelect").value;
                     $.get(url2, function (data) {
                         var select = document.getElementById("interviewed");
                         removeOptions(select);
