@@ -1,27 +1,25 @@
-<%@ page import="com.services.UserService" %>
-<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
+
 <html>
 <head lang="en">
     <title>Create Letter</title>
-    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %></head>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
-
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
-
 <form:form commandName="createNotifUnit" action="/admin/sendNotif" method="post" class="createNotificationForm">
 
     <div class="leftList">
         <form:checkbox path="forStudents" id="students"/>
         <label for="students">All students: </label><br/>
-            <form:select path="students" name="students" multiple="true">
-                <c:forEach items="${students}" var="student">
-                    <form:option value="${student.login}">${student.firstName} ${student.secondName}</form:option>
-                </c:forEach>
-            </form:select>
+        <form:select path="students" name="students" multiple="true">
+            <c:forEach items="${students}" var="student">
+                <form:option value="${student.login}">${student.firstName} ${student.secondName}</form:option>
+            </c:forEach>
+        </form:select>
     </div>
 
     <div class="centerList">
@@ -51,25 +49,24 @@
 
     <div class="alignCenter">
         <button class="gray" onclick="history.back(); return false;">Cancel</button>
-        <form:button class="blue" id="send">Send</form:button>
+        <button class="blue" id="send">Send</button>
     </div>
-</form:form>
-<div id="modal_form">
-    <span id="modal_close">&times;</span>
-    <div class="alignCenter">
-        <form action="/admin/disable">
-            <h4>Submit from</h4>
+    <div id="modal_form">
+        <span id="modal_close">&times;</span>
+
+        <div class="alignCenter">
+            <h4>Confirm password</h4>
             <div>
-                <label for="email">Email:</label><input type="text" id="email" readonly/>
-            </div>
-            <div>
-                <label for="password">Password:</label><input type="text" id="password"/>
+                <label for="password">Password:</label>
+                <form:input id="password" type="password" path="password" />
             </div>
             <button type="button" class="gray" id="cancel_button">Cancel</button>
-            <button type="submit" class="blue" id="save_button">Save</button>
-        </form>
+            <form:button class="blue" id="sendButton">Send</form:button>
+        </div>
     </div>
-</div>
+
+</form:form>
+
 <div id="overlay"></div>
 
 <script>
