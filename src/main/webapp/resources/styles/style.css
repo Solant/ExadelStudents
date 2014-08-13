@@ -149,17 +149,16 @@ body {
 
 table {
     background-color: white;
-    text-align: center;
     border: #777777 1px solid;
     border-collapse: collapse !important;
     box-shadow: 0 1px 2px #d1d1d1;
 }
 
 table thead, table tfoot {
-    background-color: grey;
+    background-color:  RGB(0, 156, 203);
     color: white;
     font-weight: bold;
-    text-shadow: 1px 1px 0px black;
+    text-align: center;
 }
 
 table td {
@@ -365,6 +364,7 @@ button.gray, a.gray, input[type=submit].gray {
 
 .withImage {
     width: 30px;
+    text-align: center;
 }
 
 .foxLogo{
@@ -405,8 +405,8 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 #example_length, #example_filter, #example_info, #example_paginate {
-    font-size: 20px;
-    color: gray;
+    font-size: 20px;/*
+    color: gray;*/
 }
 
 /*props create.jsp*/
@@ -508,8 +508,8 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 #reviewsTable_length, #reviewsTable_filter, #reviewsTable_info, #reviewsTable_paginate {
-    font-size: 14px;
-    color: gray;
+    font-size: 14px;/*
+    color: gray;*/
 }
 
 .group label {
@@ -522,6 +522,7 @@ button.gray, a.gray, input[type=submit].gray {
 .group input {
     display: table-cell;
     width: 250px;
+    padding-left: 5px;
 }
 
 .group select {
@@ -637,6 +638,7 @@ button.gray, a.gray, input[type=submit].gray {
     padding: 2px;
     border-radius: 3px;
     border: 1px solid;
+    padding-left: 5px;
 }
 
 .adminGroup input:not([type="checkbox"]), .adminGroup select {
@@ -665,7 +667,7 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 .resultingAnchors{
-    max-width: 177px;
+    max-width: 183px;
     z-index: 1;
 }
 /*end of admin props*/
@@ -679,8 +681,8 @@ button.gray, a.gray, input[type=submit].gray {
 .saveTable {
     padding-top: 100px;
     font-size: 20px;
-    text-align: center;
-    color: gray;
+    text-align: center;/*
+    color: gray;*/
 }
 
 #searchTable {
@@ -781,6 +783,7 @@ h2, h3 {
 .createNotificationForm select {
     width: 200px;
     height: 150px;
+    padding-left: 5px;
 }
 
 .subject {
@@ -790,11 +793,45 @@ h2, h3 {
 
 .subject input {
     width: 100%;
+    padding-left: 5px;
 }
 
 .letterText textarea {
     width: 100%;
     resize: none;
+}
+
+#confirm_password{
+    width: 350px;
+    height: 150px;
+    border-radius: 5px;
+    border: 3px #000 solid;
+    background: #fff;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -250px;
+    display: none;
+    opacity: 0;
+    z-index: 8;
+    padding: 20px 10px;
+}
+
+.confPassInput{
+    margin-bottom: 10px;
+}
+
+#confirm_password #modal_close {
+    width: 31px;
+    height: 41px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    display: block;
+    color: rgb(162, 17, 17);
+    font-size:22px;
 }
 
 /*end of create notification props*/
@@ -841,6 +878,7 @@ h2, h3 {
 .spoilers > div > input:not([type="radio"]) {
     height: 20px;
     margin-bottom: 5px;
+    padding-left: 5px;
 }
 
 .borderBottom {
@@ -1051,4 +1089,18 @@ span.dropt:hover span {
 
 .group select[multiple]{
     height: 50px;
+}
+
+select{
+    padding-left: 5px;
+}
+
+.foxMuch{
+    width:25px;
+    height: 25px;
+    display: none;
+}
+
+.foxMuch:hover{
+    display: block;
 }

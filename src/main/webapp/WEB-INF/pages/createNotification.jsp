@@ -1,15 +1,12 @@
-<%@ page import="com.services.UserService" %>
-<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <title>Create Letter</title>
-    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %></head>
+    <%@include file="/WEB-INF/pages/commonParts/allIncluded.jsp" %>
 </head>
 <body>
-
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 <ul class="nav nav-tabs" role="tablist">
     <li >
@@ -67,6 +64,20 @@
         <button class="gray" onclick="history.back(); return false;">Cancel</button>
         <form:button type="submit" class="blue">Send</form:button>
     </div>
+
+    <div id="confirm_password">
+        <span id="modal_close">&times;</span>
+
+        <div class="alignCenter">
+            <h4>Confirm password</h4>
+            <div class="confPassInput">
+                <form:input id="password" type="password" path="password" placeholder="password"/>
+            </div>
+            <button type="button" class="gray" id="cancel_button">Cancel</button>
+            <form:button class="blue" id="sendButton">Send</form:button>
+        </div>
+    </div>
+
 </form:form>
 </body>
 </html>

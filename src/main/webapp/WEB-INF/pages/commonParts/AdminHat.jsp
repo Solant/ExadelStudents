@@ -185,15 +185,14 @@
                     <li>
                         <a href="/notif">
                             <div class="message">
-                            <span id="numberOfNotifications" class="disappear">
-                            </span>
+                                <span id="numberOfNotifications" class="disappear">
+                                </span>
                             </div>
                         </a>
                     </li>
                     <li>
                         <span class="currUserName"><sec:authentication property="principal.username" /></span>
                     </li>
-
                     <li>
                         <a href="<c:url value="j_spring_security_logout" />">
                             <img src="/resources/images/exit.png" class="exit_logo">

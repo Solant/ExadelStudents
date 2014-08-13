@@ -509,15 +509,17 @@ public class AdminController {
     public String sendNotif(@ModelAttribute("createNotifUnit") CreateNotifUnit createNotifUnit) {
         String title = createNotifUnit.getTitle();
         String text = createNotifUnit.getText();
+        String password = createNotifUnit.getPassword();
         String current;
         if (createNotifUnit.getSender() == null)
             current = UserService.getCurrentUserLogin();
         else
             current = createNotifUnit.getSender();
+        String fromEmail = userService.getByLogin(current).getEmail();
         if (createNotifUnit.isForStudents()) {
             for (Student student : studentService.getAllEnabledStudents()) {
                 notificationService.add(current, student.getLogin(), title, text);
-                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                 mailService.setEmail(userService.getByLogin(student.getLogin()).getEmail());
                 Thread t = new Thread(mailService);
                 t.start();
@@ -526,7 +528,7 @@ public class AdminController {
             if (createNotifUnit.getStudents() != null)
                 for (String student : createNotifUnit.getStudents()) {
                     notificationService.add(current, student, title, text);
-                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                     mailService.setEmail(userService.getByLogin(student).getEmail());
                     Thread t = new Thread(mailService);
                     t.start();
@@ -535,8 +537,7 @@ public class AdminController {
         if (createNotifUnit.isForFeedbackers()) {
             for (Feedbacker feed : feedbackerService.getAllFeedbackers()) {
                 notificationService.add(current, feed.getLogin(), title, text);
-                //mailService.send(title, text, );
-                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                 mailService.setEmail(userService.getByLogin(feed.getLogin()).getEmail());
                 Thread t = new Thread(mailService);
                 t.start();
@@ -545,8 +546,7 @@ public class AdminController {
             if (createNotifUnit.getFeedbackers() != null)
                 for (String feed : createNotifUnit.getFeedbackers()) {
                     notificationService.add(current, feed, title, text);
-                    //mailService.send(title, text, );
-                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                     mailService.setEmail(userService.getByLogin(feed).getEmail());
                     Thread t = new Thread(mailService);
                     t.start();
@@ -555,8 +555,7 @@ public class AdminController {
         if (createNotifUnit.isForWorkers()) {
             for (HRWorker worker : hrWorkerService.getAllHRWorkers()) {
                 notificationService.add(current, worker.getLogin(), title, text);
-                //mailService.send(title, text, );
-                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                 mailService.setEmail(userService.getByLogin(worker.getLogin()).getEmail());
                 Thread t = new Thread(mailService);
                 t.start();
@@ -566,8 +565,7 @@ public class AdminController {
             if (createNotifUnit.getFeedbackers() != null) {
                 for (String worker : createNotifUnit.getWorkers()) {
                     notificationService.add(current, worker, title, text);
-                    //mailService.send(title, text, userService.getByLogin(worker).getEmail());
-                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                     mailService.setEmail(userService.getByLogin(worker).getEmail());
                     Thread t = new Thread(mailService);
                     t.start();
