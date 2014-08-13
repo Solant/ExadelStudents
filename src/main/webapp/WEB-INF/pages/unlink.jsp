@@ -53,8 +53,7 @@
                 <form:select path="student" id="studentSelect">
                     <form:option value=""></form:option>
                     <c:forEach items="${students}" var="student">
-                        <form:option
-                                value="${student.login}">${student.firstName} ${student.secondName}</form:option>
+                        <form:option value="${student.login}">${student.firstName} ${student.secondName}</form:option>
                     </c:forEach>
                 </form:select>
             </div>
