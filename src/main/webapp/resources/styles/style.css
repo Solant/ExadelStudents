@@ -156,10 +156,9 @@ table {
 }
 
 table thead, table tfoot {
-    background-color: grey;
+    background-color:  RGB(0, 156, 203);
     color: white;
     font-weight: bold;
-    text-shadow: 1px 1px 0px black;
 }
 
 table td {
