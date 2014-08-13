@@ -13,10 +13,6 @@ import java.util.*;
 @Service
 public class StudentService {
 
-    public final int ALL = 2;
-    public final int ENABLED = 1;
-    public final int DISABLED = 0;
-
     @Autowired
     private StudentDao studentDao;
 
@@ -31,9 +27,6 @@ public class StudentService {
 
     @Autowired
     private GroupDao groupDao;
-
-    @Autowired
-    private NotificationDao notificationDao;
 
     @Autowired
     private TechnologyDao technologyDao;
@@ -462,7 +455,7 @@ public class StudentService {
         if (students == null)
             return null;
 
-        List<JSONStudent> jsonStudents = new ArrayList();
+        List<JSONStudent> jsonStudents = new ArrayList<JSONStudent>();
         String[] initials = line.split("[ ,\\.:;]+");
         for (Student student : students) {
             if (jsonStudents.size() == numberOfResults)

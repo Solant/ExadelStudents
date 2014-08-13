@@ -9,7 +9,6 @@ import persistance.dao.AttributeDao;
 import persistance.dao.GroupDao;
 import persistance.model.Attribute;
 import persistance.model.Group;
-import persistance.model.Value;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,11 +60,6 @@ public class AttributeService {
 
         Collections.sort(gavs);
         return gavs;
-    }
-
-    @Transactional
-    public boolean isAttributeAvailable(String attribute){
-        return attributeDao.findByName(attribute) == null;
     }
 
     @Transactional

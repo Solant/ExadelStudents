@@ -37,12 +37,6 @@ public class FeedbackerService {
         return feedbacker;
     }
 
-
-    @Transactional
-    public Feedbacker getFeedbackerByLogin(String login){
-        return feedbackerDao.findByLogin(login);
-    }
-
     @Transactional
     public List<Feedbacker> getAllFeedbackers(){
         return feedbackerDao.findAll();
@@ -81,7 +75,7 @@ public class FeedbackerService {
     @Transactional
     public Set<Student> getSupervisedStudents(String feedbackerLogin){
         Set<Student> studentSet = new HashSet<Student>();
-        for(Student student:(Set<Student>)(feedbackerDao.findByLogin(feedbackerLogin).getMyStudents())){
+        for(Student student: feedbackerDao.findByLogin(feedbackerLogin).getMyStudents()){
             if(userService.getByLogin(student.getLogin()).isEnabled()){
                 studentSet.add(student);
             }
@@ -98,7 +92,7 @@ public class FeedbackerService {
     @Transactional
     public Set<Student> getInterviewedStudents(String feedbackerLogin){
         Set<Student> studentSet = new HashSet<Student>();
-        for(Student student:(Set<Student>)(feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents())){
+        for(Student student: feedbackerDao.findByLogin(feedbackerLogin).getInterviewedStudents()){
             if(userService.getByLogin(student.getLogin()).isEnabled()){
                 studentSet.add(student);
             }
@@ -127,7 +121,7 @@ public class FeedbackerService {
 
     @Transactional
     public List<JSONFeedbacker> filterFeedbackers(String technologyName){
-        List<JSONFeedbacker> jsonFeedbackers = new ArrayList();
+        List<JSONFeedbacker> jsonFeedbackers = new ArrayList<JSONFeedbacker>();
         if(technologyName.equals("Any")){
             for(Feedbacker f : getAllFeedbackers()) {
                 JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
@@ -157,7 +151,7 @@ public class FeedbackerService {
 
     @Transactional
     public List<JSONFeedbacker> getJSONCuratorsByStudent(String studentLogin){
-        List<JSONFeedbacker> jsonFeedbackers = new ArrayList();
+        List<JSONFeedbacker> jsonFeedbackers = new ArrayList<JSONFeedbacker>();
         for(Feedbacker f : getCuratorsByStudent(studentLogin)) {
                 JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
                 jsonFeedbacker.setSecondName(f.getSecondName());
@@ -174,7 +168,7 @@ public class FeedbackerService {
 
     @Transactional
     public List<JSONFeedbacker> getJSONInterviewersByStudent(String studentLogin){
-        List<JSONFeedbacker> jsonFeedbackers = new ArrayList();
+        List<JSONFeedbacker> jsonFeedbackers = new ArrayList<JSONFeedbacker>();
         for(Feedbacker f : getInterviewersByStudent(studentLogin)) {
             JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
             jsonFeedbacker.setSecondName(f.getSecondName());
@@ -214,15 +208,13 @@ public class FeedbackerService {
     @Transactional
     public void unlink(String login1, String login2, boolean isCurator){
         Set<Student> students = new HashSet<Student>();
-        Feedbacker feedbacker;String feedLogin;
+        Feedbacker feedbacker;
         String studentLogin;
         if((feedbacker = feedbackerDao.findByLogin(login1)) != null){
-            feedLogin = login1;
             studentLogin = login2;
         }
         else{
             feedbacker = feedbackerDao.findByLogin(login2);
-            feedLogin = login2;
             studentLogin = login1;
         }
         if(isCurator) {

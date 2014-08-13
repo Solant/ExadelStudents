@@ -1,11 +1,9 @@
 package com.springsecurity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.UserDao;
@@ -49,10 +47,6 @@ public class MyUserDetailsService implements UserDetailsService{
         }
 
         return new ArrayList<GrantedAuthority>(setAuths);
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
     }
 
     public void setUserDao(UserDao userDao) {

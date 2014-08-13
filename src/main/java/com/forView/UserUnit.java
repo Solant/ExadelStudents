@@ -38,23 +38,6 @@ public class UserUnit {
     public void setRole(String role) {
         this.role = role;
     }
-    // private Status status;
-
-
-   /* public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-*/
-
-    /*public enum Status{
-        WORKING, STUDYING
-    }*/
-    // public
-    // private List<String> role;
 
     public String getLogin() {
         return login;

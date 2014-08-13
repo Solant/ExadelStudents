@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,10 +27,6 @@ public class StudentController {
     private StudentService studentService;
 
     @Autowired
-    private UserService userService;
-
-
-    @Autowired
     private AttributeFormValidator attributeFormValidator;
 
 
@@ -45,7 +40,7 @@ public class StudentController {
 
         List<GAVPresentation> internal;
         ArrayList<String> groups = new ArrayList<String>();
-        for(int j = 0; gav.size() > 0; j++){
+        for(; gav.size() > 0; ){
             internal = new ArrayList<GAVPresentation>();
             GAVPresentation temp = gav.remove(0);
             internal.add(temp);

@@ -30,13 +30,6 @@ public class GroupService {
     }
 
     @Transactional
-    public void setStatus(String groupName, String status){
-        Group group = groupDao.findByName(groupName);
-        group.setStatus(status);
-        groupDao.update(group);
-    }
-
-    @Transactional
     public List<String> getAllGroups(){
         List<String> groupsReturn = new ArrayList<String>();
         List<Group> groups = groupDao.findAll();
@@ -49,11 +42,6 @@ public class GroupService {
     @Transactional
     public Group getGroupByName(String name){
         return groupDao.findByName(name);
-    }
-
-    @Transactional
-    public boolean isAvailable(String group){
-        return groupDao.findByName(group) == null;
     }
 
     @Transactional

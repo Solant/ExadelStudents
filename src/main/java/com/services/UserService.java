@@ -63,11 +63,6 @@ public class UserService {
     }
 
     @Transactional
-    public String getPassword(String login){
-        return userDao.findByLogin(login).getPassword();
-    }
-
-    @Transactional
     public void setPassword(String login, String pass){
         User user = userDao.findByLogin(login);
         user.setPassword(stringToSha256(pass));
@@ -101,7 +96,6 @@ public class UserService {
 
     @Transactional
     public List<Notification> getAllUnreadNotifications(String login) {
-        User user = userDao.findByLogin(login);
         List<Notification> notifications = notificationDao.findAll();
         List<Notification> notificationsRet = new ArrayList<Notification>();
         for (Notification notification : notifications)
@@ -119,7 +113,7 @@ public class UserService {
     @Transactional
     public List<JSONUser> getAllWithRole (String role) {
         List<User> users = userDao.findAll();
-        List<JSONUser> result = new ArrayList();
+        List<JSONUser> result = new ArrayList<JSONUser>();
         for (User user : users) {
             for(UserRole ur : user.getUserRoles()) {
                 if (ur.getRole().equals(role)) {

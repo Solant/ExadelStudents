@@ -15,7 +15,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/access_deny", method = RequestMethod.GET)
-    public String adminPage(ModelMap model) {
+    public String adminPage() {
         return "error403";
     }
 }

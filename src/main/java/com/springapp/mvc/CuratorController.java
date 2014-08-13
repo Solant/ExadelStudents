@@ -1,10 +1,5 @@
 package com.springapp.mvc;
 
-/**
- * Created by Надя on 16.07.2014.
- */
-
-
 import com.forView.ChooseTechUnit;
 import com.forView.FeedbackingUnit;
 import com.services.FeedbackerService;
@@ -35,14 +30,10 @@ public class CuratorController {
     private StudentService studentService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private TechnologyService technologyService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String curatorPage() {
-        String current = UserService.getCurrentUserLogin();
         return "redirect:/curator/myStudents";
     }
 
@@ -133,7 +124,7 @@ public class CuratorController {
 
 
     @RequestMapping(value = "/addRatingReview", method = RequestMethod.POST)
-    public String addRatingFeedback(ModelMap modelMap,@ModelAttribute("review") Review review) {
+    public String addRatingFeedback(@ModelAttribute("review") Review review) {
 
         int size = 5;
         for (int i = 0; i < size; i++) {
