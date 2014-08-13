@@ -1,3 +1,4 @@
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
@@ -22,6 +23,11 @@
     <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </sec:authorize>
 
+<%
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+    pageContext.setAttribute("sdf", sdf);
+%>
+
 <div class="notifPadding">
     <div class="notification">
 
@@ -35,7 +41,7 @@
         </div>
 
         <span class="date">
-            ${notif.timeWhenSent.time}
+            ${sdf.format(notif.timeWhenSent.time)}
         </span>
 
         <span class="sender">

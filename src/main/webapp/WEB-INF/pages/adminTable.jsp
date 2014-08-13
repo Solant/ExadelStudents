@@ -61,31 +61,33 @@
         <tbody>
         <c:forEach items="${tableData}" var="student" begin="1" varStatus="index">
             <tr<c:if test="${enable != 'enable'}"> class="notLinking" </c:if>>
-                <c:forEach items="${student}" var="item">
-                    <td>
-                        <c:if test="${enable == 'enable'}">
-                        <a href="/admin/studentPage/${student.get(1)}">
-                            </c:if>
-                                ${item}
-                        </a>
-                    </td>
-                </c:forEach>
-
-                <c:if test="${enable == 'enable'}">
-                    <td class="withImage">
-                        <a href="/admin/${index.count}/disable">
-                            <img src="/resources/images/fired.png" class="studentStatusImage">
-                        </a>
-                    </td>
-                </c:if>
-                <c:if test="${enable == 'disable'}">
-                    <td class="withImage">
-                        <a href="/admin/${index.count}/enable">
-                            <img src="/resources/images/add.png" class="studentStatusImage">
-                        </a>
-                    </td>
-                </c:if>
+            <c:forEach items="${student}" var="item">
+                <td>
+                    <c:if test="${enable == 'enable'}">
+                    <a href="/admin/studentPage/${student.get(1)}">
+                        </c:if>
+                            ${item}
+                    </a>
                 </td>
+            </c:forEach>
+
+            <c:if test="${enable == 'enable'}">
+                <td class="withImage">
+                    <a name="deleteTd" id="${index.count}" href="#myModal">
+                        <div>
+                        <img src="/resources/images/fired.png" class="studentStatusImage">
+                            </div>
+                    </a>
+                </td>
+            </c:if>
+            <c:if test="${enable == 'disable'}">
+                <td class="withImage">
+                    <a href="/admin/${index.count}/enable">
+                        <img src="/resources/images/add.png" class="studentStatusImage">
+                    </a>
+                </td>
+            </c:if>
+            </td>
             </tr>
         </c:forEach>
         </tbody>
@@ -94,3 +96,57 @@
 
 </body>
 </html>
+
+
+<div id="modal_form">
+    <span id="modal_close">&times;</span>
+    <div class="alignCenter">
+        <form action="/admin/disable">
+        <h4>Disable student</h4>
+        <label>Reason:</label>
+        <div class="group" id="reasonArea">
+            <textarea class="textOther" name="reason"></textarea>
+        </div>
+        <input type="hidden" name="studentNumber" id="studentNumber"/>
+        <button type="button" class="gray" id="cancel_button">Cancel</button>
+        <button type="submit" class="blue" id="save_button">Save</button>
+        </form>
+    </div>
+</div>
+<div id="overlay"></div>
+
+<script>
+    $.each(document.getElementsByName('deleteTd'), function (index, krestik) {
+        krestik.onclick = function (event) {
+            document.getElementById("studentNumber").value = krestik.id;
+            event.preventDefault(); // выключаем стандартную роль элемента
+            $('#overlay').fadeIn(400, // сначала плавно показываем темную подложку
+                    function () { // после выполнения предыдущей анимации
+                        $('#modal_form')
+                                .css('display', 'block') // убираем у модального окна display: none;
+                                .animate({opacity: 1, top: '50%'}, 200); // плавно прибавляем прозрачность одновременно со съезжанием вниз
+
+                    });
+            /* Закрытие модального окна, тут делаем то же самое но в обратном порядке */
+            $('#modal_close, #overlay, #cancel_button, #save_button').click(function () { // ловим клик по крестику или подложке
+                $('#modal_form')
+                        .animate({opacity: 0, top: '45%'}, 200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
+                        function () { // после анимации
+                            $(this).css('display', 'none'); // делаем ему display: none;
+                            $('#overlay').fadeOut(400); // скрываем подложку
+                        }
+                );
+            });
+
+
+            event = event || window.event; // Кроссбраузерно получить событие
+            if (event.stopPropagation) { // существует ли метод?
+                // Стандартно:
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+        }
+    })
+
+</script>

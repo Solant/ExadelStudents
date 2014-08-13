@@ -10,6 +10,7 @@ public class GAVPresentation implements Comparable<GAVPresentation>{
     private String attribute;
     private String value;
     private String type;
+    private List<String> values;
     private List<String> possibleValues;
     private boolean show;
 
@@ -19,9 +20,20 @@ public class GAVPresentation implements Comparable<GAVPresentation>{
 
         String[] values = line.split("[,;(, )]+");
         ArrayList<String> valuesList = new ArrayList<String>();
-        valuesList.add("");
         Collections.addAll(valuesList, values);
         return valuesList;
+    }
+
+    public void setValues(String line){
+        values = parse(line);
+    }
+
+    public List<String> getValues(){
+        return values;
+    }
+
+    public void setValues(List<String> list){
+        this.values = list;
     }
 
     public void setPossibleValues(String line){

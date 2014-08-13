@@ -32,6 +32,13 @@ public class TechnologyService {
     }
 
     @Transactional
+    public void changeTechnology(String oldName, String newName){
+        Technology technology = technologyDao.findByName(oldName);
+        technology.setTechnologyName(newName);
+        technologyDao.save(technology);
+    }
+
+    @Transactional
     public boolean isTechnologyAvailable(String name){
         return technologyDao.findByName(name) == null;
     }

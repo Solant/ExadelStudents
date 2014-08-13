@@ -19,10 +19,11 @@
         <intercept-url pattern="/admin/showEnabled" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/showStudying" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/showWorking" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
-        <intercept-url pattern="/admin/*/disable" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/disable" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/*/enable" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/feedbackersForTechnology" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/liveSearch" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/formedTable" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
 
         <intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/worker/**" access="hasRole('ROLE_WORKER')" />

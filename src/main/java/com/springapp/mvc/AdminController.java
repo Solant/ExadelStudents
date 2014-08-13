@@ -137,33 +137,10 @@ public class AdminController {
         LinkUnit linkUnit = new LinkUnit();
         linkUnit.setCurator(true);
 
-        List<String> studentNames = new ArrayList();
-        List<String> studentLogins = new ArrayList();
-        for (Student s : studentService.getAllEnabledStudents()) {
-            studentNames.add(s.getSecondName() + " " + s.getFirstName());
-            studentLogins.add(s.getLogin());
-        }
-
-        List<String> feedNames = new ArrayList();
-        List<String> feedLogins = new ArrayList();
-        for (Feedbacker feed : feedbackerService.getAllFeedbackers()) {
-            feedNames.add(feed.getSecondName() + " " + feed.getFirstName());
-            feedLogins.add(feed.getLogin());
-        }
-
-        List<Technology> technologies = technologyService.getAllTechnologies();
-        List<String> technologyNames = new ArrayList();
-        for (Technology t : technologies) {
-            technologyNames.add(t.getTechnologyName());
-
-        }
-
-        modelMap.addAttribute("students", studentNames);
-        modelMap.addAttribute("feedbackers", feedNames);
-        modelMap.addAttribute("feedLogins", feedLogins);
-        modelMap.addAttribute("studentLogins", studentLogins);
-        modelMap.addAttribute("technologies", technologyNames);
         modelMap.addAttribute("linkUnit", linkUnit);
+        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
+        modelMap.addAttribute("feedbackers", feedbackerService.getAllFeedbackers());
+        modelMap.addAttribute("technologies", technologyService.getAllTechnologies());
         return "linking";
     }
 
@@ -184,8 +161,7 @@ public class AdminController {
         }
         if (tableData == null)
             return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
 
@@ -415,6 +391,7 @@ public class AdminController {
         tableData.get(0).add("Phone");
         tableData.get(0).add("Skype");
         tableData.get(0).add("Email");
+        tableData.get(0).add("Reason why disabled");
         int i = 1;
         for (Student student : listDisabled) {
             tableData.add(new ArrayList<String>());
@@ -422,7 +399,8 @@ public class AdminController {
             tableData.get(i).add(student.getLogin());
             tableData.get(i).add(student.getTelephone());
             tableData.get(i).add(student.getSkype());
-            tableData.get(i++).add(student.getEmail());
+            tableData.get(i).add(student.getEmail());
+            tableData.get(i++).add(studentService.getValue(student.getLogin(), "reasonWhyDeleted"));
         }
         modelMap.addAttribute("tableData", tableData);
         enable = "disable";
@@ -533,7 +511,6 @@ public class AdminController {
 
     @RequestMapping("/sendNotif")
     public String sendNotif(@ModelAttribute("createNotifUnit") CreateNotifUnit createNotifUnit) {
-        MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com");
         String title = createNotifUnit.getTitle();
         String text = createNotifUnit.getText();
         String current;
@@ -544,38 +521,60 @@ public class AdminController {
         if (createNotifUnit.isForStudents()) {
             for (Student student : studentService.getAllEnabledStudents()) {
                 notificationService.add(current, student.getLogin(), title, text);
-                mailService.send(title, text, userService.getByLogin(student.getLogin()).getEmail());
+                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                mailService.setEmail(userService.getByLogin(student.getLogin()).getEmail());
+                Thread t = new Thread(mailService);
+                t.start();
             }
         } else {
             if (createNotifUnit.getStudents() != null)
                 for (String student : createNotifUnit.getStudents()) {
                     notificationService.add(current, student, title, text);
-                    mailService.send(title, text, userService.getByLogin(student).getEmail());
+                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    mailService.setEmail(userService.getByLogin(student).getEmail());
+                    Thread t = new Thread(mailService);
+                    t.start();
                 }
         }
         if (createNotifUnit.isForFeedbackers()) {
             for (Feedbacker feed : feedbackerService.getAllFeedbackers()) {
                 notificationService.add(current, feed.getLogin(), title, text);
-                mailService.send(title, text, userService.getByLogin(feed.getLogin()).getEmail());
+                //mailService.send(title, text, );
+                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                mailService.setEmail(userService.getByLogin(feed.getLogin()).getEmail());
+                Thread t = new Thread(mailService);
+                t.start();
             }
         } else {
             if (createNotifUnit.getFeedbackers() != null)
                 for (String feed : createNotifUnit.getFeedbackers()) {
                     notificationService.add(current, feed, title, text);
-                    mailService.send(title, text, userService.getByLogin(feed).getEmail());
+                    //mailService.send(title, text, );
+                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    mailService.setEmail(userService.getByLogin(feed).getEmail());
+                    Thread t = new Thread(mailService);
+                    t.start();
                 }
         }
         if (createNotifUnit.isForWorkers()) {
             for (HRWorker worker : hrWorkerService.getAllHRWorkers()) {
                 notificationService.add(current, worker.getLogin(), title, text);
-                mailService.send(title, text, userService.getByLogin(worker.getLogin()).getEmail());
+                //mailService.send(title, text, );
+                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                mailService.setEmail(userService.getByLogin(worker.getLogin()).getEmail());
+                Thread t = new Thread(mailService);
+                t.start();
             }
         } else {
 
             if (createNotifUnit.getFeedbackers() != null) {
                 for (String worker : createNotifUnit.getWorkers()) {
                     notificationService.add(current, worker, title, text);
-                    mailService.send(title, text, userService.getByLogin(worker).getEmail());
+                    //mailService.send(title, text, userService.getByLogin(worker).getEmail());
+                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    mailService.setEmail(userService.getByLogin(worker).getEmail());
+                    Thread t = new Thread(mailService);
+                    t.start();
                 }
             }
         }
@@ -618,17 +617,17 @@ public class AdminController {
         if (addFieldUnit.getValueType() != null) {
             if (addFieldUnit.getValueType().equals("number")) {
                 pattern = "^[0-9]*$";
-                errorMessage = "\""+addFieldUnit.getFieldName() + "\" must contain a number";
+                errorMessage = "\"" + addFieldUnit.getFieldName() + "\" must contain a number";
             }
 
             if (addFieldUnit.getValueType().equals("fullName")) {
                 pattern = "^[A-Za-z//s//-//.]*$";
-                errorMessage = "\""+addFieldUnit.getFieldName() + "\" must contain a full name";
+                errorMessage = "\"" + addFieldUnit.getFieldName() + "\" must contain a full name";
             }
 
             if (addFieldUnit.getValueType().equals("symbolsOnly")) {
                 pattern = "^[A-Za-z//s]*$";
-                errorMessage = "\""+addFieldUnit.getFieldName() + "\" must contain only latin symbols and space";
+                errorMessage = "\"" + addFieldUnit.getFieldName() + "\" must contain only latin symbols and space";
             }
         }
         attributeService.addAttribute(groupName, addFieldUnit.getFieldName(), addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
@@ -680,8 +679,14 @@ public class AdminController {
         return "adminTable";
     }
 
-    @RequestMapping("/{student}/disable")
-    public String disableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
+    @RequestMapping("/disable")
+    public String disableStudent(@ModelAttribute("reason") String reason, @ModelAttribute("studentNumber") int index, ModelMap modelMap) {
+        List <GAVPresentation> forReason = new ArrayList<GAVPresentation>();
+        GAVPresentation reasonGAV = new GAVPresentation();
+        reasonGAV.setAttribute("reasonWhyDeleted");
+        reasonGAV.setValue(reason);
+        forReason.add(reasonGAV);
+        studentService.setValues(tableData.get(index).get(1), forReason);
         studentService.disable(tableData.get(index).get(1));
         tableData.remove((int) index);
         return "redirect:/admin/formedTable";
@@ -733,12 +738,13 @@ public class AdminController {
 
 
     @RequestMapping("/showChangeField/{isField}")
-    public String showChangeField(ModelMap modelMap, @PathVariable("isField") boolean isField) {
+    public String showChangeField(ModelMap modelMap, @PathVariable("isField") String isField) {
         AddFieldUnit addFieldUnit = new AddFieldUnit();
         addFieldUnit.setExistingGroup(true);
         modelMap.addAttribute("changeGroupUnit", new ChangeGroupUnit());
         modelMap.addAttribute("addFieldUnit", addFieldUnit);
         modelMap.addAttribute("groups", groupService.getAllGroups());
+        modelMap.addAttribute("techs", technologyService.getAllTechnologies());
 
         List<String> attributes = new ArrayList();
         for (GAVPresentation gav : attributeService.getAllAttributes()) {
@@ -749,6 +755,7 @@ public class AdminController {
         return "changeField";
     }
 
+
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
     public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
         if (addFieldUnit.getOldFieldName() != null) {
@@ -758,8 +765,18 @@ public class AdminController {
         if (tableData == null)
             return "redirect:/admin";
         return "redirect:/admin/formedTable";
-
     }
+
+
+    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
+    public String changeTech(@ModelAttribute("newTechName")String newTechName,
+                             @ModelAttribute("oldTechName")String oldTechName){
+        technologyService.changeTechnology(oldTechName, newTechName);
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+    }
+
 
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
     public String changeField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
@@ -846,14 +863,70 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
-    public @ResponseBody JSONField showField(@ModelAttribute("field") String fieldName) {
+    public
+    @ResponseBody
+    JSONField showField(@ModelAttribute("field") String fieldName) {
         return attributeService.getJSONField(fieldName);
     }
 
 
     @RequestMapping(value = "/showGroup", method = RequestMethod.GET)
-    public @ResponseBody String showGroup(@ModelAttribute("group") String groupName) {
+    public
+    @ResponseBody
+    String showGroup(@ModelAttribute("group") String groupName) {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
+    @RequestMapping("/showUnlink")
+    public String showUnlink(ModelMap modelMap){
+        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
+        modelMap.addAttribute("feeds", feedbackerService.getAllFeedbackers());
+        modelMap.addAttribute("unlinkUnit", new UnlinkUnit());
+        return "unlink";
+    }
+
+    @RequestMapping(value = "/curatorsForStudent", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONFeedbacker> feedbackersForStudent(@ModelAttribute("student") String student) {
+
+        return feedbackerService.getJSONCuratorsByStudent(student);
+    }
+
+    @RequestMapping(value = "/interviewersForStudent", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONFeedbacker> interviewersForStudent(@ModelAttribute("student") String student) {
+
+        return feedbackerService.getJSONInterviewersByStudent(student);
+    }
+
+    @RequestMapping(value = "/curatedForFeed", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONStudent> curatedForFeed(@ModelAttribute("student") String student) {
+        return feedbackerService.getJSONSupervisedStudents(student);
+    }
+
+    @RequestMapping(value = "/interviewedForFeed", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONStudent> interviewedForFeed(@ModelAttribute("student") String student) {
+        return feedbackerService.getJSONInterviewedStudents(student);
+    }
+
+    @RequestMapping(value = "/unlink", method = RequestMethod.POST)
+    public String unlink(@ModelAttribute("unlinkUnit")UnlinkUnit unlinkUnit){
+        if(unlinkUnit.getCurators() != null)
+        for(String feed:unlinkUnit.getCurators()){
+            feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
+        }
+        if(unlinkUnit.getInterviewers() != null)
+        for(String feed:unlinkUnit.getInterviewers()){
+            feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
+        }
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+    }
 }

@@ -1,3 +1,4 @@
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -22,6 +23,11 @@
     <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 </sec:authorize>
 
+<%
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+    pageContext.setAttribute("sdf", sdf);
+%>
+
 <div align="center" id="table">
 
     <h2>Notifications of ${name}</h2>
@@ -31,11 +37,11 @@
         <td>Subject</td>
         <td>Sender</td>
         <td class="sorting_desc">Date when sent</td>
-        <c:if test="${role == 'ADMIN' || role=='WORKER'}">
+        <sec:authorize access="hasAnyRole('ROLE_WORKER', 'ROLE_ADMIN')">
             <td>
                 Date when read
             </td>
-        </c:if>
+        </sec:authorize>
 
         </thead>
         <tbody>
@@ -48,14 +54,16 @@
                     ${notif.sender}
                 </td>
                 <td>
-                    ${notif.timeWhenSent.time}
+                    ${sdf.format(notif.timeWhenSent.time)}
                 </td>
 
-                <c:if test="${role == 'ADMIN'|| role=='WORKER'}">
+                <sec:authorize access="hasAnyRole('ROLE_WORKER', 'ROLE_ADMIN')">
                     <td>
-                            ${notif.timeWhenRead.time}
+                        <c:if test="${notif.timeWhenRead!=null}">
+                            ${sdf.format(notif.timeWhenRead.time)}
+                        </c:if>
                     </td>
-                </c:if>
+                </sec:authorize>
             </tr>
         </c:forEach>
 

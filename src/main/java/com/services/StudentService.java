@@ -2,8 +2,6 @@ package com.services;
 
 import com.forView.JSONStudent;
 import com.services.presentation.GAVPresentation;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,6 +61,15 @@ public class StudentService {
     @Transactional
     public String getStatus(String login) {
         Set<Value> values = attributeDao.findByName("status").getValues();
+        for (Value value : values)
+            if (value.getStudent().getLogin().equalsIgnoreCase(login))
+                return value.getValue();
+        return null;
+    }
+
+    @Transactional
+    public String getValue(String login, String attrName) {
+        Set<Value> values = attributeDao.findByName(attrName).getValues();
         for (Value value : values)
             if (value.getStudent().getLogin().equalsIgnoreCase(login))
                 return value.getValue();
@@ -141,7 +148,12 @@ public class StudentService {
             for (Value value : values) {
                 if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
                     edited = true;
-                    value.setValue(gav.getValue());
+                    value.setValue("");
+                    if (gav.getValues() == null)
+                        value.setValue(gav.getValue());
+                    else
+                        for (String v : gav.getValues())
+                            value.setValue(value.getValue() + ";" + v);
                     break;
                 }
             }
@@ -186,10 +198,14 @@ public class StudentService {
                 gav.setType(attribute.getType());
                 gav.setPossibleValues(attribute.getPossibleValues());
                 gav.setValue("");
-                for (Value value : values)
-                    if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin))
-                        gav.setValue(value.getValue());
-
+                for (Value value : values) {
+                    if (value.getStudent().getLogin().equalsIgnoreCase(studentLogin)) {
+                        if (value.getAttribute().getType().equalsIgnoreCase("list"))
+                            gav.setValues(value.getValue());
+                        else
+                            gav.setValue(value.getValue());
+                    }
+                }
                 gavs.add(gav);
             }
         }
@@ -325,8 +341,10 @@ public class StudentService {
             boolean isAttrEmpty = false;
             if (gavPresentation.getValue() == null)
                 isAttrEmpty = true;
-            else if (gavPresentation.getValue().equals(""))
+            else if (gavPresentation.getValue().equals("") || gavPresentation.getValues() != null)
                 isAttrEmpty = true;
+            if(gavPresentation.getValues()!= null)
+                isAttrEmpty = false;
             if (!isAttrEmpty) {
 
                 students1.clear();
@@ -338,10 +356,20 @@ public class StudentService {
                     Set<Value> valueSet = student.getValues();
                     for (Value value : valueSet) {
                         if (value != null) {
-                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute()) &&
-                                    value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
-                                isSuitable = true;
-                                break;
+                            if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute())) {
+                                if (value.getAttribute().getType().equalsIgnoreCase("list")) {
+                                    ArrayList<String> tmp = new ArrayList<String>();
+                                    Collections.addAll(tmp, value.getValue().split(";"));
+                                    if (tmp.containsAll(gavPresentation.getValues())) {
+                                        isSuitable = true;
+                                        break;
+                                    }
+                                } else {
+                                    if (value.getValue().equalsIgnoreCase(gavPresentation.getValue())) {
+                                        isSuitable = true;
+                                        break;
+                                    }
+                                }
                             }
                         }
                         if (isSuitable)
@@ -434,7 +462,7 @@ public class StudentService {
         if (students == null)
             return null;
 
-        List<JSONStudent> jsonStudents = new ArrayList ();
+        List<JSONStudent> jsonStudents = new ArrayList();
         String[] initials = line.split("[ ,\\.:;]+");
         for (Student student : students) {
             if (jsonStudents.size() == numberOfResults)

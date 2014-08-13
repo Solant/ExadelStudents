@@ -41,10 +41,10 @@
     <div class="tab-content">
 
 
-
         <%pageContext.setAttribute("isActive", "active");%>
         <c:forEach items="${groupedValues.valuesArray}" varStatus="index1">
             <div class="tab-pane ${isActive}" id="${index1.count}">
+            <%--<input type="checkbox" name="allChecks" id="allChecks${index1.count}">--%>
 
                 <c:forEach items="${groupedValues.valuesArray[index1.count-1].gavs}" varStatus="index2" var="attr">
                     <div class="group">
@@ -54,20 +54,30 @@
                             <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"/>
                         </c:if>
                         <c:if test="${attr.type == 'textarea'}">
-                            <form:textarea cssClass="textOther" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"/>
+                            <form:textarea cssClass="textOther"
+                                           path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"/>
                         </c:if>
                         <c:if test="${attr.type == 'select'}">
                             <form:select path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value">
-                                <c:forEach items="${attr.possibleValues}" var="token">
-                                    <form:option value="${token}">${token}</form:option>
-                                </c:forEach>
+                                <form:option value=""></form:option>
+                                <form:options items="${attr.possibleValues}"></form:options>
                             </form:select>
                         </c:if>
                         <c:if test="${attr.type == 'date'}">
-                            <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value" type="date" />
+                            <form:input path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].value"
+                                        type="date"/>
                         </c:if>
-                        <div class="checkboxAligning"><form:checkbox path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show" cssStyle="width: 20px; margin-left: 5px;"/></div>
-                        <form:input class="hidden" path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
+                        <c:if test="${attr.type == 'list'}">
+                            <form:select multiple="true"
+                                         path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].values">
+                                <form:options items="${attr.possibleValues}"/>
+                            </form:select>
+                        </c:if>
+                        <div class="checkboxAligning"><form:checkbox class="check${index1.count-1}"
+                                                                     path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].show"
+                                                                     cssStyle="width: 20px; margin-left: 5px;"/></div>
+                        <form:input class="hidden"
+                                    path="valuesArray[${index1.count-1}].gavs[${index2.count-1}].attribute"/>
                     </div>
                 </c:forEach>
 
@@ -80,3 +90,20 @@
 
 </body>
 </html>
+
+
+<%--
+<script>
+    $(document).ready(function () {
+        $.each(document.getElementsByName('allChecks'), function (index1, elem1) {
+            elem1.onclick = function (event) {
+                $.each(document.getElementsByClassName('check' + index1), function (index, elem) {
+                    elem.checked = !elem.checked;
+                })
+            }
+        })
+    })
+
+</script>
+--%>
+
