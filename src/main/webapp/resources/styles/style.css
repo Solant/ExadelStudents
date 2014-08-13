@@ -667,7 +667,7 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 .resultingAnchors{
-    max-width: 177px;
+    max-width: 183px;
     z-index: 1;
 }
 /*end of admin props*/
