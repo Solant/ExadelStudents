@@ -16,13 +16,15 @@
 %>
 
 <div id="table">
+    <h3>Reviews of students</h3>
     <table id="fblist" class="display">
-        <thead>
+        <thead><%--
         <tr>
             <td rowspan="2">Name</td>
             <td colspan="2">Last review</td>
-        </tr>
+        </tr>--%>
         <tr>
+            <td>Name</td>
             <td>Date</td>
             <td>Feedbacker</td>
         </tr>
