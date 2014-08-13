@@ -79,6 +79,13 @@
                                 </button>
                             </li>
 
+                            <li>
+                                <button formaction="/admin/showUnlink" class="btn">
+                                    <img src="/resources/images/yellow-link.png" class="adminMenuImages">
+                                    <span>Unlink Student</span>
+                                </button>
+                            </li>
+
                         </ul>
                     </li>
 

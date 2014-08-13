@@ -12,6 +12,8 @@
         <intercept-url pattern="/admin/createUser" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/showLinkStudent" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/linkStudent" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/showUnlink" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
+        <intercept-url pattern="/admin/unlink/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/exportWord" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/returnPDF" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />
         <intercept-url pattern="/admin/returnExcel" access="hasAnyRole('ROLE_ADMIN', 'ROLE_WORKER')" />

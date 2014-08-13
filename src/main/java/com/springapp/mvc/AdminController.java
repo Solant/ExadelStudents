@@ -159,9 +159,7 @@ public class AdminController {
                 }
             }
         }
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showLinkStudent";
     }
 
 
@@ -773,9 +771,7 @@ public class AdminController {
         if (tableData == null)
             return "redirect:/admin";
         return "redirect:/admin/formedTable";
-
     }
-
 
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
     public String changeField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
@@ -872,7 +868,6 @@ public class AdminController {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
-
     @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
     public String showDeleteUser(ModelMap modelMap){
         List<User> users = new ArrayList();
@@ -913,7 +908,7 @@ public class AdminController {
         return "unlink";
     }
 
-    @RequestMapping(value = "/curatorsForStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/unlink/curatorsForStudent", method = RequestMethod.GET)
     public
     @ResponseBody
     List<JSONFeedbacker> feedbackersForStudent(@ModelAttribute("student") String student) {
@@ -929,14 +924,14 @@ public class AdminController {
         return feedbackerService.getJSONInterviewersByStudent(student);
     }
 
-    @RequestMapping(value = "/curatedForFeed", method = RequestMethod.GET)
+    @RequestMapping(value = "/unlink/curatedForFeed", method = RequestMethod.GET)
     public
     @ResponseBody
     List<JSONStudent> curatedForFeed(@ModelAttribute("student") String student) {
         return feedbackerService.getJSONSupervisedStudents(student);
     }
 
-    @RequestMapping(value = "/interviewedForFeed", method = RequestMethod.GET)
+    @RequestMapping(value = "/unlink/interviewedForFeed", method = RequestMethod.GET)
     public
     @ResponseBody
     List<JSONStudent> interviewedForFeed(@ModelAttribute("student") String student) {
@@ -953,8 +948,6 @@ public class AdminController {
         for(String feed:unlinkUnit.getInterviewers()){
             feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
         }
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showUnlink";
     }
 }
