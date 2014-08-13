@@ -95,30 +95,28 @@
             <div class="alignCenter">
                 <form:radiobutton path="existingGroup" id="cg" value="yes" onclick="groupVisual()" checked="true"/>
                 <label for="cg">Existing group</label>
-                <form:radiobutton path="existingGroup" id="newg" value="no" onclick="groupVisual()"/>
-                <label for="newg">New Group</label>
-            </div>
-
-            <div class="alignCenter" id="existingGroup">
-
-                <label>Group name</label>
+                <span id="existingGroup">
+                    <label>Group name</label>
                 <form:select path="groupNameExist" name="curGrup" class="addTechField" id="existingGroups">
                     <c:forEach items="${groups}" var="group">
                         <form:option value="${group}">${group}</form:option>
                     </c:forEach>
                 </form:select>
+                </span>
             </div>
+            <div class="alignCenter">
+                <form:radiobutton path="existingGroup" id="newg" value="no" onclick="groupVisual()"/>
+                <label for="newg">New Group</label>
+                <span id="newGroup">
+                <form:input path="groupNameNew" type="text" class="addTechField"/>
 
-            <div class="alignCenter" id="newGroup">
-                <label>New group name</label>
-                <form:input path="groupNameNew" type="text" class="addTechField"/><br/>
-
-                <label for="status">Status (for whom)</label>
+                <label for="status">for status</label>
                 <form:select path="forStatus" id="status" class="addTechField">
-                    <form:option value="WORKING">For working students</form:option>
-                    <form:option value="STUDYING">For studying students</form:option>
-                    <form:option value="for_everybody">For all students</form:option>
+                    <form:option value="WORKING">working students</form:option>
+                    <form:option value="STUDYING">studying students</form:option>
+                    <form:option value="for_everybody">all students</form:option>
                 </form:select>
+                </span>
             </div>
 
             <div class="alignCenter paddingTop borderBottom paddingBottom">
@@ -277,7 +275,7 @@
 
 <script type="text/javascript">
     var remove = {display: "none"}
-    var show = {display: "block"}
+    var show = {display: "inline-block"}
 
     function visual() {
         var values = $('#needOption');

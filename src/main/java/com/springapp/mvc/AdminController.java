@@ -735,7 +735,7 @@ public class AdminController {
         modelMap.addAttribute("groups", groupService.getAllGroups());
         modelMap.addAttribute("techs", technologyService.getAllTechnologies());
         AccountUnit accountUnit = new AccountUnit();
-        modelMap.addAttribute(accountUnit);
+        modelMap.addAttribute("accountUnit", accountUnit);
 
         List<String> attributes = new ArrayList();
         for (GAVPresentation gav : attributeService.getAllAttributes()) {
