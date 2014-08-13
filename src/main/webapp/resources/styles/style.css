@@ -800,6 +800,39 @@ h2, h3 {
     resize: none;
 }
 
+#confirm_password{
+    width: 350px;
+    height: 150px;
+    border-radius: 5px;
+    border: 3px #000 solid;
+    background: #fff;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -250px;
+    display: none;
+    opacity: 0;
+    z-index: 8;
+    padding: 20px 10px;
+}
+
+.confPassInput{
+    margin-bottom: 10px;
+}
+
+#confirm_password #modal_close {
+    width: 31px;
+    height: 41px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    display: block;
+    color: rgb(162, 17, 17);
+    font-size:22px;
+}
+
 /*end of create notification props*/
 
 /*add field and technology props*/
