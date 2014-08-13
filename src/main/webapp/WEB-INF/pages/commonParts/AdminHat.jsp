@@ -71,7 +71,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <button formaction="/admin/returnCreate" class="btn">
+                                        <button formaction="/admin/showAddUser" class="btn">
                                             <span>User</span>
                                         </button>
                                     </li>

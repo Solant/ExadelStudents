@@ -752,6 +752,7 @@ h2, h3 {
 .createNotificationForm {
     width: 650px;
     text-align: center;
+    margin-top: 10px;
 }
 
 .leftList {
@@ -860,6 +861,10 @@ h2, h3 {
 
 #newGroup {
     display: none;
+}
+
+#user form{
+
 }
 
 /*end of add field and technology props*/

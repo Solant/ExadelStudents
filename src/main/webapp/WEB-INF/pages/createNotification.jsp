@@ -11,9 +11,23 @@
 <body>
 
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
+<ul class="nav nav-tabs" role="tablist">
+    <li >
+        <a href="/admin/showAddUser">User</a>
+    </li>
+    <li>
+        <a href="/admin/showAddField/true">Field</a>
+    </li>
+    <li>
+        <a href="/admin/showAddField/false">Technology</a>
+    </li>
+    <li class="active">
+        <a href="/admin/createNotif" role="tab" data-toggle="tab">Notification</a>
+    </li>
+</ul>
 
 <form:form commandName="createNotifUnit" action="/admin/sendNotif" method="post" class="createNotificationForm">
-
+<h1>Create notification form</h1>
     <div class="leftList">
         <form:checkbox path="forStudents" id="students"/>
         <label for="students">All students: </label><br/>
