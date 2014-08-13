@@ -92,10 +92,13 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    getNumberOfNotifications();
+    if ($(document).find("title").text() == 'Login')
+        return;
+    setInterval(getNumberOfNotifications, 5000);
 })
 
 function getNumberOfNotifications(){
+
     var numberOfNotifications = $('#numberOfNotifications');
     var src = "/notif/update";
 
@@ -108,7 +111,6 @@ function getNumberOfNotifications(){
             numberOfNotifications.empty();
             numberOfNotifications.append(data.toString());
         }
-        setTimeout(getNumberOfNotifications, 5000);
     });
 }
 
