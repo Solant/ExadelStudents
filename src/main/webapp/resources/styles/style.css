@@ -894,7 +894,7 @@ h2, h3 {
 }
 
 #existingGroup {
-    display: block;
+    display: inline-block;
 }
 
 #newGroup {
