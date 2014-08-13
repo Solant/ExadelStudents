@@ -166,8 +166,8 @@
                     <li>
                         <a href="/notif">
                             <div class="message">
-                            <span id="numberOfNotifications" class="disappear">
-                            </span>
+                                <span id="numberOfNotifications" class="disappear">
+                                </span>
                             </div>
                         </a>
                     </li>
