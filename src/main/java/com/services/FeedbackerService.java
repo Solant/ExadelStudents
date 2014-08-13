@@ -31,6 +31,14 @@ public class FeedbackerService {
     private StudentDao studentDao;
 
     @Transactional
+    public Feedbacker getFeedbackerByLoginWithTechs(String login){
+        Feedbacker feedbacker = feedbackerDao.findByLogin(login);
+        feedbacker.getMyTechnologies().size();
+        return feedbacker;
+    }
+
+
+    @Transactional
     public Feedbacker getFeedbackerByLogin(String login){
         return feedbackerDao.findByLogin(login);
     }
