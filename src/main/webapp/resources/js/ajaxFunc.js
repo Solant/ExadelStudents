@@ -203,3 +203,24 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function(){
+    $('select').each(function(index){
+        var options = $(this).find('option');
+        options.sort(function(a,b){
+            return a.value.localeCompare(b.value);
+        });
+        $(this).html(options);
+    });
+});
+
+$(document).ready(function(){
+    if (localStorage.getItem('message').toString() != 'null') {
+        alert(localStorage.getItem('message'));
+        localStorage.setItem('message', 'null');
+    }
+    $('.blue').on('click', function() {
+        if($(this).attr('value') != 'Login' && $(this).text() != 'Form table')
+            localStorage.setItem('message', 'Saved');
+    });
+});
