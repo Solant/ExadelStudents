@@ -167,6 +167,9 @@ public class CuratorController {
 
     @RequestMapping("/chooseTech")
     public String chooseTech(@ModelAttribute("chooseTechUnit")ChooseTechUnit chooseTechUnit){
+        feedbackerService.removeAllTechs(UserService.getCurrentUserLogin());
+        if(chooseTechUnit.getMyTechs() == null)
+            return "redirect:/curator";
         for(String tech:chooseTechUnit.getMyTechs()){
             System.out.println(tech);
             feedbackerService.addTechnology(UserService.getCurrentUserLogin(), tech);

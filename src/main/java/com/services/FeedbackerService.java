@@ -8,7 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.FeedbackerDao;
 import persistance.dao.StudentDao;
 import persistance.dao.TechnologyDao;
-import persistance.model.*;
+import persistance.model.Feedbacker;
+import persistance.model.Student;
+import persistance.model.Technology;
+import persistance.model.UserRole;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -241,6 +244,13 @@ public class FeedbackerService {
             }
             feedbacker.setInterviewedStudents(students);
         }
+        feedbackerDao.update(feedbacker);
+    }
+
+    @Transactional
+    public void removeAllTechs(String login){
+        Feedbacker feedbacker = feedbackerDao.findByLogin(login);
+        feedbacker.setMyTechnologies(new HashSet<Technology>());
         feedbackerDao.update(feedbacker);
     }
 }
