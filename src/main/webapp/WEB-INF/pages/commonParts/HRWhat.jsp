@@ -66,7 +66,7 @@
                         <ul class="dropdown-menu" role="menu">
 
                             <li >
-                                <button formaction="/admin/returnCreate" class="btn">
+                                <button formaction="/admin/showAddUser" class="btn">
                                     <img src="/resources/images/add.png" class="adminMenuImages">
                                     <span>Add User</span>
                                 </button>
@@ -81,11 +81,10 @@
 
                             <li>
                                 <button formaction="/admin/showUnlink" class="btn">
-                                    <img src="/resources/images/yellow-link.png" class="adminMenuImages">
+                                    <img src="/resources/images/yellow-unlink.png" class="adminMenuImages">
                                     <span>Unlink Student</span>
                                 </button>
                             </li>
-
                         </ul>
                     </li>
 

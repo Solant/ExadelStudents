@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <!DOCTYPE html>
-
 <html>
 <head lang="en">
     <title>Create Letter</title>
@@ -10,6 +8,20 @@
 </head>
 <body>
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
+<ul class="nav nav-tabs" role="tablist">
+    <li >
+        <a href="/admin/showAddUser">User</a>
+    </li>
+    <li>
+        <a href="/admin/showAddField/true">Field</a>
+    </li>
+    <li>
+        <a href="/admin/showAddField/false">Technology</a>
+    </li>
+    <li class="active">
+        <a href="/admin/createNotif" role="tab" data-toggle="tab">Notification</a>
+    </li>
+</ul>
 <form:form commandName="createNotifUnit" action="/admin/sendNotif" method="post" class="createNotificationForm">
 
     <div class="leftList">
@@ -99,6 +111,4 @@
     }
 </script>
 </body>
-
-
 </html>

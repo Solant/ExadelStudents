@@ -1,5 +1,6 @@
 package com.springapp.mvc;
 
+
 import com.forView.*;
 import com.forView.Group;
 import com.forView.validators.AccountFormValidator;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import persistance.model.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +29,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Created by Надя on 16.07.2014.
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -79,7 +84,7 @@ public class AdminController {
 
         List<GAVPresentation> internal;
         ArrayList<String> groups = new ArrayList<String>();
-        for (; gav.size() > 0; ) {
+        for (int j = 0; gav.size() > 0; j++) {
             internal = new ArrayList<GAVPresentation>();
             GAVPresentation temp = gav.remove(0);
             internal.add(temp);
@@ -99,30 +104,28 @@ public class AdminController {
         return "admin";
     }
 
-    @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
-    public String returnCreate(ModelMap model) {
+    @RequestMapping(value = "/showAddUser", method = RequestMethod.GET)
+    public String showAddUser(ModelMap model) {
         model.addAttribute("newUser", new UserUnit());
+        model.addAttribute("isField", "user");
         return "create";
     }
 
-    @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public String createUser(ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser, BindingResult result) {
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public String addUser(ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser, BindingResult result) {
         userFormValidator.validate(newUser, result);
         if (result.hasErrors())
             return "create";
         else {
-            if (newUser.getRole().equals("Student"))
+            if (newUser.getRole().toString().equals("Student"))
                 studentService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname(), "STUDYING");
-            if (newUser.getRole().equals("Feedbacker"))
+            if (newUser.getRole().toString().equals("Feedbacker"))
                 feedbackerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-            if (newUser.getRole().equals("HRWorker"))
+            if (newUser.getRole().toString().equals("HRWorker"))
                 hrWorkerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-            if (newUser.getRole().equals("Admin"))
+            if (newUser.getRole().toString().equals("Admin"))
                 administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-            if (tableData == null)
-                return "redirect:/admin";
-            modelMap.addAttribute("tableData", tableData);
-            return "redirect:/";
+            return "redirect:/admin/showAddUser";
         }
     }
 
@@ -140,7 +143,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/linkStudent", method = RequestMethod.POST)
-    public String linkStudentCurator(@ModelAttribute("linkUnit") LinkUnit linkUnit/*, ModelMap modelMap*/) {
+    public String linkStudentCurator(@ModelAttribute("linkUnit") LinkUnit linkUnit, ModelMap modelMap) {
         if (linkUnit.isCurator()) {
             for (String student : linkUnit.getStudents()) {
                 for (String feed : linkUnit.getFeedbackers()) {
@@ -159,7 +162,9 @@ public class AdminController {
 
 
     @RequestMapping(value = "/formTable", method = RequestMethod.POST)
-    public String formTable(ModelMap modelMap, @ModelAttribute("groupedValues") GroupedValues groupedValues) {
+    public String formTable(ModelMap modelMap,
+                            ModelAndView modelAndView,
+                            @ModelAttribute("groupedValues") GroupedValues groupedValues) {
         ArrayList<GAVPresentation> values = new ArrayList<GAVPresentation>();
         for (Group group : groupedValues.getValuesArray())
             values.addAll(group.getGavs());
@@ -256,7 +261,7 @@ public class AdminController {
 
         List<GAVPresentation> internal;
         ArrayList<String> groups = new ArrayList<String>();
-        for (; gav.size() > 0; ) {
+        for (int j = 0; gav.size() > 0; j++) {
             internal = new ArrayList<GAVPresentation>();
             GAVPresentation temp = gav.remove(0);
             internal.add(temp);
@@ -567,7 +572,7 @@ public class AdminController {
                 }
             }
         }
-        return "redirect:/admin";
+        return "redirect:/admin/createNotif";
     }
 
     @RequestMapping("studentPage/{student}/notif")
@@ -589,7 +594,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/addField", method = RequestMethod.POST)
-    public String addField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit) {
+    public String addField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
         String groupName;
         CreateNotifUnit createNotifUnit = new CreateNotifUnit();
         if (addFieldUnit.isExistingGroup()) {
@@ -654,35 +659,30 @@ public class AdminController {
             createNotifUnit.setForStudents(true);
         }
         sendNotif(createNotifUnit);
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showAddField/true";
     }
 
     @RequestMapping(value = "/addTechnology", method = RequestMethod.POST)
     public String addTechnology(ModelMap modelMap, @ModelAttribute("newTech") String newTech) {
         technologyService.add(newTech);
-        if (tableData == null)
-            return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/showAddField/false";
     }
 
     @RequestMapping("/disable")
-    public String disableStudent(@ModelAttribute("reason") String reason, @ModelAttribute("studentNumber") int index) {
-        List<GAVPresentation> forReason = new ArrayList<GAVPresentation>();
+    public String disableStudent(@ModelAttribute("reason") String reason, @ModelAttribute("studentNumber") int index, ModelMap modelMap) {
+        List <GAVPresentation> forReason = new ArrayList<GAVPresentation>();
         GAVPresentation reasonGAV = new GAVPresentation();
         reasonGAV.setAttribute("reasonWhyDeleted");
         reasonGAV.setValue(reason);
         forReason.add(reasonGAV);
         studentService.setValues(tableData.get(index).get(1), forReason);
         studentService.disable(tableData.get(index).get(1));
-        tableData.remove(index);
+        tableData.remove((int) index);
         return "redirect:/admin/formedTable";
     }
 
     @RequestMapping("/{student}/enable")
-    public String enableStudent(@PathVariable("student") Integer index) {
+    public String enableStudent(@PathVariable("student") Integer index, ModelMap modelMap) {
         studentService.enable(tableData.get(index).get(1));
         tableData.remove((int) index);
         return "redirect:/admin/formedTable";
@@ -696,7 +696,9 @@ public class AdminController {
     }
 
     @RequestMapping("/showFeedback/{student}/{revId}")
-    public String showStudentFeedback(@PathVariable("revId") Long revId, ModelMap modelMap) {
+    public String showStudentFeedback(@PathVariable("student") String student,
+                                      @PathVariable("revId") Long revId,
+                                      ModelMap modelMap) {
         Review review = reviewService.getReviewById(revId);
         modelMap.addAttribute("review", review);
         if (review.getRatings() == null || review.getRatings().size() == 0)
@@ -732,8 +734,10 @@ public class AdminController {
         modelMap.addAttribute("addFieldUnit", addFieldUnit);
         modelMap.addAttribute("groups", groupService.getAllGroups());
         modelMap.addAttribute("techs", technologyService.getAllTechnologies());
+        AccountUnit accountUnit = new AccountUnit();
+        modelMap.addAttribute("accountUnit", accountUnit);
 
-        List<String> attributes = new ArrayList<String>();
+        List<String> attributes = new ArrayList();
         for (GAVPresentation gav : attributeService.getAllAttributes()) {
             attributes.add(gav.getAttribute());
         }
@@ -752,7 +756,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
-    public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit) {
+    public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
         if (addFieldUnit.getOldFieldName() != null) {
             attributeService.removeAttribute(addFieldUnit.getOldFieldName());
         }
@@ -763,7 +767,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
-    public String changeField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit) {
+    public String changeField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
 
         if (addFieldUnit.getOldFieldName() != null) {
 
@@ -813,7 +817,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/deleteGroup", method = RequestMethod.POST)
-    public String deleteGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit) {
+    public String deleteGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit, ModelMap modelMap) {
         if (changeGroupUnit.getOldGroupName() != null) {
             groupService.deleteGroup(changeGroupUnit.getOldGroupName());
 
@@ -826,7 +830,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/changeGroup", method = RequestMethod.POST)
-    public String changeGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit) {
+    public String changeGroup(@ModelAttribute("changeGroupUnit") ChangeGroupUnit changeGroupUnit, ModelMap modelMap) {
         if (changeGroupUnit.getOldGroupName() != null) {
             String newGroupName = changeGroupUnit.getNewGroupName();
             if (newGroupName == null)
@@ -847,56 +851,61 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    JSONField showField(@ModelAttribute("field") String fieldName) {
+    public @ResponseBody JSONField showField(@ModelAttribute("field") String fieldName) {
         return attributeService.getJSONField(fieldName);
     }
 
 
     @RequestMapping(value = "/showGroup", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    String showGroup(@ModelAttribute("group") String groupName) {
+    public @ResponseBody String showGroup(@ModelAttribute("group") String groupName) {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
-    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
-    public String showDeleteUser(ModelMap modelMap) {
-        List<User> users = new ArrayList<User>();
-        users.addAll(studentService.getAllDisabledStudents());
-        users.addAll(studentService.getAllEnabledStudents());
-       /* List<String> userNames = new ArrayList<String>();
-        for(User user: users){
-            userNames.add(user.getSecondName() + " " + user.getSecondName() + " (" + user.getLogin() + ")");
-        }*/
-        modelMap.addAttribute("users", users);
-
-        return "deleteUser";
+    @RequestMapping(value = "/changeUser", method = RequestMethod.POST)
+    public String changeUser(@ModelAttribute("accountUnit") AccountUnit accountUnit, @ModelAttribute("userLogin") String login){
+        if(accountUnit.getLogin()!=null){
+            if(!accountUnit.getLogin().trim().equals("")){
+                User user = userService.getByLogin(login);
+                user.setLogin(accountUnit.getLogin());
+                user.setFirstName(accountUnit.getFirstName());
+                user.setSecondName(accountUnit.getSecondName());
+                if(accountUnit.getPassword()!=null)
+                    if(!accountUnit.getPassword().trim().equals(""))
+                        user.setPassword(UserService.stringToSha256(accountUnit.getPassword()));
+                userService.update(user);
+            }
+        }
+        return "redirect:/admin/showChangeField/user";
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public String deleteUser(@ModelAttribute("userLogin") String userLogin) {
-        if (userLogin != null) {
-            if (!userLogin.equals("")) {
+    public String deleteUser(@ModelAttribute("userLogin") String userLogin){
+        if(userLogin!=null){
+            if(!userLogin.equals("")){
                 userService.delete(userLogin);
             }
         }
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/user";
     }
 
 
-    @RequestMapping(value = "/showUsersToDelete", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
+    @RequestMapping(value = "/showUsersToChange", method = RequestMethod.GET)
+    public @ResponseBody List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
         return userService.getAllWithRole(role);
     }
 
+    @RequestMapping(value = "/showChosenUser", method = RequestMethod.GET)
+    public @ResponseBody JSONUser showChosenUser(@ModelAttribute("login") String login) {
+        User user = userService.getByLogin(login);
+        JSONUser jsonUser = new JSONUser();
+        jsonUser.setFirstName(user.getFirstName());
+        jsonUser.setSecondName(user.getSecondName());
+        jsonUser.setLogin(user.getLogin());
+        return jsonUser;
+    }
+
     @RequestMapping("/showUnlink")
-    public String showUnlink(ModelMap modelMap) {
+    public String showUnlink(ModelMap modelMap){
         modelMap.addAttribute("students", studentService.getAllEnabledStudents());
         modelMap.addAttribute("feeds", feedbackerService.getAllFeedbackers());
         modelMap.addAttribute("unlinkUnit", new UnlinkUnit());
@@ -911,7 +920,7 @@ public class AdminController {
         return feedbackerService.getJSONCuratorsByStudent(student);
     }
 
-    @RequestMapping(value = "/interviewersForStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/unlink/interviewersForStudent", method = RequestMethod.GET)
     public
     @ResponseBody
     List<JSONFeedbacker> interviewersForStudent(@ModelAttribute("student") String student) {
@@ -934,15 +943,29 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/unlink", method = RequestMethod.POST)
-    public String unlink(@ModelAttribute("unlinkUnit") UnlinkUnit unlinkUnit) {
-        if (unlinkUnit.getCurators() != null)
-            for (String feed : unlinkUnit.getCurators()) {
-                feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
-            }
-        if (unlinkUnit.getInterviewers() != null)
-            for (String feed : unlinkUnit.getInterviewers()) {
-                feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
-            }
+    public String unlink(@ModelAttribute("unlinkUnit")UnlinkUnit unlinkUnit){
+        if(unlinkUnit.getCurators() != null)
+        for(String feed:unlinkUnit.getCurators()){
+            feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
+        }
+        if(unlinkUnit.getInterviewers() != null)
+        for(String feed:unlinkUnit.getInterviewers()){
+            feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
+        }
         return "redirect:/admin/showUnlink";
+    }
+
+
+    @RequestMapping(value = "/deleteTechnology", method = RequestMethod.POST)
+    public String deleteTechnology(@ModelAttribute("oldTechName") String oldTechName, ModelMap modelMap) {
+        if (oldTechName != null) {
+            if(!oldTechName.equals(""))
+                technologyService.remove(oldTechName);
+        }
+
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+
     }
 }
