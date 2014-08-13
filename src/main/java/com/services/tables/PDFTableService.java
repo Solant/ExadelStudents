@@ -61,11 +61,13 @@ public class PDFTableService {
         table = new PdfPTable(numberOfColumns);
 
         numberOfCell = 0;
-        numberOfColumns = numberOfColumns;
+        this.numberOfColumns = numberOfColumns;
     }
 
     public void addNewCell(String value) {
         PdfPCell cell = new PdfPCell();
+        if(value == null)
+            value = " ";
         cell.setPhrase(Phrase.getInstance(value));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         if (numberOfCell < numberOfColumns) {
