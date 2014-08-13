@@ -18,7 +18,7 @@
             <form method="get">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <button formaction="/curator/myStudents" type="submit" class="btn <c:if test="${feedbackerRole=='asCurator'}">btnActive</c:if>">
+                        <button formaction="/curator/myStudents" type="submit" class="btn <c:if test="${feedbackerRole=='asCurator'}">btnActive</c:if>" id="myStudents">
                         <span>My Students</span>
                         </button>
                     </li>
@@ -28,7 +28,7 @@
                         </button>
                     </li>
                     <li>
-                        <button formaction="/curator/showChooseTech" type="submit" class="btn <c:if test="${feedbackerRole=='asInterviewer'}">btnActive</c:if>">
+                        <button formaction="/curator/showChooseTech" type="submit" class="btn <c:if test="${feedbackerRole=='myTechs'}">btnActive</c:if>">
                             <span>My technologies</span>
                         </button>
                     </li>
@@ -59,3 +59,4 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+

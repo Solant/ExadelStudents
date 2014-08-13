@@ -92,8 +92,8 @@
         </div>
 
         <div class="alignCenter">
-            <button type="submit" class="loginAndCreateButton">Save</button>
-            <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
+            <button class="gray" onclick="history.back(); return false;">Cancel</button>
+            <button type="submit" class="blue">Save</button>
         </div>
 
 </form:form>

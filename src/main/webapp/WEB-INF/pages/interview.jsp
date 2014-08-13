@@ -69,8 +69,8 @@
     <div class="alignCenter">
         <label for="other">Other:</label><br/>
         <form:textarea path="comment" name="other" id="other" cols="30" rows="10" class="textOther"/>
-        <button type="submit" class="loginAndCreateButton">Save</button>
-        <button class="loginAndCreateButton" onclick="history.back(); return false;">Cancel</button>
+        <button type="submit" class="blue">Save</button>
+        <button class="gray" onclick="history.back(); return false;">Cancel</button>
     </div>
 
 </form:form>

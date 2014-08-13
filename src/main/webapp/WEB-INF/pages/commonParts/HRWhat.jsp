@@ -66,7 +66,7 @@
                         <ul class="dropdown-menu" role="menu">
 
                             <li >
-                                <button formaction="/admin/returnCreate" class="btn">
+                                <button formaction="/admin/showAddUser" class="btn">
                                     <img src="/resources/images/add.png" class="adminMenuImages">
                                     <span>Add User</span>
                                 </button>

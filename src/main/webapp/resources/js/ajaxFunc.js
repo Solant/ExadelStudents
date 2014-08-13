@@ -177,11 +177,12 @@ $(document).ready(function () {
         }
     )
 });
-/* -- DO NOT DELETE, SRC FOR OMG JS --
-$(document).ready(function () {
 
+$(document).ready(function () {
     $('input').on('input', function(){
         var edited = $(this);
+        if (edited.attr('id') == 'search' || $('.group').size() == 0)
+            return;
         var submit = edited.closest('form').find(':submit');
         //var attrId = edited.attr('id');
         attrId = edited.attr('id').replace('\.value', '.attribute');
@@ -191,15 +192,16 @@ $(document).ready(function () {
             var regexp = new RegExp(data, 'g');
             if (!regexp.test(edited.val())) {
                 edited.css('border-color', 'red');
+                edited.css('outline-color', 'red');
                 submit.attr('disabled', 'disabled');
                 submit.css('opacity', '0.5');
             }
             else {
                 edited.css('border-color', '');
+                edited.css('outline-color', '');
                 submit.removeAttr('disabled');
                 submit.css('opacity', '1');
             }
         });
     });
 });
-*/

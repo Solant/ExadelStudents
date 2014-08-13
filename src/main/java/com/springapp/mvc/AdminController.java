@@ -104,14 +104,15 @@ public class AdminController {
         return "admin";
     }
 
-    @RequestMapping(value = "/returnCreate", method = RequestMethod.GET)
-    public String returnCreate(ModelMap model) {
+    @RequestMapping(value = "/showAddUser", method = RequestMethod.GET)
+    public String showAddUser(ModelMap model) {
         model.addAttribute("newUser", new UserUnit());
+        model.addAttribute("isField", "user");
         return "create";
     }
 
-    @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public String createUser(ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser, BindingResult result) {
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public String addUser(ModelMap modelMap, @Valid @ModelAttribute("newUser") UserUnit newUser, BindingResult result) {
         userFormValidator.validate(newUser, result);
         if (result.hasErrors())
             return "create";
@@ -124,10 +125,7 @@ public class AdminController {
                 hrWorkerService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
             if (newUser.getRole().toString().equals("Admin"))
                 administratorService.add(newUser.getLogin(), newUser.getPassword(), newUser.getFirstname(), newUser.getLastname());
-            if (tableData == null)
-                return "redirect:/admin";
-            modelMap.addAttribute("tableData", tableData);
-            return "redirect:/";
+            return "redirect:/admin/showAddUser";
         }
     }
 
@@ -511,15 +509,17 @@ public class AdminController {
     public String sendNotif(@ModelAttribute("createNotifUnit") CreateNotifUnit createNotifUnit) {
         String title = createNotifUnit.getTitle();
         String text = createNotifUnit.getText();
+        String password = createNotifUnit.getPassword();
         String current;
         if (createNotifUnit.getSender() == null)
             current = UserService.getCurrentUserLogin();
         else
             current = createNotifUnit.getSender();
+        String fromEmail = userService.getByLogin(current).getEmail();
         if (createNotifUnit.isForStudents()) {
             for (Student student : studentService.getAllEnabledStudents()) {
                 notificationService.add(current, student.getLogin(), title, text);
-                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                 mailService.setEmail(userService.getByLogin(student.getLogin()).getEmail());
                 Thread t = new Thread(mailService);
                 t.start();
@@ -528,7 +528,7 @@ public class AdminController {
             if (createNotifUnit.getStudents() != null)
                 for (String student : createNotifUnit.getStudents()) {
                     notificationService.add(current, student, title, text);
-                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                     mailService.setEmail(userService.getByLogin(student).getEmail());
                     Thread t = new Thread(mailService);
                     t.start();
@@ -537,8 +537,7 @@ public class AdminController {
         if (createNotifUnit.isForFeedbackers()) {
             for (Feedbacker feed : feedbackerService.getAllFeedbackers()) {
                 notificationService.add(current, feed.getLogin(), title, text);
-                //mailService.send(title, text, );
-                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                 mailService.setEmail(userService.getByLogin(feed.getLogin()).getEmail());
                 Thread t = new Thread(mailService);
                 t.start();
@@ -547,8 +546,7 @@ public class AdminController {
             if (createNotifUnit.getFeedbackers() != null)
                 for (String feed : createNotifUnit.getFeedbackers()) {
                     notificationService.add(current, feed, title, text);
-                    //mailService.send(title, text, );
-                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                     mailService.setEmail(userService.getByLogin(feed).getEmail());
                     Thread t = new Thread(mailService);
                     t.start();
@@ -557,8 +555,7 @@ public class AdminController {
         if (createNotifUnit.isForWorkers()) {
             for (HRWorker worker : hrWorkerService.getAllHRWorkers()) {
                 notificationService.add(current, worker.getLogin(), title, text);
-                //mailService.send(title, text, );
-                MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                 mailService.setEmail(userService.getByLogin(worker.getLogin()).getEmail());
                 Thread t = new Thread(mailService);
                 t.start();
@@ -568,15 +565,14 @@ public class AdminController {
             if (createNotifUnit.getFeedbackers() != null) {
                 for (String worker : createNotifUnit.getWorkers()) {
                     notificationService.add(current, worker, title, text);
-                    //mailService.send(title, text, userService.getByLogin(worker).getEmail());
-                    MailService mailService = new MailService("exadelt@gmail.com", "petuhanWasya", "exadelt@gmail.com", title, text);
+                    MailService mailService = new MailService(fromEmail, password, fromEmail, title, text);
                     mailService.setEmail(userService.getByLogin(worker).getEmail());
                     Thread t = new Thread(mailService);
                     t.start();
                 }
             }
         }
-        return "redirect:/admin";
+        return "redirect:/admin/createNotif";
     }
 
     @RequestMapping("studentPage/{student}/notif")
@@ -663,18 +659,13 @@ public class AdminController {
             createNotifUnit.setForStudents(true);
         }
         sendNotif(createNotifUnit);
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showAddField/true";
     }
 
     @RequestMapping(value = "/addTechnology", method = RequestMethod.POST)
     public String addTechnology(ModelMap modelMap, @ModelAttribute("newTech") String newTech) {
         technologyService.add(newTech);
-        if (tableData == null)
-            return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/showAddField/false";
     }
 
     @RequestMapping("/disable")
