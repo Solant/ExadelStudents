@@ -916,7 +916,7 @@ public class AdminController {
         return feedbackerService.getJSONCuratorsByStudent(student);
     }
 
-    @RequestMapping(value = "/unlink/interviewersForStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/interviewersForStudent", method = RequestMethod.GET)
     public
     @ResponseBody
     List<JSONFeedbacker> interviewersForStudent(@ModelAttribute("student") String student) {
