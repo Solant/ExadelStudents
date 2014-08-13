@@ -1,10 +1,12 @@
 package com.services;
 
 import com.forView.JSONFeedbacker;
+import com.forView.JSONStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persistance.dao.FeedbackerDao;
+import persistance.dao.StudentDao;
 import persistance.dao.TechnologyDao;
 import persistance.model.*;
 
@@ -24,6 +26,9 @@ public class FeedbackerService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private StudentDao studentDao;
 
     @Transactional
     public Feedbacker getFeedbackerByLogin(String login){
@@ -119,6 +124,7 @@ public class FeedbackerService {
             for(Feedbacker f : getAllFeedbackers()) {
                 JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
                 jsonFeedbacker.setSecondName(f.getSecondName());
+                jsonFeedbacker.setFirstName(f.getFirstName());
                 jsonFeedbacker.setLogin(f.getLogin());
                 jsonFeedbackers.add(jsonFeedbacker);
             }
@@ -127,11 +133,106 @@ public class FeedbackerService {
                 for(Feedbacker f : getFeedbackersByTechnology(technologyName)) {
                     JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
                     jsonFeedbacker.setSecondName(f.getSecondName());
+                    jsonFeedbacker.setFirstName(f.getFirstName());
                     jsonFeedbacker.setLogin(f.getLogin());
                     jsonFeedbackers.add(jsonFeedbacker);
                 }
         }
         return jsonFeedbackers;
 
+    }
+
+    @Transactional
+    public Set<Feedbacker> getCuratorsByStudent(String studentLogin){
+        return studentDao.findByLogin(studentLogin).getCurators();
+    }
+
+    @Transactional
+    public List<JSONFeedbacker> getJSONCuratorsByStudent(String studentLogin){
+        List<JSONFeedbacker> jsonFeedbackers = new ArrayList();
+        for(Feedbacker f : getCuratorsByStudent(studentLogin)) {
+                JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
+                jsonFeedbacker.setSecondName(f.getSecondName());
+                jsonFeedbacker.setFirstName(f.getFirstName());
+                jsonFeedbacker.setLogin(f.getLogin());
+                jsonFeedbackers.add(jsonFeedbacker);
+            }
+        return jsonFeedbackers;
+    }
+    @Transactional
+    public Set<Feedbacker> getInterviewersByStudent(String studentLogin){
+        return studentDao.findByLogin(studentLogin).getInterviewers();
+    }
+
+    @Transactional
+    public List<JSONFeedbacker> getJSONInterviewersByStudent(String studentLogin){
+        List<JSONFeedbacker> jsonFeedbackers = new ArrayList();
+        for(Feedbacker f : getInterviewersByStudent(studentLogin)) {
+            JSONFeedbacker jsonFeedbacker = new JSONFeedbacker();
+            jsonFeedbacker.setSecondName(f.getSecondName());
+            jsonFeedbacker.setFirstName(f.getFirstName());
+            jsonFeedbacker.setLogin(f.getLogin());
+            jsonFeedbackers.add(jsonFeedbacker);
+        }
+        return jsonFeedbackers;
+    }
+
+    @Transactional
+    public List<JSONStudent> getJSONSupervisedStudents(String feedbackerLogin) {
+        List<JSONStudent> jsonStudents = new ArrayList<JSONStudent>();
+        for(Student student:getSupervisedStudents(feedbackerLogin)){
+            JSONStudent jsonStudent = new JSONStudent();
+            jsonStudent.setSecondName(student.getSecondName());
+            jsonStudent.setFirstName(student.getFirstName());
+            jsonStudent.setLogin(student.getLogin());
+            jsonStudents.add(jsonStudent);
+        }
+        return jsonStudents;
+    }
+
+    @Transactional
+    public List<JSONStudent> getJSONInterviewedStudents(String feedbackerLogin) {
+        List<JSONStudent> jsonStudents = new ArrayList<JSONStudent>();
+        for(Student student:getInterviewedStudents(feedbackerLogin)){
+            JSONStudent jsonStudent = new JSONStudent();
+            jsonStudent.setSecondName(student.getSecondName());
+            jsonStudent.setFirstName(student.getFirstName());
+            jsonStudent.setLogin(student.getLogin());
+            jsonStudents.add(jsonStudent);
+        }
+        return jsonStudents;
+    }
+
+    @Transactional
+    public void unlink(String login1, String login2, boolean isCurator){
+        Set<Student> students = new HashSet<Student>();
+        Feedbacker feedbacker;String feedLogin;
+        String studentLogin;
+        if((feedbacker = feedbackerDao.findByLogin(login1)) != null){
+            feedLogin = login1;
+            studentLogin = login2;
+        }
+        else{
+            feedbacker = feedbackerDao.findByLogin(login2);
+            feedLogin = login2;
+            studentLogin = login1;
+        }
+        if(isCurator) {
+            for(Student student: feedbacker.getMyStudents()){
+                if(!student.getLogin().equals(studentLogin)){
+                    students.add(student);
+                }
+            }
+            feedbacker.setMyStudents(students);
+        }
+        else{
+            for(Student student:feedbacker.getInterviewedStudents()){
+                if(!student.getLogin().equals(studentLogin)){
+                    students.add(student);
+                }
+            }
+            feedbacker.setInterviewedStudents(students);
+        }
+        feedbackerDao.update(feedbacker);
     }
 }

@@ -5,7 +5,16 @@ package com.forView;
  */
 public class JSONFeedbacker {
     private String secondName;
+    private String firstName;
     private String login;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
     public String getSecondName() {
         return secondName;

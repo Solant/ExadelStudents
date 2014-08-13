@@ -37,11 +37,11 @@
         <td>Subject</td>
         <td>Sender</td>
         <td class="sorting_desc">Date when sent</td>
-        <c:if test="${role == 'ADMIN' || role=='WORKER'}">
+        <sec:authorize access="hasAnyRole('ROLE_WORKER', 'ROLE_ADMIN')">
             <td>
                 Date when read
             </td>
-        </c:if>
+        </sec:authorize>
 
         </thead>
         <tbody>
@@ -57,11 +57,13 @@
                     ${sdf.format(notif.timeWhenSent.time)}
                 </td>
 
-                <c:if test="${role == 'ADMIN'|| role=='WORKER'}">
+                <sec:authorize access="hasAnyRole('ROLE_WORKER', 'ROLE_ADMIN')">
                     <td>
+                        <c:if test="${notif.timeWhenRead!=null}">
                             ${sdf.format(notif.timeWhenRead.time)}
+                        </c:if>
                     </td>
-                </c:if>
+                </sec:authorize>
             </tr>
         </c:forEach>
 

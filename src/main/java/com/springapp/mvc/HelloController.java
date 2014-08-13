@@ -93,7 +93,8 @@ public class HelloController {
     @RequestMapping(value = "/notif/{notifId}", method = RequestMethod.GET)
     public String showNotif(ModelMap modelMap, @PathVariable("notifId")Long id){
         Notification notification = notificationService.getNotificationById(id);
-        notificationService.setRead(id);
+        if(notification.getUser().getLogin().equals(UserService.getCurrentUserLogin()))
+            notificationService.setRead(id);
         notification.setText(notification.getText().replaceAll("\n", "<br>"));
         System.out.println(notification.getText());
         modelMap.addAttribute("notif", notification);

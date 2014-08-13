@@ -137,33 +137,10 @@ public class AdminController {
         LinkUnit linkUnit = new LinkUnit();
         linkUnit.setCurator(true);
 
-        List<String> studentNames = new ArrayList();
-        List<String> studentLogins = new ArrayList();
-        for (Student s : studentService.getAllEnabledStudents()) {
-            studentNames.add(s.getSecondName() + " " + s.getFirstName());
-            studentLogins.add(s.getLogin());
-        }
-
-        List<String> feedNames = new ArrayList();
-        List<String> feedLogins = new ArrayList();
-        for (Feedbacker feed : feedbackerService.getAllFeedbackers()) {
-            feedNames.add(feed.getSecondName() + " " + feed.getFirstName());
-            feedLogins.add(feed.getLogin());
-        }
-
-        List<Technology> technologies = technologyService.getAllTechnologies();
-        List<String> technologyNames = new ArrayList();
-        for (Technology t : technologies) {
-            technologyNames.add(t.getTechnologyName());
-
-        }
-
-        modelMap.addAttribute("students", studentNames);
-        modelMap.addAttribute("feedbackers", feedNames);
-        modelMap.addAttribute("feedLogins", feedLogins);
-        modelMap.addAttribute("studentLogins", studentLogins);
-        modelMap.addAttribute("technologies", technologyNames);
         modelMap.addAttribute("linkUnit", linkUnit);
+        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
+        modelMap.addAttribute("feedbackers", feedbackerService.getAllFeedbackers());
+        modelMap.addAttribute("technologies", technologyService.getAllTechnologies());
         return "linking";
     }
 
@@ -184,8 +161,7 @@ public class AdminController {
         }
         if (tableData == null)
             return "redirect:/admin";
-        modelMap.addAttribute("tableData", tableData);
-        return "adminTable";
+        return "redirect:/admin/formedTable";
     }
 
 
@@ -779,14 +755,6 @@ public class AdminController {
         return "changeField";
     }
 
-    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
-    public String changeTech(@ModelAttribute("newTechName") String newTechName,
-                             @ModelAttribute("oldTechName") String oldTechName) {
-        technologyService.changeTechnology(oldTechName, newTechName);
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
-    }
 
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
     public String deleteField(@ModelAttribute("addFieldUnit") AddFieldUnit addFieldUnit, ModelMap modelMap) {
@@ -797,7 +765,16 @@ public class AdminController {
         if (tableData == null)
             return "redirect:/admin";
         return "redirect:/admin/formedTable";
+    }
 
+
+    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
+    public String changeTech(@ModelAttribute("newTechName")String newTechName,
+                             @ModelAttribute("oldTechName")String oldTechName){
+        technologyService.changeTechnology(oldTechName, newTechName);
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
     }
 
 
@@ -886,13 +863,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
-    public @ResponseBody JSONField showField(@ModelAttribute("field") String fieldName) {
+    public
+    @ResponseBody
+    JSONField showField(@ModelAttribute("field") String fieldName) {
         return attributeService.getJSONField(fieldName);
     }
 
 
     @RequestMapping(value = "/showGroup", method = RequestMethod.GET)
-    public @ResponseBody String showGroup(@ModelAttribute("group") String groupName) {
+    public
+    @ResponseBody
+    String showGroup(@ModelAttribute("group") String groupName) {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
@@ -930,4 +911,56 @@ public class AdminController {
         return userService.getAllWithRole(role);
     }
 
+    @RequestMapping("/showUnlink")
+    public String showUnlink(ModelMap modelMap){
+        modelMap.addAttribute("students", studentService.getAllEnabledStudents());
+        modelMap.addAttribute("feeds", feedbackerService.getAllFeedbackers());
+        modelMap.addAttribute("unlinkUnit", new UnlinkUnit());
+        return "unlink";
+    }
+
+    @RequestMapping(value = "/curatorsForStudent", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONFeedbacker> feedbackersForStudent(@ModelAttribute("student") String student) {
+
+        return feedbackerService.getJSONCuratorsByStudent(student);
+    }
+
+    @RequestMapping(value = "/interviewersForStudent", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONFeedbacker> interviewersForStudent(@ModelAttribute("student") String student) {
+
+        return feedbackerService.getJSONInterviewersByStudent(student);
+    }
+
+    @RequestMapping(value = "/curatedForFeed", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONStudent> curatedForFeed(@ModelAttribute("student") String student) {
+        return feedbackerService.getJSONSupervisedStudents(student);
+    }
+
+    @RequestMapping(value = "/interviewedForFeed", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<JSONStudent> interviewedForFeed(@ModelAttribute("student") String student) {
+        return feedbackerService.getJSONInterviewedStudents(student);
+    }
+
+    @RequestMapping(value = "/unlink", method = RequestMethod.POST)
+    public String unlink(@ModelAttribute("unlinkUnit")UnlinkUnit unlinkUnit){
+        if(unlinkUnit.getCurators() != null)
+        for(String feed:unlinkUnit.getCurators()){
+            feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
+        }
+        if(unlinkUnit.getInterviewers() != null)
+        for(String feed:unlinkUnit.getInterviewers()){
+            feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
+        }
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+    }
 }
