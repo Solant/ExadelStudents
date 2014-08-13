@@ -63,17 +63,16 @@
         <button class="gray" onclick="history.back(); return false;">Cancel</button>
         <button class="blue" id="send">Send</button>
     </div>
-    <div id="modal_form">
+    <div id="confirm_password">
         <span id="modal_close">&times;</span>
 
         <div class="alignCenter">
-            <h4>Confirm password</h4>
-            <div>
-                <label for="password">Password:</label>
-                <form:input id="password" type="password" path="password" />
+            <h4>Confirm email password</h4>
+            <div class="confPassInput">
+                <form:input id="password" type="password" path="password" placeholder="Password"/>
             </div>
-            <button type="button" class="gray" id="cancel_button">Cancel</button>
-            <form:button class="blue" id="sendButton">Send</form:button>
+                <button type="button" class="gray" id="cancel_button">Cancel</button>
+                <form:button class="blue" id="sendButton">Send</form:button>
         </div>
     </div>
 
@@ -86,14 +85,14 @@
         event.preventDefault();
         $('#overlay').fadeIn(400, // сначала плавно показываем темную подложку
                 function () { // после выполнения предыдущей анимации
-                    $('#modal_form')
+                    $('#confirm_password')
                             .css('display', 'block') // убираем у модального окна display: none;
                             .animate({opacity: 1, top: '50%'}, 200); // плавно прибавляем прозрачность одновременно со съезжанием вниз
 
                 });
         /* Закрытие модального окна, тут делаем то же самое но в обратном порядке */
         $('#modal_close, #overlay, #cancel_button, #save_button').click(function () { // ловим клик по крестику или подложке
-            $('#modal_form')
+            $('#confirm_password')
                     .animate({opacity: 0, top: '45%'}, 200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
                     function () { // после анимации
                         $(this).css('display', 'none'); // делаем ему display: none;
