@@ -15,6 +15,6 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        response.sendRedirect("/login?error=Wrong login or password"); // here goes redirect to page with error on login
+        response.sendRedirect("/?error=Wrong login or password"); // here goes redirect to page with error on login
     }
 }

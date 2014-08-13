@@ -34,7 +34,7 @@ public class HelloController {
     private NotificationService notificationService;
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String welcomePage() {
+    public String welcomePage(ModelMap modelMap, @RequestParam(value = "error", required = false)String error) {
         if (SecurityService.hasRole("ROLE_STUDENT"))
             return "redirect:student";
 
@@ -47,6 +47,7 @@ public class HelloController {
         if (SecurityService.hasRole("ROLE_ADMIN"))
             return "redirect:admin";
 
+        modelMap.addAttribute("error", error);
         return "login";
     }
 
