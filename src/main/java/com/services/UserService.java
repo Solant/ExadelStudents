@@ -1,5 +1,6 @@
 package com.services;
 
+import com.forView.JSONUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +11,8 @@ import persistance.dao.NotificationDao;
 import persistance.dao.UserDao;
 import persistance.model.Notification;
 import persistance.model.User;
+import persistance.model.UserRole;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,5 +113,23 @@ public class UserService {
     @Transactional
     public void delete (String login){
         userDao.removeById(userDao.findByLogin(login).getId());
+    }
+
+    @Transactional
+    public List<JSONUser> getAllWithRole (String role) {
+        List<User> users = userDao.findAll();
+        List<JSONUser> result = new ArrayList();
+        for (User user : users) {
+            for(UserRole ur : user.getUserRoles()) {
+                if (ur.getRole().equals(role)) {
+                    JSONUser jsonUser = new JSONUser();
+                    jsonUser.setLogin(user.getLogin());
+                    jsonUser.setSecondName(user.getSecondName());
+                    jsonUser.setFirstName(user.getFirstName());
+                    result.add(jsonUser);
+                }
+            }
+        }
+        return result;
     }
 }

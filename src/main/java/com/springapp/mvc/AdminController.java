@@ -776,6 +776,14 @@ public class AdminController {
     }
 
 
+    @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
+    public String changeTech(@ModelAttribute("newTechName")String newTechName,
+                             @ModelAttribute("oldTechName")String oldTechName){
+        technologyService.changeTechnology(oldTechName, newTechName);
+        if (tableData == null)
+            return "redirect:/admin";
+        return "redirect:/admin/formedTable";
+    }
 
 
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
@@ -889,7 +897,6 @@ public class AdminController {
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUser(@ModelAttribute("userLogin") String userLogin){
-        System.out.println("[DEBUG] userLogin = "+userLogin);
         if(userLogin!=null){
             if(!userLogin.equals("")){
                 userService.delete(userLogin);
@@ -898,6 +905,12 @@ public class AdminController {
         if (tableData == null)
             return "redirect:/admin";
         return "redirect:/admin/formedTable";
+    }
+
+
+    @RequestMapping(value = "/showUsersToDelete", method = RequestMethod.GET)
+    public @ResponseBody List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
+        return userService.getAllWithRole(role);
     }
 
     @RequestMapping("/showUnlink")

@@ -21,6 +21,9 @@ import java.util.List;
 public class HelloController {
 
     @Autowired
+    private AttributeService attributeService;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -210,5 +213,11 @@ public class HelloController {
             return 0;
         else
             return userService.getAllUnreadNotifications(UserService.getCurrentUserLogin()).size();
+    }
+
+    @RequestMapping(value = "/getRegexpByAttrName", method = RequestMethod.GET)
+    public @ResponseBody
+    String getRegexpByAttrName(@ModelAttribute("attr") String attr){
+        return attributeService.getByName(attr).getPattern();
     }
 }
