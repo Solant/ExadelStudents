@@ -153,7 +153,11 @@ public class StudentService {
             if (!edited) {
                 Value value = new Value();
                 value.setStudent(student);
-                value.setValue(gav.getValue());
+                if (gav.getValues() == null)
+                    value.setValue(gav.getValue());
+                else
+                    for (String v : gav.getValues())
+                        value.setValue(value.getValue() + ";" + v);
                 value.setAttribute(attributeDao.findByName(gav.getAttribute()));
                 attributeDao.findByName(gav.getAttribute()).getValues().add(value);
             }
