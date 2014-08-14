@@ -303,8 +303,10 @@ public class AdminController {
                                       @Valid @ModelAttribute("accountUnit") AccountUnit accountUnit,
                                       BindingResult result) {
         accountFormValidator.validate(accountUnit, result);
-        if(result.hasErrors())
+        if(result.hasErrors()) {
+            accountUnit.setLogin(student);
             return "studentAccount";
+        }
         User user = userService.getByLogin(student);
         user.setEmail(accountUnit.getEmail());
         user.setSkype(accountUnit.getSkype());
@@ -734,6 +736,7 @@ public class AdminController {
     public
     @ResponseBody
     List<JSONFeedbacker> feedbackersForTechnology(@ModelAttribute("technology") String technologyName) {
+
 
         return feedbackerService.filterFeedbackers(technologyName);
     }
