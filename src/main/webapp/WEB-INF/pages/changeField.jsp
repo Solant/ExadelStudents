@@ -124,12 +124,12 @@
             <div class="alignCenter paddingTop">
 
                 <h3>Type of input</h3>
-                <form:radiobutton path="type" id="string" name="type" value="text"
+                <form:radiobutton path="type" id="text" name="type" value="text"
                                   onclick="visual(); "/>
-                <label for="string">String</label>
-                <form:radiobutton path="type" id="text" name="type" value="textarea"
+                <label for="text">String</label>
+                <form:radiobutton path="type" id="textarea" name="type" value="textarea"
                                   onclick="visual();"/>
-                <label for="text">Text</label>
+                <label for="textarea">Text</label>
                 <form:radiobutton path="type" id="date" name="type" value="date" onclick="visual();"/>
                 <label for="date">Date</label>
             </div>
