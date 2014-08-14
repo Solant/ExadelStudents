@@ -11,22 +11,20 @@
 
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
-
 <ul class="nav nav-tabs" role="tablist">
     <li >
-        <a href="/admin/showAddUser">User</a>
+        <a href="/admin/showAddUser" >User</a>
     </li>
-    <li
-            <c:if test="${isField}">class="active" </c:if> >
+    <li <c:if test="${isField}"> class="active" </c:if> >
         <a href="#field" role="tab" data-toggle="tab">Field</a>
     </li>
-    <li
-            <c:if test="${!isField}">class="active" </c:if> >
+    <li <c:if test="${!isField}"> class="active" </c:if> >
         <a href="#technology" role="tab" data-toggle="tab">Technology</a>
     </li>
     <li>
         <a href="/admin/createNotif">Notification</a>
     </li>
+
 </ul>
 
 <div class="tab-content" align="center">
@@ -34,9 +32,11 @@
     <div class="tab-pane <c:if test="${!isField}">active</c:if>" id="technology">
         <form action="/admin/addTechnology" method="post">
             <div class="spoilers">
-                <h1>Adding technology form</h1>
+
+                <h3>Add technology</h3>
+
                 <div class="alignCenter">
-                    <label for="newTech">New technology:</label>
+                    <label for="newTech">Technology name:</label>
                     <input type="text" name="newTech" id="newTech"/>
                 </div>
 
@@ -57,34 +57,33 @@
             <form:form commandName="addFieldUnit" action="/admin/addField" method="post">
                 <div class="alignCenter">
 
-                    <h1>Add Field to</h1>
-                    <form:radiobutton path="existingGroup" id="cg" value="yes" onclick="groupVisual()" checked="true"/>
-                    <label for="cg">Existing group</label>
-                    <form:radiobutton path="existingGroup" id="newg" value="no" onclick="groupVisual()"/>
-                    <label for="newg">New Group</label>
+                    <h3>Add Field to</h3>
+                    <div>
+                        <form:radiobutton path="existingGroup" id="cg" value="yes" onclick="groupVisual()" checked="true"/>
+                        <label for="cg">Existing group</label>
+                        <span id="existingGroup">
+                            <form:select path="groupNameExist" name="curGrup" class="addTechField">
+                                <c:forEach items="${groups}" var="group">
+                                    <form:option value="${group}">${group}</form:option>
+                                </c:forEach>
+                            </form:select>
+                        </span>
+                    </div>
+
+                    <div>
+                        <form:radiobutton path="existingGroup" id="newg" value="no" onclick="groupVisual()"/>
+                        <label for="newg">New Group</label>
+                        <span id="newGroup">
+                            <form:input path="groupNameNew" type="text" class="addTechField"/>
+                            <label for="status">for status</label>
+                            <form:select path="forStatus" id="status" class="addTechField">
+                                <form:option value="WORKING">working students</form:option>
+                                <form:option value="STUDYING">studying students</form:option>
+                                <form:option value="for_everybody">all students</form:option>
+                            </form:select>
+                        </span>
+                    </div>
                 </div>
-
-                <div class="alignCenter" id="existingGroup">
-                    <label>Group name</label>
-                    <form:select path="groupNameExist" name="curGrup" class="addTechField">
-                        <c:forEach items="${groups}" var="group">
-                            <form:option value="${group}">${group}</form:option>
-                        </c:forEach>
-                    </form:select>
-                </div>
-
-                <div class="alignCenter" id="newGroup">
-                    <label>New group name</label>
-                    <form:input path="groupNameNew" type="text" class="addTechField"/><br/>
-
-                    <label for="status">Status (for whom)</label>
-                    <form:select path="forStatus" id="status" class="addTechField">
-                        <form:option value="WORKING">For working students</form:option>
-                        <form:option value="STUDYING">For studying students</form:option>
-                        <form:option value="for_everybody">For all students</form:option>
-                    </form:select>
-                </div>
-
                 <div class="alignCenter paddingTop borderBottom paddingBottom" >
                     <label for="fieldname">Field name:</label>
                     <form:input path="fieldName" required="true" type="text" id="fieldname" class="addTechField"/>
@@ -92,7 +91,7 @@
 
                 <div class="alignCenter paddingTop">
 
-                    <h1>Type of input</h1>
+                    <h3>Type of input</h3>
                     <form:radiobutton path="type" id="string" name="type" value="text"
                                       onclick="visual(); "/>
                     <label for="string">String</label>
@@ -118,7 +117,7 @@
                 </div>
 
                 <div class="alignCenter paddingTop borderTop">
-                    <h1>Restrictions</h1>
+                    <h3>Restrictions</h3>
                     <label for="valueType">Type of value:</label>
                     <form:select path="valueType" name="valueType" id="valueType">
                         <form:option value="any">Any</form:option>
@@ -136,15 +135,14 @@
             </form:form>
 
         </div>
+        </div>
 
     </div>
-</div>
 
-</div>
 
 <script type="text/javascript">
     var remove = {display: "none"}
-    var show = {display: "block"}
+    var show = {display: "inline-block"}
 
     function visual() {
         var values = $('#needOption');
