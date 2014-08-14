@@ -24,6 +24,7 @@
 </sec:authorize>
 
 <form class="linkingForm">
+    <h1>Linking form</h1>
     <div class="radio">
         <form:radiobutton path="linkUnit.curator" name="feedbacking" value="true" id="suitable"/>
         <label for="suitable">Curating</label>
