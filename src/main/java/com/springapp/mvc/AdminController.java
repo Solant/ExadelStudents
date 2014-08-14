@@ -72,6 +72,7 @@ public class AdminController {
     private List<List<String>> tableData;
     private String enable;
 
+    //
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String workerPage(ModelMap modelMap) {
         ArrayList<GAVPresentation> gav = (ArrayList<GAVPresentation>) attributeService.getAllAttributes();
