@@ -2,7 +2,6 @@ package com.forView;
 
 import org.hibernate.validator.constraints.Email;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -25,7 +24,7 @@ public class AccountUnit {
 
 
     @Size(max = 30, message = "Telephone number can not contain more than 30 symbols")
-    @Pattern(regexp = "^\\+?[0-9\\-()]*$", message = "Wrong telephone number.")
+    @Pattern(regexp = "^\\+?[0-9\\-()\\s]*$", message = "Wrong telephone number.")
     private String telephone;
 
     @Size(max = 30, message = "Skype can not contain more than 30 symbols")
