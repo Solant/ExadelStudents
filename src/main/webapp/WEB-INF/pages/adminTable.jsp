@@ -145,7 +145,6 @@
             }
         }
     })
-
 </script>
 <script src="/resources/js/trAnchors.js"></script>
 </body>
