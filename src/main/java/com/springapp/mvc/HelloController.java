@@ -42,7 +42,7 @@ public class HelloController {
             return "redirect:curator";
 
         if (SecurityService.hasRole("ROLE_WORKER"))
-            return "HRworker";
+            return "redirect:admin/showEnabled";
 
         if (SecurityService.hasRole("ROLE_ADMIN"))
             return "redirect:admin";

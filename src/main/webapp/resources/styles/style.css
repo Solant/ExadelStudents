@@ -421,6 +421,10 @@ button.gray, a.gray, input[type=submit].gray {
     width: 450px;
 }
 
+.linkingForm > h1 {
+    text-align: center;
+}
+
 .linkingL, .linkingR {
     width: 30%;
     float: left;
