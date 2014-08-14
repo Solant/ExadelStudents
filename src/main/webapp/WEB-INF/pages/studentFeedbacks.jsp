@@ -39,6 +39,7 @@
 <tr>
     <td>Date</td>
     <td>Feedbacker</td>
+    <td>Interviewer/Curator</td>
 </tr>
 </thead>
 <tbody>
@@ -46,6 +47,8 @@
     <tr>
         <td><a href="/admin/showFeedback/${review.student.login}/${review.id}">${sdf.format(review.date.time)}</a></td>
         <td>${review.feedbacker.firstName} ${review.feedbacker.secondName}</td>
+        <td><c:if test="${review.fromInterview}">Interviewer</c:if>
+            <c:if test="${!review.fromInterview}">Curator</c:if></td>
     </tr>
 </c:forEach>
     </tbody>
