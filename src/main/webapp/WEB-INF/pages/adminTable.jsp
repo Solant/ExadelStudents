@@ -94,22 +94,19 @@
     </table>
 </div>
 
-</body>
-</html>
-
 
 <div id="modal_form">
     <span id="modal_close">&times;</span>
     <div class="alignCenter">
         <form action="/admin/disable">
-        <h4>Disable student</h4>
-        <label>Reason:</label>
-        <div class="group" id="reasonArea">
-            <textarea class="textOther" name="reason"></textarea>
-        </div>
-        <input type="hidden" name="studentNumber" id="studentNumber"/>
-        <button type="button" class="gray" id="cancel_button">Cancel</button>
-        <button type="submit" class="blue" id="save_button">Save</button>
+            <h4>Disable student</h4>
+            <label>Reason:</label>
+            <div class="group" id="reasonArea">
+                <textarea class="textOther" name="reason"></textarea>
+            </div>
+            <input type="hidden" name="studentNumber" id="studentNumber"/>
+            <button type="button" class="gray" id="cancel_button">Cancel</button>
+            <button type="submit" class="blue" id="save_button">Save</button>
         </form>
     </div>
 </div>
@@ -150,3 +147,6 @@
     })
 
 </script>
+<script src="/resources/js/trAnchors.js"></script>
+</body>
+</html>
