@@ -46,5 +46,7 @@
         </tbody>
     </table>
 </div>
+
+<script src="/resources/js/trAnchors.js"></script>
 </body>
 </html>

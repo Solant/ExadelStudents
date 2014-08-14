@@ -72,6 +72,7 @@ public class AdminController {
     private List<List<String>> tableData;
     private String enable;
 
+    //
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String workerPage(ModelMap modelMap) {
         ArrayList<GAVPresentation> gav = (ArrayList<GAVPresentation>) attributeService.getAllAttributes();
@@ -303,6 +304,10 @@ public class AdminController {
                                       @Valid @ModelAttribute("accountUnit") AccountUnit accountUnit,
                                       BindingResult result) {
         accountFormValidator.validate(accountUnit, result);
+        if(result.hasErrors()) {
+            accountUnit.setLogin(student);
+            return "studentAccount";
+        }
         User user = userService.getByLogin(student);
         user.setEmail(accountUnit.getEmail());
         user.setSkype(accountUnit.getSkype());
@@ -591,6 +596,7 @@ public class AdminController {
         List<Notification> notifications = userService.getAllNotifications(student);
         modelMap.addAttribute("notifs", notifications);
         modelMap.addAttribute("name", studentService.getFirstName(student) + " " + studentService.getSecondName(student));
+        modelMap.addAttribute("isShow", true);
         return "notificationList";
     }
 
@@ -732,6 +738,7 @@ public class AdminController {
     @ResponseBody
     List<JSONFeedbacker> feedbackersForTechnology(@ModelAttribute("technology") String technologyName) {
 
+
         return feedbackerService.filterFeedbackers(technologyName);
     }
 
@@ -756,13 +763,13 @@ public class AdminController {
         return "changeField";
     }
 
+
+
     @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
     public String changeTech(@ModelAttribute("newTechName") String newTechName,
                              @ModelAttribute("oldTechName") String oldTechName) {
         technologyService.changeTechnology(oldTechName, newTechName);
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/tech";
     }
 
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
@@ -771,9 +778,7 @@ public class AdminController {
             attributeService.removeAttribute(addFieldUnit.getOldFieldName());
         }
 
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/field";
     }
 
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
@@ -821,9 +826,7 @@ public class AdminController {
                     addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
 
         }
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/field";
     }
 
     @RequestMapping(value = "/deleteGroup", method = RequestMethod.POST)
@@ -832,10 +835,7 @@ public class AdminController {
             groupService.deleteGroup(changeGroupUnit.getOldGroupName());
 
         }
-
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/group";
 
     }
 
@@ -854,10 +854,7 @@ public class AdminController {
                     newGroupName, changeGroupUnit.getStatus());
 
         }
-
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/group";
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
@@ -972,10 +969,7 @@ public class AdminController {
             if(!oldTechName.equals(""))
                 technologyService.remove(oldTechName);
         }
-
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/tech";
 
     }
 }
