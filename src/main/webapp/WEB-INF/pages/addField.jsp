@@ -12,13 +12,19 @@
 <%@include file="/WEB-INF/pages/commonParts/AdminHat.jsp" %>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li <c:if test="${!isField}">class="active" </c:if>>
-        <a href="#technology" role="tab" data-toggle="tab">Technology</a>
+    <li >
+        <a href="/admin/showAddUser" >User</a>
     </li>
-    <li
-            <c:if test="${isField}">class="active" </c:if> >
+    <li <c:if test="${isField}"> class="active" </c:if> >
         <a href="#field" role="tab" data-toggle="tab">Field</a>
     </li>
+    <li <c:if test="${!isField}"> class="active" </c:if> >
+        <a href="#technology" role="tab" data-toggle="tab">Technology</a>
+    </li>
+    <li>
+        <a href="/admin/createNotif">Notification</a>
+    </li>
+
 </ul>
 
 <div class="tab-content" align="center">
@@ -27,8 +33,10 @@
         <form action="/admin/addTechnology" method="post">
             <div class="spoilers">
 
+                <h3>Add technology</h3>
+
                 <div class="alignCenter">
-                    <label for="newTech">New technology:</label>
+                    <label for="newTech">Technology name:</label>
                     <input type="text" name="newTech" id="newTech"/>
                 </div>
 
@@ -128,9 +136,9 @@
 
         </div>
         </div>
+
     </div>
 
-</div>
 
 <script type="text/javascript">
     var remove = {display: "none"}
