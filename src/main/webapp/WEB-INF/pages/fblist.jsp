@@ -17,7 +17,7 @@
 
 <div id="table">
     <h3>Reviews of students</h3>
-    <table id="fblist" class="display">
+    <table id="curatorReviews" class="display">
         <thead><%--
         <tr>
             <td rowspan="2">Name</td>

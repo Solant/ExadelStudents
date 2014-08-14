@@ -29,30 +29,32 @@
 
 <script type="text/javascript" class="init">
     $(document).ready(function() {
-        $('#fblist').dataTable();
+        $('#fblist').dataTable({
+            "order":[0, 'desc']
+        });
     } );
 </script>
 
 <script type="text/javascript" class="init">
     $(document).ready(function() {
-        $('#messageTable').dataTable();
+        $('#messageTable').dataTable({
+            "order":[2, 'desc']
+        });
     } );
 </script>
+<%--
 
 <script type="text/javascript" class="init">
     $(document).ready(function() {
         $('#reviewsTable').dataTable();
     } );
 </script>
+--%>
 
 <script type="text/javascript" class="init">
     $(document).ready(function() {
-        $('#reviewsTable').dataTable();
-    } );
-</script>
-
-<script type="text/javascript" class="init">
-    $(document).ready(function() {
-        $('#fblist').dataTable();
+        $('#curatorReviews').dataTable({
+            "order":[1, 'desc']
+        });
     } );
 </script>
