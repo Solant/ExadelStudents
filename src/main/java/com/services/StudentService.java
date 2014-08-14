@@ -414,7 +414,7 @@ public class StudentService {
         row0.add("Value");
         returnStatement.add(row0);
         ArrayList<String> row = new ArrayList<String>();
-        row.add("Name");
+        row.add(" Name");
         row.add(student.getFirstName() + " " + student.getSecondName());
         returnStatement.add(row);
         ArrayList<String> row2 = new ArrayList<String>();
@@ -427,7 +427,20 @@ public class StudentService {
                 if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute()) && gavPresentation.isShow()) {
                     ArrayList<String> addStatement = new ArrayList<String>();
                     addStatement.add(gavPresentation.getAttribute());
-                    addStatement.add(gavStudent.getValue());
+
+                    String result = gavStudent.getValue();
+
+                    if(gavStudent.getValues() != null) {
+                        if (gavStudent.getValues().size() != 0){
+                            for(String val : gavStudent.getValues()){
+                                if(val != null) {
+                                    if(!val.trim().equals(""))
+                                        result = result + "" + val + ";";
+                                }
+                            }
+                        }
+                    }
+                    addStatement.add(result);
                     returnStatement.add(addStatement);
                     break;
                 }

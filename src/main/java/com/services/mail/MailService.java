@@ -37,7 +37,6 @@ public class MailService implements Runnable{
                 return new PasswordAuthentication(username, password);
             }
         });
-        System.out.println("[DEBUG]Email trying to send to " + toEmail + " " + Calendar.getInstance().getTimeInMillis());
         if (toEmail != null && !toEmail.equals("")) {
             try {
                 Message message = new MimeMessage(session);
@@ -51,7 +50,6 @@ public class MailService implements Runnable{
 
             }
         }
-        System.out.println("[DEBUG]Email sended " + Calendar.getInstance().getTimeInMillis());
     }
 
     public void setEmail(String email){
