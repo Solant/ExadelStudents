@@ -23,7 +23,7 @@
     </li>
 </ul>
 <form:form commandName="createNotifUnit" action="/admin/sendNotif" method="post" class="createNotificationForm">
-
+<h1>Create notification</h1>
     <div class="leftList">
         <form:checkbox path="forStudents" id="students"/>
         <label for="students">All students: </label><br/>

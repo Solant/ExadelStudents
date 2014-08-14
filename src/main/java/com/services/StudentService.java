@@ -336,7 +336,7 @@ public class StudentService {
                 isAttrEmpty = true;
             else if (gavPresentation.getValue().equals("") || gavPresentation.getValues() != null)
                 isAttrEmpty = true;
-            if(gavPresentation.getValues()!= null)
+            if (gavPresentation.getValues() != null)
                 isAttrEmpty = false;
             if (!isAttrEmpty) {
 
@@ -348,7 +348,7 @@ public class StudentService {
                     boolean isSuitable = false;
                     Set<Value> valueSet = student.getValues();
                     for (Value value : valueSet) {
-                        if (value != null) {
+                        if (value.getValue() != null) {
                             if (value.getAttribute().getAttributeName().equalsIgnoreCase(gavPresentation.getAttribute())) {
                                 if (value.getAttribute().getType().equalsIgnoreCase("list")) {
                                     ArrayList<String> tmp = new ArrayList<String>();
