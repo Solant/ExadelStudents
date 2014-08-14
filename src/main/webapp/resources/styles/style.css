@@ -190,11 +190,10 @@ table thead th, table thead td, table tfoot td, table tfoot tr {
     margin-left: 5px;
 }
 
-.loginAndCreateForm, .linkingForm, .reviewForm, .createNotificationForm {
+.loginAndCreateForm, .linkingForm, .unlinkingForm, .reviewForm, .createNotificationForm {
     color: #808080;
     width: 370px;
     margin: auto;
-    margin-top: 100px;
     padding: 7px;
     background-color: #f7f7f7;
     webkit-border-radius: 2px;
@@ -202,6 +201,14 @@ table thead th, table thead td, table tfoot td, table tfoot tr {
     -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.unlinkingForm{
+    margin-top: 0;
+}
+
+.loginAndCreateForm, .linkingForm, .reviewForm, .createNotificationForm{
+    margin-top: 100px;
 }
 
 .loginAndCreateForm {
@@ -473,7 +480,7 @@ button.gray, a.gray, input[type=submit].gray {
 }
 
 .buttons {
-    padding-top: 100px;
+    padding-top: 70px;
     text-align: center;
 }
 
@@ -1103,12 +1110,28 @@ select{
     padding-left: 5px;
 }
 
-.foxMuch{
-    width:25px;
-    height: 25px;
-    display: none;
+.hrWorkerMargin{
+    margin-top: 100px;
 }
 
-.foxMuch:hover{
-    display: block;
+/*unlink page props*/
+
+.rightMultiple{
+    float: right;
+    width: 45%;
+    margin-bottom: 10px;
 }
+
+.leftMultiple{
+    float: left;
+    width: 45%;
+    margin-bottom: 10px;
+}
+
+
+.rightMultiple > select, .leftMultiple > select{
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+}
+/*end of unlink page props*/
