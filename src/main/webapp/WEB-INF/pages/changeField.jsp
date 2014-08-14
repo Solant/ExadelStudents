@@ -124,12 +124,12 @@
             <div class="alignCenter paddingTop">
 
                 <h3>Type of input</h3>
-                <form:radiobutton path="type" id="string" name="type" value="text"
+                <form:radiobutton path="type" id="text" name="type" value="text"
                                   onclick="visual(); "/>
-                <label for="string">String</label>
-                <form:radiobutton path="type" id="text" name="type" value="textarea"
+                <label for="text">String</label>
+                <form:radiobutton path="type" id="textarea" name="type" value="textarea"
                                   onclick="visual();"/>
-                <label for="text">Text</label>
+                <label for="textarea">Text</label>
                 <form:radiobutton path="type" id="date" name="type" value="date" onclick="visual();"/>
                 <label for="date">Date</label>
             </div>
@@ -259,8 +259,8 @@
 </html>
 
 <script type="text/javascript">
-    var remove = {display: "none"}
-    var show = {display: "inline-block"}
+    var remove = {display: "none"};
+    var show = {display: "inline-block"};
 
     function visual() {
         var values = $('#needOption');
@@ -272,7 +272,7 @@
             values.css(remove);
         }
 
-        var valueTypeSelect = document.getElementById("valueType")
+        var valueTypeSelect = document.getElementById("valueType");
         if (document.getElementsByName('type')[2].checked ||
                 document.getElementsByName('type')[3].checked ||
                 document.getElementsByName('type')[4].checked) {
@@ -287,7 +287,7 @@
 
     function groupVisual() {
         var existingGroup = $('#existingGroup');
-        var newGroup = $('#newGroup')
+        var newGroup = $('#newGroup');
         if (document.getElementsByName('existingGroup')[1].checked) {
             existingGroup.css(remove);
             newGroup.css(show);
@@ -307,6 +307,9 @@
                     var userSelect = document.getElementById("userLogin");
                     removeOptions(userSelect);
 
+                    data.sort(function(a,b){
+                        return a.secondName.localeCompare(b.secondName);
+                    });
 
                     $.each(data, function (index, user) {
                         var option = document.createElement("option");
@@ -322,7 +325,7 @@
                     })
                 });
             }
-    )
+    );
     $('#userLogin').change(
             function () {
                 var url = "/admin/showChosenUser?login=" + document.getElementById("userLogin").value;
