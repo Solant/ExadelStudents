@@ -593,6 +593,7 @@ public class AdminController {
         List<Notification> notifications = userService.getAllNotifications(student);
         modelMap.addAttribute("notifs", notifications);
         modelMap.addAttribute("name", studentService.getFirstName(student) + " " + studentService.getSecondName(student));
+        modelMap.addAttribute("isShow", true);
         return "notificationList";
     }
 
