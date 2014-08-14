@@ -39,17 +39,10 @@
 <div class="tab-content" align="center">
 
     <div class="tab-pane active" id="student">
-        <form:form commandName="unlinkUnit" cssClass="linkingForm" method="post" action="/admin/unlink">
-            <div class="linkingL">
-                <label for="curators">Curators:</label>
-                <form:select path="curators" multiple="true" id="curators"/>
-            </div>
-            <div class="linkingR">
-                <label for="interviewers">Interviewers:</label>
-                <form:select path="interviewers" multiple="true" id="interviewers"/>
-            </div>
-            <div class="technology">
-                <label for="studentSelect">Student:</label>
+        <form:form commandName="unlinkUnit" cssClass="unlinkingForm" method="post" action="/admin/unlink">
+
+            <div>
+                <label for="studentSelect">Student:</label><br/>
                 <form:select path="student" id="studentSelect">
                     <form:option value=""></form:option>
                     <c:forEach items="${students}" var="student">
@@ -57,6 +50,17 @@
                     </c:forEach>
                 </form:select>
             </div>
+
+            <div class="leftMultiple">
+                <label for="curators">Curators:</label><br/>
+                <form:select path="curators" multiple="true" id="curators"/>
+            </div>
+
+            <div class="rightMultiple">
+                <label for="interviewers">Interviewers:</label><br/>
+                <form:select path="interviewers" multiple="true" id="interviewers"/>
+            </div>
+
             <div class="buttons">
                 <button class="gray" onclick="history.back(); return false;">Cancel</button>
                 <button class="blue">Unlink</button>
@@ -65,17 +69,10 @@
     </div>
 
     <div class="tab-pane " id="feed">
-        <form:form commandName="unlinkUnit" cssClass="linkingForm" method="post" action="/admin/unlink">
-            <div class="linkingL">
-                <label for="curators">Curated:</label>
-                <form:select path="curators" multiple="true" id="curated"/>
-            </div>
-            <div class="linkingR">
-                <label for="interviewers">Interviewed:</label>
-                <form:select path="interviewers" multiple="true" id="interviewed"/>
-            </div>
-            <div class="technology">
-                <label for="feedSelect">Feedbacker:</label>
+        <form:form commandName="unlinkUnit" cssClass="unlinkingForm" method="post" action="/admin/unlink">
+
+            <div >
+                <label for="feedSelect">Feedbacker:</label><br/>
                 <form:select path="student" id="feedSelect">
                     <form:option value=""></form:option>
                     <c:forEach items="${feeds}" var="feed">
@@ -84,6 +81,17 @@
                     </c:forEach>
                 </form:select>
             </div>
+
+            <div class="leftMultiple">
+                <label for="curators">Curated:</label>
+                <form:select path="curators" multiple="true" id="curated"/>
+            </div>
+
+            <div class="rightMultiple">
+                <label for="interviewers">Interviewed:</label>
+                <form:select path="interviewers" multiple="true" id="interviewed"/>
+            </div>
+
             <div class="buttons">
                 <button class="gray" onclick="history.back(); return false;">Cancel</button>
                 <button class="blue">Unlink</button>
