@@ -576,7 +576,7 @@ public class AdminController {
             }
         } else {
 
-            if (createNotifUnit.getFeedbackers() != null) {
+            if (createNotifUnit.getWorkers() != null) {
                 for (String worker : createNotifUnit.getWorkers()) {
                     notificationService.add(current, worker, title, text);
                     if (fromEmail != null) {
