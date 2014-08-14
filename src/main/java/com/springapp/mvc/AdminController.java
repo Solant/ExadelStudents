@@ -768,9 +768,7 @@ public class AdminController {
     public String changeTech(@ModelAttribute("newTechName") String newTechName,
                              @ModelAttribute("oldTechName") String oldTechName) {
         technologyService.changeTechnology(oldTechName, newTechName);
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/tech";
     }
 
     @RequestMapping(value = "/deleteField", method = RequestMethod.POST)
@@ -779,9 +777,7 @@ public class AdminController {
             attributeService.removeAttribute(addFieldUnit.getOldFieldName());
         }
 
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/field";
     }
 
     @RequestMapping(value = "/changeField", method = RequestMethod.POST)
@@ -829,9 +825,7 @@ public class AdminController {
                     addFieldUnit.getType(), addFieldUnit.getPossibleValues(), pattern, errorMessage);
 
         }
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/field";
     }
 
     @RequestMapping(value = "/deleteGroup", method = RequestMethod.POST)
@@ -840,10 +834,7 @@ public class AdminController {
             groupService.deleteGroup(changeGroupUnit.getOldGroupName());
 
         }
-
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/group";
 
     }
 
@@ -862,10 +853,7 @@ public class AdminController {
                     newGroupName, changeGroupUnit.getStatus());
 
         }
-
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/group";
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
@@ -980,10 +968,7 @@ public class AdminController {
             if(!oldTechName.equals(""))
                 technologyService.remove(oldTechName);
         }
-
-        if (tableData == null)
-            return "redirect:/admin";
-        return "redirect:/admin/formedTable";
+        return "redirect:/admin/showChangeField/tech";
 
     }
 }
