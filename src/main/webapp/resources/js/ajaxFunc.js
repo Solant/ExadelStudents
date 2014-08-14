@@ -205,7 +205,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function(){
-    $('select').each(function(index){
+    $('select').each(function(){
         var options = $(this).find('option');
         options.sort(function(a,b){
             return a.value.localeCompare(b.value);
@@ -216,7 +216,32 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     if (localStorage.getItem('message') !== null && localStorage.getItem('message').toString() != 'null') {
-        alert(localStorage.getItem('message'));
+        //alert(localStorage.getItem('message'));
+        $('body').append('<div id=message></div>');
+        var messageBox = $('#message');
+        messageBox.append('Completed');
+        messageBox.css('position', 'absolute');
+        messageBox.css('top', '-80px');
+        messageBox.css('left', '36%');
+        messageBox.css('background-color', '#24d665');
+        messageBox.css('width', '28%');
+        messageBox.css('text-align', 'center');
+        messageBox.css('height', '72px');
+        messageBox.css('border-radius', '5px');
+        messageBox.css('padding-top', '21px');
+        messageBox.css('opacity', '0.9');
+        messageBox.css('border', '1px solid #1fbc59');
+        messageBox.css('font-size', 'x-large');
+        messageBox.css('z-index', '5');
+        messageBox.animate({
+            top: "70px"
+        }, 700);
+
+        setTimeout(function () {
+            messageBox.animate({
+                top: "-80px"
+            }, 700);
+        }, 1250);
         localStorage.setItem('message', 'null');
     }
     $('.blue').on('click', function() {
