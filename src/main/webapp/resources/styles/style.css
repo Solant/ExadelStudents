@@ -1099,12 +1099,6 @@ select{
     padding-left: 5px;
 }
 
-.foxMuch{
-    width:25px;
-    height: 25px;
-    display: none;
-}
-
-.foxMuch:hover{
-    display: block;
+.hrWorkerMargin{
+    margin-top: 100px;
 }
