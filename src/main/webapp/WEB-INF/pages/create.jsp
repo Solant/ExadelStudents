@@ -42,8 +42,13 @@
 </ul>
 </sec:authorize>
 
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <div class="tab-content" align="center">
+    </sec:authorize>
 
-<div class="tab-content" align="center">
+    <sec:authorize access="hasRole('ROLE_WORKER')">
+        <div class="tab-content hrWorkerMargin" align="center">
+    </sec:authorize>
 
     <div class="tab-pane active" id="user">
         <form:form commandName="newUser" cssClass="spoilers" action="/admin/addUser" method="post">
