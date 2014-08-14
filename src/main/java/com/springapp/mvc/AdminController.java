@@ -303,6 +303,8 @@ public class AdminController {
                                       @Valid @ModelAttribute("accountUnit") AccountUnit accountUnit,
                                       BindingResult result) {
         accountFormValidator.validate(accountUnit, result);
+        if(result.hasErrors())
+            return "studentAccount";
         User user = userService.getByLogin(student);
         user.setEmail(accountUnit.getEmail());
         user.setSkype(accountUnit.getSkype());
@@ -755,6 +757,8 @@ public class AdminController {
         modelMap.addAttribute("isField", isField);
         return "changeField";
     }
+
+
 
     @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
     public String changeTech(@ModelAttribute("newTechName") String newTechName,
