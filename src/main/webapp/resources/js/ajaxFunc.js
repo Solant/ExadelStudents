@@ -215,7 +215,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    if (localStorage.getItem('message').toString() != 'null') {
+    if (localStorage.getItem('message') !== null && localStorage.getItem('message').toString() != 'null') {
         alert(localStorage.getItem('message'));
         localStorage.setItem('message', 'null');
     }
