@@ -304,7 +304,7 @@ public class AdminController {
                                       @Valid @ModelAttribute("accountUnit") AccountUnit accountUnit,
                                       BindingResult result) {
         accountFormValidator.validate(accountUnit, result);
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             accountUnit.setLogin(student);
             return "studentAccount";
         }
@@ -510,16 +510,17 @@ public class AdminController {
         String text = createNotifUnit.getText();
         String password = createNotifUnit.getPassword();
         String current;
-        if (createNotifUnit.getSender() == null)
+        if (createNotifUnit.getSender() == null) {
+            createNotifUnit.setSender("Admin");
             current = UserService.getCurrentUserLogin();
-        else
+        } else
             current = createNotifUnit.getSender();
 
         User user = userService.getByLogin(current);
         String fromEmail = null;
         if (user != null)
             fromEmail = userService.getByLogin(current).getEmail();
-        if(createNotifUnit.getSender().equals("System")) {
+        if (createNotifUnit.getSender().equals("System")) {
             fromEmail = "exadelt@gmail.com";
             password = "petuhanWasya";
         }
@@ -691,7 +692,7 @@ public class AdminController {
 
     @RequestMapping("/disable")
     public String disableStudent(@ModelAttribute("reason") String reason, @ModelAttribute("studentNumber") int index) {
-        List <GAVPresentation> forReason = new ArrayList<GAVPresentation>();
+        List<GAVPresentation> forReason = new ArrayList<GAVPresentation>();
         GAVPresentation reasonGAV = new GAVPresentation();
         reasonGAV.setAttribute("reasonWhyDeleted");
         reasonGAV.setValue(reason);
@@ -766,7 +767,6 @@ public class AdminController {
         modelMap.addAttribute("isField", isField);
         return "changeField";
     }
-
 
 
     @RequestMapping(value = "/changeTech", method = RequestMethod.POST)
@@ -862,26 +862,30 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/showField", method = RequestMethod.GET)
-    public @ResponseBody JSONField showField(@ModelAttribute("field") String fieldName) {
+    public
+    @ResponseBody
+    JSONField showField(@ModelAttribute("field") String fieldName) {
         return attributeService.getJSONField(fieldName);
     }
 
 
     @RequestMapping(value = "/showGroup", method = RequestMethod.GET)
-    public @ResponseBody String showGroup(@ModelAttribute("group") String groupName) {
+    public
+    @ResponseBody
+    String showGroup(@ModelAttribute("group") String groupName) {
         return groupService.getGroupByName(groupName).getStatus();
     }
 
     @RequestMapping(value = "/changeUser", method = RequestMethod.POST)
-    public String changeUser(@ModelAttribute("accountUnit") AccountUnit accountUnit, @ModelAttribute("userLogin") String login){
-        if(accountUnit.getLogin()!=null){
-            if(!accountUnit.getLogin().trim().equals("")){
+    public String changeUser(@ModelAttribute("accountUnit") AccountUnit accountUnit, @ModelAttribute("userLogin") String login) {
+        if (accountUnit.getLogin() != null) {
+            if (!accountUnit.getLogin().trim().equals("")) {
                 User user = userService.getByLogin(login);
                 user.setLogin(accountUnit.getLogin());
                 user.setFirstName(accountUnit.getFirstName());
                 user.setSecondName(accountUnit.getSecondName());
-                if(accountUnit.getPassword()!=null)
-                    if(!accountUnit.getPassword().trim().equals(""))
+                if (accountUnit.getPassword() != null)
+                    if (!accountUnit.getPassword().trim().equals(""))
                         user.setPassword(UserService.stringToSha256(accountUnit.getPassword()));
                 userService.update(user);
             }
@@ -890,9 +894,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public String deleteUser(@ModelAttribute("userLogin") String userLogin){
-        if(userLogin!=null){
-            if(!userLogin.equals("")){
+    public String deleteUser(@ModelAttribute("userLogin") String userLogin) {
+        if (userLogin != null) {
+            if (!userLogin.equals("")) {
                 userService.delete(userLogin);
             }
         }
@@ -901,12 +905,16 @@ public class AdminController {
 
 
     @RequestMapping(value = "/showUsersToChange", method = RequestMethod.GET)
-    public @ResponseBody List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
+    public
+    @ResponseBody
+    List<JSONUser> showUsersToDelete(@ModelAttribute("role") String role) {
         return userService.getAllWithRole(role);
     }
 
     @RequestMapping(value = "/showChosenUser", method = RequestMethod.GET)
-    public @ResponseBody JSONUser showChosenUser(@ModelAttribute("login") String login) {
+    public
+    @ResponseBody
+    JSONUser showChosenUser(@ModelAttribute("login") String login) {
         User user = userService.getByLogin(login);
         JSONUser jsonUser = new JSONUser();
         jsonUser.setFirstName(user.getFirstName());
@@ -916,7 +924,7 @@ public class AdminController {
     }
 
     @RequestMapping("/showUnlink")
-    public String showUnlink(ModelMap modelMap){
+    public String showUnlink(ModelMap modelMap) {
         modelMap.addAttribute("students", studentService.getAllEnabledStudents());
         modelMap.addAttribute("feeds", feedbackerService.getAllFeedbackers());
         modelMap.addAttribute("unlinkUnit", new UnlinkUnit());
@@ -954,15 +962,15 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/unlink", method = RequestMethod.POST)
-    public String unlink(@ModelAttribute("unlinkUnit")UnlinkUnit unlinkUnit){
-        if(unlinkUnit.getCurators() != null)
-        for(String feed:unlinkUnit.getCurators()){
-            feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
-        }
-        if(unlinkUnit.getInterviewers() != null)
-        for(String feed:unlinkUnit.getInterviewers()){
-            feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
-        }
+    public String unlink(@ModelAttribute("unlinkUnit") UnlinkUnit unlinkUnit) {
+        if (unlinkUnit.getCurators() != null)
+            for (String feed : unlinkUnit.getCurators()) {
+                feedbackerService.unlink(unlinkUnit.getStudent(), feed, true);
+            }
+        if (unlinkUnit.getInterviewers() != null)
+            for (String feed : unlinkUnit.getInterviewers()) {
+                feedbackerService.unlink(unlinkUnit.getStudent(), feed, false);
+            }
         return "redirect:/admin/showUnlink";
     }
 
@@ -970,7 +978,7 @@ public class AdminController {
     @RequestMapping(value = "/deleteTechnology", method = RequestMethod.POST)
     public String deleteTechnology(@ModelAttribute("oldTechName") String oldTechName) {
         if (oldTechName != null) {
-            if(!oldTechName.equals(""))
+            if (!oldTechName.equals(""))
                 technologyService.remove(oldTechName);
         }
         return "redirect:/admin/showChangeField/tech";

@@ -1099,11 +1099,11 @@ span.dropt:hover span {
 
 .group select[multiple]:hover{
     width: 250px;
-    height: auto;
+
 }
 
 .group select[multiple]{
-    height: 50px;
+    height: auto;
 }
 
 select{

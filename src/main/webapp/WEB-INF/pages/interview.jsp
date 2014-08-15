@@ -69,8 +69,26 @@
     <div class="alignCenter">
         <label for="other">Other:</label><br/>
         <form:textarea path="comment" name="other" id="other" cols="30" rows="10" class="textOther"/>
-        <button type="submit" class="blue">Save</button>
+    </div>
+
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_WORKER')">
+        <div class="alignCenter">
+            Feedbacker: ${review.feedbacker.secondName} ${review.feedbacker.firstName} ,
+            email: ${review.feedbacker.email}.
+        </div>
+    </sec:authorize>
+
+    <div class="alignCenter">
         <button class="gray" onclick="history.back(); return false;">Cancel</button>
+
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <button type="submit" class="blue">Save</button>
+        </sec:authorize>
+
+        <sec:authorize access="hasRole('ROLE_CURATOR')">
+            <button type="submit" class="blue">Save</button>
+        </sec:authorize>
+
     </div>
 
 </form:form>

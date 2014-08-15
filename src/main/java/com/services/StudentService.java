@@ -387,7 +387,19 @@ public class StudentService {
                     boolean foundAttribute = false;
                     for (GAVPresentation gavStudent : valuesGAV) {
                         if (gavStudent.getAttribute().equalsIgnoreCase(gavPresentation.getAttribute())) {
-                            addStatement.add(gavStudent.getValue());
+                            String result = gavStudent.getValue();
+
+                            if(gavStudent.getValues() != null) {
+                                if (gavStudent.getValues().size() != 0){
+                                    for(String val : gavStudent.getValues()){
+                                        if(val != null) {
+                                            if(!val.trim().equals(""))
+                                                result = result + "" + val + ";";
+                                        }
+                                    }
+                                }
+                            }
+                            addStatement.add(result);
                             foundAttribute = true;
                             break;
                         }
