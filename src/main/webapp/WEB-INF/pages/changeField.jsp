@@ -36,7 +36,7 @@
     <form:form commandName="changeGroupUnit" action="/admin/changeGroup" method="post">
         <div class="spoilers">
 
-            <h3>Change Group</h3>
+            <h1>Change Group</h1>
 
             <div class="alignCenter">
                 <p>
@@ -77,7 +77,7 @@
         <form:form commandName="addFieldUnit" action="/admin/changeField" method="post">
             <div class="alignCenter">
 
-                <h3>Change Field</h3>
+                <h1>Change Field</h1>
 
                 <div class="alignCenter">
                     <label>Old name of field</label>
@@ -123,7 +123,7 @@
 
             <div class="alignCenter paddingTop">
 
-                <h3>Type of input</h3>
+                <h1>Type of input</h1>
                 <form:radiobutton path="type" id="text" name="type" value="text"
                                   onclick="visual(); "/>
                 <label for="text">String</label>
@@ -150,7 +150,7 @@
             </div>
 
             <div class="alignCenter paddingTop borderTop">
-                <h3>Restrictions</h3>
+                <h1>Restrictions</h1>
                 <label for="valueType">Type of value:</label>
                 <form:select path="valueType" id="valueType">
                     <form:option value="any">Any</form:option>
@@ -177,7 +177,7 @@
 
         <form action="/admin/changeTech" method="post">
 
-            <h3>Change Technology</h3>
+            <h1>Change Technology</h1>
 
             <div class="alignCenter">
                 <p>
@@ -206,7 +206,7 @@
     <div class ="spoilers">
         <form:form action="/admin/changeUser" commandName="accountUnit" method="post">
 
-            <h3>Change user</h3>
+            <h1>Change user</h1>
 
             <div class="alignCenter">
                 <p>

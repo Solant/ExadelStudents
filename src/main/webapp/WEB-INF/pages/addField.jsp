@@ -33,7 +33,7 @@
         <form action="/admin/addTechnology" method="post">
             <div class="spoilers">
 
-                <h3>Add technology</h3>
+                <h1>Add technology</h1>
 
                 <div class="alignCenter">
                     <label for="newTech">Technology name:</label>
@@ -57,7 +57,7 @@
             <form:form commandName="addFieldUnit" action="/admin/addField" method="post">
                 <div class="alignCenter">
 
-                    <h3>Add Field to</h3>
+                    <h1>Add Field to</h1>
                     <div>
                         <form:radiobutton path="existingGroup" id="cg" value="yes" onclick="groupVisual()" checked="true"/>
                         <label for="cg">Existing group</label>
@@ -91,7 +91,7 @@
 
                 <div class="alignCenter paddingTop">
 
-                    <h3>Type of input</h3>
+                    <h1>Type of input</h1>
                     <form:radiobutton path="type" id="string" name="type" value="text"
                                       onclick="visual(); "/>
                     <label for="string">String</label>
@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="alignCenter paddingTop borderTop">
-                    <h3>Restrictions</h3>
+                    <h1>Restrictions</h1>
                     <label for="valueType">Type of value:</label>
                     <form:select path="valueType" name="valueType" id="valueType">
                         <form:option value="any">Any</form:option>
