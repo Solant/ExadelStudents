@@ -40,7 +40,7 @@
 
             <div class="alignCenter">
                 <p>
-                    <label id="oldGroup">Old name of group</label>
+                    <label for="oldGroup">Old name of group</label>
                     <form:select path="oldGroupName" id="oldGroup" class="field">
                         <c:forEach items="${groups}" var="group">
                             <form:option value="${group}">${group}</form:option>
@@ -255,8 +255,6 @@
 </div>
 
 </div>
-</body>
-</html>
 
 <script type="text/javascript">
     var remove = {display: "none"};
@@ -335,5 +333,8 @@
                     document.getElementById("userSecondName").value = data.secondName;
                 });
             }
-    )
+    );
 </script>
+</body>
+
+</html>

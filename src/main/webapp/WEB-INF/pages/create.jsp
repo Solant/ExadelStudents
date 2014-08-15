@@ -70,7 +70,7 @@
 
 
         <p>
-            <label for="person">User's post:</label>
+            <label for="person">User's role:</label>
             <form:select path="role" id="person" class="field">
                 <form:option value="Student">Student</form:option>
                 <form:option value="Feedbacker">Feedbacker</form:option>

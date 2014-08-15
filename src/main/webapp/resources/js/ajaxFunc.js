@@ -163,7 +163,6 @@ $(document).ready(function () {
     )
 });
 
-
 $(document).ready(function () {
     $('#oldGroup').change(
         function () {
