@@ -68,7 +68,7 @@
 
     <p>
         <label for="status">Status:</label>
-        <select id="status" name="status">
+        <select id="status" name="status" class="field">
             <option value="WORKING" <c:if test="${status == 'WORKING'}">selected</c:if>>Working</option>
             <option value="STUDYING" <c:if test="${status == 'STUDYING'}">selected</c:if>>Studying</option>
         </select>
