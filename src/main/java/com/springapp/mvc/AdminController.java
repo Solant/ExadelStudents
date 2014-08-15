@@ -519,6 +519,10 @@ public class AdminController {
         String fromEmail = null;
         if (user != null)
             fromEmail = userService.getByLogin(current).getEmail();
+        if(createNotifUnit.getSender().equals("System")) {
+            fromEmail = "exadelt@gmail.com";
+            password = "petuhanWasya";
+        }
 
         if (createNotifUnit.isForStudents()) {
             for (Student student : studentService.getAllEnabledStudents()) {
